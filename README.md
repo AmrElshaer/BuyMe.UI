@@ -9,6 +9,7 @@ Project is created with:
 * C#
 * Fluent Validation
 * AutoMapper
+* SyncFussion third-party UI
 
 ## Pattern and Architecture
 Project is created with:
