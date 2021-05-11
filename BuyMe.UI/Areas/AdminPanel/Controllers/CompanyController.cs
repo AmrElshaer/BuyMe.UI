@@ -2,7 +2,6 @@
 using BuyMe.Application.Company.Commonds;
 using BuyMe.Application.Company.Commonds.DeleteCompany;
 using BuyMe.Application.Company.Queries;
-using BuyMe.UI.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -24,17 +23,17 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
             var result =await Mediator.Send(new GetCompaniesQuery() { DM=dm});
             return Json(result);
         }
-        public async Task< ActionResult> CreateEdit([FromBody] ICRUDModel<CreateEditCommond> value)
+        public async Task< ActionResult> CreateEdit([FromBody] CRUDModel<CreateEditCommond> value)
         {
             _= value ?? throw new BadRequestException("Invalid Data");
-            value.value.Id = await Mediator.Send(value.value);
-            return Json(value.value);
+            value.Value.Id = await Mediator.Send(value.Value);
+            return Json(value.Value);
 
         }
 
-        public async Task<ActionResult> Delete([FromBody] ICRUDModel<CompanyDto> value)
+        public async Task<ActionResult> Delete([FromBody] CRUDModel<CompanyDto> value)
         {
-            _=await Mediator.Send(new DeleteCompanyCommond() { CompanyId = Convert.ToInt32(value.key) });
+            _=await Mediator.Send(new DeleteCompanyCommond() { CompanyId = Convert.ToInt32(value.Key) });
             return Json(value);
         }
         public IActionResult EditAddPartial([FromBody] CRUDModel<CreateEditCommond> value)
@@ -42,5 +41,6 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
             return PartialView("_CreateEditPartial", value.Value);
         }
     }
-  
+    
+
 }

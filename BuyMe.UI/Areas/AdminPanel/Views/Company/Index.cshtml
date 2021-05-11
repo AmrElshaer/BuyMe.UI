@@ -59,26 +59,36 @@
         displayErrors(args)
         }
     function displayErrors(err) {
-            var grid = document.getElementById("Grid").ej2_instances[0];
-            if (err.error[0].error.status === 400) {
-            const validationErrorDictionary = JSON.parse( err.error[0].error.responseText);
-                for (const fieldName in validationErrorDictionary) {
-                    if (validationErrorDictionary.hasOwnProperty(fieldName)) {
-                        var validationEle = $(".e-edit-dialog .form-row div.e-float-input #" + fieldName);
-                        var spanEle = document.createElement("span");
-                        spanEle.textContent = '*' + validationErrorDictionary[fieldName];
-                        spanEle.style.color = "red";
-                        validationEle.parent().append(spanEle)
-                    }
+        var grid = document.getElementById("Grid").ej2_instances[0];
+        if (err.error[0].error.status === 400 && IsJsonString(err.error[0].error.responseText)) {
+
+            const validationErrorDictionary = JSON.parse(err.error[0].error.responseText);
+            for (const fieldName in validationErrorDictionary) {
+                if (validationErrorDictionary.hasOwnProperty(fieldName)) {
+                    var validationEle = $(".e-edit-dialog .form-row div.e-float-input #" + fieldName);
+                    var spanEle = document.createElement("span");
+                    spanEle.textContent = '*' + validationErrorDictionary[fieldName];
+                    spanEle.style.color = "red";
+                    validationEle.parent().append(spanEle)
                 }
-            }else {
-                var validationEle = $(".e-edit-dialog .form-row");
-                var spanEle = document.createElement("span");
-                spanEle.textContent = 'Please Check Your Connection';
-                spanEle.style.color = "red";
-                validationEle.append(spanEle)
             }
         }
+        else {
+            var validationEle = $(".e-edit-dialog");
+            var spanEle = document.createElement("span");
+            spanEle.textContent = '* Please Check Your Connection';
+            spanEle.style.color = "red";
+            validationEle.append(spanEle)
+        }
+    }
+    function IsJsonString(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
     function actionComplete(args) {
             if (args.requestType === 'beginEdit' || args.requestType === 'add') {
                 let spinner = ej.popups.createSpinner({ target: args.dialog.element });
