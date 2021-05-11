@@ -1,4 +1,4 @@
-# BuyMe.UI
+# BuyMe
 Inventory and sales management software
 ## Technologies
 Project is created with:
