@@ -1,0 +1,28 @@
+﻿
+.e-grid .e-headercell
+.form-group.col-md-6 {
+    width: 250px;
+}
+
+:-ms-fullscreen, .e-dialog {
+    max-width: 552px;
+}
+
+@media only screen and (max-width: 991px) {
+    .e-dialog.e-control.e-popup {
+        min-width: 300px !important;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .e-dialog.e-control.e-popup {
+        min-width: 550px !important;
+        min-height: 415px;
+    }
+
+    .e-bigger .e-dialog.e-control.e-popup,
+    .e-bigger .e-dialog.e-control.e-popup {
+        min-height: 496px;
+    }
+}
+

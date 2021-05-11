@@ -1,0 +1,134 @@
+﻿@using BuyMe.Application.Company.Commonds;
+@model CreateEditCommond
+@{
+    Layout = null;
+}
+<style>
+
+    .e-checkbox-wrapper {
+        margin-top: 18px;
+    }
+
+    .e-checkbox-wrapper.e-primary:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #e03872;
+    }
+
+    .e-checkbox-wrapper.e-success .e-frame.e-check,
+    .e-checkbox-wrapper.e-success .e-checkbox:focus + .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #689f38;
+    }
+
+    .e-checkbox-wrapper.e-success:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #449d44;
+    }
+
+    .e-checkbox-wrapper.e-info .e-frame.e-check,
+    .e-checkbox-wrapper.e-info .e-checkbox:focus + .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #2196f3;
+    }
+
+    .e-checkbox-wrapper.e-info:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #0b7dda;
+    }
+
+    .e-checkbox-wrapper.e-warning .e-frame.e-check,
+    .e-checkbox-wrapper.e-warning .e-checkbox:focus + .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #ef6c00;
+    }
+
+    .e-checkbox-wrapper.e-warning:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #cc5c00;
+    }
+
+    .e-checkbox-wrapper.e-danger .e-frame.e-check,
+    .e-checkbox-wrapper.e-danger .e-checkbox:focus + .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #d84315;
+    }
+
+    .e-checkbox-wrapper.e-danger:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
+        background-color: #ba3912;
+    }
+</style>
+@{
+    var Modalanimation = new Syncfusion.EJ2.Popups.DialogAnimationSettings { Effect = Syncfusion.EJ2.Popups.DialogEffect.Zoom };
+}
+<div>
+    <input asp-for="Id" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Name" />
+                <span class="e-float-line"></span>
+                <label asp-for="Name" class="e-float-text e-label-top">Company Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Country" />
+                <span class="e-float-line"></span>
+                <label asp-for="Country" class="e-float-text e-label-top">Country</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="City" />
+                <span class="e-float-line"></span>
+                <label asp-for="City" class="e-float-text e-label-top">City</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Business" />
+                <span class="e-float-line"></span>
+                <label asp-for="Business" class="e-float-text e-label-top">Business</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Telephone" />
+                <span class="e-float-line"></span>
+                <label asp-for="Telephone" class="e-float-text e-label-top">Telephone</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+
+            <div class="e-float-input e-control-wrapper">
+                <ejs-checkbox id="cbox2" name="IsActive" value="@Model.IsActive" checked="@Model.IsActive" label="IsActive"></ejs-checkbox>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+
+        <div class="form-group col-md-12">
+
+            <div class="e-float-input upload-area">
+                <input type="text" id="Logo" value="@Model.Logo" name="Logo" style="display:none">
+            </div>
+            <ejs-uploader id="fileupload"  autoUpload="false" selected="onFileSelect" removing="removeImage" multiple="false"> </ejs-uploader>
+        </div>
+    </div>
+    @if (Model.Logo != null)
+    {
+        <div class="form-row">
+            <div class="form-group col-md-12">
+
+
+                <div style="display: block;border-radius: 3px;">
+                    <span class="e-avatar e-avatar-xlarge" style="background-image:url(@Model.Logo)"></span>
+                </div>
+
+            </div>
+        </div>
+
+    }
+    </div>
+<ejs-scripts></ejs-scripts>
+

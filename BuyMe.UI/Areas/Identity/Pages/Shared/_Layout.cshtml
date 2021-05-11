@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BuyMe.Infrastructure.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuyMe</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/logo.png" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Identity.css" />
+</head>
+<body>
+     @RenderBody()
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(function () {
+            'use strict';
+
+
+            $('.form-control').on('input', function () {
+                var $field = $(this).closest('.form-group');
+                if (this.value) {
+                    $field.addClass('field--not-empty');
+                } else {
+                    $field.removeClass('field--not-empty');
+                }
+            });
+
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
