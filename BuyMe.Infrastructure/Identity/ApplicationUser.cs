@@ -12,5 +12,6 @@ namespace BuyMe.Infrastructure.Identity
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Photo { get; set; }
+        public int? CompanyId { get; set; }
     }
 }

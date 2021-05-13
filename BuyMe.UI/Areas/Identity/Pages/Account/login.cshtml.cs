@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using BuyMe.Application.Common.Interfaces;
 using BuyMe.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -17,9 +18,14 @@ namespace BuyMe.UI.Areas.Identity.Pages.Account
     {
 
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public LoginModel(SignInManager<ApplicationUser> signInManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICompanyService _companyService;
+
+        public LoginModel(SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager,ICompanyService companyService)
         {
             this._signInManager = signInManager;
+            this._userManager = userManager;
+            this._companyService = companyService;
         }
 
         [BindProperty]
@@ -60,20 +66,21 @@ namespace BuyMe.UI.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe,lockoutOnFailure:false);
                 if (result.Succeeded)
                 {
-                    return LocalRedirect(returnUrl);
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    if (await _companyService.IsActive(user.CompanyId))
+                    {
+                       return LocalRedirect(returnUrl);
+                    }
+                    ModelState.AddModelError(string.Empty, "Company not active please go to admin");
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
                 }
             }
             return Page();

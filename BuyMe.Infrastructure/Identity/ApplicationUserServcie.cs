@@ -23,7 +23,7 @@ namespace BuyMe.Infrastructure.Identity
         {
             var user = new ApplicationUser {FirstName=employee.FirstName,
                 LastName=employee.LastName,Photo=employee.Photo,UserName = employee.Email,
-                Email = employee.Email };
+                Email = employee.Email,CompanyId=employee.CompanyId };
             var result = await _userManager.CreateAsync(user, employee.Password);
             var appResult = result.ToApplicationResult();
             if (!appResult.Succeeded)

@@ -1,6 +1,7 @@
 ﻿using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Mapping;
+using BuyMe.Application.Company;
 using BuyMe.Application.Employee;
 using FluentValidation;
 using MediatR;
@@ -24,6 +25,7 @@ namespace BuyMe.Application
              .ForEach(item => services.AddScoped(item.InterfaceType, item.ValidatorType));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<ICompanyService, CompanyService>();
             return services;
         }
     }

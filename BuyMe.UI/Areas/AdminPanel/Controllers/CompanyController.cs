@@ -30,7 +30,6 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
             return Json(value.Value);
 
         }
-
         public async Task<ActionResult> Delete([FromBody] CRUDModel<CompanyDto> value)
         {
             _=await Mediator.Send(new DeleteCompanyCommond() { CompanyId = Convert.ToInt32(value.Key) });
