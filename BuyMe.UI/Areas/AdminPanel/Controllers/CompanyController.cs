@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.AdminPanel.Controllers
 {
-    [Area("AdminPanel")]
+    
     public class CompanyController : BaseController
     {
         public IActionResult Index()
@@ -23,7 +23,7 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
             var result =await Mediator.Send(new GetCompaniesQuery() { DM=dm});
             return Json(result);
         }
-        public async Task< ActionResult> CreateEdit([FromBody] CRUDModel<CreateEditCommond> value)
+        public async Task< ActionResult> CreateEdit([FromBody] CRUDModel<CreateEditCompanyCommond> value)
         {
             _= value ?? throw new BadRequestException("Invalid Data");
             value.Value.Id = await Mediator.Send(value.Value);
@@ -36,7 +36,7 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
             _=await Mediator.Send(new DeleteCompanyCommond() { CompanyId = Convert.ToInt32(value.Key) });
             return Json(value);
         }
-        public IActionResult EditAddPartial([FromBody] CRUDModel<CreateEditCommond> value)
+        public IActionResult EditAddPartial([FromBody] CRUDModel<CreateEditCompanyCommond> value)
         {
             return PartialView("_CreateEditPartial", value.Value);
         }

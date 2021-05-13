@@ -1,4 +1,5 @@
-﻿using BuyMe.Infrastructure.Identity;
+﻿using BuyMe.Application.Common.Interfaces;
+using BuyMe.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,7 @@ namespace BuyMe.Infrastructure
                       configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            services.AddTransient<IApplicationUserServcie, ApplicationUserServcie>();
             return services;
         }
     }

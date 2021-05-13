@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace BuyMe.Application.Company.Commonds
 {
-    public class CreateEditCommondHandler : IRequestHandler<CreateEditCommond, int>
+    public class CreateEditCompanyCommondHandler : IRequestHandler<CreateEditCompanyCommond, int>
     {
         private readonly IBuyMeDbContext _context;
-        public CreateEditCommondHandler(IBuyMeDbContext context)
+        public CreateEditCompanyCommondHandler(IBuyMeDbContext context)
         {
             _context = context;
         }
-        public async Task<int> Handle(CreateEditCommond request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateEditCompanyCommond request, CancellationToken cancellationToken)
         {
             Domain.Entities.Company company;
             if (request.Id.HasValue)

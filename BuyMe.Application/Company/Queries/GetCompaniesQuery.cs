@@ -36,7 +36,7 @@ namespace BuyMe.Application.Company.Queries
                 if(request.DM.Search != null && request.DM.Search.Count > 0) dataSource = operation.PerformSearching(dataSource, request.DM.Search); 
                 if (request.DM.Skip != 0)dataSource = operation.PerformSkip(dataSource, request.DM.Skip);
                 if (request.DM.Take != 0)dataSource = operation.PerformTake(dataSource, request.DM.Take);
-                var companies =await dataSource.OrderByDescending(a => a.Id).ProjectTo<CompanyDto>(_mapper.ConfigurationProvider).ToListAsync();
+                var companies = dataSource.OrderByDescending(a => a.Id).Select(_mapper.Map<CompanyDto>).ToList();
                 return new QueryResult<CompanyDto>() { count=count,result= companies };
             }
             

@@ -9,6 +9,10 @@ namespace BuyMe.Domain.Entities
 {
     public class Company: AuditableEntity
     {
+        public Company()
+        {
+            Employees = new HashSet<Employee>();
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Telephone { get; set; }
@@ -17,5 +21,6 @@ namespace BuyMe.Domain.Entities
         public string Business { get; set; }
         public string Logo { get; set; }
         public bool IsActive { get; set; }
+        public ICollection<Employee> Employees { get; set; }
     }
 }

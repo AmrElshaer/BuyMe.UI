@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BuyMe.Application.Company.Commonds
 {
-    public class CreateEditCommondValidator : AbstractValidator<CreateEditCommond>
+    public class CreateEditCompanyValidator : AbstractValidator<CreateEditCompanyCommond>
     {
-        public CreateEditCommondValidator()
+        public CreateEditCompanyValidator()
         {
             RuleFor(d => d.Name).NotEmpty();
             RuleFor(d => d.Country).NotEmpty();

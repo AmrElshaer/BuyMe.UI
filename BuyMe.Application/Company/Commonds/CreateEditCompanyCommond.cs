@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.Application.Company.Commonds
 {
-    public class CreateEditCommond: AuditableEntity,IRequest<int>
+    public class CreateEditCompanyCommond: AuditableEntity,IRequest<int>
     {
         public int? Id { get; set; }
         public string Name { get; set; }

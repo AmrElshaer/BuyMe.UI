@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 namespace BuyMe.UI.Areas.AdminPanel.Controllers
 {
+    [Area("AdminPanel")]
     public class BaseController : Controller
     {
         private IMediator _mediator;
