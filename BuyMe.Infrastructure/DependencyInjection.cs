@@ -20,6 +20,7 @@ namespace BuyMe.Infrastructure
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddTransient<IApplicationUserServcie, ApplicationUserServcie>();
+            services.AddTransient<IUserManagerService, UserManagerService>();
             return services;
         }
     }
