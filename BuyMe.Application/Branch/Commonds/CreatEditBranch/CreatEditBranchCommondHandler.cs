@@ -49,7 +49,7 @@ namespace BuyMe.Application.Branch.Commonds.CreatEditBranch
             branch.CurrencyId = request.CurrencyId;
             branch.Description = request.Description;
             await _context.SaveChangesAsync(cancellationToken);
-            return branch.CurrencyId;
+            return branch.BranchId;
         }
     }
 }
