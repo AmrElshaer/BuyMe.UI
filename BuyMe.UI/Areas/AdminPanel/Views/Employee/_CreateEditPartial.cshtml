@@ -3,52 +3,7 @@
 @{
     Layout = null;
 }
-<style>
-
-    .e-checkbox-wrapper {
-        margin-top: 18px;
-    }
-
-        .e-checkbox-wrapper.e-primary:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #e03872;
-        }
-
-        .e-checkbox-wrapper.e-success .e-frame.e-check,
-        .e-checkbox-wrapper.e-success .e-checkbox:focus + .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #689f38;
-        }
-
-        .e-checkbox-wrapper.e-success:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #449d44;
-        }
-
-        .e-checkbox-wrapper.e-info .e-frame.e-check,
-        .e-checkbox-wrapper.e-info .e-checkbox:focus + .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #2196f3;
-        }
-
-        .e-checkbox-wrapper.e-info:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #0b7dda;
-        }
-
-        .e-checkbox-wrapper.e-warning .e-frame.e-check,
-        .e-checkbox-wrapper.e-warning .e-checkbox:focus + .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #ef6c00;
-        }
-
-        .e-checkbox-wrapper.e-warning:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #cc5c00;
-        }
-
-        .e-checkbox-wrapper.e-danger .e-frame.e-check,
-        .e-checkbox-wrapper.e-danger .e-checkbox:focus + .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #d84315;
-        }
-
-        .e-checkbox-wrapper.e-danger:hover .e-frame.e-check { /* csslint allow: adjoining-classes */
-            background-color: #ba3912;
-        }
-</style>
+<link rel="stylesheet" href="~/css/checkbox.css"/>
 <div>
     <input asp-for="Id" type="hidden" />
     <input asp-for="CompanyId" type="hidden"/>

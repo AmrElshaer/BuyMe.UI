@@ -18,7 +18,8 @@ namespace BuyMe.Infrastructure
                   options.UseSqlServer(
                       configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders()
+        .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>(); 
             services.AddTransient<IApplicationUserServcie, ApplicationUserServcie>();
             services.AddTransient<IUserManagerService, UserManagerService>();
             return services;

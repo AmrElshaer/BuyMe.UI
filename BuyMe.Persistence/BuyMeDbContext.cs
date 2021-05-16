@@ -27,6 +27,8 @@ namespace BuyMe.Persistence
         }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<Branch> Branches { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

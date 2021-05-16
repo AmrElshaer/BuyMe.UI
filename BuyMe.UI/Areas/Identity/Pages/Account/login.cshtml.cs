@@ -78,10 +78,8 @@ namespace BuyMe.UI.Areas.Identity.Pages.Account
                     }
                     ModelState.AddModelError(string.Empty, "Company not active please go to admin");
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                }
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                
             }
             return Page();
         }

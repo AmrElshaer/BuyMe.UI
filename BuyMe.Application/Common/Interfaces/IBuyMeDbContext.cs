@@ -13,6 +13,8 @@ namespace BuyMe.Application.Common.Interfaces
     {
          DbSet<Entities.Company> Companies{ get; set; }
          DbSet<Entities.Employee> Employees{ get; set; }
+         DbSet<Entities.Currency> Currencies{ get; set; }
+         DbSet<Entities.Branch> Branches{ get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }

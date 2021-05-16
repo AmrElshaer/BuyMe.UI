@@ -22,5 +22,6 @@ namespace BuyMe.Domain.Entities
         public string Logo { get; set; }
         public bool IsActive { get; set; }
         public ICollection<Employee> Employees { get; set; }
+        public ICollection<Currency> Currencies { get; set; }
     }
 }
