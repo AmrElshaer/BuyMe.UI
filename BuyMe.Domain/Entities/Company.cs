@@ -12,6 +12,8 @@ namespace BuyMe.Domain.Entities
         public Company()
         {
             Employees = new HashSet<Employee>();
+            Currencies = new HashSet<Currency>();
+            Branches = new HashSet<Branch>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -23,5 +25,6 @@ namespace BuyMe.Domain.Entities
         public bool IsActive { get; set; }
         public ICollection<Employee> Employees { get; set; }
         public ICollection<Currency> Currencies { get; set; }
+        public ICollection<Branch> Branches { get; set; }
     }
 }

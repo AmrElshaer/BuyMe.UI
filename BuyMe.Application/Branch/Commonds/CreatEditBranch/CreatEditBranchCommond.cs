@@ -1,14 +1,15 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuyMe.Domain.Entities
+namespace BuyMe.Application.Branch.Commonds.CreatEditBranch
 {
-    public class Branch
+    public class CreatEditBranchCommond:IRequest<int>
     {
-        public int BranchId { get; set; }
+        public int? BranchId { get; set; }
         public string BranchName { get; set; }
         public string Description { get; set; }
         public int CurrencyId { get; set; }
@@ -19,7 +20,6 @@ namespace BuyMe.Domain.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         public string ContactPerson { get; set; }
-        public int CompanyId { get; set; }
-        public Currency Currency { get; set; }
+        public int? CompanyId { get; set; }
     }
 }

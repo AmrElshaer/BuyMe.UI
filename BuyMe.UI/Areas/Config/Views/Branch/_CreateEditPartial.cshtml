@@ -1,0 +1,96 @@
+﻿@using BuyMe.Application.Branch.Commonds.CreatEditBranch
+@model CreatEditBranchCommond
+@{
+    Layout = null;
+}
+<div>
+    <input asp-for="BranchId" type="hidden" />
+    <input asp-for="CompanyId" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="BranchName" />
+                <span class="e-float-line"></span>
+                <label asp-for="BranchName" class="e-float-text e-label-top">BranchName</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="ContactPerson" />
+                <span class="e-float-line"></span>
+                <label asp-for="ContactPerson" class="e-float-text e-label-top">ContactPerson</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Description" />
+                <span class="e-float-line"></span>
+                <label asp-for="Description" class="e-float-text e-label-top">Description</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Address" />
+                <span class="e-float-line"></span>
+                <label asp-for="Address" class="e-float-text e-label-top">Address</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="City" />
+                <span class="e-float-line"></span>
+                <label asp-for="City" class="e-float-text e-label-top">City</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+                <ejs-dropdownlist ejs-for="CurrencyId" dataSource="@ViewBag.currencies" placeholder="Select a currency"  popupHeight="200px">
+                    <e-dropdownlist-fields text="CurrencyCode" value="CurrencyId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="ZipCode" />
+                <span class="e-float-line"></span>
+                <label asp-for="ZipCode" class="e-float-text e-label-top">ZipCode</label>
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Email" />
+                <span class="e-float-line"></span>
+                <label asp-for="Email" class="e-float-text e-label-top">Email</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Phone" />
+                <span class="e-float-line"></span>
+                <label asp-for="Phone" class="e-float-text e-label-top">Phone</label>
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="State" />
+                <span class="e-float-line"></span>
+                <label asp-for="State" class="e-float-text e-label-top">State</label>
+            </div>
+        </div>
+    </div>
+
+</div>
+<ejs-scripts></ejs-scripts>
+
