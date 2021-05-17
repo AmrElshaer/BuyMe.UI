@@ -1,0 +1,31 @@
+﻿@using BuyMe.Application.UnitOfMeasure.Commonds
+@model CreateEditUnitOfMeasureCommond
+@{
+    Layout = null;
+}
+<div>
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="CompanyId" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="UOM" />
+                <span class="e-float-line"></span>
+                <label asp-for="UOM" class="e-float-text e-label-top">UOM</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Description" />
+                <span class="e-float-line"></span>
+                <label asp-for="Description" class="e-float-text e-label-top">Description</label>
+            </div>
+        </div>
+    </div>
+
+</div>
+<ejs-scripts></ejs-scripts>
+

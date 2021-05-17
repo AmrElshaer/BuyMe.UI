@@ -383,7 +383,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li class="@(action == "Index"&& controller == "Category"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="Category" asp-action="Index"><i class="fa fa-circle-o"></i>Category</a></li>
-                                <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+                                <li class="@(action == "Index"&& controller == "UOM"&&area=="Inventory"? "active" : "")"><a  asp-area="Inventory" asp-controller="UOM" asp-action="Index"><i class="fa fa-circle-o"></i> Unit Of Measure</a></li>
                                 <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
                                 <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
                                 <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>

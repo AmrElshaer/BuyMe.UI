@@ -12,7 +12,6 @@ namespace BuyMe.Application.Category.Commonds
         public CreateEditCategoryValidator()
         {
             RuleFor(d => d.CategoryName).NotEmpty();
-            RuleFor(d => d.Description).NotEmpty();
         }
     }
 }
