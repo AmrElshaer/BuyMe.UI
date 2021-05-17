@@ -29,6 +29,11 @@ namespace BuyMe.Persistence
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Branch> Branches { get; set; }
+        public DbSet<Category> Categories { get ; set ; }
+        public DbSet<Product> Products { get ; set ; }
+        public DbSet<UnitOfMeasure> UnitOfMeasures { get ; set ; }
+        public DbSet<Warehouse> Warehouses { get ; set ; }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())

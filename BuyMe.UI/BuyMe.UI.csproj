@@ -25,6 +25,8 @@
     <Folder Include="Areas\AdminPanel\Models\" />
     <Folder Include="Areas\Config\Data\" />
     <Folder Include="Areas\Config\Models\" />
+    <Folder Include="Areas\Inventory\Data\" />
+    <Folder Include="Areas\Inventory\Models\" />
   </ItemGroup>
 
 </Project>
