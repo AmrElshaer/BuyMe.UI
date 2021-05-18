@@ -1,0 +1,97 @@
+﻿@using BuyMe.Application.Product.Commonds
+@using Newtonsoft.Json
+@model CreateEditProductCommond
+@{
+    Layout = null;
+}
+<style>
+    .dropDownListTop{
+        margin-top:15px;
+    }
+</style>
+<div>
+    <input asp-for="ProductId" type="hidden" />
+    <input asp-for="CompanyId" type="hidden" />
+    <input asp-for="CurrencyId" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="ProductName" />
+                <span class="e-float-line"></span>
+                <label asp-for="ProductName" class="e-float-text e-label-top">Product Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Description" />
+                <span class="e-float-line"></span>
+                <label asp-for="Description" class="e-float-text e-label-top">Description</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Barcode" />
+                <span class="e-float-line"></span>
+                <label asp-for="Barcode" class="e-float-text e-label-top">Barcode</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div>
+                DefaultBuyingPrice
+                <ejs-numerictextbox ejs-for="DefaultBuyingPrice" format="@Model.CurrencyCode ###.##"  Type="text"></ejs-numerictextbox>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="form-row">
+
+        <div class="form-group col-md-6">
+            <div>
+                DefaultSellingPrice
+                <ejs-numerictextbox ejs-for="DefaultSellingPrice" format="@Model.CurrencyCode ###.##" Type="text"></ejs-numerictextbox>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+
+            <div class="dropDownListTop">
+                <ejs-dropdownlist  filterBarPlaceholder="Search" allowFiltering="true" filtering="onfilteringUOM" ejs-for="UnitOfMeasureId" dataSource="@ViewBag.UOMS" placeholder="Select Unit Of Measure" popupHeight="200px">
+                    <e-dropdownlist-fields text="UOM" value="Id"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="dropDownListTop">
+                <ejs-dropdownlist ejs-for="BranchId" change="branchChange" dataSource="@ViewBag.Branches" placeholder="Select Branch" popupHeight="200px">
+                    <e-dropdownlist-fields text="BranchName" value="BranchId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input readonly asp-for="CurrencyCode"/>
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top">Currency</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="dropDownListTop">
+                <ejs-dropdownlist filterBarPlaceholder="Search" allowFiltering="true" filtering="onfilteringCategory" ejs-for="CategoryId" dataSource="@ViewBag.Categories" placeholder="Select Category" popupHeight="200px">
+                    <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ejs-scripts></ejs-scripts>
+

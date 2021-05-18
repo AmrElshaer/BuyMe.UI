@@ -41,7 +41,8 @@
         displayErrors(args)
         }
     function actionComplete(args) {
-            if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+        if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+            args.form.ej2_instances[0].addRules('CurrencyId', { required: true });
                 let spinner = ej.popups.createSpinner({ target: args.dialog.element });
                 ej.popups.showSpinner(args.dialog.element);
                 if (args.requestType === 'beginEdit' || args.requestType === 'add') {

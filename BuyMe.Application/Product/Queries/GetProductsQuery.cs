@@ -13,37 +13,34 @@ using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace BuyMe.Application.UnitOfMeasure.Queries
+namespace BuyMe.Application.Product.Queries
 {
-    public  class GetUOMQuery:IRequest<QueryResult<UnitOfMeasureDto>>
+    public  class GetProductQuery:IRequest<QueryResult<ProductDto>>
     {
         public DataManagerRequest  DM { get; set; }
-        public GetUOMQuery()
-        {
-            DM ??= new DataManagerRequest();
-        }
-        public class GetUOMsQueryHandler : IRequestHandler<GetUOMQuery, QueryResult<UnitOfMeasureDto>>
+        public class GetProductQueryHandler : IRequestHandler<GetProductQuery, QueryResult<ProductDto>>
         {
             private readonly IBuyMeDbContext _context;
             private readonly IMapper _mapper;
             private readonly ICurrentUserService currentUserService;
 
-            public GetUOMsQueryHandler(IBuyMeDbContext context,IMapper mapper,ICurrentUserService currentUserService)
+            public GetProductQueryHandler(IBuyMeDbContext context,IMapper mapper,ICurrentUserService currentUserService)
             {
                 _context = context;
                 _mapper = mapper;
                 this.currentUserService = currentUserService;
             }
-            public async Task<QueryResult<UnitOfMeasureDto>> Handle(GetUOMQuery request, CancellationToken cancellationToken)
+            public async Task<QueryResult<ProductDto>> Handle(GetProductQuery request, CancellationToken cancellationToken)
             {
-                var dataSource = _context.UnitOfMeasures.Where(a=>a.CompanyId==currentUserService.CompanyId).AsQueryable();
+                var dataSource = _context.Products.Include(a=>a.Branch).Include(a=>a.UnitOfMeasure).Include(a=>a.Currency)
+                    .Where(a=>a.CompanyId==currentUserService.CompanyId).AsQueryable();
                 var operation = new DataOperations();
                 if(request.DM.Search != null && request.DM.Search.Count > 0) dataSource = operation.PerformSearching(dataSource, request.DM.Search); 
                 if (request.DM.Skip != 0)dataSource = operation.PerformSkip(dataSource, request.DM.Skip);
                 if (request.DM.Take != 0)dataSource = operation.PerformTake(dataSource, request.DM.Take);
                 int count = dataSource.Count();
-                var ums = dataSource.OrderByDescending(a => a.Id).Select(_mapper.Map<UnitOfMeasureDto>).ToList();
-                return new QueryResult<UnitOfMeasureDto>() { count=count,result= ums };
+                var products = dataSource.OrderByDescending(a => a.ProductId).Select(_mapper.Map<ProductDto>).ToList();
+                return new QueryResult<ProductDto>() { count=count,result= products };
             }
             
         }

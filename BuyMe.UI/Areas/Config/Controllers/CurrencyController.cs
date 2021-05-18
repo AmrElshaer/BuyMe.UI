@@ -38,5 +38,10 @@ namespace BuyMe.UI.Areas.Config.Controllers
         {
             return PartialView("_CreateEditPartial", value.Value);
         }
+        public async Task<IActionResult> GetBranchCurrency(int branchId)
+        {
+            var currency = await Mediator.Send(new GetBranchCurrencyQuery() { BranchId= branchId });
+            return Json(currency);
+        }
     }
 }

@@ -16,6 +16,10 @@ namespace BuyMe.Application.Branch.Queries
     public class GetBranchesQuery:IRequest<QueryResult<BranchDto>>
     {
         public DataManagerRequest DM { get; set; }
+        public GetBranchesQuery()
+        {
+            DM ??= new DataManagerRequest();
+        }
         public class GetBranchesQueryHandler : IRequestHandler<GetBranchesQuery, QueryResult<BranchDto>>
         {
             private readonly IBuyMeDbContext _context;

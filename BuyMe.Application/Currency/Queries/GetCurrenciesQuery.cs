@@ -15,6 +15,10 @@ namespace BuyMe.Application.Currency.Queries
     public class GetCurrenciesQuery:IRequest<QueryResult<CurrencyDto>>
     {
         public DataManagerRequest DM { get; set; }
+        public GetCurrenciesQuery()
+        {
+            DM ??= new DataManagerRequest();
+        }
         public class GetCurrenciesQueryHandler : IRequestHandler<GetCurrenciesQuery, QueryResult<CurrencyDto>>
         {
             private readonly IBuyMeDbContext _context;
