@@ -383,11 +383,10 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li class="@(action == "Index"&& controller == "Category"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="Category" asp-action="Index"><i class="fa fa-circle-o"></i>Category</a></li>
-                                <li class="@(action == "Index"&& controller == "UOM"&&area=="Inventory"? "active" : "")"><a  asp-area="Inventory" asp-controller="UOM" asp-action="Index"><i class="fa fa-circle-o"></i> Unit Of Measure</a></li>
+                                <li class="@(action == "Index"&& controller == "UOM"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="UOM" asp-action="Index"><i class="fa fa-circle-o"></i> Unit Of Measure</a></li>
                                 <li class="@(action == "Index"&& controller == "Product"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="Product" asp-action="Index"><i class="fa fa-circle-o"></i>Product</a></li>
-                                <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                                <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                                <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+                                <li class="@(action == "Index"&& controller == "Warehouse"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="Warehouse" asp-action="Index"><i class="fa fa-circle-o"></i>Warehouse</a></li>
+                             
                             </ul>
                         </li>
                         <li class="treeview @(area=="Config"? "active" : "")">
