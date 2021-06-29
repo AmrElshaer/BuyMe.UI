@@ -2,6 +2,7 @@
 using BuyMe.Application.Branch.Commonds.DeleteBranch;
 using BuyMe.Application.Branch.Queries;
 using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.Currency.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
@@ -20,7 +21,7 @@ namespace BuyMe.UI.Areas.Config.Controllers
         }
         public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
         {
-            var result = await Mediator.Send(new GetBranchesQuery() { DM = dm });
+            var result = await Mediator.Send(new GetBranchesQuery() { DM = new DataManager(dm.Take,dm.Skip,dm.Search?.FirstOrDefault()?.Key) });
             return Json(result);
         }
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreatEditBranchCommond> value)
@@ -37,7 +38,7 @@ namespace BuyMe.UI.Areas.Config.Controllers
         }
         public async Task< IActionResult> EditAddPartial([FromBody] CRUDModel<CreatEditBranchCommond> value)
         {
-            var currencies = await Mediator.Send(new GetCurrenciesQuery() { DM = new DataManagerRequest() });
+            var currencies = await Mediator.Send(new GetCurrenciesQuery());
             ViewBag.currencies = currencies.result;
             return PartialView("_CreateEditPartial", value.Value);
         }

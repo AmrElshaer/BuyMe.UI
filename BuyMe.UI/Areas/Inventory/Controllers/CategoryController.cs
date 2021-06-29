@@ -2,6 +2,7 @@
 using BuyMe.Application.Category.Commonds.DeleteCategory;
 using BuyMe.Application.Category.Queries;
 using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -19,7 +20,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
         }
         public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
         {
-            var result = await Mediator.Send(new GetCategoriesQuery() { DM = dm });
+            var result = await Mediator.Send(new GetCategoriesQuery() { DM=new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key) });
             return Json(result);
         }
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreateEditCategoryCommond> value)

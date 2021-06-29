@@ -15,7 +15,7 @@
 <section class="content">
     <div class="control-section">
         <ejs-grid id="Grid" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search" })" allowPaging="true">
-            <e-data-manager url="/AdminPanel/Employee/UrlDataSource" insertUrl="/AdminPanel/Employee/CreateEdit" updateUrl="/AdminPanel/Employee/CreateEdit" removeUrl="/AdminPanel/Employee/Delete" adaptor="UrlAdaptor"></e-data-manager>
+            <e-data-manager url="/AdminPanel/Employee/UrlDataSource?companyId=@ViewBag.CompanyId" insertUrl="/AdminPanel/Employee/CreateEdit" updateUrl="/AdminPanel/Employee/CreateEdit" removeUrl="/AdminPanel/Employee/Delete" adaptor="UrlAdaptor"></e-data-manager>
             <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
             <e-grid-columns>
                 <e-grid-column field="Id" headerText="Company Id" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>

@@ -3,9 +3,6 @@ using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Syncfusion.EJ2.Base;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,7 +12,11 @@ namespace BuyMe.Application.WarehouseINV.Queries
 {
     public class GetWarehousesQuery:IRequest<QueryResult<WarhouseDto>>
     {
-        public DataManagerRequest DM { get; set; }
+        public DataManager DM { get; set; }
+        public GetWarehousesQuery()
+        {
+            DM ??= new DataManager();
+        }
         public class GetWarehousesQueryHandler : IRequestHandler<GetWarehousesQuery, QueryResult<WarhouseDto>>
         {
             private readonly IBuyMeDbContext _context;
@@ -31,10 +32,9 @@ namespace BuyMe.Application.WarehouseINV.Queries
             public async Task<QueryResult<WarhouseDto>> Handle(GetWarehousesQuery request, CancellationToken cancellationToken)
             {
                 var dataSource = _context.Warehouses.Include(a => a.Branch).Where(a => a.CompanyId == currentUserService.CompanyId).AsQueryable();
-                var operation = new DataOperations();
-                if (request.DM.Search != null && request.DM.Search.Count > 0) dataSource = operation.PerformSearching(dataSource, request.DM.Search);
-                if (request.DM.Skip != 0) dataSource = operation.PerformSkip(dataSource, request.DM.Skip);
-                if (request.DM.Take != 0) dataSource = operation.PerformTake(dataSource, request.DM.Take);
+                if (!string.IsNullOrEmpty(request.DM.SearchValue)) dataSource = dataSource.Where(a=>a.WarehouseName.Contains(request.DM.SearchValue));
+                if (request.DM.Skip!=null&&request.DM.Skip != 0) dataSource = dataSource.Skip(request.DM.Skip.Value);
+                if (request.DM.Take != 0) dataSource = dataSource.Take(request.DM.Take.Value);
                 int count = dataSource.Count();
                 var warhouses = dataSource.OrderByDescending(a => a.WarehouseId).Select(_mapper.Map<WarhouseDto>).ToList();
                 return new QueryResult<WarhouseDto>() { count = count, result = warhouses };

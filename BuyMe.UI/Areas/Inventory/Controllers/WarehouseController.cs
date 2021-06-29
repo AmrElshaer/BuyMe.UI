@@ -1,5 +1,6 @@
 ﻿using BuyMe.Application.Branch.Queries;
 using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.WarehouseINV.Commonds.CreatEdit;
 using BuyMe.Application.WarehouseINV.Commonds.DeleteWarehouse;
 using BuyMe.Application.WarehouseINV.Queries;
@@ -20,7 +21,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
         }
         public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
         {
-            var result = await Mediator.Send(new GetWarehousesQuery() { DM = dm });
+            var result = await Mediator.Send(new GetWarehousesQuery() { DM = new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key) });
             return Json(result);
         }
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreatEditWarehouseCommond> value)

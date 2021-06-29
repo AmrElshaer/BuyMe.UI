@@ -1,6 +1,7 @@
 ﻿using BuyMe.Application.Branch.Queries;
 using BuyMe.Application.Category.Queries;
 using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.Currency.Queries;
 using BuyMe.Application.Product.Commonds;
 using BuyMe.Application.Product.Commonds.DeleteProduct;
@@ -24,7 +25,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
         }
         public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
         {
-            var result = await Mediator.Send(new GetProductQuery() { DM = dm });
+            var result = await Mediator.Send(new GetProductQuery() { DM = new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key) });
             return Json(result);
         }
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreateEditProductCommond> value)

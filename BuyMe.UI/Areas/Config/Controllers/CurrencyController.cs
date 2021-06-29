@@ -1,4 +1,5 @@
 ﻿using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.Currency.Commonds.CreateEditCurrency;
 using BuyMe.Application.Currency.Commonds.DeleteCurrency;
 using BuyMe.Application.Currency.Queries;
@@ -19,7 +20,7 @@ namespace BuyMe.UI.Areas.Config.Controllers
         }
         public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
         {
-            var result = await Mediator.Send(new GetCurrenciesQuery() { DM = dm });
+            var result = await Mediator.Send(new GetCurrenciesQuery() { DM = new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key) });
             return Json(result);
         }
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreatEditCurrencyCommond> value)

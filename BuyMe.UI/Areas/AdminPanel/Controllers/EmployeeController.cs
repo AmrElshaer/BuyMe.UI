@@ -1,5 +1,6 @@
 ﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.Employee.Commonds.CreateEdit;
 using BuyMe.Application.Employee.Commonds.DeleteEmployee;
 using BuyMe.Application.Employee.Queries;
@@ -19,9 +20,10 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
             ViewBag.CompanyId = companyId??throw new NotFoundException("Company","CompanyId");
             return View();
         }
-        public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
+        public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm,int companyId)
         {
-            var result = await Mediator.Send(new GetEmployeesQuery() { DM = dm });
+            var result = await Mediator.Send(new GetEmployeesQuery() { DM = new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key)
+                ,CompanyId=companyId });
             return Json(result);
         }
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreatEditEmployeeCommond> value)

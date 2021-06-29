@@ -2,22 +2,19 @@
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
-using Syncfusion.EJ2.Base;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace BuyMe.Application.Company.Queries
 {
     public  class GetCompaniesQuery:IRequest<QueryResult<CompanyDto>>
     {
-        public DataManagerRequest  DM { get; set; }
+        public DataManager  DM { get; set; }
+        public GetCompaniesQuery()
+        {
+            DM ??= new DataManager();
+        }
         public class GetCompaniesQueryHandler : IRequestHandler<GetCompaniesQuery, QueryResult<CompanyDto>>
         {
             private readonly IBuyMeDbContext _context;
@@ -31,10 +28,15 @@ namespace BuyMe.Application.Company.Queries
             public async Task<QueryResult<CompanyDto>> Handle(GetCompaniesQuery request, CancellationToken cancellationToken)
             {
                 var dataSource = _context.Companies.AsQueryable();
-                var operation = new DataOperations();
-                if(request.DM.Search != null && request.DM.Search.Count > 0) dataSource = operation.PerformSearching(dataSource, request.DM.Search); 
-                if (request.DM.Skip != 0)dataSource = operation.PerformSkip(dataSource, request.DM.Skip);
-                if (request.DM.Take != 0)dataSource = operation.PerformTake(dataSource, request.DM.Take);
+                if (!string.IsNullOrEmpty(request.DM.SearchValue))
+                {
+                    dataSource = dataSource.Where(a =>a.Name.Contains(request.DM.SearchValue)||
+                    a.Country.Contains(request.DM.SearchValue)||
+                    a.City.Contains(request.DM.SearchValue)||
+                    a.Business.Contains(request.DM.SearchValue));
+                }
+                if (request.DM.Skip!=null&&request.DM.Skip != 0)dataSource = dataSource.Skip(request.DM.Skip.Value);
+                if (request.DM.Take != null && request.DM.Take != 0)dataSource = dataSource.Take(request.DM.Take.Value);
                 int count = dataSource.Count();
                 var companies = dataSource.OrderByDescending(a => a.Id).Select(_mapper.Map<CompanyDto>).ToList();
                 return new QueryResult<CompanyDto>() { count=count,result= companies };

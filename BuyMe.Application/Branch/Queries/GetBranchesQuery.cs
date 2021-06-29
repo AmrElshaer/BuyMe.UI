@@ -3,9 +3,6 @@ using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Syncfusion.EJ2.Base;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,10 +12,10 @@ namespace BuyMe.Application.Branch.Queries
 {
     public class GetBranchesQuery:IRequest<QueryResult<BranchDto>>
     {
-        public DataManagerRequest DM { get; set; }
+        public DataManager DM { get; set; }
         public GetBranchesQuery()
         {
-            DM ??= new DataManagerRequest();
+            DM ??= new DataManager();
         }
         public class GetBranchesQueryHandler : IRequestHandler<GetBranchesQuery, QueryResult<BranchDto>>
         {
@@ -32,14 +29,18 @@ namespace BuyMe.Application.Branch.Queries
                 _mapper = mapper;
                 _currentUserService = currentUserService;
             }
-            public async Task<QueryResult<BranchDto>> Handle(GetBranchesQuery request, CancellationToken cancellationToken)
+            public async Task<QueryResult<BranchDto>> Handle(GetBranchesQuery req, CancellationToken cancellationToken)
             {
                 var dataSource = _context.Branches.Include(a=>a.Currency).Where(a => a.CompanyId == _currentUserService.CompanyId)
                     .AsQueryable();
-                var operation = new DataOperations();
-                if (request.DM.Search != null && request.DM.Search.Count > 0) dataSource = operation.PerformSearching(dataSource, request.DM.Search);
-                if (request.DM.Skip != 0) dataSource = operation.PerformSkip(dataSource, request.DM.Skip);
-                if (request.DM.Take != 0) dataSource = operation.PerformTake(dataSource, request.DM.Take);
+                if (!string.IsNullOrEmpty(req.DM.SearchValue))
+                {
+                    dataSource = dataSource.Where(a => a.BranchName.Contains(req.DM.SearchValue) ||
+                    a.Address.Contains(req.DM.SearchValue) || a.City.Contains(req.DM.SearchValue)||
+                    a.Currency.CurrencyName.Contains(req.DM.SearchValue));
+                }
+                if (req.DM.Skip !=null&& req.DM.Skip != 0) dataSource =dataSource.Skip(req.DM.Skip.Value);
+                if (req.DM.Take != null && req.DM.Take != 0) dataSource = dataSource.Take(req.DM.Take.Value);
                 int count = dataSource.Count();
                 var currencies = dataSource.OrderByDescending(a => a.CurrencyId).Select(_mapper.Map<BranchDto>).ToList();
                 return new QueryResult<BranchDto>() { count = count, result = currencies };

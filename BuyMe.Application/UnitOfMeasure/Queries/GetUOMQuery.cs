@@ -2,25 +2,17 @@
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
-using Syncfusion.EJ2.Base;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-
 namespace BuyMe.Application.UnitOfMeasure.Queries
 {
     public  class GetUOMQuery:IRequest<QueryResult<UnitOfMeasureDto>>
     {
-        public DataManagerRequest  DM { get; set; }
+        public DataManager  DM { get; set; }
         public GetUOMQuery()
         {
-            DM ??= new DataManagerRequest();
+            DM ??= new DataManager();
         }
         public class GetUOMsQueryHandler : IRequestHandler<GetUOMQuery, QueryResult<UnitOfMeasureDto>>
         {
@@ -37,10 +29,13 @@ namespace BuyMe.Application.UnitOfMeasure.Queries
             public async Task<QueryResult<UnitOfMeasureDto>> Handle(GetUOMQuery request, CancellationToken cancellationToken)
             {
                 var dataSource = _context.UnitOfMeasures.Where(a=>a.CompanyId==currentUserService.CompanyId).AsQueryable();
-                var operation = new DataOperations();
-                if(request.DM.Search != null && request.DM.Search.Count > 0) dataSource = operation.PerformSearching(dataSource, request.DM.Search); 
-                if (request.DM.Skip != 0)dataSource = operation.PerformSkip(dataSource, request.DM.Skip);
-                if (request.DM.Take != 0)dataSource = operation.PerformTake(dataSource, request.DM.Take);
+
+                if (!string.IsNullOrEmpty(request.DM.SearchValue))
+                { 
+                    dataSource = dataSource.Where(a=>a.UOM.Contains( request.DM.SearchValue));
+                }
+                if (request.DM.Skip !=null&& request.DM.Skip != 0)dataSource = dataSource.Skip(request.DM.Skip.Value);
+                if (request.DM.Take !=null&& request.DM.Take != 0)dataSource = dataSource.Take(request.DM.Take.Value);
                 int count = dataSource.Count();
                 var ums = dataSource.OrderByDescending(a => a.Id).Select(_mapper.Map<UnitOfMeasureDto>).ToList();
                 return new QueryResult<UnitOfMeasureDto>() { count=count,result= ums };

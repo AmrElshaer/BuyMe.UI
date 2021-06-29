@@ -1,4 +1,5 @@
 ﻿using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.UnitOfMeasure.Commonds;
 using BuyMe.Application.UnitOfMeasure.Commonds.DeleteUnitOfMeasure;
 using BuyMe.Application.UnitOfMeasure.Queries;
@@ -19,7 +20,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
         }
         public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
         {
-            var result = await Mediator.Send(new GetUOMQuery() { DM = dm });
+            var result = await Mediator.Send(new GetUOMQuery() { DM = new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key) });
             return Json(result);
         }
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreateEditUnitOfMeasureCommond> value)
