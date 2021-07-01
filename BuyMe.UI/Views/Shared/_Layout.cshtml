@@ -348,14 +348,14 @@
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview @(area=="Sales"? "active" : "")">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
                                 <span>SALES</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+                                <li class="@(action == "Index"&& controller == "CustomerType"&&area=="Sales"? "active" : "")"><a asp-area="Sales" asp-controller="CustomerType" asp-action="Index"><i class="fa fa-circle-o"></i>Customer Type</a></li>
                                 <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
                                 <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
                                 <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
