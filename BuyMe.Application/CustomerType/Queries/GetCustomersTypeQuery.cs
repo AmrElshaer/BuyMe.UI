@@ -35,7 +35,7 @@ namespace BuyMe.Application.CustomerType.Queries
                 var dataSource = _context.CustomerTypes.Where(a => a.CompanyId == currentUserService.CompanyId).AsQueryable();
                 if (!string.IsNullOrEmpty(request.DM.SearchValue)) dataSource = dataSource.Where(a => a.CustomerTypeName.Contains(request.DM.SearchValue));
                 if (request.DM.Skip != null && request.DM.Skip != 0) dataSource = dataSource.Skip(request.DM.Skip.Value);
-                if (request.DM.Take != 0) dataSource = dataSource.Take(request.DM.Take.Value);
+                if( request.DM.Take != null && request.DM.Take != 0) dataSource = dataSource.Take(request.DM.Take.Value);
                 int count = dataSource.Count();
                 var warhouses = dataSource.OrderByDescending(a => a.Id).Select(_mapper.Map<CustomerTypeDto>).ToList();
                 return new QueryResult<CustomerTypeDto>() { count = count, result = warhouses };

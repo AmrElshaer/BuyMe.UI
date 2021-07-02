@@ -1,0 +1,70 @@
+﻿@using Newtonsoft.Json;
+<link rel="stylesheet" href="~/css/grid.css" />
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Customer 
+        <small>Sales</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Customer </a></li>
+        <li class="active">Sales</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="control-section">
+        <ejs-grid id="Grid" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search" })" allowPaging="true">
+            <e-data-manager url="/Sales/Customer/UrlDataSource" insertUrl="/Sales/Customer/CreateEdit" updateUrl="/Sales/Customer/CreateEdit" removeUrl="/Sales/Customer/Delete" adaptor="UrlAdaptor"></e-data-manager>
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="Id" headerText="CustomerId" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
+                <e-grid-column field="CustomerName" headerText="Customer Name" type="string"></e-grid-column>
+                <e-grid-column field="City" headerText="City" type="string"></e-grid-column>
+                <e-grid-column field="Address" headerText="Address" type="string"></e-grid-column>
+                <e-grid-column field="Phone" headerText="Phone" type="string"></e-grid-column>
+                <e-grid-column field="CustomerTypeId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+                <e-grid-column field="CompanyId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</section><!-- /.content -->
+<script id='dialogtemplate' type="text/x-template">
+    <div id="dialogTemp"></div>
+</script>
+<script src="~/js/grid.js"></script>
+<script>
+    function actionFailure(args) {
+        displayErrors(args)
+        }
+    function actionComplete(args) {
+        if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+            args.form.ej2_instances[0].addRules('CustomerName', { required: true });
+
+                let spinner = ej.popups.createSpinner({ target: args.dialog.element });
+                ej.popups.showSpinner(args.dialog.element);
+                if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+                    var ajax = new ej.base.Ajax({
+                        url: "@Url.Action($"EditAddPartial", "Customer")", //render the partial view
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify({ value: args.rowData })
+                    });
+                    ajax.send().then(function (data) {
+                        appendElement(data, args.form); //Render the edit form with selected record
+                        args.form.elements.namedItem('CustomerName').focus();
+                        ej.popups.hideSpinner(args.dialog.element);
+                    }).catch(function (xhr) {
+                        console.log(xhr);
+                        ej.popups.hideSpinner(args.dialog.element);
+                    });
+                }
+            }
+        }
+</script>
+
+
+
+
+

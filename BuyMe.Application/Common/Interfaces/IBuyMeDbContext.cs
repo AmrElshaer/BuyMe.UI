@@ -20,6 +20,7 @@ namespace BuyMe.Application.Common.Interfaces
         DbSet<Entities.UnitOfMeasure> UnitOfMeasures { get; set; }
         DbSet<Entities.Warehouse> Warehouses { get; set; }
         DbSet<Entities.CustomerType> CustomerTypes { get; set; }
+         DbSet<Entities.Customer> Customers { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }
