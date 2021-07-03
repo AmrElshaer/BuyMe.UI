@@ -13,11 +13,11 @@ namespace BuyMe.Application.CustomerType.Commonds.Delete
     public class DeleteCustomerTypeCommond:IRequest<Unit>
     {
         public int CustomerTypeId { get; set; }
-        public class DeleteWarehouseCommondHandler : IRequestHandler<DeleteCustomerTypeCommond, Unit>
+        public class DeleteSalesTypeCommondHandler : IRequestHandler<DeleteCustomerTypeCommond, Unit>
         {
             private readonly IBuyMeDbContext _context;
 
-            public DeleteWarehouseCommondHandler(IBuyMeDbContext context)
+            public DeleteSalesTypeCommondHandler(IBuyMeDbContext context)
             {
                 this._context = context;
             }
