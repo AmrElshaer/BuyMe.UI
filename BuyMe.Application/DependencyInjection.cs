@@ -3,6 +3,7 @@ using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Mapping;
 using BuyMe.Application.Company;
 using BuyMe.Application.Employee;
+using BuyMe.Application.NumberSequence;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ namespace BuyMe.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<ICompanyService, CompanyService>();
+            services.AddTransient<INumberSequencyService, NumberSequencyService>();
             return services;
         }
     }

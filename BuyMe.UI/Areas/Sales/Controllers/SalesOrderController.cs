@@ -1,0 +1,51 @@
+﻿using BuyMe.Application.Branch.Queries;
+using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Models;
+using BuyMe.Application.Customer.Queries.GetCustomers;
+using BuyMe.Application.Product.Queries;
+using BuyMe.Application.SalesOrder.Commonds;
+using BuyMe.Application.SalesOrder.Commonds.DeleteSalesOrder;
+using BuyMe.Application.SalesOrder.Queries;
+using BuyMe.Application.SalesType.Queries;
+using Microsoft.AspNetCore.Mvc;
+using Syncfusion.EJ2.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BuyMe.UI.Areas.Sales.Controllers
+{
+    public class SalesOrderController:BaseController
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public async Task<IActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
+        {
+            var result = await Mediator.Send(new GetSalesOrdersQuery() { DM = new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key) });
+            return Json(result);
+        }
+        public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreateEditSOCommond> value)
+        {
+            _ = value ?? throw new BadRequestException("Invalid Data");
+            value.Value.SalesOrderId = await Mediator.Send(value.Value);
+            return Json(value.Value);
+
+        }
+        public async Task<ActionResult> Delete([FromBody] CRUDModel<SalesOrderDto> value)
+        {
+            _ = await Mediator.Send(new DeleteSalesOrderCommond() { SalesOrderId =long.Parse(value.Key.ToString())  });
+            return Json(value);
+        }
+        public async Task<IActionResult> EditAddPartial([FromBody] CRUDModel<CreateEditSOCommond> value)
+        {
+            ViewBag.Customers =(await Mediator.Send(new GetCustomersQurery())).result;
+            ViewBag.Branches =(await Mediator.Send(new GetBranchesQuery())).result;
+            ViewBag.SalesTypes =(await Mediator.Send(new GetSalesTypeQuery())).result;
+            return PartialView("_CreateEditPartial", value.Value);
+        }
+    }
+}

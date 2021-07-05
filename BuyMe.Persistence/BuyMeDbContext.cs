@@ -36,6 +36,9 @@ namespace BuyMe.Persistence
         public DbSet<CustomerType> CustomerTypes { get ; set ; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<SalesType> SalesTypes { get; set ; }
+        public DbSet<SalesOrder> SalesOrders { get ; set ; }
+        public DbSet<SalesOrderLine> SalesOrderLines { get ; set ; }
+        public DbSet<NumberSequence> NumberSequences { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
