@@ -1,0 +1,211 @@
+﻿@model BuyMe.Application.SalesOrder.Queries.SalesOrderDto
+
+@using Newtonsoft.Json;
+<link rel="stylesheet" href="~/css/grid.css" />
+<!-- Content Header (Page header) -->
+
+<!-- Main content -->
+<section class="content box">
+  
+    <div class="control-section">
+        <div class="box-header">
+            <h3 class="box-title">Order Details</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Order Number
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="SalesOrderName" readonly />
+                    </dd>
+                    <dt>
+                        Branch
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="BranchName" readonly />
+                    </dd>
+                    <dt>
+                        Customer
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="CustomerName" readonly />
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        OrderDate
+                    </dt>
+                    <dd>
+                        <input class="form-control" value="@(Model.OrderDate.ToShortDateString())" readonly />
+                    </dd>
+                    <dt>
+                        DeliveryDate
+                    </dt>
+                    <dd>
+
+                        <input class="form-control" value="@(Model.DeliveryDate.ToShortDateString())" readonly />
+                    </dd>
+                    <dt>
+                        Currency
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="CurrencyCode" readonly />
+                    </dd>
+                    <dt>
+                        Sales Type
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="SalesTypeName" readonly />
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="control-section">
+        <ejs-grid id="Grid" actionFailure="actionFailure"  actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete" })" allowPaging="true">
+            <e-data-manager url="/Sales/SalesOrderLine/UrlDataSource?salesOrderId=@Model.SalesOrderId" insertUrl="/Sales/SalesOrderLine/CreateEdit" updateUrl="/Sales/SalesOrderLine/CreateEdit" removeUrl="/Sales/SalesOrderLine/Delete" adaptor="UrlAdaptor"></e-data-manager>
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="ProductName" headerText="Product" type="string"></e-grid-column>
+                <e-grid-column field="Description" allowSearching="false" headerText="Description" type="string"></e-grid-column>
+                <e-grid-column field="Quantity"  headerText="Qty" type="string"></e-grid-column>
+                <e-grid-column field="Price" headerText="Price"  ></e-grid-column>
+                <e-grid-column field="Amount" headerText="Amount"></e-grid-column>
+                <e-grid-column field="DiscountPercentage" headerText="Disc%"></e-grid-column>
+                <e-grid-column field="SubTotal" headerText="SubTotal"></e-grid-column>
+                <e-grid-column field="TaxPercentage" headerText="Tax%"></e-grid-column>
+                <e-grid-column field="Total" headerText="Total"></e-grid-column>
+                <e-grid-column field="SalesOrderId" defaultValue="@Model.SalesOrderId" visible="false"></e-grid-column>
+                <e-grid-column field="ProductId" visible="false"></e-grid-column>
+                <e-grid-column field="DiscountAmount" visible="false"></e-grid-column>
+                <e-grid-column field="TaxAmount" visible="false"></e-grid-column>
+                <e-grid-column field="SalesOrderLineId" headerText="" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</section><!-- /.content -->
+<section class="content box box-primary">
+    <div class="control-section">
+        <div class="row">
+            <div class="col-md-8">
+                <dl class="dl-horizontal">
+                    <dt>
+                       Remarks
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="Remarks" readonly/>
+                    </dd>
+                  
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Amount
+                    </dt>
+                    <dd>
+                       <input class="form-control" asp-for="Amount" readonly/>
+                    </dd>
+                    <dt>
+                        Discount
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="Discount" readonly />
+                    </dd>
+                    <dt>
+                        SubTotal
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="SubTotal" readonly />
+                    </dd>
+                    <dt>
+                        Tax
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="Tax" readonly/>
+                    </dd>
+                    <dt>
+                        Freight
+                    </dt>
+                    <dd>
+                        <input class="form-control" asp-for="Freight" readonly />
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+<script id='dialogtemplate' type="text/x-template">
+    <div id="dialogTemp"></div>
+</script>
+
+<script src="~/js/grid.js"></script>
+<script>
+
+        function actionFailure(args) {
+          displayErrors(args)
+        }
+        function actionComplete(args) {
+           if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+            args.form.ej2_instances[0].addRules('ProductId', { required: true });
+                let spinner = ej.popups.createSpinner({ target: args.dialog.element });
+                ej.popups.showSpinner(args.dialog.element);
+                if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+                    var ajax = new ej.base.Ajax({
+                        url: "@Url.Action($"EditAddPartial", "SalesOrderLine")", //render the partial view
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify({ value: args.rowData })
+                    });
+                    ajax.send().then(function (data) {
+                        appendElement(data, args.form);
+                        ej.popups.hideSpinner(args.dialog.element);
+                    }).catch(function (xhr) {
+                        console.log(xhr);
+                        ej.popups.hideSpinner(args.dialog.element);
+                    });
+                }
+
+            }
+            if (args.requestType == 'save' || args.requestType == 'delete') {
+                RewriteTotal();
+            }
+        }
+        function RewriteTotal() {
+            $.ajax({
+                type: 'GET',
+                url: `/Sales/SalesOrder/GetById/${@(Model.SalesOrderId)}`,
+                success: function (data) {
+                    $('#Amount').val(data.Amount);
+                    $('#SubTotal').val(data.SubTotal);
+                    $('#Discount').val(data.Discount);
+                    $('#Tax').val(data.Tax);
+                    $('#Freight').val(data.Freight);
+                    $('#Total').val(data.Total);
+                }
+            });
+        }
+
+</script>
+<script type="text/javascript">
+    function productChange(e) {
+        debugger;
+        if (e.value != 0) {
+            $.ajax({
+                url: `/Inventory/Product/GetProductPrice?productId=${e.value}`,
+                type: 'GET',
+                success: function (data) {
+                    $("#Price").val(data.DefaultSellingPrice);
+                }
+            })
+        }
+
+    }
+</script>

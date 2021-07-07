@@ -1,12 +1,18 @@
-﻿namespace BuyMe.Domain.Entities
+﻿using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BuyMe.Application.SalesOrderLine.Commonds
 {
-    public class SalesOrderLine
+    public class CreatEditSOLineCommond:IRequest<int>
     {
-        public int SalesOrderLineId { get; set; }
-        public long SalesOrderId { get; set; }
-        public SalesOrder SalesOrder { get; set; }
-        public int? ProductId { get; set; }
-        public Product Product { get; set; }
+        public int? SalesOrderLineId { get; set; }
+        public int SalesOrderId { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
         public string Description { get; set; }
         public double Quantity { get; set; }
         public double Price { get; set; }

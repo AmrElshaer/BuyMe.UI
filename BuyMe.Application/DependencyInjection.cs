@@ -4,6 +4,7 @@ using BuyMe.Application.Common.Mapping;
 using BuyMe.Application.Company;
 using BuyMe.Application.Employee;
 using BuyMe.Application.NumberSequence;
+using BuyMe.Application.SalesOrder;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,7 @@ namespace BuyMe.Application
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<INumberSequencyService, NumberSequencyService>();
+            services.AddTransient<ISalesOrderService, SalesOrderService>();
             return services;
         }
     }

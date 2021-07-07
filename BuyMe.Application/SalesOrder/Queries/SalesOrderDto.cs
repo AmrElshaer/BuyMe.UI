@@ -5,6 +5,7 @@ using BuyMe.Application.Common.Mapping;
 using BuyMe.Application.Company.Queries;
 using BuyMe.Application.Currency.Queries;
 using BuyMe.Application.Customer.Queries.GetCustomers;
+using BuyMe.Application.SalesOrderLine.Queries;
 using BuyMe.Application.SalesType.Queries;
 using BuyMe.Application.UnitOfMeasure.Queries;
 using BuyMe.Domain.Common;
@@ -18,6 +19,7 @@ namespace BuyMe.Application.SalesOrder.Queries
 {
     public class SalesOrderDto : IMapFrom
     {
+       
         public long SalesOrderId { get; set; }
         public string SalesOrderName { get; set; }
         public int? BranchId { get; set; }
@@ -27,8 +29,8 @@ namespace BuyMe.Application.SalesOrder.Queries
         public string SalesTypeName { get; set; }
         public int? CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public string OrderDate { get; set; }
-        public string DeliveryDate { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime DeliveryDate { get; set; }
         public double Amount { get; set; }
         public double SubTotal { get; set; }
         public double Discount { get; set; }
@@ -37,6 +39,7 @@ namespace BuyMe.Application.SalesOrder.Queries
         public double Freight { get; set; }
         public string Remarks { get; set; }
         public string CurrencyCode { get; set; }
+       
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Entities.SalesOrder, SalesOrderDto>()

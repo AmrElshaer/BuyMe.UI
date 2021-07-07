@@ -35,6 +35,16 @@ namespace BuyMe.UI.Areas.Sales.Controllers
             return Json(value.Value);
 
         }
+        public async Task<ActionResult> Details(long salesOrderId)
+        {
+            var so = await Mediator.Send(new GetSalesOrderQuery(salesOrderId));
+            return View(so);
+        }
+        public async Task<ActionResult> GetById(long id)
+        {
+            var so = await Mediator.Send(new GetSalesOrderQuery(id));
+            return Json(so);
+        }
         public async Task<ActionResult> Delete([FromBody] CRUDModel<SalesOrderDto> value)
         {
             _ = await Mediator.Send(new DeleteSalesOrderCommond() { SalesOrderId =long.Parse(value.Key.ToString())  });

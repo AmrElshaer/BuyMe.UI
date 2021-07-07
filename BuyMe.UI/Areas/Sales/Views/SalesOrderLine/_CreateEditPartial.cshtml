@@ -1,0 +1,70 @@
+﻿@using BuyMe.Application.SalesOrderLine.Commonds
+@using Newtonsoft.Json
+@model CreatEditSOLineCommond
+@{
+    Layout = null;
+}
+<style>
+    .dropDownListTop {
+        margin-top: 15px;
+    }
+</style>
+<div>
+    <input type="hidden" asp-for="SalesOrderLineId" />
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="dropDownListTop">
+                <ejs-dropdownlist ejs-for="ProductId" change="productChange" dataSource="@ViewBag.Products" placeholder="Select Product" popupHeight="200px">
+                    <e-dropdownlist-fields text="ProductName" value="ProductId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Price" />
+                <span class="e-float-line"></span>
+                <label asp-for="Price" class="e-float-text e-label-top">Price</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Quantity" />
+                <span class="e-float-line"></span>
+                <label asp-for="Quantity" class="e-float-text e-label-top">Qty</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Description" />
+                <span class="e-float-line"></span>
+                <label asp-for="Description" class="e-float-text e-label-top">Description</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="DiscountPercentage" />
+                <span class="e-float-line"></span>
+                <label asp-for="DiscountPercentage" class="e-float-text e-label-top">Disc%</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="TaxPercentage" />
+                <span class="e-float-line"></span>
+                <label asp-for="TaxPercentage" class="e-float-text e-label-top">Tax%</label>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<ejs-scripts></ejs-scripts>
+
+
+

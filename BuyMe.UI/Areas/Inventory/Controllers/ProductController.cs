@@ -47,5 +47,10 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
             ViewBag.Branches = (await Mediator.Send(new GetBranchesQuery()))?.result;
             return PartialView("_CreateEditPartial", value.Value);
         }
+        public async Task<IActionResult> GetProductPrice(int productId)
+        {
+            var pro = await Mediator.Send(new GetProducbyIdtQuery(productId));
+            return Json(pro);
+        }
     }
 }
