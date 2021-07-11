@@ -15,27 +15,31 @@
 <!-- Main content -->
 <section class="content">
     <div class="control-section">
-        <ejs-grid id="Grid" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search" })" allowPaging="true">
+        <ejs-grid id="Grid"   actionBegin="actionBegin"  actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search" })" allowPaging="true">
             <e-data-manager url="/Inventory/Product/UrlDataSource" insertUrl="/Inventory/Product/CreateEdit" updateUrl="/Inventory/Product/CreateEdit" removeUrl="/Inventory/Product/Delete" adaptor="UrlAdaptor"></e-data-manager>
-            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+            <e-grid-editSettings  allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
             <e-grid-columns>
                 <e-grid-column field="ProductId" headerText="ProductId" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
                 <e-grid-column field="ProductName" headerText="Product Name" type="string"></e-grid-column>
                 <e-grid-column field="UOM" allowSearching="false" headerText="UOM" type="string"></e-grid-column>
                 <e-grid-column field="Barcode" headerText="Barcode" type="string"></e-grid-column>
-                <e-grid-column field="DefaultBuyingPrice"  headerText="Buying Price" format="C2" template="#DefaultBuyingPriceTemp" ></e-grid-column>
-                <e-grid-column field="DefaultSellingPrice"  headerText="Selling Price" template="#DefaultSellingPriceTemp"  format="C2"></e-grid-column>
+                <e-grid-column field="DefaultBuyingPrice" headerText="Buying Price" format="C2" template="#DefaultBuyingPriceTemp"></e-grid-column>
+                <e-grid-column field="DefaultSellingPrice" headerText="Selling Price" template="#DefaultSellingPriceTemp" format="C2"></e-grid-column>
                 <e-grid-column field="BranchName" allowSearching="false" headerText="Branch" type="string"></e-grid-column>
                 <e-grid-column field="CompanyId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="CategoryId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="CurrencyId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="BranchId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="UnitOfMeasureId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+                <e-grid-column field="AllowMarketing" headerText="Marketing" displayAsCheckBox="true"></e-grid-column>
+                <e-grid-column field="ProductImages" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
 </section><!-- /.content -->
-
+<script id='DefaultBuyingPriceTemp' type="text/x-template">
+    <span>${CurrencyCode} ${DefaultBuyingPrice}</span>
+</script>
 <script id='DefaultBuyingPriceTemp' type="text/x-template">
     <span>${CurrencyCode} ${DefaultBuyingPrice}</span>
 </script>
@@ -47,10 +51,45 @@
 </script>
 <script src="~/js/grid.js"></script>
 <script>
+   
+   
+    function actionBegin(args) {
+        debugger;
+        if (args.action === 'add' || args.action==='edit') {
+            let inputTypes = [];
+            $('input[name="Images"]').each(function () {
+                inputTypes.push($(this).attr('value'));
+            });
+            args.data.ProductImages = inputTypes;
+        }
+    }
+    function onUploadSuccess(args) {
+        if (args.operation === 'upload') {
+            const imgName = args.e.currentTarget.getResponseHeader('name');
+            if (imgName != null) {
+                args.file.name = imgName;
+                const itemId = imgName.split('.')[0];
+                const ele = `<div style="border-radius:3px;display:inline-flex" id="${itemId}">
+                            <span class="e-avatar e-avatar-xlarge" style="background-image:url(/images/${imgName})"></span>
+                            <input name="Images" value="${imgName}" type="hidden" />
+                        </div>`;
+                $(".allProductImages").append(ele);
+            }
+
+        }
+        if (args.operation === 'remove') {
+            const itemId = args.file.name.split('.')[0];
+            $(`.allProductImages #${itemId}`).remove(); 
+        }
+    }
+    function onUploadFailure(args) {
+        console.log(args);
+    }
     function actionFailure(args) {
         displayErrors(args)
-        }
+    }
     function actionComplete(args) {
+        debugger;
         if (args.requestType === 'beginEdit' || args.requestType === 'add') {
             args.form.ej2_instances[0].addRules('BranchId', { required: true });
             args.form.ej2_instances[0].addRules('UnitOfMeasureId', { required: true });
@@ -75,19 +114,9 @@
                     });
                 }
             }
-        }
+    }
 </script>
 <script type="text/javascript">
-    function onfilteringCategory(e) {
-            var query = new ej.data.Query();
-            query = (e.text !== '') ? query.where('CategoryName', 'startswith', e.text, true) : query;
-            e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.Categories)), query);
-    }
-    function onfilteringUOM(e) {
-            var query = new ej.data.Query();
-            query = (e.text !== '') ? query.where('UOM', 'startswith', e.text, true) : query;
-            e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.UOMS)), query);
-    }
     function branchChange(e) {
         $.ajax({
             url: `/Config/Currency/GetBranchCurrency?branchId=${e.value}`,
@@ -99,7 +128,9 @@
             }
         })
     }
+  
 </script>
+
 
 
 

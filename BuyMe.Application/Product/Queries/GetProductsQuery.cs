@@ -32,8 +32,8 @@ namespace BuyMe.Application.Product.Queries
             }
             public async Task<QueryResult<ProductDto>> Handle(GetProductQuery request, CancellationToken cancellationToken)
             {
-                var dataSource = _context.Products.Include(a=>a.Branch).Include(a=>a.UnitOfMeasure).Include(a=>a.Currency)
-                    .Where(a=>a.CompanyId==currentUserService.CompanyId).AsQueryable();
+                var dataSource = _context.Products.Include(a=>a.Branch)
+                    .Include(a=>a.UnitOfMeasure).Include(a=>a.Currency).Where(a=>a.CompanyId==currentUserService.CompanyId).AsQueryable();
                 if (!string.IsNullOrEmpty(request.DM.SearchValue))
                 { 
                     dataSource = dataSource.Where(a=>

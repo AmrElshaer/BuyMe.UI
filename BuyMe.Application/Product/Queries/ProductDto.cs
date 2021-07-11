@@ -30,6 +30,7 @@ namespace BuyMe.Application.Product.Queries
         public string  UOM { get; set; }
         public int CompanyId { get; set; }
         public string CurrencyCode { get; set; }
+        public bool AllowMarketing { get; set; }
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Entities.Product, ProductDto>()

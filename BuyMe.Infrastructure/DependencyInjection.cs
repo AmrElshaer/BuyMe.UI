@@ -22,6 +22,7 @@ namespace BuyMe.Infrastructure
         .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>(); 
             services.AddTransient<IApplicationUserServcie, ApplicationUserServcie>();
             services.AddTransient<IUserManagerService, UserManagerService>();
+            services.AddTransient<IFileService, FileService>();
             return services;
         }
     }

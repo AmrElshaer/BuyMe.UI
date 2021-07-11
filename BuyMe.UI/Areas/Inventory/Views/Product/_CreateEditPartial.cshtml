@@ -1,18 +1,24 @@
 ﻿@using BuyMe.Application.Product.Commonds
+@using BuyMe.Application.Product.Queries
 @using Newtonsoft.Json
 @model CreateEditProductCommond
 @{
     Layout = null;
 }
 <style>
-    .dropDownListTop{
-        margin-top:15px;
+    .dropDownListTop {
+        margin-top: 15px;
     }
 </style>
+@{
+    var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = "/Inventory/UploadImage/Save", RemoveUrl = "/Inventory/UploadImage/Remove" };
+}
+
 <div>
     <input asp-for="ProductId" type="hidden" />
     <input asp-for="CompanyId" type="hidden" />
     <input asp-for="CurrencyId" type="hidden" />
+    <input asp-for="ProductImages" type="hidden" />
     <div class="form-row">
         <div class="form-group col-md-12">
             <div class="e-float-input e-control-wrapper">
@@ -42,11 +48,9 @@
         <div class="form-group col-md-6">
             <div>
                 DefaultBuyingPrice
-                <ejs-numerictextbox ejs-for="DefaultBuyingPrice" format="@Model.CurrencyCode ###.##"  Type="text"></ejs-numerictextbox>
+                <ejs-numerictextbox ejs-for="DefaultBuyingPrice" format="@Model.CurrencyCode ###.##" Type="text"></ejs-numerictextbox>
             </div>
         </div>
-
-
     </div>
     <div class="form-row">
 
@@ -59,7 +63,7 @@
         <div class="form-group col-md-6">
 
             <div class="dropDownListTop">
-                <ejs-dropdownlist  filterBarPlaceholder="Search" allowFiltering="true" filtering="onfilteringUOM" ejs-for="UnitOfMeasureId" dataSource="@ViewBag.UOMS" placeholder="Select Unit Of Measure" popupHeight="200px">
+                <ejs-dropdownlist filterBarPlaceholder="Search"   ejs-for="UnitOfMeasureId" dataSource="@ViewBag.UOMS" placeholder="Select Unit Of Measure" popupHeight="200px">
                     <e-dropdownlist-fields text="UOM" value="Id"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
@@ -75,7 +79,7 @@
         </div>
         <div class="form-group col-md-6">
             <div class="e-float-input e-control-wrapper">
-                <input readonly asp-for="CurrencyCode"/>
+                <input readonly asp-for="CurrencyCode" />
                 <span class="e-float-line"></span>
                 <label class="e-float-text e-label-top">Currency</label>
             </div>
@@ -83,14 +87,61 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
+
+            <div class="e-float-input e-control-wrapper">
+                <ejs-checkbox id="cbox2" name="AllowMarketing" value="@Model.AllowMarketing" checked="@Model.AllowMarketing" label="Marketing"></ejs-checkbox>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
             <div class="dropDownListTop">
-                <ejs-dropdownlist filterBarPlaceholder="Search" allowFiltering="true" filtering="onfilteringCategory" ejs-for="CategoryId" dataSource="@ViewBag.Categories" placeholder="Select Category" popupHeight="200px">
+                <ejs-dropdownlist filterBarPlaceholder="Search" allowFiltering="true" ejs-for="CategoryId" dataSource="@ViewBag.Categories" placeholder="Select Category" popupHeight="200px">
                     <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
         </div>
-    </div>
-</div>
 
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <ejs-uploader id="uploadFiles" success="onUploadSuccess"
+                          failure="onUploadFailure"
+                          asyncSettings="@asyncSettings"  allowedExtensions="image/*" autoUpload="true">
+
+                @if (ViewBag.ProductImages != null)
+                {       
+                        <e-uploader-files>
+                            @foreach (var item in ViewBag.ProductImages as IEnumerable<ProductImageDto>)
+                            {
+                                <e-uploader-uploadedfiles  name="@(item.Image?.Split('.')[0])" size="44" type=".@(item.Image?.Split('.')[1])"></e-uploader-uploadedfiles>
+                            }
+                        </e-uploader-files>
+                }
+
+
+            </ejs-uploader>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="allProductImages">
+                @if (ViewBag.ProductImages != null)
+                {
+                    @foreach (var item in ViewBag.ProductImages as IEnumerable<ProductImageDto>)
+                    {
+                        <div style="border-radius: 3px;display:inline-flex" id="@(item.Image?.Split('.')[0])">
+                            <span class="e-avatar e-avatar-xlarge" style="background-image:url(/images/@item.Image)"></span>
+                            <input name="Images" value="@item.Image" type="hidden" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+
+</div>
 <ejs-scripts></ejs-scripts>
+
+
+
 

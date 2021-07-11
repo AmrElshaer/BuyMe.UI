@@ -1,6 +1,7 @@
 ﻿
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
+using BuyMe.Application.Product.Commonds.CreatEditProductImages;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,13 @@ namespace BuyMe.Application.Product.Commonds
     {
         private readonly IBuyMeDbContext _context;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IMediator _mediator;
 
-        public CreateEditProductCommondHandler(IBuyMeDbContext context,ICurrentUserService currentUserService)
+        public CreateEditProductCommondHandler(IBuyMeDbContext context, ICurrentUserService currentUserService, IMediator mediator)
         {
             _context = context;
             _currentUserService = currentUserService;
+            _mediator = mediator;
         }
         public async Task<int> Handle(CreateEditProductCommond request, CancellationToken cancellationToken)
         {
@@ -46,7 +49,9 @@ namespace BuyMe.Application.Product.Commonds
             product.DefaultBuyingPrice = request.DefaultBuyingPrice;
             product.DefaultSellingPrice = request.DefaultSellingPrice;
             product.CategoryId = request.CategoryId;
+            product.AllowMarketing = request.AllowMarketing;
             await _context.SaveChangesAsync(cancellationToken);
+            await _mediator.Send(new CreatEditProductImageCommond(product.ProductId,request.ProductImages));
             return product.ProductId;
         }
     }

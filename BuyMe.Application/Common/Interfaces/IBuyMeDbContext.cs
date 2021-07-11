@@ -25,6 +25,7 @@ namespace BuyMe.Application.Common.Interfaces
         DbSet<Entities.SalesOrder> SalesOrders { get; set; }
          DbSet<Entities.SalesOrderLine> SalesOrderLines { get; set; }
          DbSet<Entities.NumberSequence> NumberSequences { get; set; }
+         DbSet<Entities.ProductImages> ProductImages { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }

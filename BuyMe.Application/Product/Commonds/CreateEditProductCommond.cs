@@ -1,4 +1,5 @@
-﻿using BuyMe.Domain.Common;
+﻿using BuyMe.Application.Product.Queries;
+using BuyMe.Domain.Common;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,10 @@ namespace BuyMe.Application.Product.Commonds
 {
     public class CreateEditProductCommond: IRequest<int>
     {
+        public CreateEditProductCommond()
+        {
+            ProductImages ??= new List<string>();
+        }
         public int? ProductId { get; set; }
         public string ProductName { get; set; }
         public int? CategoryId { get; set; }
@@ -24,5 +29,7 @@ namespace BuyMe.Application.Product.Commonds
         public string UOM { get; set; }
         public int? CompanyId { get; set; }
         public string CurrencyCode { get; set; }
+        public bool AllowMarketing { get; set; }
+        public List<string> ProductImages { get; set; }
     }
 }

@@ -39,6 +39,7 @@ namespace BuyMe.Persistence
         public DbSet<SalesOrder> SalesOrders { get ; set ; }
         public DbSet<SalesOrderLine> SalesOrderLines { get ; set ; }
         public DbSet<NumberSequence> NumberSequences { get; set; }
+        public DbSet<ProductImages> ProductImages { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

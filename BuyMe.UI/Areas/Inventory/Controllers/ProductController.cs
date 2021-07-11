@@ -31,7 +31,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreateEditProductCommond> value)
         {
             _ = value ?? throw new BadRequestException("Invalid Data");
-            value.Value.CategoryId = await Mediator.Send(value.Value);
+            value.Value.ProductId = await Mediator.Send(value.Value);
             return Json(value.Value);
 
         }
@@ -45,6 +45,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
             ViewBag.UOMS =(await Mediator.Send(new GetUOMQuery()))?.result;
             ViewBag.Categories = (await Mediator.Send(new GetCategoriesQuery()))?.result;
             ViewBag.Branches = (await Mediator.Send(new GetBranchesQuery()))?.result;
+            if (value.Value.ProductId!=null)ViewBag.ProductImages = (await Mediator.Send(new GetProductImagesQuery(value.Value.ProductId.Value)));
             return PartialView("_CreateEditPartial", value.Value);
         }
         public async Task<IActionResult> GetProductPrice(int productId)

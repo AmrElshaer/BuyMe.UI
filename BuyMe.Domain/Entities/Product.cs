@@ -8,6 +8,10 @@ namespace BuyMe.Domain.Entities
 {
     public class Product
     {
+        public Product()
+        {
+            ProductImages = new HashSet<ProductImages>();
+        }
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public int? CategoryId { get; set; }
@@ -24,5 +28,7 @@ namespace BuyMe.Domain.Entities
         public UnitOfMeasure UnitOfMeasure { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
+        public bool AllowMarketing { get; set; }
+        public ICollection<ProductImages> ProductImages { get; set; }
     }
 }
