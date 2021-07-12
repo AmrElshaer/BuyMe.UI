@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.NumberSequence.Queries
 {
-    public class NumberSequenceDto:IMapFrom
+    public class NumberSequenceDto : IMapFrom
     {
         public int NumberSequenceId { get; set; }
         public string NumberSequenceName { get; set; }

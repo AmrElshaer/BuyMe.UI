@@ -1,16 +1,12 @@
 ﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Branch.Commonds.CreatEditBranch
 {
-    public class CreatEditBranchCommondHandler:IRequestHandler<CreatEditBranchCommond,int>
+    public class CreatEditBranchCommondHandler : IRequestHandler<CreatEditBranchCommond, int>
     {
         private readonly IBuyMeDbContext _context;
         private readonly ICurrentUserService _currentUserService;
@@ -30,7 +26,6 @@ namespace BuyMe.Application.Branch.Commonds.CreatEditBranch
                 if (entity == null)
                     throw new NotFoundException("Branch", request.CurrencyId);
                 branch = entity;
-
             }
             else
             {

@@ -1,11 +1,6 @@
-﻿
-using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,11 +11,12 @@ namespace BuyMe.Application.Category.Commonds
         private readonly IBuyMeDbContext _context;
         private readonly ICurrentUserService _currentUserService;
 
-        public CreateEditCategoryCommondHandler(IBuyMeDbContext context,ICurrentUserService currentUserService)
+        public CreateEditCategoryCommondHandler(IBuyMeDbContext context, ICurrentUserService currentUserService)
         {
             _context = context;
             _currentUserService = currentUserService;
         }
+
         public async Task<int> Handle(CreateEditCategoryCommond request, CancellationToken cancellationToken)
         {
             Domain.Entities.Category category;

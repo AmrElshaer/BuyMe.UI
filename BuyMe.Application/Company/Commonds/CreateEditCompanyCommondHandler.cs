@@ -1,11 +1,6 @@
-﻿
-using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,10 +9,12 @@ namespace BuyMe.Application.Company.Commonds
     public class CreateEditCompanyCommondHandler : IRequestHandler<CreateEditCompanyCommond, int>
     {
         private readonly IBuyMeDbContext _context;
+
         public CreateEditCompanyCommondHandler(IBuyMeDbContext context)
         {
             _context = context;
         }
+
         public async Task<int> Handle(CreateEditCompanyCommond request, CancellationToken cancellationToken)
         {
             Domain.Entities.Company company;

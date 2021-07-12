@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
-using BuyMe.Application.Currency.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.Branch.Queries
 {
-    public class BranchDto:IMapFrom
+    public class BranchDto : IMapFrom
     {
         public int BranchId { get; set; }
         public string BranchName { get; set; }
@@ -24,9 +18,10 @@ namespace BuyMe.Application.Branch.Queries
         public string ContactPerson { get; set; }
         public int CompanyId { get; set; }
         public string CurrencyName { get; set; }
+
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Domain.Entities.Branch,BranchDto>().ForMember(b=>b.CurrencyName,b=>b.MapFrom(a=>a.Currency.CurrencyName));
+            profile.CreateMap<Domain.Entities.Branch, BranchDto>().ForMember(b => b.CurrencyName, b => b.MapFrom(a => a.Currency.CurrencyName));
         }
     }
 }

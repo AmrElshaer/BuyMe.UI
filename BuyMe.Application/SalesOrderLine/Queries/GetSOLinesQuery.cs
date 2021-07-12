@@ -3,10 +3,7 @@ using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,11 +13,13 @@ namespace BuyMe.Application.SalesOrderLine.Queries
     {
         public DataManager DM { get; set; }
         public long SalesOrderId { get; private set; }
+
         public GetSOLinesQuery(long salesOrderId)
         {
             DM ??= new DataManager();
             SalesOrderId = salesOrderId;
         }
+
         public class GetSalesOrderQueryHandler : IRequestHandler<GetSOLinesQuery, QueryResult<SalesOrderLineDto>>
         {
             private readonly IBuyMeDbContext _context;
@@ -31,6 +30,7 @@ namespace BuyMe.Application.SalesOrderLine.Queries
                 _context = context;
                 _mapper = mapper;
             }
+
             public async Task<QueryResult<SalesOrderLineDto>> Handle(GetSOLinesQuery request, CancellationToken cancellationToken)
             {
                 var dataSource = _context.SalesOrderLines.Include(a => a.Product)

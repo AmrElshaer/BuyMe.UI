@@ -1,21 +1,17 @@
 ﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Currency.Commonds.CreateEditCurrency
 {
-    public class CreatEditCurrencyCommondHandler : IRequestHandler<CreatEditCurrencyCommond,int>
+    public class CreatEditCurrencyCommondHandler : IRequestHandler<CreatEditCurrencyCommond, int>
     {
         private readonly IBuyMeDbContext _context;
         private readonly ICurrentUserService _currentUserService;
 
-        public CreatEditCurrencyCommondHandler(IBuyMeDbContext context,ICurrentUserService currentUserService)
+        public CreatEditCurrencyCommondHandler(IBuyMeDbContext context, ICurrentUserService currentUserService)
         {
             _context = context;
             _currentUserService = currentUserService;
@@ -30,7 +26,6 @@ namespace BuyMe.Application.Currency.Commonds.CreateEditCurrency
                 if (entity == null)
                     throw new NotFoundException("Currency", request.CurrencyId);
                 currency = entity;
-                
             }
             else
             {

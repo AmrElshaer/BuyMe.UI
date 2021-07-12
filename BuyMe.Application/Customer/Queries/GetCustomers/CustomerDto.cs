@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
 using BuyMe.Application.CustomerType.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.Customer.Queries.GetCustomers
 {
-    public class CustomerDto:IMapFrom
+    public class CustomerDto : IMapFrom
     {
         public int Id { get; set; }
         public string CustomerName { get; set; }

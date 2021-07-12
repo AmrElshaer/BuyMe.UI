@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
-using BuyMe.Application.SalesOrder.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.SalesOrderLine.Queries
 {
@@ -29,7 +23,7 @@ namespace BuyMe.Application.SalesOrderLine.Queries
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Entities.SalesOrderLine, SalesOrderLineDto>()
-                .ForMember(a=>a.ProductName,a=>a.MapFrom(p=>p.Product.ProductName));
+                .ForMember(a => a.ProductName, a => a.MapFrom(p => p.Product.ProductName));
         }
     }
 }

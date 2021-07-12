@@ -1,11 +1,6 @@
-﻿
-using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,12 +12,13 @@ namespace BuyMe.Application.SalesOrder.Commonds
         private readonly ICurrentUserService _currentUserService;
         private readonly INumberSequencyService _numberSequencyService;
 
-        public CreateEditSOCommondHandler(IBuyMeDbContext context,ICurrentUserService currentUserService,INumberSequencyService numberSequencyService)
+        public CreateEditSOCommondHandler(IBuyMeDbContext context, ICurrentUserService currentUserService, INumberSequencyService numberSequencyService)
         {
             _context = context;
             _currentUserService = currentUserService;
             _numberSequencyService = numberSequencyService;
         }
+
         public async Task<long> Handle(CreateEditSOCommond request, CancellationToken cancellationToken)
         {
             Domain.Entities.SalesOrder so;
@@ -39,9 +35,8 @@ namespace BuyMe.Application.SalesOrder.Commonds
                 so.CompanyId = _currentUserService.CompanyId;
                 so.SalesOrderName = await _numberSequencyService.GetCurrentNumberSequence("SO");
                 await _context.SalesOrders.AddAsync(so);
-                
             }
-            
+
             so.Amount = request.Amount;
             so.BranchId = request.BranchId;
             so.CurrencyId = request.CurrencyId;

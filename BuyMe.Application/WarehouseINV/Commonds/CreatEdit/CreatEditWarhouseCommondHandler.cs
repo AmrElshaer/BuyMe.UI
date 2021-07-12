@@ -2,16 +2,12 @@
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.WarehouseINV.Commonds.CreatEdit
 {
-    public class CreatEditWarhouseCommondHandler:IRequestHandler<CreatEditWarehouseCommond,int>
+    public class CreatEditWarhouseCommondHandler : IRequestHandler<CreatEditWarehouseCommond, int>
     {
         private readonly IBuyMeDbContext _context;
         private readonly ICurrentUserService _currentUserService;
@@ -21,6 +17,7 @@ namespace BuyMe.Application.WarehouseINV.Commonds.CreatEdit
             _context = context;
             _currentUserService = currentUserService;
         }
+
         public async Task<int> Handle(CreatEditWarehouseCommond request, CancellationToken cancellationToken)
         {
             Warehouse warehouse;
@@ -40,7 +37,7 @@ namespace BuyMe.Application.WarehouseINV.Commonds.CreatEdit
             warehouse.Description = request.Description;
             warehouse.BranchId = request.BranchId;
             warehouse.WarehouseName = request.WarehouseName;
-            
+
             await _context.SaveChangesAsync(cancellationToken);
             return warehouse.WarehouseId;
         }

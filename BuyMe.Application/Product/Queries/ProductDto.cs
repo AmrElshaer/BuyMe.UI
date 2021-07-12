@@ -1,20 +1,10 @@
 ﻿using AutoMapper;
-using BuyMe.Application.Branch.Queries;
-using BuyMe.Application.Category.Queries;
 using BuyMe.Application.Common.Mapping;
-using BuyMe.Application.Company.Queries;
-using BuyMe.Application.Currency.Queries;
-using BuyMe.Application.UnitOfMeasure.Queries;
-using BuyMe.Domain.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.Product.Queries
 {
-    public class ProductDto:IMapFrom
+    public class ProductDto : IMapFrom
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
@@ -27,10 +17,11 @@ namespace BuyMe.Application.Product.Queries
         public string BranchName { get; set; }
         public string Description { get; set; }
         public int? UnitOfMeasureId { get; set; }
-        public string  UOM { get; set; }
+        public string UOM { get; set; }
         public int CompanyId { get; set; }
         public string CurrencyCode { get; set; }
         public bool AllowMarketing { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Entities.Product, ProductDto>()

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.Common.Mapping
 {
@@ -14,6 +11,7 @@ namespace BuyMe.Application.Common.Mapping
         {
             ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
         }
+
         private void ApplyMappingsFromAssembly(Assembly assembly)
         {
             var types = assembly.GetExportedTypes().Where(x => typeof(IMapFrom).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)

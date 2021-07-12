@@ -1,13 +1,8 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.SalesOrderLine.Commonds
 {
-    public class CreatEditSOLineCommond:IRequest<int>
+    public class CreatEditSOLineCommond : IRequest<int>
     {
         public int? SalesOrderLineId { get; set; }
         public int SalesOrderId { get; set; }

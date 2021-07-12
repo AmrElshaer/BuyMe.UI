@@ -1,13 +1,8 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.Currency.Commonds.CreateEditCurrency
 {
-    public class CreatEditCurrencyCommond:IRequest<int>
+    public class CreatEditCurrencyCommond : IRequest<int>
     {
         public int? CurrencyId { get; set; }
         public string CurrencyName { get; set; }

@@ -1,9 +1,5 @@
 ﻿using BuyMe.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.Employee
 {
@@ -15,10 +11,11 @@ namespace BuyMe.Application.Employee
         {
             this._context = context;
         }
-        public bool IsEmailUnique(string email,int? id)
+
+        public bool IsEmailUnique(string email, int? id)
         {
-            var employee = _context.Employees.FirstOrDefault(a=>a.Email==email&&(id==null||a.Id!=id));
-            return employee==null?true: false;
+            var employee = _context.Employees.FirstOrDefault(a => a.Email == email && (id == null || a.Id != id));
+            return employee == null ? true : false;
         }
     }
 }

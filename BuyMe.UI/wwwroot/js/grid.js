@@ -21,7 +21,7 @@ function displayErrors(err) {
         const validationErrorDictionary = JSON.parse(err.error[0].error.responseText);
         for (const fieldName in validationErrorDictionary) {
             if (validationErrorDictionary.hasOwnProperty(fieldName)) {
-                var validationEle = $(".e-edit-dialog .form-row #"+fieldName);
+                var validationEle = $(".e-edit-dialog .form-row #" + fieldName);
                 var spanEle = document.createElement("span");
                 spanEle.textContent = '*' + validationErrorDictionary[fieldName];
                 spanEle.style.color = "red";

@@ -1,12 +1,7 @@
-﻿
-using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Product.Commonds.CreatEditProductImages;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +19,7 @@ namespace BuyMe.Application.Product.Commonds
             _currentUserService = currentUserService;
             _mediator = mediator;
         }
+
         public async Task<int> Handle(CreateEditProductCommond request, CancellationToken cancellationToken)
         {
             Domain.Entities.Product product;
@@ -51,7 +47,7 @@ namespace BuyMe.Application.Product.Commonds
             product.CategoryId = request.CategoryId;
             product.AllowMarketing = request.AllowMarketing;
             await _context.SaveChangesAsync(cancellationToken);
-            await _mediator.Send(new CreatEditProductImageCommond(product.ProductId,request.ProductImages));
+            await _mediator.Send(new CreatEditProductImageCommond(product.ProductId, request.ProductImages));
             return product.ProductId;
         }
     }

@@ -2,22 +2,20 @@
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.SalesOrder.Queries
 {
-    public class GetSalesOrderQuery:IRequest<SalesOrderDto>
+    public class GetSalesOrderQuery : IRequest<SalesOrderDto>
     {
-        public long SalesOrderId { get;private set; }
+        public long SalesOrderId { get; private set; }
+
         public GetSalesOrderQuery(long salesOrderId)
         {
             SalesOrderId = salesOrderId;
         }
+
         public class GetSalesOrderByIdQueryHandler : IRequestHandler<GetSalesOrderQuery, SalesOrderDto>
         {
             private readonly IBuyMeDbContext _context;
@@ -30,16 +28,14 @@ namespace BuyMe.Application.SalesOrder.Queries
                 _mapper = mapper;
                 this.currentUserService = currentUserService;
             }
+
             public async Task<SalesOrderDto> Handle(GetSalesOrderQuery request, CancellationToken cancellationToken)
             {
-                var salesOrder =await _context.SalesOrders.Include(a => a.Branch).Include(a => a.Customer).Include(a => a.Currency)
+                var salesOrder = await _context.SalesOrders.Include(a => a.Branch).Include(a => a.Customer).Include(a => a.Currency)
                     .Include(a => a.SalesType).FirstOrDefaultAsync(a => a.CompanyId == currentUserService.CompanyId
-                    &&a.SalesOrderId==request.SalesOrderId);
+                    && a.SalesOrderId == request.SalesOrderId);
                 return _mapper.Map<SalesOrderDto>(salesOrder);
-
-               
             }
-
         }
     }
 }

@@ -1,18 +1,15 @@
 ﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.WarehouseINV.Commonds.DeleteWarehouse
 {
-    public class DeleteWarehouseCommond:IRequest<Unit>
+    public class DeleteWarehouseCommond : IRequest<Unit>
     {
         public int WarehouseId { get; set; }
+
         public class DeleteWarehouseCommondHandler : IRequestHandler<DeleteWarehouseCommond, Unit>
         {
             private readonly IBuyMeDbContext _context;
@@ -21,6 +18,7 @@ namespace BuyMe.Application.WarehouseINV.Commonds.DeleteWarehouse
             {
                 this._context = context;
             }
+
             public async Task<Unit> Handle(DeleteWarehouseCommond request, CancellationToken cancellationToken)
             {
                 var warehouse = await _context.Warehouses.FindAsync(request.WarehouseId);

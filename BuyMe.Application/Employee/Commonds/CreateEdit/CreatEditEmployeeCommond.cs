@@ -1,13 +1,9 @@
 ﻿using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.Employee.Commonds.CreateEdit
 {
-    public class CreatEditEmployeeCommond:IRequest<int>
+    public class CreatEditEmployeeCommond : IRequest<int>
     {
         public int? Id { get; set; }
         public string LastName { get; set; }
@@ -27,6 +23,5 @@ namespace BuyMe.Application.Employee.Commonds.CreateEdit
         public string Notes { get; set; }
         public string UserId { get; set; }
         public int? CompanyId { get; set; }
-
     }
 }

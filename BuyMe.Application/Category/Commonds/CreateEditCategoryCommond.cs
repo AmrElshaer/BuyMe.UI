@@ -1,14 +1,8 @@
-﻿using BuyMe.Domain.Common;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace BuyMe.Application.Category.Commonds
 {
-    public class CreateEditCategoryCommond: IRequest<int>
+    public class CreateEditCategoryCommond : IRequest<int>
     {
         public int? CategoryId { get; set; }
         public string CategoryName { get; set; }

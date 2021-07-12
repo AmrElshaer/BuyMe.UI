@@ -1,14 +1,9 @@
-﻿using BuyMe.Domain.Common;
-using MediatR;
+﻿using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.SalesOrder.Commonds
 {
-    public class CreateEditSOCommond: IRequest<long>
+    public class CreateEditSOCommond : IRequest<long>
     {
         public long? SalesOrderId { get; set; }
         public int? BranchId { get; set; }

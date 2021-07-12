@@ -11,6 +11,7 @@ namespace BuyMe.Application.Category.Queries
     public class GetCategoriesQuery : IRequest<QueryResult<CategoryDto>>
     {
         public DataManager DM { get; set; }
+
         public GetCategoriesQuery()
         {
             DM ??= new DataManager();
@@ -33,7 +34,7 @@ namespace BuyMe.Application.Category.Queries
             {
                 var dataSource = _context.Categories.Where(a => a.CompanyId == currentUserService.CompanyId).AsQueryable();
                 if (!string.IsNullOrEmpty(req.DM.SearchValue)) dataSource = dataSource.Where(a => a.CategoryName.Contains(req.DM.SearchValue));
-                if (req.DM.Skip != null&&req.DM.Skip!=0) dataSource = dataSource.Skip(req.DM.Skip.Value);
+                if (req.DM.Skip != null && req.DM.Skip != 0) dataSource = dataSource.Skip(req.DM.Skip.Value);
                 if (req.DM.Take != null && req.DM.Take != 0) dataSource = dataSource.Take(req.DM.Take.Value);
                 int count = dataSource.Count();
                 var categories = dataSource.OrderByDescending(a => a.CategoryId).Select(_mapper.Map<CategoryDto>).ToList();

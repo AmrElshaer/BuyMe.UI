@@ -1,21 +1,18 @@
 ﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.CustomerType.Commonds.CreateEdit
 {
-    public class CreatEditCustomerTypeCommond:IRequest<int>
+    public class CreatEditCustomerTypeCommond : IRequest<int>
     {
         public int? CustomerTypeId { get; set; }
         public string CustomerTypeName { get; set; }
         public string CustomerTypeDescription { get; set; }
         public string CompanyId { get; set; }
+
         public class CreatEditCTCommondHandler : IRequestHandler<CreatEditCustomerTypeCommond, int>
         {
             private readonly IBuyMeDbContext _context;

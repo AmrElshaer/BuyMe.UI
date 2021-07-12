@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
+
 namespace BuyMe.Application.Currency.Queries
 {
-    public class CurrencyDto:IMapFrom
+    public class CurrencyDto : IMapFrom
     {
         public int? CurrencyId { get; set; }
         public string CurrencyName { get; set; }
@@ -12,7 +13,7 @@ namespace BuyMe.Application.Currency.Queries
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Domain.Entities.Currency, CurrencyDto >();
+            profile.CreateMap<Domain.Entities.Currency, CurrencyDto>();
         }
     }
 }

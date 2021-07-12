@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Application.Employee.Queries
 {
-    public class EmployeeDto:IMapFrom
+    public class EmployeeDto : IMapFrom
     {
         public int? Id { get; set; }
         public string LastName { get; set; }

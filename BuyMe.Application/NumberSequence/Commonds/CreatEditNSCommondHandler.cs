@@ -1,11 +1,6 @@
-﻿using BuyMe.Application.Common.Exceptions;
-using BuyMe.Application.Common.Interfaces;
+﻿using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,9 +16,10 @@ namespace BuyMe.Application.NumberSequence.Commonds
             _context = context;
             _currentUserService = currentUserService;
         }
+
         public async Task<int> Handle(CreatEditNSCommond request, CancellationToken cancellationToken)
         {
-            var ns = await _context.NumberSequences.FirstOrDefaultAsync(a=>a.Module==request.Module);
+            var ns = await _context.NumberSequences.FirstOrDefaultAsync(a => a.Module == request.Module);
             if (ns == null)
             {
                 ns = new Domain.Entities.NumberSequence();

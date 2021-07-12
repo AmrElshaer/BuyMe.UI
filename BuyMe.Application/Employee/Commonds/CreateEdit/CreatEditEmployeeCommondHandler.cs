@@ -1,10 +1,6 @@
 ﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,11 +11,12 @@ namespace BuyMe.Application.Employee.Commonds.CreateEdit
         private readonly IBuyMeDbContext _context;
         private readonly IApplicationUserServcie _applicationUserServcie;
 
-        public CreatEditEmployeeCommondHandler(IBuyMeDbContext context,IApplicationUserServcie applicationUserServcie)
+        public CreatEditEmployeeCommondHandler(IBuyMeDbContext context, IApplicationUserServcie applicationUserServcie)
         {
             _context = context;
             this._applicationUserServcie = applicationUserServcie;
         }
+
         public async Task<int> Handle(CreatEditEmployeeCommond request, CancellationToken cancellationToken)
         {
             Domain.Entities.Employee employee;
