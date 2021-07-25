@@ -1,0 +1,97 @@
+﻿@using Newtonsoft.Json;
+<link rel="stylesheet" href="~/css/grid.css" />
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Template
+        <small>Admin Panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Template</a></li>
+        <li class="active">Admin Panel</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="control-section">
+        <ejs-grid id="Grid" actionBegin="actionBegin" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search" })" allowPaging="true">
+            <e-data-manager url="/AdminPanel/Template/UrlDataSource" insertUrl="/AdminPanel/Template/CreateEdit" updateUrl="/AdminPanel/Template/CreateEdit" removeUrl="/AdminPanel/Template/Delete" adaptor="UrlAdaptor"></e-data-manager>
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="Id" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
+                <e-grid-column field="Name" headerText="Template Name" type="string"></e-grid-column>
+                <e-grid-column field="Description" headerText="Template Description" type="string"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</section><!-- /.content -->
+<script id='dialogtemplate' type="text/x-template">
+    <div id="dialogTemp"></div>
+</script>
+<script src="~/js/grid.js"></script>
+<script>
+    function actionBegin(args) {
+        debugger;
+        if (args.action === 'add' || args.action==='edit') {
+            let inputTypes = [];
+            $('input[name="TemplateImages"]').each(function () {
+                inputTypes.push($(this).attr('value'));
+            });
+            args.data.Images = inputTypes;
+        }
+    }
+    function onUploadSuccess(args) {
+        if (args.operation === 'upload') {
+            const imgName = args.e.currentTarget.getResponseHeader('name');
+            if (imgName != null) {
+                args.file.name = imgName;
+                const itemId = imgName.split('.')[0];
+                const ele = `<div style="border-radius:3px;display:inline-flex" id="${itemId}">
+                            <span class="e-avatar e-avatar-xlarge" style="background-image:url(/images/${imgName})"></span>
+                            <input name="TemplateImages" value="${imgName}" type="hidden" />
+                        </div>`;
+                $(".allProductImages").append(ele);
+            }
+
+        }
+        if (args.operation === 'remove') {
+            const itemId = args.file.name.split('.')[0];
+            $(`.allProductImages #${itemId}`).remove();
+        }
+    }
+    function onUploadFailure(args) {
+        console.log(args);
+    }
+    function actionFailure(args) {
+        displayErrors(args)
+    }
+    function actionComplete(args) {
+        debugger;
+        if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+            args.form.ej2_instances[0].addRules('Name', { required: true });
+                let spinner = ej.popups.createSpinner({ target: args.dialog.element });
+                ej.popups.showSpinner(args.dialog.element);
+                if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+                    var ajax = new ej.base.Ajax({
+                        url: "@Url.Action($"EditAddPartial", "Template")", //render the partial view
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify({ value: args.rowData })
+                    });
+                    ajax.send().then(function (data) {
+                        appendElement(data, args.form); //Render the edit form with selected record
+                        args.form.elements.namedItem('Name').focus();
+                        ej.popups.hideSpinner(args.dialog.element);
+                    }).catch(function (xhr) {
+                        console.log(xhr);
+                        ej.popups.hideSpinner(args.dialog.element);
+                    });
+                }
+            }
+    }
+</script>
+
+
+
+

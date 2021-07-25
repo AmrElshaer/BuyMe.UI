@@ -1,0 +1,85 @@
+﻿@using BuyMe.Application.Template.Commonds.CreatEditTemplate
+@using BuyMe.Application.Template.Queries
+@using Newtonsoft.Json
+@model CreatEditTemplateCommond
+@{
+    Layout = null;
+}
+<style>
+    .dropDownListTop {
+        margin-top: 15px;
+    }
+</style>
+@{
+    var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = "/Inventory/UploadImage/Save", RemoveUrl = "/Inventory/UploadImage/Remove" };
+}
+
+<div>
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="Images" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Name" />
+                <span class="e-float-line"></span>
+                <label asp-for="Name" class="e-float-text e-label-top">Template Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Description" />
+                <span class="e-float-line"></span>
+                <label asp-for="Description" class="e-float-text e-label-top">Description</label>
+            </div>
+        </div>
+    </div>
+  
+   
+    
+    
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <ejs-uploader id="uploadFiles" success="onUploadSuccess"
+                          failure="onUploadFailure"
+                          asyncSettings="@asyncSettings"  allowedExtensions="image/*" autoUpload="true">
+
+                @if (ViewBag.TemplateImages != null)
+                {       
+                        <e-uploader-files>
+                            @foreach (var item in ViewBag.TemplateImages as IEnumerable<TemplateImagesDto>)
+                            {
+                                <e-uploader-uploadedfiles  name="@(item.ImageName?.Split('.')[0])" size="44" type=".@(item.ImageName?.Split('.')[1])"></e-uploader-uploadedfiles>
+                            }
+                        </e-uploader-files>
+                }
+
+
+            </ejs-uploader>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="allProductImages">
+                @if (ViewBag.TemplateImages != null)
+                {
+                    @foreach (var item in ViewBag.TemplateImages as IEnumerable<TemplateImagesDto>)
+                    {
+                        <div style="border-radius: 3px;display:inline-flex" id="@(item.ImageName?.Split('.')[0])">
+                            <span class="e-avatar e-avatar-xlarge" style="background-image:url(/images/@item.ImageName)"></span>
+                            <input name="TemplateImages" value="@item.ImageName" type="hidden" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<ejs-scripts></ejs-scripts>
+
+
+
+
