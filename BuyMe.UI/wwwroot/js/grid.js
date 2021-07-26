@@ -15,7 +15,6 @@ function getBase64(file, elementId) {
     };
 }
 function displayErrors(err) {
-    var grid = document.getElementById("Grid").ej2_instances[0];
     if (err.error[0].error.status === 400 && IsJsonString(err.error[0].error.responseText)) {
         $('.validErrorMess').remove();
         const validationErrorDictionary = JSON.parse(err.error[0].error.responseText);
