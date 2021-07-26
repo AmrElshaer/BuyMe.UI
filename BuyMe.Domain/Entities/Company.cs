@@ -23,6 +23,8 @@ namespace BuyMe.Domain.Entities
         public string Business { get; set; }
         public string Logo { get; set; }
         public bool IsActive { get; set; }
+        public int? TemplateId { get; set; }
+        public Template Template { get; set; }
         public ICollection<Employee> Employees { get; set; }
         public ICollection<Currency> Currencies { get; set; }
         public ICollection<Branch> Branches { get; set; }

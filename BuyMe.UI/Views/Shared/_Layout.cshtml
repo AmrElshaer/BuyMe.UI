@@ -43,7 +43,6 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="~/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/userImage.css" rel="stylesheet" />
-
 </head>
 <body class="skin-blue">
     <div class="wrapper">
@@ -401,14 +400,13 @@
                                 <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview @(area=="Marketing"? "active" : "")">
                             <a href="#">
-                                <i class="fa fa-table"></i> <span>USER&ROLE</span>
+                                <i class="fa fa-table"></i> <span>Marketing</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                                <li class="@(action == "Index"&& controller == "Template"&&area=="Marketing"? "active" : "")"><a asp-area="Marketing" asp-controller="Template" asp-action="Index"><i class="fa fa-circle-o"></i>Template</a></li>
                             </ul>
                         </li>
                     }

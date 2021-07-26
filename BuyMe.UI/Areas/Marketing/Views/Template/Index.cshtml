@@ -1,0 +1,113 @@
+﻿@model IEnumerable<BuyMe.Application.Template.Queries.TemplateDto>
+<style>
+    #lightbox .modal-content {
+        display: inline-block;
+        text-align: center;
+    }
+
+    #lightbox .close {
+        opacity: 1;
+        color: rgb(255, 255, 255);
+        background-color: rgb(25, 25, 25);
+        padding: 5px 8px;
+        border-radius: 30px;
+        border: 2px solid rgb(255, 255, 255);
+        position: absolute;
+        top: -15px;
+        right: -55px;
+        z-index: 1032;
+    }
+</style>
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Template
+        <small>Marketing</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Template</a></li>
+        <li class="active">Marketing</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="control-section container">
+            @foreach (var item in Model)
+            {
+                <div class="e-card col-md-4" style="margin-left:15px">
+                    <div>
+                        <ejs-radiobutton value="@item.Id" checked="@((int?)ViewBag.CompanyTemplate==item.Id)" change="change" id="Temp_@item.Id" label="@item.Name" name="TemplateId"></ejs-radiobutton>
+                    </div>
+                    
+                    <div class="TemplateImages">
+                        @foreach (var image in item.Images)
+                        {
+                            <a href="#" data-toggle="modal" data-target="#lightbox">
+                                <img style="max-width: 150px;max-height:100px" src="/images/@(image.ImageName)" alt="...">
+                            </a>
+                         }
+                    </div>
+                    <h5>@item.Description</h5>
+                    
+                       
+                </div>
+            }
+    </div>
+    <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.content -->
+<script>
+    function change(args) {
+        console.log(args);
+          $.ajax({
+              url: `/Marketing/Template/UpdateCompanyTemplate?templateId=${args.value}`,
+            type: 'GET',
+            success: function () {
+                console.log("Update Success");
+            }
+
+        });
+    }
+</script>
+@section Scripts{
+    <script>
+       
+        $(document).ready(function () {
+            var $lightbox = $('#lightbox');
+
+            $('[data-target="#lightbox"]').on('click', function (event) {
+                var $img = $(this).find('img'),
+                    src = $img.attr('src'),
+                    alt = $img.attr('alt'),
+                    css = {
+                        'maxWidth': $(window).width() - 100,
+                        'maxHeight': $(window).height() - 100
+                    };
+
+                $lightbox.find('.close').addClass('hidden');
+                $lightbox.find('img').attr('src', src);
+                $lightbox.find('img').attr('alt', alt);
+                $lightbox.find('img').css(css);
+            });
+
+            $lightbox.on('shown.bs.modal', function (e) {
+                var $img = $lightbox.find('img');
+
+                $lightbox.find('.modal-dialog').css({ 'width': $img.width() });
+                $lightbox.find('.close').removeClass('hidden');
+            });
+        });
+    </script>
+}
+
