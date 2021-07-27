@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BuyMe.UI.Common;
+using BuyMe.UI.Models;
+
 namespace BuyMe.UI
 {
     public class Startup
@@ -42,6 +44,7 @@ namespace BuyMe.UI
             {
                 options.LoginPath = $"/Identity/Account/Login";
             });
+            services.Configure<MarketingSettings>(this.Configuration.GetSection("MarketingSettings"));
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options => { 
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
