@@ -20,6 +20,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BuyMe.UI.Common;
 using BuyMe.UI.Models;
+using Microsoft.OpenApi.Models;
+using System.IO;
+using System.Reflection;
 
 namespace BuyMe.UI
 {
@@ -35,6 +38,16 @@ namespace BuyMe.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("allowcors",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader().AllowCredentials();
+                });
+            });
             services.AddInfrastructure(Configuration);
             services.AddPersistance(Configuration);
             services.AddApplication();
@@ -48,7 +61,36 @@ namespace BuyMe.UI
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options => { 
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                }).AddRazorRuntimeCompilation(); 
+                }).AddRazorRuntimeCompilation();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BuyMe Api", Version = "v1", });
+                // To Enable authorization using Swagger (JWT)  
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] {}
+
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +107,7 @@ namespace BuyMe.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCors("allowcors");
             app.UseCustomExceptionHandlerMiddleware();
             //Register Syncfusion license
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDQwMjUwQDMxMzkyZTMxMmUzME15Y2NQMGtxUXZheTBJV0drb05mamVML2xEcVFyVnRDYWd1M01pYmV6L0k9");
@@ -85,7 +128,15 @@ namespace BuyMe.UI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-           
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
         }
     }
 }
