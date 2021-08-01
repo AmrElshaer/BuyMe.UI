@@ -56,6 +56,7 @@
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
+
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
@@ -339,84 +340,14 @@
 
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
-                    @if (!(await UserManagerService.GetCurrentUserRoles()).Contains(ApplicationRoles.SuperAdmin))
-                    {
-                        <li class="header">MAIN NAVIGATION</li>
-                        <li class="@(action == "Index"&& controller == "Home"? "active" : "")">
-                            <a href="/">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="treeview @(area=="Sales"? "active" : "")">
-                            <a href="#">
-                                <i class="fa fa-laptop"></i>
-                                <span>SALES</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li class="@(action == "Index"&& controller == "CustomerType"&&area=="Sales"? "active" : "")"><a asp-area="Sales" asp-controller="CustomerType" asp-action="Index"><i class="fa fa-circle-o"></i>Customer Type</a></li>
-                                <li class="@(action == "Index"&& controller == "Customer"&&area=="Sales"? "active" : "")"><a asp-area="Sales" asp-controller="Customer" asp-action="Index"><i class="fa fa-circle-o"></i>Customer</a></li>
-                                <li class="@(action == "Index"&& controller == "SalesType"&&area=="Sales"? "active" : "")"><a asp-area="Sales" asp-controller="SalesType" asp-action="Index"><i class="fa fa-circle-o"></i>SalesType</a></li>
-                                <li class="@(action == "Index"&& controller == "SalesOrder"&&area=="Sales"? "active" : "")"><a asp-area="Sales" asp-controller="SalesOrder" asp-action="Index"><i class="fa fa-circle-o"></i>SalesOrder</a></li>
-                                <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                                <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                                <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-pie-chart"></i>
-                                <span>PURCHASE</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview @(area=="Inventory"? "active" : "")">
-                            <a href="#">
-                                <i class="fa fa-laptop"></i>
-                                <span>INVENTORY</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li class="@(action == "Index"&& controller == "Category"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="Category" asp-action="Index"><i class="fa fa-circle-o"></i>Category</a></li>
-                                <li class="@(action == "Index"&& controller == "UOM"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="UOM" asp-action="Index"><i class="fa fa-circle-o"></i> Unit Of Measure</a></li>
-                                <li class="@(action == "Index"&& controller == "Product"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="Product" asp-action="Index"><i class="fa fa-circle-o"></i>Product</a></li>
-                                <li class="@(action == "Index"&& controller == "Warehouse"&&area=="Inventory"? "active" : "")"><a asp-area="Inventory" asp-controller="Warehouse" asp-action="Index"><i class="fa fa-circle-o"></i>Warehouse</a></li>
-
-                            </ul>
-                        </li>
-                        <li class="treeview @(area=="Config"? "active" : "")">
-                            <a href="#">
-                                <i class="fa fa-edit"></i> <span>CONFIG</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li class="@(action == "Index"&& controller == "Currency"&&area=="Config"? "active" : "")"><a asp-area="Config" asp-controller="Currency" asp-action="Index"><i class="fa fa-circle-o"></i>Currency</a></li>
-                                <li class="@(action == "Index"&& controller == "Branch"&&area=="Config"? "active" : "")"><a asp-area="Config" asp-controller="Branch" asp-action="Index"><i class="fa fa-circle-o"></i>Branch</a></li>
-                                <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview @(area=="Marketing"? "active" : "")">
-                            <a href="#">
-                                <i class="fa fa-table"></i> <span>Marketing</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li class="@(action == "Index"&& controller == "Template"&&area=="Marketing"? "active" : "")"><a asp-area="Marketing" asp-controller="Template" asp-action="Index"><i class="fa fa-circle-o"></i>Template</a></li>
-                                <li class="@(action == "Index"&& controller == "Settings"&&area=="Marketing"? "active" : "")"><a asp-area="Marketing" asp-controller="Settings" asp-action="Index"><i class="fa fa-circle-o"></i>Settings</a></li>
-                            </ul>
-                        </li>
-                    }
-
                     @if ((await UserManagerService.GetCurrentUserRoles()).Contains(ApplicationRoles.SuperAdmin))
                     {
-                        <li class="header">Admin Panel</li>
-                        <li class="@(action == "Index"&& controller == "Company"&&area=="AdminPanel"? "active" : "")"><a asp-area="AdminPanel" asp-controller="Company" asp-action="Index"><i class="fa fa-book"></i>COMPANY</a></li>
-                        <li class="@(action == "Index"&& controller == "Template"&&area=="AdminPanel"? "active" : "")"><a asp-area="AdminPanel" asp-controller="Template" asp-action="Index"><i class="fa fa-book"></i>Template</a></li>
+                        <partial name="_AdminMainSideBar" />
+                    }
+                    else
+                    {
+
+                        <partial name="_UserMainSideBar" />
                     }
 
                 </ul>

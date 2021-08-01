@@ -1,0 +1,7 @@
+﻿<li class="header">Admin Panel</li>
+<li class="@Html.IsSelected(controller:"Company")">
+    <a asp-area="AdminPanel" asp-controller="Company" asp-action="Index"><i class="fa fa-book"></i>COMPANY</a>
+</li>
+<li class="@Html.IsSelected(controller:"Template")">
+    <a asp-area="AdminPanel" asp-controller="Template" asp-action="Index"><i class="fa fa-book"></i>Template</a>
+</li>
