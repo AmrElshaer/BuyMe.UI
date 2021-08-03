@@ -23,7 +23,7 @@ namespace BuyMe.UI.Areas.Marketing.Controllers
             var templates =await Mediator.Send(new GetTempWithImagesQuery());
             var company = await Mediator.Send(new GetCompanyQuery());
             ViewBag.CompanyTemplate = company?.TemplateId;
-            ViewBag.MarketingLink = $"{_options.Domain}{company.Name}";
+            ViewBag.MarketingLink = $"{_options.Domain}/{company.Name}";
             return View(templates);
         }
         public async Task<IActionResult> UpdateCompanyTemplate(int templateId)

@@ -18,5 +18,6 @@ namespace BuyMe.Domain.Entities
         public CustomerType CustomerType  { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
+        public string UserId { get; set; }
     }
 }

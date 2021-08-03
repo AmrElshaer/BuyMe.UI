@@ -19,12 +19,13 @@ namespace BuyMe.Infrastructure.Identity
         {
             this._userManager = userManager;
         }
-        public async Task<string> AddApplicationUser(CreatEditEmployeeCommond employee)
+        public async Task<string> AddApplicationUser(string firstName, string lastName, string password, string email, int companyId,string photo)
         {
-            var user = new ApplicationUser {FirstName=employee.FirstName,
-                LastName=employee.LastName,Photo=employee.Photo,UserName = employee.Email,
-                Email = employee.Email,CompanyId=employee.CompanyId };
-            var result = await _userManager.CreateAsync(user, employee.Password);
+            var user = new ApplicationUser {FirstName=firstName,
+                LastName= lastName,
+                Photo=photo,UserName = email,
+                Email =email,CompanyId=companyId };
+            var result = await _userManager.CreateAsync(user, password);
             var appResult = result.ToApplicationResult();
             if (!appResult.Succeeded)
             {
@@ -46,16 +47,21 @@ namespace BuyMe.Infrastructure.Identity
                 throw validEx;
             }
         }
-        public async Task EditApplicationUser(CreatEditEmployeeCommond employee)
+        public async Task<(bool isRegister,string userId)>TryGetUserAsync(string email,string password)
         {
-            var appUser = await _userManager.FindByIdAsync(employee.UserId);
-            appUser.FirstName = employee.FirstName;
-            appUser.LastName = employee.LastName;
-            appUser.Email = employee.Email;
-            appUser.UserName = employee.Email;
-            appUser.Photo = employee.Photo;
+            var user = await _userManager.FindByEmailAsync(email);
+            return ((user != null && (await _userManager.CheckPasswordAsync(user, password))),user?.Id);
+        }
+        public async Task EditApplicationUser(string userId,string firstName, string lastName, string password, string email, int companyId, string photo)
+        {
+            var appUser = await _userManager.FindByIdAsync(userId);
+            appUser.FirstName = firstName;
+            appUser.LastName = lastName;
+            appUser.Email = email;
+            appUser.UserName = email;
+            appUser.Photo = photo;
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
-            appUser.PasswordHash = ph.HashPassword(appUser, employee.Password);
+            appUser.PasswordHash = ph.HashPassword(appUser,password);
             var result=  await _userManager.UpdateAsync(appUser);
             var appResult = result.ToApplicationResult();
             if (!appResult.Succeeded)

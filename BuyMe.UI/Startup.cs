@@ -43,7 +43,7 @@ namespace BuyMe.UI
                 options.AddPolicy("allowcors",
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200")
+                    builder.WithOrigins(this.Configuration["MarketingSettings:Domain"])
                     .AllowAnyMethod()
                     .AllowAnyHeader().AllowCredentials();
                 });
@@ -110,7 +110,7 @@ namespace BuyMe.UI
             app.UseCors("allowcors");
             app.UseCustomExceptionHandlerMiddleware();
             //Register Syncfusion license
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDQwMjUwQDMxMzkyZTMxMmUzME15Y2NQMGtxUXZheTBJV0drb05mamVML2xEcVFyVnRDYWd1M01pYmV6L0k9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(this.Configuration["Syncfusion:Key"]);
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();

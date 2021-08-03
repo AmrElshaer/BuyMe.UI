@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Controllers
 {
+
     [Authorize]
     public class HomeController : Controller
     {
