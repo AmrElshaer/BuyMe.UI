@@ -43,10 +43,18 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="~/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/userImage.css" rel="stylesheet" />
+    <link  href="~/css/loader.css" rel="stylesheet"/>
 </head>
 <body class="skin-blue">
+    
     <div class="wrapper">
-
+       <!--Loader Section-->
+        <div id="loaderbody" class="hidden">
+            <div class="loader-overlay">
+                <div class="loader"></div>
+            </div>
+        </div>
+       <!--End Loader Section-->
         <header class="main-header">
             <!-- Logo -->
             <a href="/" class="logo"><b>Buy</b>ME</a>
@@ -408,6 +416,7 @@
 
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js" type="text/javascript"></script>
+    <script src="~/js/loader.js" type="text/javascript"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
