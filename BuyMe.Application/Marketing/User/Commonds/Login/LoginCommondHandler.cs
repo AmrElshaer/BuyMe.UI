@@ -25,12 +25,11 @@ namespace BuyMe.Application.Marketing.User.Commonds.Login
         }
         public async Task<string> Handle(LoginCommond request, CancellationToken cancellationToken)
         {
-            var user =await _userService.TryGetUserAsync(request.Email,request.Password);
+            var user =await _userService.TryGetUserAsync(request.Email,request.CompanyId,request.Password);
             if (!user.isRegister)
             {
               throw new NotFoundException("User", request.Email);
             } 
-
             var customer = await _context.Customers.FirstOrDefaultAsync(a => a.UserId == user.userId);
             return await _jwtFactoryService.GenerateEncodedToken(customer.UserId,customer.CustomerName, customer.Id, customer.CompanyId);
         }

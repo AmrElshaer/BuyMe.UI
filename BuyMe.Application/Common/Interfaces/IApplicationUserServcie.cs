@@ -11,6 +11,7 @@ namespace BuyMe.Application.Common.Interfaces
 
         Task RemoveApplicationUser(string id);
 
-        Task<(bool isRegister, string userId)> TryGetUserAsync(string email, string password);
+        Task<(bool isRegister, string userId)> TryGetUserAsync(string email, int companyId, string password);
+        Task<bool> EmailExistAsync(string email, int companyId);
     }
 }

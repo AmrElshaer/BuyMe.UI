@@ -19,10 +19,11 @@ namespace BuyMe.UI.Controllers.api
             return Ok();
         }
         [HttpPost]
+
         public async Task<IActionResult> Login(LoginCommond loginCommond)
         {
             var token= await Mediator.Send(loginCommond);
-            return Ok(token);
+            return Ok(new {Token=token});
         }
     }
 }

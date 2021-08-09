@@ -27,12 +27,11 @@ namespace BuyMe.Infrastructure
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IJwtFactoryService, JwtFactoryService>();
             services.Configure<IdentityOptions>(opts => {
-                opts.User.RequireUniqueEmail = true;
+                opts.User.RequireUniqueEmail = false;
                 opts.Password.RequiredLength = 8;
                 opts.Password.RequireNonAlphanumeric = false;
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = false;
-                opts.Password.RequireDigit = false;
             });
             var jwtAppSettingOptions = configuration.GetSection(nameof(JwtIssuerOptions));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
