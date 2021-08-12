@@ -23,6 +23,7 @@ using BuyMe.UI.Models;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Reflection;
+using Rotativa.AspNetCore;
 
 namespace BuyMe.UI
 {
@@ -94,7 +95,7 @@ namespace BuyMe.UI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -117,7 +118,7 @@ namespace BuyMe.UI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            RotativaConfiguration.Setup(env);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

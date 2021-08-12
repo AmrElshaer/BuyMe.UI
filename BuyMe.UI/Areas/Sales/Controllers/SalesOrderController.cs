@@ -6,8 +6,11 @@ using BuyMe.Application.Product.Queries;
 using BuyMe.Application.SalesOrder.Commonds;
 using BuyMe.Application.SalesOrder.Commonds.DeleteSalesOrder;
 using BuyMe.Application.SalesOrder.Queries;
+using BuyMe.Application.SalesOrderLine.Queries;
 using BuyMe.Application.SalesType.Queries;
+using BuyMe.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 using Syncfusion.EJ2.Base;
 using System;
 using System.Collections.Generic;
@@ -34,6 +37,12 @@ namespace BuyMe.UI.Areas.Sales.Controllers
             value.Value.SalesOrderId = await Mediator.Send(value.Value);
             return Json(value.Value);
 
+        }
+        public async Task<IActionResult> Print(long salesOrderId)
+        {
+            var so = await Mediator.Send(new GetSalesOrderQuery(salesOrderId));
+            var salesOrdersLine = (await Mediator.Send(new GetSOLinesQuery(salesOrderId)))?.result;
+            return new ViewAsPdf((so, salesOrdersLine));
         }
         public async Task<ActionResult> Details(long salesOrderId)
         {
