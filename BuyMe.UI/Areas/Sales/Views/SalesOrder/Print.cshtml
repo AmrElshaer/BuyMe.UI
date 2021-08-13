@@ -1,173 +1,159 @@
-﻿@{
-    Layout = null;
-}
-@using BuyMe.Application.SalesOrder.Queries
+﻿@using BuyMe.Application.SalesOrder.Queries
 @using BuyMe.Application.SalesOrderLine.Queries
-@model  (SalesOrderDto order,IList<SalesOrderLineDto> salesOrderLines)
+@{
+    Layout = "_Print";
+    ViewBag.Title = "Print Order";
+}
 
-<!DOCTYPE html>
+@model (SalesOrderDto order, IList<SalesOrderLineDto> salesOrderLines)
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>BuyMe</title>
-    <link rel="shortcut icon" type="image/x-icon" href="~/images/logo.png" />
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Bootstrap 3.3.2 -->
-    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-   <style>
-      
-   </style>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6" style="display:inline-block">
-                <dl class="dl-horizontal">
-                    <dt>
-                        Order Number
-                    </dt>
-                    <dd>
-                        @Model.order.SalesOrderName
-                    </dd>
-                    <dt>
-                        Branch
-                    </dt>
-                    <dd>
-                        @Model.order.BranchName
-                    </dd>
-                    <dt>
-                        Customer
-                    </dt>
-                    <dd>
-                        @Model.order.CustomerName
-                    </dd>
-                </dl>
-            </div>
-            <div class="col-md-6" style="display:inline-block;float:right">
-                <dl class="dl-horizontal">
-                    <dt>
-                        OrderDate
-                    </dt>
-                    <dd>
-                        @(Model.order.OrderDate.ToShortDateString())
-                    </dd>
-                    <dt>
-                        DeliveryDate
-                    </dt>
-                    <dd>
-                        @(Model.order.DeliveryDate.ToShortDateString())
-                    </dd>
-                    <dt>
-                        Currency
-                    </dt>
-                    <dd>
-                        @Model.order.CurrencyCode
-                    </dd>
-                    <dt>
-                        Sales Type
-                    </dt>
-                    <dd>
-                        @Model.order.SalesTypeName
-                    </dd>
-                </dl>
-            </div>
+
+
+    <div class="row">
+        <div class="col-md-6" style="display:inline-block">
+            <dl class="dl-horizontal">
+                <dt>
+                    Order Number
+                </dt>
+                <dd>
+                    @Model.order.SalesOrderName
+                </dd>
+                <dt>
+                    Branch
+                </dt>
+                <dd>
+                    @Model.order.BranchName
+                </dd>
+                <dt>
+                    Customer
+                </dt>
+                <dd>
+                    @Model.order.CustomerName
+                </dd>
+            </dl>
         </div>
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>Amt</th>
-                        <th>Disc</th>
-                        <th>SubTotal</th>
-                        <th>Tax</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (var item in Model.salesOrderLines)
-                    {
-                        <tr>
-                            <td>
-                                @item.ProductName
-                            </td>
-                            <td>
-                                @item.Quantity
-                            </td>
-                            <td>
-                                @item.Price
-                            </td>
-                            <td>
-                                @item.Amount
-                            </td>
-                            <td>
-                                @item.DiscountAmount
-                            </td>
-                            <td>
-                                @item.SubTotal
-                            </td>
-                            <td>
-                                @item.TaxAmount
-                            </td>
-                            <td>
-                                @item.Total
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="row">
-            <div class="col-md-8" style="display:inline-block;float:right">
-                <dl>
-                    <dt>
-                        Remarks
-                    </dt>
-                    <dd>
-                        @Model.order.Remarks
-                    </dd>
-
-                </dl>
-            </div>
-            <div class="col-md-4" style="display:inline-block">
-                <dl>
-                    <dt>
-                        Amount
-                    </dt>
-                    <dd>
-                        @Model.order.Amount
-                    </dd>
-                    <dt>
-                        Discount
-                    </dt>
-                    <dd>
-                        @Model.order.Discount
-                    </dd>
-                    <dt>
-                        SubTotal
-                    </dt>
-                    <dd>
-                        @Model.order.SubTotal
-                    </dd>
-                    <dt>
-                        Tax
-                    </dt>
-                    <dd>
-                        @Model.order.Tax
-                    </dd>
-                    <dt>
-                        Freight
-                    </dt>
-                    <dd>
-                        @Model.order.Freight
-                    </dd>
-                </dl>
-            </div>
+        <div class="col-md-6" style="display:inline-block;float:right">
+            <dl class="dl-horizontal">
+                <dt>
+                    OrderDate
+                </dt>
+                <dd>
+                    @(Model.order.OrderDate.ToShortDateString())
+                </dd>
+                <dt>
+                    DeliveryDate
+                </dt>
+                <dd>
+                    @(Model.order.DeliveryDate.ToShortDateString())
+                </dd>
+                <dt>
+                    Currency
+                </dt>
+                <dd>
+                    @Model.order.CurrencyCode
+                </dd>
+                <dt>
+                    Sales Type
+                </dt>
+                <dd>
+                    @Model.order.SalesTypeName
+                </dd>
+            </dl>
         </div>
     </div>
-</body>
-</html>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Amt</th>
+                    <th>Disc</th>
+                    <th>SubTotal</th>
+                    <th>Tax</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.salesOrderLines)
+                {
+                    <tr>
+                        <td>
+                            @item.ProductName
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @item.Amount
+                        </td>
+                        <td>
+                            @item.DiscountAmount
+                        </td>
+                        <td>
+                            @item.SubTotal
+                        </td>
+                        <td>
+                            @item.TaxAmount
+                        </td>
+                        <td>
+                            @item.Total
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-8" style="display:inline-block;float:right">
+            <dl>
+                <dt>
+                    Remarks
+                </dt>
+                <dd>
+                    @Model.order.Remarks
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-md-4" style="display:inline-block">
+            <dl>
+                <dt>
+                    Amount
+                </dt>
+                <dd>
+                    @Model.order.Amount
+                </dd>
+                <dt>
+                    Discount
+                </dt>
+                <dd>
+                    @Model.order.Discount
+                </dd>
+                <dt>
+                    SubTotal
+                </dt>
+                <dd>
+                    @Model.order.SubTotal
+                </dd>
+                <dt>
+                    Tax
+                </dt>
+                <dd>
+                    @Model.order.Tax
+                </dd>
+                <dt>
+                    Freight
+                </dt>
+                <dd>
+                    @Model.order.Freight
+                </dd>
+            </dl>
+        </div>
+    </div>
+

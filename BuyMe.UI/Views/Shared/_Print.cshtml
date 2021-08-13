@@ -1,0 +1,28 @@
+﻿@using BuyMe.Application.Common.Interfaces
+@inject ICompanyService companyService
+@{ 
+    var company = await companyService.GetCurrentCompany();
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/logo.png" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.2 -->
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="text-align:center">
+                <img src="@(company.Logo)" class="img-circle img-responsive" style="max-width:100px;margin:auto" />
+                <h2>@company.Name</h2>
+        </div>
+        @RenderBody()
+    </div>
+   
+</body>
+</html>
