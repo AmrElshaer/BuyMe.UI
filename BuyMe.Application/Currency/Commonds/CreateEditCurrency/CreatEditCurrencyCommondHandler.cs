@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -23,8 +24,7 @@ namespace BuyMe.Application.Currency.Commonds.CreateEditCurrency
             if (request.CurrencyId.HasValue)
             {
                 var entity = await _context.Currencies.FindAsync(request.CurrencyId);
-                if (entity == null)
-                    throw new NotFoundException("Currency", request.CurrencyId);
+                Guard.Against.Null(entity, request.CurrencyId);
                 currency = entity;
             }
             else

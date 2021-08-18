@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -21,8 +22,7 @@ namespace BuyMe.Application.Company.Commonds
             if (request.Id.HasValue)
             {
                 var entity = await _context.Companies.FindAsync(request.Id);
-                if (entity == null)
-                    throw new NotFoundException("Company", request.Id);
+                Guard.Against.Null(entity, request.Id);
                 company = entity;
             }
             else

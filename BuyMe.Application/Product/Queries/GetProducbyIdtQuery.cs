@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
@@ -31,10 +32,7 @@ namespace BuyMe.Application.Product.Queries
             public async Task<ProductDto> Handle(GetProducbyIdtQuery request, CancellationToken cancellationToken)
             {
                 var product = await _context.Products.FirstOrDefaultAsync(a => a.ProductId == request.ProductId);
-                if (product == null)
-                {
-                    throw new NotFoundException("Product", request.ProductId);
-                }
+                Guard.Against.Null(product, request.ProductId);
                 return _mapper.Map<ProductDto>(product);
             }
         }

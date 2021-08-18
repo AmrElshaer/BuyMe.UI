@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace BuyMe.Application.UnitOfMeasure.Commonds.DeleteUnitOfMeasure
             public async Task<Unit> Handle(DeleteUnitOfMeasureCommond request, CancellationToken cancellationToken)
             {
                 var uom = await _context.UnitOfMeasures.FindAsync(request.UOMId);
-                _ = uom ?? throw new NotFoundException(nameof(Domain.Entities.Company), request.UOMId);
+                Guard.Against.Null(uom, request.UOMId);
                 _context.UnitOfMeasures.Remove(uom);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

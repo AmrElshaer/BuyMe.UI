@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Product.Commonds.CreatEditProductImages;
 using BuyMe.Application.Template.Commonds.CreatEditTemplateImages;
@@ -39,8 +40,7 @@ namespace BuyMe.Application.Template.Commonds.CreatEditTemplate
                 if (request.Id.HasValue)
                 {
                     var entity = await _context.Templates.FindAsync(request.Id);
-                    if (entity == null)
-                        throw new NotFoundException("Template", request.Id);
+                    Guard.Against.Null(entity, request.Id);
                     template = entity;
                 }
                 else

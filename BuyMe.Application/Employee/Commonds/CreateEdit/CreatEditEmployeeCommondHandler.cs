@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -23,8 +24,7 @@ namespace BuyMe.Application.Employee.Commonds.CreateEdit
             if (request.Id.HasValue)
             {
                 var entity = await _context.Employees.FindAsync(request.Id);
-                if (entity == null)
-                    throw new NotFoundException("Employee", request.Id);
+                Guard.Against.Null(entity, request.Id);
                 await _applicationUserServcie.EditApplicationUser(request.UserId,request.FirstName,request.LastName,request.Password
                     ,request.Email,request.CompanyId.Value,request.Photo);
                 employee = entity;

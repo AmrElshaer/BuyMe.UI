@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Domain.Entities;
 using MediatR;
@@ -24,8 +25,7 @@ namespace BuyMe.Application.WarehouseINV.Commonds.CreatEdit
             if (request.WarehouseId.HasValue)
             {
                 var entity = await _context.Warehouses.FindAsync(request.WarehouseId);
-                if (entity == null)
-                    throw new NotFoundException("Warhouse", request.WarehouseId);
+                Guard.Against.Null(entity, request.WarehouseId);
                 warehouse = entity;
             }
             else

@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -25,8 +26,7 @@ namespace BuyMe.Application.SalesOrder.Commonds
             if (request.SalesOrderId.HasValue)
             {
                 var entity = await _context.SalesOrders.FindAsync(request.SalesOrderId);
-                if (entity == null)
-                    throw new NotFoundException("SalesOrder", request.SalesOrderId);
+                Guard.Against.Null(entity, request.SalesOrderId);
                 so = entity;
             }
             else

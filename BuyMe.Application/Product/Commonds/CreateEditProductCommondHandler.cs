@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Product.Commonds.CreatEditProductImages;
 using MediatR;
@@ -26,8 +27,7 @@ namespace BuyMe.Application.Product.Commonds
             if (request.ProductId.HasValue)
             {
                 var entity = await _context.Products.FindAsync(request.ProductId);
-                if (entity == null)
-                    throw new NotFoundException("Product", request.ProductId);
+                Guard.Against.Null(entity, request.ProductId);
                 product = entity;
             }
             else

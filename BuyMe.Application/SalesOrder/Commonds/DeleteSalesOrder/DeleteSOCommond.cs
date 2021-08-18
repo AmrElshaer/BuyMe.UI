@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace BuyMe.Application.SalesOrder.Commonds.DeleteSalesOrder
             public async Task<Unit> Handle(DeleteSalesOrderCommond request, CancellationToken cancellationToken)
             {
                 var so = await _context.SalesOrders.FindAsync(request.SalesOrderId);
-                _ = so ?? throw new NotFoundException(nameof(Domain.Entities.SalesOrder), request.SalesOrderId);
+                Guard.Against.Null(so, request.SalesOrderId);
                 _context.SalesOrders.Remove(so);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

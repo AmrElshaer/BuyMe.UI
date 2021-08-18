@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -23,8 +24,7 @@ namespace BuyMe.Application.UnitOfMeasure.Commonds
             if (request.Id.HasValue)
             {
                 var entity = await _context.UnitOfMeasures.FindAsync(request.Id);
-                if (entity == null)
-                    throw new NotFoundException("UnitOfMeasure", request.Id);
+                Guard.Against.Null(entity, request.Id);
                 uom = entity;
             }
             else

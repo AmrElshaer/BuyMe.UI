@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace BuyMe.Application.Company.Commonds.DeleteCompany
             public async Task<Unit> Handle(DeleteCompanyCommond request, CancellationToken cancellationToken)
             {
                 var company = await _context.Companies.FindAsync(request.CompanyId);
-                _ = company ?? throw new NotFoundException(nameof(Domain.Entities.Company), request.CompanyId);
+                Guard.Against.Null(company, request.CompanyId);
                 _context.Companies.Remove(company);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

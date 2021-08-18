@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -23,8 +24,7 @@ namespace BuyMe.Application.Customer.Commonds.CreatEditCustomer
             if (request.Id.HasValue)
             {
                 var entity = await _context.Customers.FindAsync(request.Id);
-                if (entity == null)
-                    throw new NotFoundException("Customer", request.Id);
+                Guard.Against.Null(entity, request.Id);
                 customer = entity;
             }
             else

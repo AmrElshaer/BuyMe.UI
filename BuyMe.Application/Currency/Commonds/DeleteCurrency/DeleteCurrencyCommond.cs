@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -22,10 +23,7 @@ namespace BuyMe.Application.Currency.Commonds.DeleteCurrency
             public async Task<Unit> Handle(DeleteCurrencyCommond request, CancellationToken cancellationToken)
             {
                 var currency = await context.Currencies.FindAsync(request.CurrencyId);
-                if (currency == null)
-                {
-                    throw new NotFoundException(nameof(Currency), request.CurrencyId);
-                }
+                Guard.Against.Null(currency, request.CurrencyId);
                 context.Currencies.Remove(currency);
                 await context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

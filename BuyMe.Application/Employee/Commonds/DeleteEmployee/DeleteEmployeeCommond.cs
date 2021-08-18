@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -24,10 +25,7 @@ namespace BuyMe.Application.Employee.Commonds.DeleteEmployee
             public async Task<Unit> Handle(DeleteEmployeeCommond request, CancellationToken cancellationToken)
             {
                 var employee = await context.Employees.FindAsync(request.EmployeeId);
-                if (employee == null)
-                {
-                    throw new NotFoundException(nameof(Employee), request.EmployeeId);
-                }
+                Guard.Against.Null(employee, request.EmployeeId);
                 await applicationUserServcie.RemoveApplicationUser(employee.UserId);
                 context.Employees.Remove(employee);
                 await context.SaveChangesAsync(cancellationToken);

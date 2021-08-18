@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,7 @@ namespace BuyMe.Application.Template.Commonds.DeleteTemplate
             public async Task<Unit> Handle(DeleteTemplateCommond request, CancellationToken cancellationToken)
             {
                 var template = await _context.Templates.Include(a => a.Images).FirstOrDefaultAsync(a => a.Id == request.TemplateId);
-                _ = template ?? throw new NotFoundException(nameof(Domain.Entities.Template), request.TemplateId);
+                Guard.Against.Null(template, request.TemplateId);
                 _context.Templates.Remove(template);
                 await _context.SaveChangesAsync(cancellationToken);
                 template.Images.ToList().ForEach(a => _fileService.DeleteFile("images", a.ImageName));

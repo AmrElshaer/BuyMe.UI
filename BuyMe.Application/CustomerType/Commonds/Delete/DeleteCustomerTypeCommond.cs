@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace BuyMe.Application.CustomerType.Commonds.Delete
             public async Task<Unit> Handle(DeleteCustomerTypeCommond request, CancellationToken cancellationToken)
             {
                 var customerType = await _context.CustomerTypes.FindAsync(request.CustomerTypeId);
-                _ = customerType ?? throw new NotFoundException(nameof(Domain.Entities.CustomerType), request.CustomerTypeId);
+                Guard.Against.Null(customerType, request.CustomerTypeId);
                 _context.CustomerTypes.Remove(customerType);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

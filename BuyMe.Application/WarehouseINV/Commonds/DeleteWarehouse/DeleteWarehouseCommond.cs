@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace BuyMe.Application.WarehouseINV.Commonds.DeleteWarehouse
             public async Task<Unit> Handle(DeleteWarehouseCommond request, CancellationToken cancellationToken)
             {
                 var warehouse = await _context.Warehouses.FindAsync(request.WarehouseId);
-                _ = warehouse ?? throw new NotFoundException(nameof(Domain.Entities.Warehouse), request.WarehouseId);
+                Guard.Against.Null(warehouse, request.WarehouseId);
                 _context.Warehouses.Remove(warehouse);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

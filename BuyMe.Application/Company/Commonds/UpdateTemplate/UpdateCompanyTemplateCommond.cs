@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Interfaces;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace BuyMe.Application.Company.Commonds.UpdateTemplate
             public async Task<Unit> Handle(UpdateCompanyTemplateCommond request, CancellationToken cancellationToken)
             {
                 var company =await  _context.Companies.FindAsync(_currentUserService.CompanyId);
+                Guard.Against.Null(company, _currentUserService.CompanyId);
                 company.TemplateId = request.TemplateId;
                 await _context.SaveChangesAsync();
                 return Unit.Value;

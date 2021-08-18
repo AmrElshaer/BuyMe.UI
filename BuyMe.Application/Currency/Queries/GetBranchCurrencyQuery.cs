@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
@@ -26,10 +27,7 @@ namespace BuyMe.Application.Currency.Queries
             public async Task<CurrencyDto> Handle(GetBranchCurrencyQuery request, CancellationToken cancellationToken)
             {
                 var branch = await context.Branches.Include(a => a.Currency).FirstOrDefaultAsync(a => a.BranchId == request.BranchId);
-                if (branch == null)
-                {
-                    throw new NotFoundException("Currency", request.BranchId);
-                }
+                Guard.Against.Null(branch, request.BranchId);
                 return mapper.Map<CurrencyDto>(branch.Currency);
             }
         }
