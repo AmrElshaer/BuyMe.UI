@@ -31,6 +31,9 @@
     <Folder Include="Areas\Inventory\Models\" />
     <Folder Include="Areas\Sales\Data\" />
     <Folder Include="Areas\Sales\Models\" />
+    <Folder Include="Areas\UserRole\Data\" />
+    <Folder Include="Areas\UserRole\Models\" />
+    <Folder Include="Areas\UserRole\Views\Shared\" />
   </ItemGroup>
 
 </Project>

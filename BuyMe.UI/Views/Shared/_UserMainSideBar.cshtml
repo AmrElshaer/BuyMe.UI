@@ -67,3 +67,13 @@
         <li class="@Html.IsSelected(controller:"Settings")"><a asp-area="Marketing" asp-controller="Settings" asp-action="Index"><i class="fa fa-circle-o"></i>Settings</a></li>
     </ul>
 </li>
+<li class="treeview @Html.IsSelected(area:"UserRole")">
+    <a href="#">
+        <i class="fa fa-table"></i> <span>User & Role</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li class="@Html.IsSelected(controller:"User")"><a asp-area="UserRole" asp-controller="User" asp-action="Index"><i class="fa fa-circle-o"></i>User</a></li>
+        <li class="@Html.IsSelected(controller:"User")"><a asp-area="UserRole" asp-controller="Role" asp-action="Index"><i class="fa fa-circle-o"></i>Role</a></li>
+    </ul>
+</li>
