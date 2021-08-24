@@ -4,6 +4,7 @@ using BuyMe.Application.Customer.Commonds.CreatEditCustomer;
 using BuyMe.Application.Customer.Commonds.DeleteCustomer;
 using BuyMe.Application.Customer.Queries.GetCustomers;
 using BuyMe.Application.CustomerType.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Sales.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.Customer)]
     public class CustomerController : BaseController
     {
         public IActionResult Index()

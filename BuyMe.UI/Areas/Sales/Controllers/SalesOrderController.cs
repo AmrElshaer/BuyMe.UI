@@ -9,6 +9,7 @@ using BuyMe.Application.SalesOrder.Queries;
 using BuyMe.Application.SalesOrderLine.Queries;
 using BuyMe.Application.SalesType.Queries;
 using BuyMe.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rotativa.AspNetCore;
 using Syncfusion.EJ2.Base;
@@ -20,6 +21,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Sales.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.SalesOrder)]
     public class SalesOrderController:BaseController
     {
         public IActionResult Index()

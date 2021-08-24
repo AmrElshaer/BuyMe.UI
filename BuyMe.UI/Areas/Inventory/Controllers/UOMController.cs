@@ -3,6 +3,7 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.UnitOfMeasure.Commonds;
 using BuyMe.Application.UnitOfMeasure.Commonds.DeleteUnitOfMeasure;
 using BuyMe.Application.UnitOfMeasure.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Inventory.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.UnitOfMeasure)]
     public class UOMController : BaseController
     {
         public IActionResult Index()

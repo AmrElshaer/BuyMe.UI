@@ -3,6 +3,7 @@ using BuyMe.Application.Category.Commonds.DeleteCategory;
 using BuyMe.Application.Category.Queries;
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Inventory.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.Category)]
     public class CategoryController : BaseController
     {
         public IActionResult Index()

@@ -3,6 +3,7 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.CustomerType.Commonds.CreateEdit;
 using BuyMe.Application.CustomerType.Commonds.Delete;
 using BuyMe.Application.CustomerType.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Sales.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.CustomerType)]
     public class CustomerTypeController : BaseController
     {
         public IActionResult Index()

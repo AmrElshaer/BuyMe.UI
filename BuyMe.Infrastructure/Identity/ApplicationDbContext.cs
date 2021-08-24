@@ -1,36 +1,31 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BuyMe.Application.Common.Models;
+
 namespace BuyMe.Infrastructure.Identity
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
         {
-
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
            : base(options)
         {
-
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             string ADMIN_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
             string ROLE_ID = "341743f0-asd2–42de-afbf-59kmkkmk72cf6";
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
-                Name = ApplicationRoles.SuperAdmin,
-                NormalizedName = ApplicationRoles.SuperAdmin,
+                Name = "SuperAdmin",
+                NormalizedName = "SuperAdmin",
                 Id = ROLE_ID,
                 ConcurrencyStamp = ROLE_ID
             });
+
             var appUser = new ApplicationUser()
             {
                 Id = ADMIN_ID,

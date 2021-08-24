@@ -2,6 +2,7 @@
 using BuyMe.Infrastructure.Authorization;
 using BuyMe.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -55,7 +56,14 @@ namespace BuyMe.Infrastructure
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAppSettingOptions[nameof(JwtIssuerOptions.SigningKey)])), SecurityAlgorithms.HmacSha256);
             });
+            services.AddTransient<IRoleService, RoleService>();
             return services;
+        }
+        public static void SeedRoles(this IApplicationBuilder app)
+        {
+            using var scope = app.ApplicationServices.CreateScope();
+            var serviceProvider =(IRoleService)scope.ServiceProvider.GetService(typeof(IRoleService));
+            serviceProvider.GenerateRolesAsync().GetAwaiter().GetResult();
         }
     }
 }

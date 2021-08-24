@@ -1,7 +1,9 @@
 ﻿using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.Company.Commonds;
 using BuyMe.Application.Company.Queries;
 using BuyMe.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Options;
@@ -13,7 +15,8 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Marketing.Controllers
 {
-public class SettingsController : BaseController
+    [Authorize(Roles = ApplicationRoles.Settings)]
+    public class SettingsController : BaseController
 {
         private readonly MarketingSettings _options;
         public SettingsController(IOptions<MarketingSettings> options)

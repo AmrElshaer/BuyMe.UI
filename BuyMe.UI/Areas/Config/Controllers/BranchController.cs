@@ -4,6 +4,7 @@ using BuyMe.Application.Branch.Queries;
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Models;
 using BuyMe.Application.Currency.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Config.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.Branch)]
     public class BranchController : BaseController
     {
         public IActionResult Index()

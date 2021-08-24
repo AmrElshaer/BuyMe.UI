@@ -4,6 +4,7 @@ using BuyMe.Application.SalesType.Commonds.CreateEdit;
 using BuyMe.Application.SalesType.Commonds.Delete;
 using BuyMe.Application.SalesType.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Sales.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.SalesType)]
     public class SalesTypeController : BaseController
     {
         public IActionResult Index()

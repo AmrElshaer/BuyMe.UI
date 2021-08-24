@@ -3,6 +3,7 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.Currency.Commonds.CreateEditCurrency;
 using BuyMe.Application.Currency.Commonds.DeleteCurrency;
 using BuyMe.Application.Currency.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Config.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.Currency)]
     public class CurrencyController : BaseController
     {
         public IActionResult Index()

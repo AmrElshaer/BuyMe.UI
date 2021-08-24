@@ -1,7 +1,9 @@
-﻿using BuyMe.Application.Company.Commonds.UpdateTemplate;
+﻿using BuyMe.Application.Common.Models;
+using BuyMe.Application.Company.Commonds.UpdateTemplate;
 using BuyMe.Application.Company.Queries;
 using BuyMe.Application.Template.Queries;
 using BuyMe.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Marketing.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.Template)]
     public class TemplateController : BaseController
     {
         private readonly MarketingSettings _options;

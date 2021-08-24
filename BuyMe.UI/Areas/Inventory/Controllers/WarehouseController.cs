@@ -4,6 +4,8 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.WarehouseINV.Commonds.CreatEdit;
 using BuyMe.Application.WarehouseINV.Commonds.DeleteWarehouse;
 using BuyMe.Application.WarehouseINV.Queries;
+using BuyMe.UI.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -13,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Inventory.Controllers
 {
+    [Authorize(Roles =ApplicationRoles.Warehouse)]
     public class WarehouseController : BaseController
     {
         public IActionResult Index()

@@ -1,28 +1,17 @@
-
 using BuyMe.Application;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Infrastructure;
 using BuyMe.Persistence;
+using BuyMe.UI.Common;
+using BuyMe.UI.Models;
 using BuyMe.UI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BuyMe.UI.Common;
-using BuyMe.UI.Models;
 using Microsoft.OpenApi.Models;
-using System.IO;
-using System.Reflection;
+using Newtonsoft.Json.Serialization;
 using Rotativa.AspNetCore;
 
 namespace BuyMe.UI
@@ -56,17 +45,19 @@ namespace BuyMe.UI
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = $"/Identity/Account/Login";
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
             });
             services.Configure<MarketingSettings>(this.Configuration.GetSection("MarketingSettings"));
             services.AddControllersWithViews()
-                .AddNewtonsoftJson(options => { 
+                .AddNewtonsoftJson(options =>
+                {
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 }).AddRazorRuntimeCompilation();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BuyMe Api", Version = "v1", });
-                // To Enable authorization using Swagger (JWT)  
+                // To Enable authorization using Swagger (JWT)
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
@@ -88,7 +79,6 @@ namespace BuyMe.UI
                                 }
                             },
                             new string[] {}
-
                     }
                 });
             });
@@ -108,11 +98,12 @@ namespace BuyMe.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.SeedRoles();
             app.UseCors("allowcors");
             app.UseCustomExceptionHandlerMiddleware();
             //Register Syncfusion license
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(this.Configuration["Syncfusion:Key"]);
-            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -137,7 +128,6 @@ namespace BuyMe.UI
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-
         }
     }
 }

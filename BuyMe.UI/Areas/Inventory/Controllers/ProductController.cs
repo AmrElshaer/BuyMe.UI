@@ -6,6 +6,7 @@ using BuyMe.Application.Product.Commonds;
 using BuyMe.Application.Product.Commonds.DeleteProduct;
 using BuyMe.Application.Product.Queries;
 using BuyMe.Application.UnitOfMeasure.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Inventory.Controllers
 {
+    [Authorize(Roles = ApplicationRoles.Product)]
     public class ProductController : BaseController
     {
         public IActionResult Index()
