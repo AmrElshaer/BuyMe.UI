@@ -13,13 +13,14 @@ namespace BuyMe.Infrastructure.Identity
 {
     public class UserClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser>
     {
-        
+        private readonly IRoleService roleService;
 
         public UserClaimsPrincipalFactory(
        UserManager<ApplicationUser> userManager,
-       IOptions<IdentityOptions> optionsAccessor)
+       IOptions<IdentityOptions> optionsAccessor,IRoleService roleService)
        : base(userManager, optionsAccessor)
         {
+            this.roleService = roleService;
         }
 
         protected override async Task<ClaimsIdentity> GenerateClaimsAsync(ApplicationUser user)
@@ -29,7 +30,7 @@ namespace BuyMe.Infrastructure.Identity
             {
                identity.AddClaim(new Claim("CompanyId", user.CompanyId.ToString()));
             }
-            ApplicationRoles.GetRoles().ToList().ForEach(a => identity.AddClaim(new Claim( ClaimTypes.Role,a)));
+            (await roleService.GeUserRolesAsync(user.Id)).ToList().ForEach(a => identity.AddClaim(new Claim( ClaimTypes.Role,a)));
             return identity;
         }
     }
