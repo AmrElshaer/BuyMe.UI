@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Sales.Controllers
 {
-    [Authorize(Roles = ApplicationRoles.Customer)]
+    [Authorize(Roles =ApplicationRoles.Customer)]
     public class CustomerController : BaseController
     {
         public IActionResult Index()

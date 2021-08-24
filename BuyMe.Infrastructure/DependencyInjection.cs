@@ -20,9 +20,10 @@ namespace BuyMe.Infrastructure
             services.AddDbContext<ApplicationDbContext>(options =>
                   options.UseSqlServer(
                       configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders()
-        .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>(); 
+
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddRoles<IdentityRole>()
+                .AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>(); 
             services.AddTransient<IApplicationUserServcie, ApplicationUserServcie>();
             services.AddTransient<IUserManagerService, UserManagerService>();
             services.AddTransient<IFileService, FileService>();
@@ -56,7 +57,12 @@ namespace BuyMe.Infrastructure
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAppSettingOptions[nameof(JwtIssuerOptions.SigningKey)])), SecurityAlgorithms.HmacSha256);
             });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Customer", policy => policy.RequireRole("Customer"));
+            });
             services.AddTransient<IRoleService, RoleService>();
+
             return services;
         }
         public static void SeedRoles(this IApplicationBuilder app)
