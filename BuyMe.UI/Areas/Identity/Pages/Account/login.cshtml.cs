@@ -68,20 +68,19 @@ namespace BuyMe.UI.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe,lockoutOnFailure:false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password,false,lockoutOnFailure:false);
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(Input.Email);
-                    if (await _companyService.IsActive(user.CompanyId))
-                    {
-                       return LocalRedirect(returnUrl);
-                    }
+                    if (await _companyService.IsActive(user.CompanyId)) return LocalRedirect(returnUrl);
+                    
                     ModelState.AddModelError(string.Empty, "Company not active please go to admin");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 
             }
             return Page();
+
         }
     }
 }
