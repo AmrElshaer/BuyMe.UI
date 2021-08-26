@@ -2,24 +2,21 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Infrastructure
 {
     public class FileService : IFileService
     {
         private readonly IWebHostEnvironment _hostEnv;
+
         public FileService(IWebHostEnvironment hostEnv)
         {
             _hostEnv = hostEnv;
         }
 
-        public string AddFile(string folderName,IFormFile file)
+        public string AddFile(string folderName, IFormFile file)
         {
             var filename = ContentDispositionHeaderValue
                                      .Parse(file.ContentDisposition)

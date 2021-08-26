@@ -28,6 +28,8 @@ namespace BuyMe.Infrastructure
             services.AddTransient<IUserManagerService, UserManagerService>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IJwtFactoryService, JwtFactoryService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IImageService, ImageService>();
             services.Configure<IdentityOptions>(opts => {
                 opts.User.RequireUniqueEmail = false;
                 opts.Password.RequiredLength = 8;
@@ -61,8 +63,7 @@ namespace BuyMe.Infrastructure
             {
                 options.AddPolicy("Customer", policy => policy.RequireRole("Customer"));
             });
-            services.AddTransient<IRoleService, RoleService>();
-
+           
             return services;
         }
         public static void SeedRoles(this IApplicationBuilder app)
