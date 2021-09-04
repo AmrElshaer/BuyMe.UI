@@ -1,18 +1,14 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Interfaces;
-using BuyMe.Application.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Template.Queries
 {
-    public class GetTempWithImagesQuery:IRequest<IList<TemplateDto>>
+    public class GetTempWithImagesQuery : IRequest<IList<TemplateDto>>
     {
         public class GetTempWithImagesQueryHandler : IRequestHandler<GetTempWithImagesQuery, IList<TemplateDto>>
         {
@@ -27,7 +23,7 @@ namespace BuyMe.Application.Template.Queries
 
             public async Task<IList<TemplateDto>> Handle(GetTempWithImagesQuery request, CancellationToken cancellationToken)
             {
-                var templates= await  _context.Templates.Include(a=>a.Images).ToListAsync();
+                var templates = await _context.Templates.Include(a => a.Images).ToListAsync();
                 return _mapper.Map<IList<TemplateDto>>(templates);
             }
         }

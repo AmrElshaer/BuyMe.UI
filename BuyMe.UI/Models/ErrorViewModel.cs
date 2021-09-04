@@ -1,5 +1,3 @@
-using System;
-
 namespace BuyMe.UI.Models
 {
     public class ErrorViewModel

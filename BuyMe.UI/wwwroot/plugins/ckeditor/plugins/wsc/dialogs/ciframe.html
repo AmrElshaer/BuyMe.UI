@@ -5,11 +5,9 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 -->
 <html>
 <head>
-	<title></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<script type="text/javascript">
-
-function gup( name )
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript">function gup( name )
 {
 	name = name.replace( /[\[]/, '\\\[' ).replace( /[\]]/, '\\\]' ) ;
 	var regexS = '[\\?&]' + name + '=([^&#]*)' ;
@@ -58,9 +56,9 @@ function onLoad()
 {
 	interval = window.setInterval( sendData2Master, 100 );
 	listenPostMessage();
-}
-
-</script>
+}</script>
 </head>
-<body onload="onLoad()"><p></p></body>
+<body onload="onLoad()">
+    <p></p>
+</body>
 </html>

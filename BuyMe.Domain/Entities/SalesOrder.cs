@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Domain.Entities
 {
@@ -12,6 +9,7 @@ namespace BuyMe.Domain.Entities
         {
             SalesOrderLines = new HashSet<SalesOrderLine>();
         }
+
         public long SalesOrderId { get; set; }
         public string SalesOrderName { get; set; }
         public int? BranchId { get; set; }

@@ -19,7 +19,6 @@
     }
 </style>
 
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -41,7 +40,7 @@
                     <div>
                         <ejs-radiobutton value="@item.Id" checked="@((int?)ViewBag.CompanyTemplate==item.Id)" change="change" id="Temp_@item.Id" label="@item.Name" name="TemplateId"></ejs-radiobutton>
                     </div>
-                    
+
                     <div class="TemplateImages">
                         @foreach (var image in item.Images)
                         {
@@ -51,11 +50,8 @@
                          }
                     </div>
                     <h5>@item.Description</h5>
-                    
-                       
                 </div>
             }
-        
     </div>
     <div class="control-section container" style="margin-top:15px">
         <a class="btn btn-primary" href="@(ViewBag.MarketingLink)" target="_blank">Preview Site</a>
@@ -85,7 +81,7 @@
 </script>
 @section Scripts{
     <script>
-       
+
         $(document).ready(function () {
             var $lightbox = $('#lightbox');
 
@@ -113,4 +109,3 @@
         });
     </script>
 }
-

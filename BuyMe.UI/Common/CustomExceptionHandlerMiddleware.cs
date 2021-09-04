@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -22,7 +20,6 @@ namespace BuyMe.UI.Common
 
         public async Task Invoke(HttpContext httpContext)
         {
-
             try
             {
                 await _next(httpContext);
@@ -32,7 +29,8 @@ namespace BuyMe.UI.Common
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
-        private  Task HandleExceptionAsync(HttpContext context, Exception exception)
+
+        private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var code = HttpStatusCode.InternalServerError;
             var result = string.Empty;
@@ -42,10 +40,12 @@ namespace BuyMe.UI.Common
                     code = HttpStatusCode.BadRequest;
                     result = JsonConvert.SerializeObject(validationException.Failures);
                     break;
+
                 case BadRequestException badRequestException:
                     code = HttpStatusCode.BadRequest;
                     result = badRequestException.Message;
                     break;
+
                 case NotFoundException _:
                     code = HttpStatusCode.NotFound;
                     break;
@@ -58,7 +58,7 @@ namespace BuyMe.UI.Common
                 result = JsonConvert.SerializeObject(new { error = exception.Message });
             }
 
-            return  context.Response.WriteAsync(result);
+            return context.Response.WriteAsync(result);
         }
     }
 

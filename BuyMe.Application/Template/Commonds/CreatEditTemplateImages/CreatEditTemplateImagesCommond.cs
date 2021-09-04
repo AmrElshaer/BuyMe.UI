@@ -1,17 +1,14 @@
 ﻿using BuyMe.Application.Common.Interfaces;
-using BuyMe.Application.Product.Commonds.CreatEditProductImages;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Template.Commonds.CreatEditTemplateImages
 {
-    public class CreatEditTemplateImagesCommond:IRequest<Unit>
+    public class CreatEditTemplateImagesCommond : IRequest<Unit>
     {
         public int TemplateId { get; private set; }
         public List<string> TemplateImages { get; private set; }

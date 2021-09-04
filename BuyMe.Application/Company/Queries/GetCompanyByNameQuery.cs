@@ -2,18 +2,14 @@
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Company.Queries
 {
-    public class GetCompanyByNameQuery:IRequest<CompanyDto>
+    public class GetCompanyByNameQuery : IRequest<CompanyDto>
     {
-        public string Name { get;private set; }
+        public string Name { get; private set; }
 
         public GetCompanyByNameQuery(string name)
         {
@@ -33,7 +29,7 @@ namespace BuyMe.Application.Company.Queries
 
             public async Task<CompanyDto> Handle(GetCompanyByNameQuery request, CancellationToken cancellationToken)
             {
-                return _mapper.Map<CompanyDto>(await _context.Companies.Include(a=>a.Template).FirstOrDefaultAsync(a=>a.Name==request.Name));
+                return _mapper.Map<CompanyDto>(await _context.Companies.Include(a => a.Template).FirstOrDefaultAsync(a => a.Name == request.Name));
             }
         }
     }

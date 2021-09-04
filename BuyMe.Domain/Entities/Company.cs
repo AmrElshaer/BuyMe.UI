@@ -1,13 +1,9 @@
 ﻿using BuyMe.Domain.Common;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Domain.Entities
 {
-    public class Company: AuditableEntity
+    public class Company : AuditableEntity
     {
         public Company()
         {
@@ -15,6 +11,7 @@ namespace BuyMe.Domain.Entities
             Currencies = new HashSet<Currency>();
             Branches = new HashSet<Branch>();
         }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Telephone { get; set; }

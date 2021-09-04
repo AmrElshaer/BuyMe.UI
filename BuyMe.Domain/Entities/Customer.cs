@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BuyMe.Domain.Entities
+﻿namespace BuyMe.Domain.Entities
 {
     public class Customer
     {
@@ -15,7 +9,7 @@ namespace BuyMe.Domain.Entities
         public string Email { get; set; }
         public string Phone { get; set; }
         public int? CustomerTypeId { get; set; }
-        public CustomerType CustomerType  { get; set; }
+        public CustomerType CustomerType { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
         public string UserId { get; set; }

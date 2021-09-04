@@ -38,7 +38,7 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
         }
 
         public async Task<IActionResult> EditAddPartial([FromBody] CRUDModel<CreatEditTemplateCommond> value)
-        
+
         {
             if (value.Value.Id != null)
                 ViewBag.TemplateImages = (await Mediator.Send(new GetTemplateImagesQueries(value.Value.Id.Value)));

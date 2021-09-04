@@ -1,7 +1,5 @@
 ﻿using BuyMe.Application.Common.Behaviour;
-using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;

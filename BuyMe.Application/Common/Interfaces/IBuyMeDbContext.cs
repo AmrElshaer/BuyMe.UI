@@ -1,5 +1,4 @@
-﻿using BuyMe.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Entities = BuyMe.Domain.Entities;
@@ -24,7 +23,8 @@ namespace BuyMe.Application.Common.Interfaces
         DbSet<Entities.NumberSequence> NumberSequences { get; set; }
         DbSet<Entities.ProductImages> ProductImages { get; set; }
         DbSet<Entities.Template> Templates { get; set; }
-         DbSet<Entities.TemplateImages> TemplateImages { get; set; }
+        DbSet<Entities.TemplateImages> TemplateImages { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

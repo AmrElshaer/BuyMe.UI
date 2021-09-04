@@ -15,9 +15,9 @@
 <!-- Main content -->
 <section class="content">
     <div class="control-section">
-        <ejs-grid id="Grid"   actionBegin="actionBegin"  actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search" })" allowPaging="true">
+        <ejs-grid id="Grid" actionBegin="actionBegin" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search" })" allowPaging="true">
             <e-data-manager url="/Inventory/Product/UrlDataSource" insertUrl="/Inventory/Product/CreateEdit" updateUrl="/Inventory/Product/CreateEdit" removeUrl="/Inventory/Product/Delete" adaptor="UrlAdaptor"></e-data-manager>
-            <e-grid-editSettings  allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
             <e-grid-columns>
                 <e-grid-column field="ProductId" headerText="ProductId" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
                 <e-grid-column field="ProductName" headerText="Product Name" type="string"></e-grid-column>
@@ -51,8 +51,7 @@
 </script>
 <script src="~/js/grid.js"></script>
 <script>
-   
-   
+
     function actionBegin(args) {
         debugger;
         if (args.action === 'add' || args.action==='edit') {
@@ -79,7 +78,7 @@
         }
         if (args.operation === 'remove') {
             const itemId = args.file.name.split('.')[0];
-            $(`.allProductImages #${itemId}`).remove(); 
+            $(`.allProductImages #${itemId}`).remove();
         }
     }
     function onUploadFailure(args) {
@@ -128,9 +127,4 @@
             }
         })
     }
-  
 </script>
-
-
-
-

@@ -1,12 +1,8 @@
 ﻿using BuyMe.Application.Common.Interfaces;
-using BuyMe.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BuyMe.Infrastructure.Identity
@@ -17,7 +13,7 @@ namespace BuyMe.Infrastructure.Identity
 
         public UserClaimsPrincipalFactory(
        UserManager<ApplicationUser> userManager,
-       IOptions<IdentityOptions> optionsAccessor,IRoleService roleService)
+       IOptions<IdentityOptions> optionsAccessor, IRoleService roleService)
        : base(userManager, optionsAccessor)
         {
             this.roleService = roleService;
@@ -28,9 +24,9 @@ namespace BuyMe.Infrastructure.Identity
             var identity = await base.GenerateClaimsAsync(user);
             if (user.CompanyId.HasValue)
             {
-               identity.AddClaim(new Claim("CompanyId", user.CompanyId.ToString()));
+                identity.AddClaim(new Claim("CompanyId", user.CompanyId.ToString()));
             }
-            (await roleService.GeUserRolesAsync(user.Id)).ToList().ForEach(a => identity.AddClaim(new Claim( ClaimTypes.Role,a)));
+            (await roleService.GeUserRolesAsync(user.Id)).ToList().ForEach(a => identity.AddClaim(new Claim(ClaimTypes.Role, a)));
             return identity;
         }
     }

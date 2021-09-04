@@ -1,18 +1,15 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Interfaces;
-using BuyMe.Application.Product.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Template.Queries
 {
-    public class GetTemplateImagesQueries:IRequest<IList<TemplateImagesDto>>
+    public class GetTemplateImagesQueries : IRequest<IList<TemplateImagesDto>>
     {
         public GetTemplateImagesQueries(int templateId)
         {

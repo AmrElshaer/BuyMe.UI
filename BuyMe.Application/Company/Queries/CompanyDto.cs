@@ -17,6 +17,7 @@ namespace BuyMe.Application.Company.Queries
         public bool IsActive { get; set; }
         public int? TemplateId { get; set; }
         public TemplateDto Template { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Entities.Company, CompanyDto>();

@@ -11,7 +11,7 @@ namespace BuyMe.Application.Company
         private readonly ICurrentUserService currentUserService;
         private readonly IMapper mapper;
 
-        public CompanyService(IBuyMeDbContext context,ICurrentUserService currentUserService,IMapper mapper)
+        public CompanyService(IBuyMeDbContext context, ICurrentUserService currentUserService, IMapper mapper)
         {
             this._context = context;
             this.currentUserService = currentUserService;
@@ -22,9 +22,10 @@ namespace BuyMe.Application.Company
         {
             return companyId != null ? (await _context.Companies.FindAsync(companyId)).IsActive : true;
         }
+
         public async Task<CompanyDto> GetCurrentCompany()
         {
-            return mapper.Map<CompanyDto>( await _context.Companies.FindAsync(currentUserService.CompanyId));
+            return mapper.Map<CompanyDto>(await _context.Companies.FindAsync(currentUserService.CompanyId));
         }
     }
 }

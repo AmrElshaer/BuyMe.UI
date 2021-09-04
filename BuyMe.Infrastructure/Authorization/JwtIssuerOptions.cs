@@ -1,8 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BuyMe.Infrastructure.Authorization
@@ -54,6 +51,7 @@ namespace BuyMe.Infrastructure.Authorization
         /// The signing key to use when generating tokens.
         /// </summary>
         public SigningCredentials SigningCredentials { get; set; }
+
         /// <summary>
         /// secret key to make decode
         /// </summary>

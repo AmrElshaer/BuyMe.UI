@@ -1,11 +1,7 @@
 ﻿using BuyMe.Application.Common.Interfaces;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BuyMe.Infrastructure.Authorization
@@ -13,11 +9,13 @@ namespace BuyMe.Infrastructure.Authorization
     public class JwtFactoryService : IJwtFactoryService
     {
         private readonly JwtIssuerOptions _jwtOptions;
+
         public JwtFactoryService(IOptions<JwtIssuerOptions> jwtOptions)
         {
             _jwtOptions = jwtOptions.Value;
         }
-        public async Task<string> GenerateEncodedToken(string identifierId,string name, int userId,int companyId)
+
+        public async Task<string> GenerateEncodedToken(string identifierId, string name, int userId, int companyId)
         {
             var claims = new[]
             {

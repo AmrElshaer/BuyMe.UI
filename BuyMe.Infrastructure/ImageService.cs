@@ -1,23 +1,18 @@
 ﻿using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Interfaces;
-using ImageMagick;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace BuyMe.Infrastructure
 {
-    public class ImageService:IImageService
+    public class ImageService : IImageService
     {
         #region Image Helper to resize image
-        
+
         /// <summary>
         /// Resize the image to the specified width and height.
         /// </summary>
@@ -46,6 +41,7 @@ namespace BuyMe.Infrastructure
             }
             return resultImage;
         }
+
         private Image Base64ToImage(string img)
         {
             byte[] bytes = Convert.FromBase64String(img);
@@ -57,12 +53,14 @@ namespace BuyMe.Infrastructure
 
             return result;
         }
-        #endregion
-        public string ResizeImage(string base64String, int width, int height,ImageFormat format)
+
+        #endregion Image Helper to resize image
+
+        public string ResizeImage(string base64String, int width, int height, ImageFormat format)
         {
             Guard.Against.Null(base64String, "Image");
             var img = Regex.Replace(base64String, @"^data:image\/[a-zA-Z]+;base64,", string.Empty);
-            Image resizeImage =  ResizeImage(Base64ToImage(img), width, height);
+            Image resizeImage = ResizeImage(Base64ToImage(img), width, height);
             using MemoryStream ms1 = new MemoryStream();
             resizeImage.Save(ms1, format);
             return $"data:image/png;base64,{Convert.ToBase64String(ms1.ToArray())}";

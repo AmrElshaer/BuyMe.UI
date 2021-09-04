@@ -6,6 +6,7 @@ namespace BuyMe.Application.Common.Interfaces
     public interface ICompanyService
     {
         Task<CompanyDto> GetCurrentCompany();
+
         Task<bool> IsActive(int? companyId);
     }
 }

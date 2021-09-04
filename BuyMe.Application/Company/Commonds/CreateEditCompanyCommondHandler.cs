@@ -1,5 +1,4 @@
 ﻿using BuyMe.Application.Common.Behaviour;
-using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Drawing.Imaging;
@@ -13,7 +12,7 @@ namespace BuyMe.Application.Company.Commonds
         private readonly IBuyMeDbContext _context;
         private readonly IImageService imageService;
 
-        public CreateEditCompanyCommondHandler(IBuyMeDbContext context,IImageService imageService)
+        public CreateEditCompanyCommondHandler(IBuyMeDbContext context, IImageService imageService)
         {
             _context = context;
             this.imageService = imageService;
@@ -36,7 +35,7 @@ namespace BuyMe.Application.Company.Commonds
             company.Country = request.Country;
             company.City = request.City;
             company.Business = request.Business;
-            company.Logo = imageService.ResizeImage(request.Logo, 144, 144,ImageFormat.Png);
+            company.Logo = imageService.ResizeImage(request.Logo, 144, 144, ImageFormat.Png);
             company.IsActive = request.IsActive;
             company.Name = request.Name;
             company.Telephone = request.Telephone;

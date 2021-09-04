@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace BuyMe.Application.Common.Models
@@ -20,10 +19,10 @@ namespace BuyMe.Application.Common.Models
         public const string Settings = "Settings";
         public const string User = "User";
         public const string ChangeRole = "ChangeRole";
-      
+
         public static IEnumerable<string> GetRoles()
         {
-           return  typeof(ApplicationRoles).GetFields().Select(a => a.Name);
+            return typeof(ApplicationRoles).GetFields().Select(a => a.Name);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace BuyMe.Infrastructure.Identity
         public ApplicationDbContext()
         {
         }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
            : base(options)
         {

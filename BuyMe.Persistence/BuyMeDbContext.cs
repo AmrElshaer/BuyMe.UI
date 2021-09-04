@@ -3,9 +3,7 @@ using BuyMe.Domain.Common;
 using BuyMe.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,24 +18,26 @@ namespace BuyMe.Persistence
         {
             this.currentUserService = currentUserService;
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BuyMeDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
+
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Branch> Branches { get; set; }
-        public DbSet<Category> Categories { get ; set ; }
-        public DbSet<Product> Products { get ; set ; }
-        public DbSet<UnitOfMeasure> UnitOfMeasures { get ; set ; }
-        public DbSet<Warehouse> Warehouses { get ; set ; }
-        public DbSet<CustomerType> CustomerTypes { get ; set ; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<CustomerType> CustomerTypes { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<SalesType> SalesTypes { get; set ; }
-        public DbSet<SalesOrder> SalesOrders { get ; set ; }
-        public DbSet<SalesOrderLine> SalesOrderLines { get ; set ; }
+        public DbSet<SalesType> SalesTypes { get; set; }
+        public DbSet<SalesOrder> SalesOrders { get; set; }
+        public DbSet<SalesOrderLine> SalesOrderLines { get; set; }
         public DbSet<NumberSequence> NumberSequences { get; set; }
         public DbSet<ProductImages> ProductImages { get; set; }
         public DbSet<Template> Templates { get; set; }

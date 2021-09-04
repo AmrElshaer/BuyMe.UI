@@ -14,7 +14,6 @@
                 <label asp-for="BranchName" class="e-float-text e-label-top">BranchName</label>
             </div>
         </div>
-
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
@@ -32,7 +31,6 @@
                 <input asp-for="Description" />
                 <span class="e-float-line"></span>
                 <label asp-for="Description" class="e-float-text e-label-top">Description</label>
-
             </div>
         </div>
     </div>
@@ -54,9 +52,9 @@
             </div>
         </div>
         <div class="form-group col-md-6">
-                <ejs-dropdownlist ejs-for="CurrencyId" dataSource="@ViewBag.currencies" placeholder="Select a currency"  popupHeight="200px">
-                    <e-dropdownlist-fields text="CurrencyCode" value="CurrencyId"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
+            <ejs-dropdownlist ejs-for="CurrencyId" dataSource="@ViewBag.currencies" placeholder="Select a currency" popupHeight="200px">
+                <e-dropdownlist-fields text="CurrencyCode" value="CurrencyId"></e-dropdownlist-fields>
+            </ejs-dropdownlist>
         </div>
     </div>
     <div class="form-row">
@@ -91,7 +89,5 @@
             </div>
         </div>
     </div>
-
 </div>
 <ejs-scripts></ejs-scripts>
-

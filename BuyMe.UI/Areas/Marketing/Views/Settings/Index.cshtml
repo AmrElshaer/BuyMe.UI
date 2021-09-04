@@ -92,7 +92,6 @@
                 </div>
                 <div class="form-row">
                     <button type="submit" class="btn btn-primary">Save</button>
-                    
                 </div>
             </div>
         </form>
@@ -132,7 +131,7 @@
                         for (const field in errors.responseJSON) {
 
                             var validationEle = $("#" + field);
-                          
+
                             for (let err of  errors.responseJSON[field]) {
                                 var spanEle = document.createElement("span");
                                 spanEle.textContent = '*' + err;
@@ -141,8 +140,7 @@
                                 validationEle.parent().remove("span");
                                 validationEle.parent().append(spanEle)
                             }
-                               
-                            
+
                         }
                     }
 

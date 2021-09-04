@@ -8,11 +8,11 @@
 
 (function ($) {
     if ($.fn.inputmask === undefined) {
-        //helper functions    
+        //helper functions
         function isInputEventSupported(eventName) {
             var el = document.createElement('input'),
-            eventName = 'on' + eventName,
-            isSupported = (eventName in el);
+                eventName = 'on' + eventName,
+                isSupported = (eventName in el);
             if (!isSupported) {
                 el.setAttribute(eventName, 'return;');
                 isSupported = typeof el[eventName] == 'function';
@@ -206,7 +206,6 @@
                         });
                     }
                 }
-
             }
 
             if ($.isFunction(opts.mask)) { //allow mask to be a preprocessing fn - should return a valid mask
@@ -230,7 +229,6 @@
             androidchrome = navigator.userAgent.match(new RegExp("android.*chrome.*", "i")) !== null,
             pasteEvent = isInputEventSupported('paste') ? 'paste' : isInputEventSupported('input') ? 'input' : "propertychange";
 
-
         //masking scope
         //actionObj definition see below
         function maskScope(masksets, activeMasksetIndex, opts, actionObj) {
@@ -240,7 +238,6 @@
                 skipKeyPressEvent = false, //Safari 5.1.x - modal dialog fires keypress twice workaround
                 skipInputEvent = false, //skip when triggered from within inputmask
                 ignorable = false;
-
 
             //maskset helperfunctions
 
@@ -261,7 +258,7 @@
             }
 
             function isValid(pos, c, strict) { //strict true ~ no correction or autofill
-                strict = strict === true; //always set a value to strict to prevent possible strange behavior in the extensions 
+                strict = strict === true; //always set a value to strict to prevent possible strange behavior in the extensions
 
                 function _isValid(position, activeMaskset, c, strict) {
                     var testPos = determineTestPosition(position), loopend = c ? 1 : 0, chrs = '', buffer = activeMaskset["buffer"];
@@ -513,7 +510,7 @@
             }
 
             function clearBuffer(buffer, start, end, stripNomasks) {
-                for (var i = start, maskL = getMaskLength() ; i < end && i < maskL; i++) {
+                for (var i = start, maskL = getMaskLength(); i < end && i < maskL; i++) {
                     if (stripNomasks === true) {
                         if (!isMask(i))
                             setBufferElement(buffer, i, "");
@@ -617,7 +614,6 @@
                     if (npt.setSelectionRange) {
                         npt.selectionStart = begin;
                         npt.selectionEnd = android ? begin : end;
-
                     } else if (npt.createTextRange) {
                         range = npt.createTextRange();
                         range.collapse(true);
@@ -674,7 +670,6 @@
                 return isRTL ? (begin - end) > 1 || ((begin - end) == 1 && opts.insertMode) :
                     (end - begin) > 1 || ((end - begin) == 1 && opts.insertMode);
             }
-
 
             //private functions
             function installEventRuler(npt) {
@@ -791,7 +786,7 @@
                 var buffer = getActiveBuffer();
                 if (maskJumps !== false) //jumping over nonmask position
                     while (!isMask(start) && start - 1 >= 0) start--;
-                for (var i = start; i < end && i < getMaskLength() ; i++) {
+                for (var i = start; i < end && i < getMaskLength(); i++) {
                     if (isMask(i)) {
                         setReTargetPlaceHolder(buffer, i);
                         var j = seekNext(i);
@@ -825,7 +820,7 @@
             function shiftR(start, end, c) {
                 var buffer = getActiveBuffer();
                 if (getBufferElement(buffer, start, true) != getPlaceHolder(start)) {
-                    for (var i = seekPrevious(end) ; i > start && i >= 0; i--) {
+                    for (var i = seekPrevious(end); i > start && i >= 0; i--) {
                         if (isMask(i)) {
                             var j = seekPrevious(i);
                             var t = getBufferElement(buffer, j);
@@ -964,7 +959,6 @@
                 ignorable = $.inArray(k, opts.ignorables) != -1;
             }
 
-
             function keypressEvent(e, checkval, k, writeOut, strict, ndx) {
                 //Safari 5.1.x - modal dialog fires keypress twice workaround
                 if (k == undefined && skipKeyPressEvent) return false;
@@ -1025,7 +1019,6 @@
                             }
                         }
 
-
                         var p = pos.begin;
                         results = isValid(p, c, strict);
                         if (strict === true) results = [{ "activeMasksetIndex": activeMasksetIndex, "result": results }];
@@ -1067,7 +1060,7 @@
                                     }
                                 }
                                 if (minimalForwardPosition > getActiveMaskSet()["p"])
-                                    getActiveMaskSet()["p"] = minimalForwardPosition; //needed for checkval strict 
+                                    getActiveMaskSet()["p"] = minimalForwardPosition; //needed for checkval strict
                             }
                         });
 
@@ -1199,7 +1192,7 @@
                                 }
                             });
                         }
-                        if (getMaskLength() >= maxLength && maxLength > -1) { //FF sets no defined max length to -1 
+                        if (getMaskLength() >= maxLength && maxLength > -1) { //FF sets no defined max length to -1
                             if (maxLength < getActiveBufferTemplate().length) getActiveBufferTemplate().length = maxLength;
                             if (getActiveMaskSet()['greedy'] == false) {
                                 getActiveMaskSet()['repeat'] = Math.round(maxLength / getActiveBufferTemplate().length);
@@ -1555,7 +1548,6 @@
                                 } catch (e) {
                                     input._valueGet = undefined;
                                     input._valueSet = undefined;
-
                                 }
                             }
                         });
@@ -1567,7 +1559,7 @@
                             return masksets[activeMasksetIndex]['_buffer'].join('');
                         }
                         else return "";
-                    case "hasMaskedValue": //check wheter the returned value is masked or not; currently only works reliable when using jquery.val fn to retrieve the value 
+                    case "hasMaskedValue": //check wheter the returned value is masked or not; currently only works reliable when using jquery.val fn to retrieve the value
                         return this.data('_inputmask') ? !this.data('_inputmask')['opts'].autoUnmask : false;
                     case "isComplete":
                         masksets = this.data('_inputmask')['masksets'];

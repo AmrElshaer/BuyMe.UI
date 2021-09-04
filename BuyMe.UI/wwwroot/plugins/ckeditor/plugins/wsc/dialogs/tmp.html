@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>iframe</title>
+<head>
+    <meta charset="UTF-8">
+    <title>iframe</title>
 
-		<style>
-			html,body{
-				margin: 0;
-				height: 100%;
-				font: 13px/1.555 "Trebuchet MS", sans-serif;
-			}
-			a{
-			    color: #888;
-			    font-weight: bold;
-			    text-decoration: none;
-			    border-bottom: 1px solid #888;
-			}
-			.main-box {
-				color:#252525;
-				padding: 3px 5px;
-				text-align: justify;
-			}
-			.main-box p{margin: 0 0 14px;}
-			.main-box .cerr{
-			    color: #f00000;
-			    border-bottom-color: #f00000;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="content" class="main-box"></div>
-		<iframe src="" frameborder="0" id="spelltext" name="spelltext" style="display:none; width: 100%" ></iframe>
-		<iframe src="" frameborder="0" id="loadsuggestfirst" name="loadsuggestfirst" style="display:none; width: 100%" ></iframe>
-		<iframe src="" frameborder="0" id="loadspellsuggestall" name="loadspellsuggestall" style="display:none; width: 100%" ></iframe>
-		<iframe src="" frameborder="0" id="loadOptionsForm" name="loadOptionsForm" style="display:none; width: 100%" ></iframe>
-		<script>
-		(function(window) {
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            font: 13px/1.555 "Trebuchet MS", sans-serif;
+        }
+
+        a {
+            color: #888;
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 1px solid #888;
+        }
+
+        .main-box {
+            color: #252525;
+            padding: 3px 5px;
+            text-align: justify;
+        }
+
+            .main-box p {
+                margin: 0 0 14px;
+            }
+
+            .main-box .cerr {
+                color: #f00000;
+                border-bottom-color: #f00000;
+            }
+    </style>
+</head>
+<body>
+    <div id="content" class="main-box"></div>
+    <iframe src="" frameborder="0" id="spelltext" name="spelltext" style="display:none; width: 100%"></iframe>
+    <iframe src="" frameborder="0" id="loadsuggestfirst" name="loadsuggestfirst" style="display:none; width: 100%"></iframe>
+    <iframe src="" frameborder="0" id="loadspellsuggestall" name="loadspellsuggestall" style="display:none; width: 100%"></iframe>
+    <iframe src="" frameborder="0" id="loadOptionsForm" name="loadOptionsForm" style="display:none; width: 100%"></iframe>
+    <script>(function(window) {
 			// Constructor Manager PostMessage
 
 			var ManagerPostMessage = function() {
@@ -69,7 +74,6 @@
 			};
 
 			var manageMessageTmp = new ManagerPostMessage;
-
 
 				var appString = (function(){
 					var spell = parent.CKEDITOR.config.wsc.DefaultParams.scriptPath;
@@ -109,7 +113,6 @@
 						});
 					});
 				}
-			})(this);
-		</script>
-	</body>
+			})(this);</script>
+</body>
 </html>

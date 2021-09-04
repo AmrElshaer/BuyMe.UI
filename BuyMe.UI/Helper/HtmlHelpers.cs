@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.UI.Helper
 {
     public static class HtmlHelpers
     {
-        public static string IsSelected(this IHtmlHelper html, string controller = null, string action = null,string area=null, string cssClass = null)
+        public static string IsSelected(this IHtmlHelper html, string controller = null, string action = null, string area = null, string cssClass = null)
         {
             if (String.IsNullOrEmpty(cssClass))
                 cssClass = "active";
@@ -23,7 +19,7 @@ namespace BuyMe.UI.Helper
                 action = currentAction;
             if (String.IsNullOrEmpty(area))
                 area = currentArea;
-            return controller == currentController && action == currentAction&&area==currentArea ?
+            return controller == currentController && action == currentAction && area == currentArea ?
                 cssClass : String.Empty;
         }
 

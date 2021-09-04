@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Text;
 
 namespace BuyMe.Infrastructure
@@ -23,14 +22,15 @@ namespace BuyMe.Infrastructure
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddRoles<IdentityRole>()
                 .AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>()
-           .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>(); 
+           .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>();
             services.AddTransient<IApplicationUserServcie, ApplicationUserServcie>();
             services.AddTransient<IUserManagerService, UserManagerService>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IJwtFactoryService, JwtFactoryService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IImageService, ImageService>();
-            services.Configure<IdentityOptions>(opts => {
+            services.Configure<IdentityOptions>(opts =>
+            {
                 opts.User.RequireUniqueEmail = false;
                 opts.Password.RequiredLength = 8;
                 opts.Password.RequireNonAlphanumeric = false;
@@ -59,14 +59,14 @@ namespace BuyMe.Infrastructure
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAppSettingOptions[nameof(JwtIssuerOptions.SigningKey)])), SecurityAlgorithms.HmacSha256);
             });
-            
-           
+
             return services;
         }
+
         public static void SeedRoles(this IApplicationBuilder app)
         {
             using var scope = app.ApplicationServices.CreateScope();
-            var serviceProvider =(IRoleService)scope.ServiceProvider.GetService(typeof(IRoleService));
+            var serviceProvider = (IRoleService)scope.ServiceProvider.GetService(typeof(IRoleService));
             serviceProvider.GenerateRolesAsync().GetAwaiter().GetResult();
         }
     }

@@ -99,7 +99,6 @@
                 </ejs-dropdownlist>
             </div>
         </div>
-
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
@@ -108,7 +107,7 @@
                           asyncSettings="@asyncSettings"  allowedExtensions="image/*" autoUpload="true">
 
                 @if (ViewBag.ProductImages != null)
-                {       
+                {
                         <e-uploader-files>
                             @foreach (var item in ViewBag.ProductImages as IEnumerable<ProductImageDto>)
                             {
@@ -116,8 +115,6 @@
                             }
                         </e-uploader-files>
                 }
-
-
             </ejs-uploader>
         </div>
     </div>
@@ -137,11 +134,5 @@
             </div>
         </div>
     </div>
-
-
 </div>
 <ejs-scripts></ejs-scripts>
-
-
-
-
