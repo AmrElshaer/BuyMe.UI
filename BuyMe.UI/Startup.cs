@@ -42,6 +42,7 @@ namespace BuyMe.UI
             services.AddPersistance(Configuration);
             services.AddApplication();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddTransient<IGenerateManifestService, GenerateManifestService>();
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>
             {

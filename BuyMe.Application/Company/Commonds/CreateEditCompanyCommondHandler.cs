@@ -2,6 +2,7 @@
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
+using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,10 +11,12 @@ namespace BuyMe.Application.Company.Commonds
     public class CreateEditCompanyCommondHandler : IRequestHandler<CreateEditCompanyCommond, int>
     {
         private readonly IBuyMeDbContext _context;
+        private readonly IImageService imageService;
 
-        public CreateEditCompanyCommondHandler(IBuyMeDbContext context)
+        public CreateEditCompanyCommondHandler(IBuyMeDbContext context,IImageService imageService)
         {
             _context = context;
+            this.imageService = imageService;
         }
 
         public async Task<int> Handle(CreateEditCompanyCommond request, CancellationToken cancellationToken)
@@ -33,7 +36,7 @@ namespace BuyMe.Application.Company.Commonds
             company.Country = request.Country;
             company.City = request.City;
             company.Business = request.Business;
-            company.Logo = request.Logo;
+            company.Logo = imageService.ResizeImage(request.Logo, 144, 144,ImageFormat.Png);
             company.IsActive = request.IsActive;
             company.Name = request.Name;
             company.Telephone = request.Telephone;

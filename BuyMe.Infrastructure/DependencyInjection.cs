@@ -59,10 +59,7 @@ namespace BuyMe.Infrastructure
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAppSettingOptions[nameof(JwtIssuerOptions.SigningKey)])), SecurityAlgorithms.HmacSha256);
             });
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Customer", policy => policy.RequireRole("Customer"));
-            });
+            
            
             return services;
         }
