@@ -1,11 +1,17 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
+using BuyMe.Domain.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace BuyMe.Application.Product.Queries
 {
     public class ProductDto : IMapFrom
     {
+        public ProductDto()
+        {
+            ProductImages = new List<ProductImageDto>();
+        }
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public int? CategoryId { get; set; }
@@ -21,7 +27,7 @@ namespace BuyMe.Application.Product.Queries
         public int CompanyId { get; set; }
         public string CurrencyCode { get; set; }
         public bool AllowMarketing { get; set; }
-
+        public IList<ProductImageDto> ProductImages { get; set; }
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Entities.Product, ProductDto>()

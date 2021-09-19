@@ -15,9 +15,9 @@ namespace BuyMe.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5");
+                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BuyMe.Infrastructure.Identity.ApplicationUser", b =>
                 {
@@ -100,7 +100,7 @@ namespace BuyMe.Infrastructure.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "18f6affb-91ea-4bae-a672-5f6f5a4df952",
+                            ConcurrencyStamp = "b60a97ed-2f73-4321-9d74-9f48c7534387",
                             Email = "Admin@buyMe.com",
                             EmailConfirmed = true,
                             FirstName = "Super",
@@ -108,9 +108,9 @@ namespace BuyMe.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@BUYME.COM",
                             NormalizedUserName = "ADMIN@BUYME.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEPSQG46Qc3LPCdqhJwZjJtyEZXg0CZP3I01pZQSjkA6oLmC6DLQLZtgq20JYurH1g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBppUsoTCEUHIB2nxVv92+cdggbJ4tz6eAP5CU7hqjl5vdRVsxqZPIvuzXbx8fnpuw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "041d68eb-3e34-41c0-a727-91f56fa0e676",
+                            SecurityStamp = "50ddc32a-962f-4b65-a914-58130f71ebd5",
                             TwoFactorEnabled = false,
                             UserName = "Admin@buyMe.com"
                         });
@@ -157,7 +157,7 @@ namespace BuyMe.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -181,7 +181,7 @@ namespace BuyMe.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");

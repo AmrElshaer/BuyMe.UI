@@ -10,16 +10,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuyMe.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210507122648_updateUser")]
-    partial class updateUser
+    [Migration("20210919090132_InitInfrastructure")]
+    partial class InitInfrastructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5");
+                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BuyMe.Infrastructure.Identity.ApplicationUser", b =>
                 {
@@ -27,6 +27,9 @@ namespace BuyMe.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -69,6 +72,9 @@ namespace BuyMe.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -96,7 +102,7 @@ namespace BuyMe.Infrastructure.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f6d4c770-9be3-42a8-bec2-17180e36268f",
+                            ConcurrencyStamp = "b60a97ed-2f73-4321-9d74-9f48c7534387",
                             Email = "Admin@buyMe.com",
                             EmailConfirmed = true,
                             FirstName = "Super",
@@ -104,9 +110,9 @@ namespace BuyMe.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@BUYME.COM",
                             NormalizedUserName = "ADMIN@BUYME.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDm8ihPtF1e0IgJvwoAe6/1OD/ufWdI/99gfghUeXW8Z8fqheVvsk+Z4DRQ5YpWAgQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBppUsoTCEUHIB2nxVv92+cdggbJ4tz6eAP5CU7hqjl5vdRVsxqZPIvuzXbx8fnpuw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2fbb7cea-4172-4a91-bdcf-4e7e18322ded",
+                            SecurityStamp = "50ddc32a-962f-4b65-a914-58130f71ebd5",
                             TwoFactorEnabled = false,
                             UserName = "Admin@buyMe.com"
                         });
@@ -137,6 +143,15 @@ namespace BuyMe.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
+                            ConcurrencyStamp = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SuperAdmin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -144,7 +159,7 @@ namespace BuyMe.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -168,7 +183,7 @@ namespace BuyMe.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -222,6 +237,13 @@ namespace BuyMe.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
+                            RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
