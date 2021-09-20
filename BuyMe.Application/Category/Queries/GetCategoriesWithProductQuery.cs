@@ -42,6 +42,7 @@ namespace BuyMe.Application.Category.Queries
                 Guard.Against.Null(comapny,comapny.Name);
                 var result = _context.Categories.Where(a => a.CompanyId== comapny.Id)
                     .Include(a=>a.Products).ThenInclude(a=>a.ProductImages)
+                    .Include(a=>a.Products).ThenInclude(a=>a.Currency)
                     .Select(_mapper.Map<CategoryDto>).ToList();
                
                 return result;
