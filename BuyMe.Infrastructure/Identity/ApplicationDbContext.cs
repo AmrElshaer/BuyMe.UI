@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BuyMe.Application.Common.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,15 +7,28 @@ namespace BuyMe.Infrastructure.Identity
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        private readonly ITenantService tenantService;
+        public string TenantId { get; set; }
         public ApplicationDbContext()
         {
         }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,ITenantService tenantService)
            : base(options)
         {
+            this.tenantService = tenantService;
+            this.TenantId = this.tenantService.GetTenant()?.Name;
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var tenantConnectionString = this.tenantService.GetConnectionString();
+            if (!string.IsNullOrEmpty(tenantConnectionString))
+            {
+               
+                    optionsBuilder.UseSqlServer(this.tenantService.GetConnectionString());
+                
+            }
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             string ADMIN_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";

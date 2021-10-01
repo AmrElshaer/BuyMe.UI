@@ -14,6 +14,14 @@
                             <img src="~/images/logo.png" />
                         </div>
                         <form method="post">
+                            <div class="form-group last mb-4">
+                                <p class="alert alert-warning">
+                                    Current tenant  @(HttpContext.Request.Cookies.TryGetValue("tenant",out var value)?value:"Default" )
+                                    <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal">
+                                        Change
+                                    </a>
+                                </p>
+                            </div>
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group first">
                                 <label for="Email">Email</label>
@@ -24,6 +32,8 @@
                                 <input type="password" class="form-control" asp-for="Input.Password">
                             </div>
                             <input type="submit" value="Log In" class="btn text-white btn-block btn-success" style="background-color: #29BB8A">
+
+
                         </form>
                     </div>
                 </div>
@@ -31,7 +41,31 @@
         </div>
     </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Tenant</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-area="" asp-action="Index" asp-controller="Home">
+                    <div class="form-group last mb-4">
+                        
+                        <input type="text" placeholder="Tenant" class="form-control" name="tenant">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -11,12 +11,15 @@ namespace BuyMe.Persistence
 {
     public class BuyMeDbContext : DbContext, IBuyMeDbContext
     {
+        private readonly ITenantService tenantService;
         private readonly ICurrentUserService currentUserService;
-
-        public BuyMeDbContext(DbContextOptions<BuyMeDbContext> options, ICurrentUserService currentUserService)
+        public string TenantId { get; set; }
+        public BuyMeDbContext(DbContextOptions<BuyMeDbContext> options,ITenantService tenantService, ICurrentUserService currentUserService)
           : base(options)
         {
+            this.tenantService = tenantService;
             this.currentUserService = currentUserService;
+            this.TenantId = this.tenantService.GetTenant()?.Name;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,7 +27,16 @@ namespace BuyMe.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BuyMeDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var tenantConnectionString = this.tenantService.GetConnectionString();
+            if (!string.IsNullOrEmpty(tenantConnectionString))
+            {
 
+                optionsBuilder.UseSqlServer(this.tenantService.GetConnectionString());
+
+            }
+        }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Currency> Currencies { get; set; }

@@ -1,5 +1,7 @@
+
 using BuyMe.Application;
 using BuyMe.Application.Common.Interfaces;
+using BuyMe.Application.Common.Models;
 using BuyMe.Infrastructure;
 using BuyMe.Persistence;
 using BuyMe.UI.Common;
@@ -38,10 +40,14 @@ namespace BuyMe.UI
                     .AllowAnyHeader().AllowCredentials();
                 });
             });
+            services.AddHttpContextAccessor();
+            services.AddTransient<ITenantService, TenantService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.Configure<TenantSettings>(Configuration.GetSection(nameof(TenantSettings)));
             services.AddInfrastructure(Configuration);
             services.AddPersistance(Configuration);
             services.AddApplication();
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
+           
             services.AddTransient<IGenerateManifestService, GenerateManifestService>();
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>
