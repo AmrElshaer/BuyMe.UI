@@ -37,6 +37,7 @@ namespace BuyMe.Infrastructure
             {
                 SetTenant(tenId);
             }
+           
             else
             {
                 SetDefaultConnectionStringToCurrentTenant();

@@ -24,8 +24,9 @@ namespace BuyMe.UI.Areas.Marketing.Controllers
         {
             var templates = await Mediator.Send(new GetTempWithImagesQuery());
             var company = await Mediator.Send(new GetCompanyQuery());
+            var defaultTenant = "Default";
             ViewBag.CompanyTemplate = company?.TemplateId;
-            ViewBag.MarketingLink = $"{_options.Domain}/{company.Name}";
+            ViewBag.MarketingLink = $"{_options.Domain}/{company.Name}/{(HttpContext.Request.Cookies.TryGetValue("tenant",out var tenant)?tenant:"Default")}";
             return View(templates);
         }
 
