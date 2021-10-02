@@ -19,7 +19,7 @@ namespace BuyMe.Application.Employee.Commonds.CreateEdit
 
         private bool CheckEmail(CreatEditEmployeeCommond employeeCommond, string email)
         {
-            return employeeService.IsEmailUnique(email, employeeCommond.Id);
+            return employeeService.IsEmailUnique(email, employeeCommond.Id,employeeCommond.CompanyId);
         }
     }
 }
