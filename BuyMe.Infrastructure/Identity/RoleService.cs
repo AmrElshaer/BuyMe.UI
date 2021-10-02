@@ -11,23 +11,16 @@ namespace BuyMe.Infrastructure.Identity
 {
     public class RoleService : IRoleService
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
+       
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public RoleService(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager = null)
+        public RoleService(UserManager<ApplicationUser> userManager = null)
         {
-            _roleManager = roleManager;
+            
             _userManager = userManager;
         }
 
-        public async Task GenerateRolesAsync()
-        {
-            foreach (var rol in ApplicationRoles.GetRoles())
-            {
-                if (!await _roleManager.RoleExistsAsync(rol))
-                    await _roleManager.CreateAsync(new IdentityRole(rol));
-            }
-        }
+      
 
         public async Task UpSertUserRolesAsync(string userId, IEnumerable<string> roles)
         {

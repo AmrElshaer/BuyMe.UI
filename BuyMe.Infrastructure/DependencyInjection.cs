@@ -65,12 +65,7 @@ namespace BuyMe.Infrastructure
             return services;
         }
 
-        public static void SeedRoles(this IApplicationBuilder app)
-        {
-            using var scope = app.ApplicationServices.CreateScope();
-            var serviceProvider = (IRoleService)scope.ServiceProvider.GetService(typeof(IRoleService));
-            serviceProvider.GenerateRolesAsync().GetAwaiter().GetResult();
-        }
+     
 
         public static IServiceCollection AddAndMigrateTenantDatabases(this IServiceCollection services, IConfiguration config)
         {

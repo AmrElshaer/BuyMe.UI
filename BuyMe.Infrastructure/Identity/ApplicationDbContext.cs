@@ -1,7 +1,9 @@
 ﻿using BuyMe.Application.Common.Interfaces;
+using BuyMe.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace BuyMe.Infrastructure.Identity
 {
@@ -39,8 +41,19 @@ namespace BuyMe.Infrastructure.Identity
                 NormalizedName = "SuperAdmin",
                 Id = ROLE_ID,
                 ConcurrencyStamp = ROLE_ID
-            });
-
+            }
+            );
+            foreach (var rol in ApplicationRoles.GetRoles())
+            {
+                builder.Entity<IdentityRole>().HasData(new IdentityRole
+                {
+                    Name = rol,
+                    NormalizedName = rol,
+                    Id = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                }
+           );
+            }
             var appUser = new ApplicationUser()
             {
                 Id = ADMIN_ID,

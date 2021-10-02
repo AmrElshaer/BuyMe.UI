@@ -5,7 +5,6 @@ namespace BuyMe.Application.Common.Interfaces
 {
     public interface IRoleService
     {
-        Task GenerateRolesAsync();
 
         Task UpSertUserRolesAsync(string userId, IEnumerable<string> roles);
 
