@@ -2,7 +2,14 @@
 @model CreateEditCategoryCommond
 @{
     Layout = null;
+    var desc= Model.CategoryDescriptions.Any()? Model.CategoryDescriptions.Select(a => a.Description).Aggregate((e, f) => e + ',' + f):"";
 }
+
+<style>
+    .bootstrap-tagsinput {
+        width: 100%;
+    }
+</style>
 <div>
     <input asp-for="CategoryId" type="hidden" />
     <input asp-for="CompanyId" type="hidden" />
@@ -17,12 +24,27 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <div class="e-float-input e-control-wrapper">
-                <input asp-for="Description" />
-                <span class="e-float-line"></span>
-                <label asp-for="Description" class="e-float-text e-label-top">Description</label>
-            </div>
+           <label class="mb-4">Item Description</label>
+                <input name="Description" value="@desc" class="form-control" data-role="tagsinput" id="tags" placeholder="ex:Color" />
+            
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(() => {
+        $('#tags').tagsinput();
+        $('form input').keydown(function (e) {
+            if (e.keyCode == 13 && !($(this).attr('id'))) {
+                $('#tags').tagsinput('add', $(this).val());
+                $(this).val("");
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+  
+   
+</script>
 <ejs-scripts></ejs-scripts>
+
+

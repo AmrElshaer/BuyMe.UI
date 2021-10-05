@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootstrap-tagsinput@0.8.0",
+      "destination": "wwwroot/bootstrap-tagsinput/",
+      "files": [
+        "bootstrap-tagsinput.min.js",
+        "bootstrap-tagsinput.css"
+      ]
+    }
+  ]
+}

@@ -30,6 +30,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
         {
             _ = value ?? throw new BadRequestException("Invalid Data");
             value.Value.CategoryId = await Mediator.Send(value.Value);
+            value.Value.RefreshDescriptionCategorys();
             return Json(value.Value);
         }
 

@@ -1,6 +1,7 @@
 ﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace BuyMe.Application.Category.Commonds
             Domain.Entities.Category category;
             if (request.CategoryId.HasValue)
             {
-                var entity = await _context.Categories.FindAsync(request.CategoryId);
+                var entity = await _context.Categories.Include(a=>a.CategoryDescriptions).FirstOrDefaultAsync(a=>a.CategoryId==request.CategoryId);
                 if (entity == null)
                     throw new NotFoundException("Category", request.CategoryId);
                 category = entity;
@@ -34,7 +35,7 @@ namespace BuyMe.Application.Category.Commonds
                 category.CompanyId = _currentUserService.CompanyId;
             }
             category.CategoryName = request.CategoryName;
-            category.Description = request.Description;
+            category.UPSertCategorydesc(request.Description);
             await _context.SaveChangesAsync(cancellationToken);
             return category.CategoryId.Value;
         }

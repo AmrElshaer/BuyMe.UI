@@ -2,6 +2,7 @@
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace BuyMe.Application.Category.Queries
 
             public async Task<QueryResult<CategoryDto>> Handle(GetCategoriesQuery req, CancellationToken cancellationToken)
             {
-                var dataSource = _context.Categories.Where(a => a.CompanyId == currentUserService.CompanyId).AsQueryable();
+                var dataSource = _context.Categories.Include(a=>a.CategoryDescriptions).Where(a => a.CompanyId == currentUserService.CompanyId).AsQueryable();
                 if (!string.IsNullOrEmpty(req.DM.SearchValue)) dataSource = dataSource.Where(a => a.CategoryName.Contains(req.DM.SearchValue));
                 if (req.DM.Skip != null && req.DM.Skip != 0) dataSource = dataSource.Skip(req.DM.Skip.Value);
                 if (req.DM.Take != null && req.DM.Take != 0) dataSource = dataSource.Take(req.DM.Take.Value);

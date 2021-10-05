@@ -1,4 +1,5 @@
 ﻿<link rel="stylesheet" href="~/css/grid.css" />
+<link rel="stylesheet" href="~/bootstrap-tagsinput/bootstrap-tagsinput.css" />
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -20,7 +21,6 @@
             <e-grid-columns>
                 <e-grid-column field="CategoryId" headerText="CategoryId" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
                 <e-grid-column field="CategoryName" headerText="Category Name" type="string"></e-grid-column>
-                <e-grid-column field="Description" headerText="Description" type="string"></e-grid-column>
                 <e-grid-column field="CompanyId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
@@ -58,3 +58,7 @@
             }
         }
 </script>
+@section Scripts{
+    <script src="~/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+
+}
