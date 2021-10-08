@@ -11,6 +11,7 @@ namespace BuyMe.Application.Product.Queries
         public ProductDto()
         {
             ProductImages = new List<ProductImageDto>();
+            ProductDescriptions = new List<ProductDescriptionDto>();
         }
         public int ProductId { get; set; }
         public string ProductName { get; set; }
@@ -28,6 +29,7 @@ namespace BuyMe.Application.Product.Queries
         public string CurrencyCode { get; set; }
         public bool AllowMarketing { get; set; }
         public IList<ProductImageDto> ProductImages { get; set; }
+        public IList<ProductDescriptionDto> ProductDescriptions { get; set; }
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Entities.Product, ProductDto>()

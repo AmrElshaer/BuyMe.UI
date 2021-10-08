@@ -25,7 +25,7 @@ namespace BuyMe.Application.Product.Commonds.DeleteProduct
 
             public async Task<Unit> Handle(DeleteProductCommond request, CancellationToken cancellationToken)
             {
-                var product = await _context.Products.Include(a => a.ProductImages).FirstOrDefaultAsync(a => a.ProductId == request.ProductId);
+                var product = await _context.Products.Include(a => a.ProductImages).Include(a=>a.ProductDescriptions).FirstOrDefaultAsync(a => a.ProductId == request.ProductId);
                 Guard.Against.Null(product, request.ProductId);
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync(cancellationToken);

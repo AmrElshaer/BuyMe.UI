@@ -6,10 +6,12 @@ using BuyMe.Application.Product.Commonds;
 using BuyMe.Application.Product.Commonds.DeleteProduct;
 using BuyMe.Application.Product.Queries;
 using BuyMe.Application.UnitOfMeasure.Queries;
+using BuyMe.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,7 +50,38 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
             ViewBag.Categories = (await Mediator.Send(new GetCategoriesQuery()))?.result;
             ViewBag.Branches = (await Mediator.Send(new GetBranchesQuery()))?.result;
             if (value.Value.ProductId != null) ViewBag.ProductImages = (await Mediator.Send(new GetProductImagesQuery(value.Value.ProductId.Value)));
+            if (value.Value.CategoryId.HasValue)
+            {
+                value.Value.ProductDescriptions = await GetProductDesc(value.Value.ProductId, value.Value.CategoryId.Value);
+            }
             return PartialView("_CreateEditPartial", value.Value);
+        }
+        public async Task<IActionResult> GetProductDescription(int? productId, int categoryId)
+        {
+
+            return PartialView("_ProductDescription", await GetProductDesc(productId, categoryId));
+        }
+
+        private async Task<IList<ProductDescriptionDto>> GetProductDesc(int? productId, int categoryId)
+        {
+            var categoryDescs = await Mediator.Send(new GetCategoryDescriptionQuery(categoryId));
+            var productDescs = productId != null ? (await Mediator.Send(new GetProductDescriptionQuery(productId, categoryId)))
+                : new List<ProductDescriptionDto>();
+            categoryDescs.ToList().ForEach(item =>
+            {
+                var catdesc = productDescs.FirstOrDefault(a => a.CategoryDescriptionId == item.Id);
+                if (catdesc == null)
+                {
+                    productDescs.Add(new()
+                    {
+                        CategoryDescription = item,
+                        CategoryDescriptionId = item.Id,
+                        ProductId = productId
+                    });
+                }
+
+            });
+            return productDescs;
         }
 
         public async Task<IActionResult> GetProductPrice(int productId)

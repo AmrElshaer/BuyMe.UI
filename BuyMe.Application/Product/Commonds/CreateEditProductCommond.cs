@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using BuyMe.Application.Product.Queries;
+using MediatR;
 using System;
 using System.Collections.Generic;
 
@@ -9,6 +10,7 @@ namespace BuyMe.Application.Product.Commonds
         public CreateEditProductCommond()
         {
             ProductImages ??= new List<string>();
+            ProductDescriptions = new List<ProductDescriptionDto>();
         }
 
         public int? ProductId { get; set; }
@@ -27,5 +29,6 @@ namespace BuyMe.Application.Product.Commonds
         public string CurrencyCode { get; set; }
         public bool AllowMarketing { get; set; }
         public List<string> ProductImages { get; set; }
+        public IList<ProductDescriptionDto> ProductDescriptions { get; set; }
     }
 }

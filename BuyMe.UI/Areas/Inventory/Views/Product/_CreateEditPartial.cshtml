@@ -94,10 +94,16 @@
         </div>
         <div class="form-group col-md-6">
             <div class="dropDownListTop">
-                <ejs-dropdownlist filterBarPlaceholder="Search" allowFiltering="true" ejs-for="CategoryId" dataSource="@ViewBag.Categories" placeholder="Select Category" popupHeight="200px">
+                <ejs-dropdownlist filterBarPlaceholder="Search" change="categoryChange" allowFiltering="true" ejs-for="CategoryId" dataSource="@ViewBag.Categories" placeholder="Select Category" popupHeight="200px">
                     <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
             </div>
+        </div>
+        <div id="categoryDescriptionDetails">
+            @if (Model.ProductDescriptions.Any())
+            {
+                <partial  name="_ProductDescription" model="Model.ProductDescriptions"/>
+            }
         </div>
     </div>
     <div class="form-row">

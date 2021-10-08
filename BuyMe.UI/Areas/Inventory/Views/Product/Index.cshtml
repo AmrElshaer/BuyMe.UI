@@ -25,7 +25,8 @@
                 <e-grid-column field="Barcode" headerText="Barcode" type="string"></e-grid-column>
                 <e-grid-column field="DefaultBuyingPrice" headerText="Buying Price" format="C2" template="#DefaultBuyingPriceTemp"></e-grid-column>
                 <e-grid-column field="DefaultSellingPrice" headerText="Selling Price" template="#DefaultSellingPriceTemp" format="C2"></e-grid-column>
-                <e-grid-column field="BranchName" allowSearching="false" headerText="Branch" type="string"></e-grid-column>
+
+                <e-grid-column field="BranchName" allowSearching="false" allowFiltering="false" visible="false" headerText="Branch" type="string"></e-grid-column>
                 <e-grid-column field="CompanyId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="CategoryId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="CurrencyId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
@@ -53,12 +54,24 @@
 <script>
 
     function actionBegin(args) {
-        debugger;
-        if (args.action === 'add' || args.action==='edit') {
+        if (args.action === 'add' || args.action === 'edit') {
+            let productDesciptions = [];
+            const allCategoryDesc = $('.allProductDescs').length;
+            for (var i = 0; i < allCategoryDesc; i++) {
+                productDesciptions.push({
+                    CategoryDescriptionId: parseInt($(`#CategoryDescriptionId_${i}`).val()),
+                    Id: parseInt($(`#Id_${i}`).val()),
+                    ProductId: parseInt($(`#ProductId_${i}`).val()),
+                    Description:  $(`#Description_${i}`).val()
+                });
+            }
+            console.log(productDesciptions);
+            args.data.ProductDescriptions = productDesciptions;
             let inputTypes = [];
             $('input[name="Images"]').each(function () {
                 inputTypes.push($(this).attr('value'));
             });
+            console.log(args.data);
             args.data.ProductImages = inputTypes;
         }
     }
@@ -124,6 +137,17 @@
                 $("#CurrencyCode").val(data.CurrencyCode);
                 $("#CurrencyId").val(data.CurrencyId);
 
+            }
+        })
+    }
+    function categoryChange(e) {
+        const productId = $('#ProductId').val();
+        $.ajax({
+            url: `/Inventory/Product/GetProductDescription?categoryId=${e.value}&productId=${productId}`,
+            type: 'GET',
+            success: function (data) {
+                $('#categoryDescriptionDetails').html('');
+                $('#categoryDescriptionDetails').append(data);
             }
         })
     }

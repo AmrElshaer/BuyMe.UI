@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BuyMe.Domain.Entities
 {
@@ -8,6 +9,7 @@ namespace BuyMe.Domain.Entities
         public Product()
         {
             ProductImages = new HashSet<ProductImages>();
+            ProductDescriptions = new HashSet<ProductDescription>();
         }
 
         public int ProductId { get; set; }
@@ -28,5 +30,23 @@ namespace BuyMe.Domain.Entities
         public Company Company { get; set; }
         public bool AllowMarketing { get; set; }
         public ICollection<ProductImages> ProductImages { get; set; }
+        public ICollection<ProductDescription> ProductDescriptions { get; set; }
+
+        public void UpSertProductDescs(IList<ProductDescription> productDescriptions)
+        {
+            productDescriptions.ToList().ForEach(a =>
+            {
+                if (a.Id == 0)
+                {
+                    this.ProductDescriptions.Add(a);
+                }
+                else
+                {
+                    var proDesc = this.ProductDescriptions.FirstOrDefault(p => p.Id == a.Id);
+                    proDesc.Description = a.Description;
+                }
+
+            });
+        }
     }
 }

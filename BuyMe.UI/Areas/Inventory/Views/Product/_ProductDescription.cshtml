@@ -1,0 +1,18 @@
+﻿@model IEnumerable<BuyMe.Application.Product.Queries.ProductDescriptionDto>
+@{
+    var productDescriptionDtos = Model.ToArray();
+}
+@for (int i = 0; i < productDescriptionDtos.Length; i++)
+{
+    if (productDescriptionDtos[i].CategoryDescription != null)
+    {
+        <div class="allProductDescs">
+            <p>@productDescriptionDtos[i].CategoryDescription.Description</p>
+            <input  id="Description_@i" value="@productDescriptionDtos[i].Description" />
+            <input type="hidden" id="CategoryDescriptionId_@i" value="@productDescriptionDtos[i].CategoryDescriptionId" />
+            <input type="hidden" id="Id_@i" value="@productDescriptionDtos[i].Id" />
+            <input type="hidden" id="ProductId_@i" value="@productDescriptionDtos[i].ProductId" />
+        </div>
+    }
+
+}

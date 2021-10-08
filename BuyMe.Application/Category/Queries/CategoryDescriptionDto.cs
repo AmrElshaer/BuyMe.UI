@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
+using BuyMe.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace BuyMe.Application.Category.Queries
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Domain.Entities.CategoryDescription, CategoryDescriptionDto>();
+            profile.CreateMap<CategoryDescription, CategoryDescriptionDto>();
+
         }
     }
 }
