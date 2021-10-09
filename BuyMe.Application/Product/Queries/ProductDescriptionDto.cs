@@ -9,7 +9,6 @@ namespace BuyMe.Application.Product.Queries
     {
         public int Id { get; set; } 
         public int? ProductId { get; set; }
-        public ProductDto Product { get; set; }
         public int? CategoryDescriptionId { get; set; }
         public CategoryDescriptionDto CategoryDescription { get; set; }
         public string Description { get; set; }

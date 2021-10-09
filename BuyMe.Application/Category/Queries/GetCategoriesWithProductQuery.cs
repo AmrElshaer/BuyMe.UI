@@ -43,8 +43,8 @@ namespace BuyMe.Application.Category.Queries
                 var result = _context.Categories.Where(a => a.CompanyId== comapny.Id)
                     .Include(a=>a.Products).ThenInclude(a=>a.ProductImages)
                     .Include(a=>a.Products).ThenInclude(a=>a.Currency)
+                    .Include(a=>a.Products).ThenInclude(a=>a.ProductDescriptions).ThenInclude(a=>a.CategoryDescription)
                     .Select(_mapper.Map<CategoryDto>).ToList();
-               
                 return result;
             }
         }
