@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CartItem\Queries\" />
     <Folder Include="Role\Queries\" />
   </ItemGroup>
 

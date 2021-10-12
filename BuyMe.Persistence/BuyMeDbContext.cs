@@ -56,6 +56,8 @@ namespace BuyMe.Persistence
         public DbSet<TemplateImages> TemplateImages { get; set; }
         public DbSet<CategoryDescription> CategoryDescriptions { get; set; }
         public DbSet<ProductDescription> ProductDescriptions { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())

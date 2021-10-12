@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +25,7 @@ namespace BuyMe.Application.Category.Commonds
             if (request.CategoryId.HasValue)
             {
                 var entity = await _context.Categories.Include(a=>a.CategoryDescriptions).FirstOrDefaultAsync(a=>a.CategoryId==request.CategoryId);
-                if (entity == null)
-                    throw new NotFoundException("Category", request.CategoryId);
+                Guard.Against.Null(entity,"Category");
                 category = entity;
             }
             else
