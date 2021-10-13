@@ -1,4 +1,5 @@
 ﻿using BuyMe.Application.CartItem.Commonds;
+using BuyMe.Application.CartItem.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,12 @@ namespace BuyMe.UI.Controllers.api
         {
             var id = await Mediator.Send(command);
             return Ok(id);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAll(int customerId)
+        {
+            var cartItems = await Mediator.Send(new GetCartItemsByCustomerIdQuery(customerId));
+            return Ok(cartItems);
         }
     }
 }
