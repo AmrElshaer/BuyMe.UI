@@ -21,7 +21,7 @@ namespace BuyMe.Domain.Entities
         public int Id { get;private set; }
         public int ProductId { get;private set; }
         public Product Product { get;private set; }
-        public int CustomerId { get;private set; }
+        public int? CustomerId { get;private set; }
         public Customer Customer { get;private set; }
         public int QTN { get;private set; }
         public int CompanyId { get;private set; }
