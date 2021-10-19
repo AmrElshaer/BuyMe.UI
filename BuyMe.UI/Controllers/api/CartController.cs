@@ -24,5 +24,11 @@ namespace BuyMe.UI.Controllers.api
             var cartItems = await Mediator.Send(new GetCartItemsByCustomerIdQuery(customerId));
             return Ok(cartItems);
         }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCartItem(int cartItemId)
+        {
+            await Mediator.Send(new DeleteCartItemCommond(cartItemId));
+            return Ok();
+        }
     }
 }
