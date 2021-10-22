@@ -25,7 +25,7 @@ namespace BuyMe.Infrastructure.Identity
                 FirstName = firstName,
                 LastName = lastName,
                 Photo = photo,
-                UserName = $"{firstName}_{lastName}_{companyId}",
+                UserName = email,
                 Email = email,
                 CompanyId = companyId
             };

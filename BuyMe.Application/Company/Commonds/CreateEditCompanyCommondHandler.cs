@@ -35,7 +35,11 @@ namespace BuyMe.Application.Company.Commonds
             company.Country = request.Country;
             company.City = request.City;
             company.Business = request.Business;
-            company.Logo = imageService.ResizeImage(request.Logo, 144, 144, ImageFormat.Png);
+            if (!string.IsNullOrEmpty( company.Logo))
+            {
+                company.Logo= imageService.ResizeImage(request.Logo, 144, 144, ImageFormat.Png);
+            }
+            
             company.IsActive = request.IsActive;
             company.Name = request.Name;
             company.Telephone = request.Telephone;
