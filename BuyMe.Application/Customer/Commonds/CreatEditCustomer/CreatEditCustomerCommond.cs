@@ -12,5 +12,6 @@ namespace BuyMe.Application.Customer.Commonds.CreatEditCustomer
         public string Phone { get; set; }
         public int? CustomerTypeId { get; set; }
         public int CompanyId { get; set; }
+        public string Country { get; set; }
     }
 }

@@ -13,5 +13,6 @@
         public int CompanyId { get; set; }
         public Company Company { get; set; }
         public string UserId { get; set; }
+        public string Country { get; set; }
     }
 }

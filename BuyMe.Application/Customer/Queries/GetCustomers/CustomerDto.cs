@@ -14,6 +14,7 @@ namespace BuyMe.Application.Customer.Queries.GetCustomers
         public string Phone { get; set; }
         public int? CustomerTypeId { get; set; }
         public int CompanyId { get; set; }
+        public string Country { get; set; }
         public CustomerTypeDto CustomerType { get; set; }
 
         public void Mapping(Profile profile)
