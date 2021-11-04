@@ -1,0 +1,95 @@
+﻿@model BuyMe.Application.MarketingDefaultSetting.Queries.MarketingDefaultSettingDto
+@using BuyMe.Application.Branch.Queries
+@using BuyMe.Application.SalesType.Queries
+@using BuyMe.Application.CustomerType.Queries 
+<section class="content-header">
+    <h1>
+        Settings
+        <small>Marketing</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>MarketingSetting</a></li>
+        <li class="active">Home</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="control-section">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Quick Example</h3>
+            </div><!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CurrencyId"/>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Default Branch</label>
+                        <select  asp-for="BranchId" asp-items="@(new SelectList(ViewBag.Branches as IEnumerable<BranchDto>,nameof(BranchDto.BranchId),nameof(BranchDto.BranchName)))" class="form-control">
+                            <option disabled selected>Branch</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="CurrencyId">Default Currency</label>
+                        <input readonly type="text" class="form-control" value="@(Model?.Currency?.CurrencyCode)" id="CurrencyCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="SalesTypeId">Default SalesType</label>
+                        <select type="text" class="form-control" asp-items="@(new SelectList(ViewBag.SalesTypes as IEnumerable<SalesTypeDto>,nameof(SalesTypeDto.Id),nameof(SalesTypeDto.SalesTypeName)))" asp-for="SalesTypeId">
+                            <option disabled selected>Sales Type</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="SalesTypeId">Default CustomerType</label>
+                        <select type="text" asp-items="@(new SelectList(ViewBag.CustomerTypes as IEnumerable<CustomerTypeDto>,nameof(CustomerTypeDto.Id),nameof(CustomerTypeDto.CustomerTypeName)))" class="form-control" asp-for="CustomerTypeId">
+                            <option disabled selected>Customer Type</option>
+                        </select>
+                    </div>
+
+                </div><!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div><!-- /.box -->
+    </div>
+</section>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#BranchId').on('change', function (){
+                const branchId = $(this).val();
+                $.ajax({
+                    url: `/Config/Currency/GetBranchCurrency?branchId=${branchId}`,
+                    type: 'GET',
+                    success: function (data) {
+                        $("#CurrencyCode").val(data.CurrencyCode);
+                        $("#CurrencyId").val(data.CurrencyId);
+
+                    }
+                })
+                console.log($(this).val());
+            });
+            $("form").on("submit", function (event) {
+                event.preventDefault();
+                const formValues = $(this).serializeArray();
+                $.ajax({
+                    url: "@Url.Action("CreateEdit", "DefaultMarketingSetting")",
+                    type:"POST",
+                    data: formValues,
+                    success: function (data) {
+                        $('#Id').val(data);
+                    },
+                    error: function (errors) {
+                        console.log(errors);
+                    }
+
+                });
+            });
+        });
+    </script>
+}
