@@ -39,6 +39,7 @@ namespace BuyMe.Application.Customer.Commonds.CreatEditCustomer
             customer.Email = request.Email;
             customer.Address = request.Address;
             customer.City = request.City;
+            customer.Country = request.Country;
             await _context.SaveChangesAsync(cancellationToken);
             return customer.Id;
         }
