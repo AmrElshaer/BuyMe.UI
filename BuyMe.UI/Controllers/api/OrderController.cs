@@ -55,6 +55,8 @@ namespace BuyMe.UI.Controllers.api
                     SalesOrderId = (int)salesOrderId,
                     ProductId = item.ProductId,
                     Quantity = item.QTN,
+                    Price=(double)item.Product.DefaultSellingPrice
+                    
                 });
             }
         }
@@ -68,6 +70,7 @@ namespace BuyMe.UI.Controllers.api
             upSertOrder.OrderDate = System.DateTime.Now;
             upSertOrder.BranchId = defaultSetting?.BranchId;
             upSertOrder.SalesTypeId = defaultSetting?.SalesTypeId;
+            upSertOrder.CurrencyCode = defaultSetting?.Currency?.CurrencyCode;
             var salesOrderId = await Mediator.Send(upSertOrder);
             return salesOrderId;
         }
