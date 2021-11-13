@@ -62,9 +62,10 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li class="@Html.IsSelected(controller:"Template")"><a asp-area="Marketing" asp-controller="Template" asp-action="Index"><i class="fa fa-circle-o"></i>Template</a></li>
         <li class="@Html.IsSelected(controller:"Settings")"><a asp-area="Marketing" asp-controller="Settings" asp-action="Index"><i class="fa fa-circle-o"></i>Settings</a></li>
         <li class="@Html.IsSelected(controller:"DefaultMarketingSetting")"><a asp-area="Marketing" asp-controller="DefaultMarketingSetting" asp-action="Index"><i class="fa fa-circle-o"></i>Default Settings</a></li>
+        <li class="@Html.IsSelected(controller:"Template")"><a asp-area="Marketing" asp-controller="Template" asp-action="Index"><i class="fa fa-circle-o"></i>Template</a></li>
+
     </ul>
 </li>
 <li class="treeview @Html.IsSelected(area:"UserRole")">

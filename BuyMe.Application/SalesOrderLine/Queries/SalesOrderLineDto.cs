@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
+using BuyMe.Application.Product.Queries;
 
 namespace BuyMe.Application.SalesOrderLine.Queries
 {
@@ -8,6 +9,7 @@ namespace BuyMe.Application.SalesOrderLine.Queries
         public int SalesOrderLineId { get; set; }
         public int SalesOrderId { get; set; }
         public int ProductId { get; set; }
+        public ProductDto  Product { get; set; }
         public string ProductName { get; set; }
         public string Description { get; set; }
         public double Quantity { get; set; }

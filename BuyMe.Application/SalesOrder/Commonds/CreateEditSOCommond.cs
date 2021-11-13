@@ -13,7 +13,7 @@ namespace BuyMe.Application.SalesOrder.Commonds
         public int? CustomerId { get; set; }
         public string SalesOrderName { get; set; }
         public DateTime OrderDate { get; set; }
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
         public string CurrencyCode { get; set; }
         public double Amount { get; set; }
         public double SubTotal { get; set; }

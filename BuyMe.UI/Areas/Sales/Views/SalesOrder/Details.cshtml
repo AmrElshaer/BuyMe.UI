@@ -47,7 +47,7 @@
                     </dt>
                     <dd>
 
-                        <input class="form-control" value="@(Model.DeliveryDate.ToShortDateString())" readonly />
+                        <input class="form-control" value="@(Model.DeliveryDate?.ToShortDateString())" readonly />
                     </dd>
                     <dt>
                         Currency

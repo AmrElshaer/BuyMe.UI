@@ -4,14 +4,16 @@ using BuyMe.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuyMe.Persistence.Migrations
 {
     [DbContext(typeof(BuyMeDbContext))]
-    partial class BuyMeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211113101811_UpdateSODelDate")]
+    partial class UpdateSODelDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

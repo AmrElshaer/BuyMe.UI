@@ -23,7 +23,7 @@ namespace BuyMe.Domain.Entities
         public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
         public DateTime OrderDate { get; set; }
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
         public double Amount { get; set; }
         public double SubTotal { get; set; }
         public double Discount { get; set; }

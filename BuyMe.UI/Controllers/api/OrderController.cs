@@ -3,6 +3,7 @@ using BuyMe.Application.CartItem.Queries;
 using BuyMe.Application.Customer.Commonds.CreatEditCustomer;
 using BuyMe.Application.MarketingDefaultSetting.Queries;
 using BuyMe.Application.SalesOrder.Commonds;
+using BuyMe.Application.SalesOrder.Queries;
 using BuyMe.Application.SalesOrderLine.Commonds;
 using BuyMe.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -15,6 +16,7 @@ namespace BuyMe.UI.Controllers.api
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class OrderController : BaseController
     {
+        [HttpPost]
         public async Task<IActionResult> CheckOut(CreatEditCustomerCommond customerCommond)
         {
             // update user profile
@@ -28,7 +30,14 @@ namespace BuyMe.UI.Controllers.api
 
             return Ok(salesOrderId);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetCustomerOrders(int customerId)
+        {
+             return Ok( await Mediator.Send(new GetCustomerOrdersQuery(customerId)));
 
+        }
+
+        #region CheckOut Helper Methods
         private async Task UpdateCustomerInfo(CreatEditCustomerCommond customerCommond)
         {
             var defaultSetting = await Mediator.Send(new GetDefaultMarkSettingQuery());
@@ -46,7 +55,7 @@ namespace BuyMe.UI.Controllers.api
         }
 
         private async Task CreateSalesOrderLines(int customerId, long salesOrderId)
-{
+        {
             var cartItems = await Mediator.Send(new GetCartItemsByCustomerIdQuery(customerId));
             foreach (var item in cartItems)
             {
@@ -55,8 +64,8 @@ namespace BuyMe.UI.Controllers.api
                     SalesOrderId = (int)salesOrderId,
                     ProductId = item.ProductId,
                     Quantity = item.QTN,
-                    Price=(double)item.Product.DefaultSellingPrice
-                    
+                    Price = (double)item.Product.DefaultSellingPrice
+
                 });
             }
         }
@@ -73,6 +82,9 @@ namespace BuyMe.UI.Controllers.api
             upSertOrder.CurrencyCode = defaultSetting?.Currency?.CurrencyCode;
             var salesOrderId = await Mediator.Send(upSertOrder);
             return salesOrderId;
-        }
+        } 
+        #endregion
+
+
     }
 }

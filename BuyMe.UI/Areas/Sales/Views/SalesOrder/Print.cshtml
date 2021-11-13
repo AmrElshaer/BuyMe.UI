@@ -42,7 +42,7 @@
                     DeliveryDate
                 </dt>
                 <dd>
-                    @(Model.order.DeliveryDate.ToShortDateString())
+                    @(Model.order.DeliveryDate?.ToShortDateString())
                 </dd>
                 <dt>
                     Currency

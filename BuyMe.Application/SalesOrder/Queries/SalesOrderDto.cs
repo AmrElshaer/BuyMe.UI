@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Mapping;
+using BuyMe.Application.SalesOrderLine.Queries;
 using System;
+using System.Collections.Generic;
 
 namespace BuyMe.Application.SalesOrder.Queries
 {
@@ -16,7 +18,7 @@ namespace BuyMe.Application.SalesOrder.Queries
         public int? CustomerId { get; set; }
         public string CustomerName { get; set; }
         public DateTime OrderDate { get; set; }
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
         public double Amount { get; set; }
         public double SubTotal { get; set; }
         public double Discount { get; set; }
@@ -25,7 +27,7 @@ namespace BuyMe.Application.SalesOrder.Queries
         public double Freight { get; set; }
         public string Remarks { get; set; }
         public string CurrencyCode { get; set; }
-
+        public IList<SalesOrderLineDto> SalesOrderLines { get; set; }
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Entities.SalesOrder, SalesOrderDto>()
