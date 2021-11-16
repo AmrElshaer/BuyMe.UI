@@ -1,24 +1,77 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Syncfusion.EJ2
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
         Dashboard
-        <small>Control panel</small>
+        <small>Home</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
         <li class="active">Dashboard</li>
     </ol>
 </section>
-
 <!-- Main content -->
 <section class="content">
     <div class="control-section">
-        <div class="text-center">
-            <h1 class="display-4">Welcome</h1>
-            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+        <div class="row">
+            <!-- solid sales graph -->
+            <div class="col-lg-6">
+                <div class="box box-solid  box-primary">
+                    <div class="box-header">
+                        <i class="fa fa-th"></i>
+                        <h3 class="box-title">Products</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn bg-primary btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn bg-primary btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body border-radius-none">
+                        <div class="chart" id="line-chart">
+                           
+                            <ejs-accumulationchart  enableAnimation="false"  height="280" id="product" title="Products by Category">
+                                <e-accumulationchart-center x="50%" y="50%"></e-accumulationchart-center>
+                                <e-accumulationchart-tooltipsettings enable="true"></e-accumulationchart-tooltipsettings>
+                                <e-accumulationchart-legendsettings visible="true">
+                                </e-accumulationchart-legendsettings>
+                                <e-accumulation-series-collection >
+                                    <e-accumulation-series type="Pie" dataSource="ViewBag.ProductChart"  radius="50%" startAngle="0" endAngle="360" explodeIndex="1" explode="true"  explodeOffset="10%" xName="XValue" yName="YValue" name="Category">
+                                    </e-accumulation-series>
+                                </e-accumulation-series-collection>
+                            </ejs-accumulationchart>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+            <div class="col-lg-6">
+                <div class="box box-solid box-warning">
+                    <div class="box-header">
+                        <i class="fa fa-th"></i>
+                        <h3 class="box-title">Customers</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-warning btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-warning btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body border-radius-none">
+                        <div class="chart" id="line-chart">
+                            <ejs-accumulationchart enableAnimation="false" height="280"  id="customer" title="Customers by Customer Type">
+                                <e-accumulationchart-center x="50%" y="50%"></e-accumulationchart-center>
+                                <e-accumulationchart-tooltipsettings enable="true"></e-accumulationchart-tooltipsettings>
+                                <e-accumulationchart-legendsettings visible="true">
+                                </e-accumulationchart-legendsettings>
+                                <e-accumulation-series-collection>
+                                    <e-accumulation-series type="Pie" dataSource="ViewBag.CustomerChart"  radius="50%" startAngle="0" endAngle="360" explodeIndex="5" explode="true" explodeOffset="10%" xName="XValue" yName="YValue" name="CustomerType">
+                                    </e-accumulation-series>
+                                </e-accumulation-series-collection>
+                            </ejs-accumulationchart>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section><!-- /.content -->

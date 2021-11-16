@@ -1,11 +1,15 @@
-﻿using BuyMe.Application.Common.Models;
+﻿using BuyMe.Application.Category.Queries;
+using BuyMe.Application.Common.Models;
+using BuyMe.Application.CustomerType.Queries;
 using BuyMe.UI.Models;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BuyMe.UI.Controllers
 {
@@ -13,10 +17,12 @@ namespace BuyMe.UI.Controllers
     public class HomeController : Controller
     {
         private readonly TenantSettings option;
+        private readonly IMediator mediator;
 
-        public HomeController(IOptions<TenantSettings> option)
+        public HomeController(IOptions<TenantSettings> option, IMediator mediator)
         {
             this.option = option.Value;
+            this.mediator = mediator;
         }
         public IActionResult Index(string tenant)
         {
@@ -31,8 +37,10 @@ namespace BuyMe.UI.Controllers
             return RedirectToAction(nameof(Dashboard));
         }
         [Authorize]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
+            ViewBag.ProductChart = await this.mediator.Send(new GetCategoryChartQuery());
+            ViewBag.CustomerChart = await this.mediator.Send(new GetCustomerChartQuery());
             return View();
         }
         public IActionResult Privacy()
