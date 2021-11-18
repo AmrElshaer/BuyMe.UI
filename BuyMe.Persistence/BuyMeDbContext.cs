@@ -58,6 +58,7 @@ namespace BuyMe.Persistence
         public DbSet<ProductDescription> ProductDescriptions { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<MarketingDefaultSetting> MarketingDefaultSettings { get; set ; }
+        public DbSet<ShipmentType> ShipmentTypes { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

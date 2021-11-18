@@ -22,8 +22,4 @@
     <ProjectReference Include="..\BuyMe.Application\BuyMe.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

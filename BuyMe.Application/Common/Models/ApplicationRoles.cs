@@ -19,7 +19,7 @@ namespace BuyMe.Application.Common.Models
         public const string Settings = "Settings";
         public const string User = "User";
         public const string ChangeRole = "ChangeRole";
-
+        public const string ShipmentType = "ShipmentType";
         public static IEnumerable<string> GetRoles()
         {
             return typeof(ApplicationRoles).GetFields().Select(a => a.Name);

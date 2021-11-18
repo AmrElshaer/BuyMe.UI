@@ -1,0 +1,34 @@
+﻿@using BuyMe.Application.ShipmentType.Commonds.CreateEdit
+@model CreatEditShipmentTypeCommond
+@{
+    Layout = null;
+}
+<style>
+    .dropDownListTop {
+        margin-top: 15px;
+    }
+</style>
+<div>
+    <input asp-for="ShipmentTypeId" type="hidden" />
+    <input asp-for="CompanyId" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="ShipmentTypeName" />
+                <span class="e-float-line"></span>
+                <label asp-for="ShipmentTypeName" class="e-float-text e-label-top">ShipmentType Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="ShipmentTypeDescription" />
+                <span class="e-float-line"></span>
+                <label asp-for="ShipmentTypeDescription" class="e-float-text e-label-top">ShipmentType Description</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ejs-scripts></ejs-scripts>

@@ -29,6 +29,7 @@ namespace BuyMe.Application.Common.Interfaces
         DbSet<ProductDescription> ProductDescriptions { get; set; }
         DbSet<Entities.CartItem> CartItems { get; set; }
         DbSet<Entities.MarketingDefaultSetting> MarketingDefaultSettings { get; set; }
+        DbSet<Entities.ShipmentType> ShipmentTypes { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
