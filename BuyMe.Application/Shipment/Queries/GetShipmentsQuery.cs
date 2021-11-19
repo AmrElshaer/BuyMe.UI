@@ -37,7 +37,7 @@ namespace BuyMe.Application.Shipment.Queries
 
             public async Task<QueryResult<ShipmentDto>> Handle(GetShipmentsQuery request, CancellationToken cancellationToken)
             {
-                var dataSource = _context.Shipments.Include(a => a.Warehouse)
+                var dataSource = _context.Shipments.Include(a => a.Warehouse).Include(a=>a.SalesOrder)
                     .Where(a => a.CompanyId == currentUserService.CompanyId).AsQueryable();
                 if (!string.IsNullOrEmpty(request.DM.SearchValue))
                 {

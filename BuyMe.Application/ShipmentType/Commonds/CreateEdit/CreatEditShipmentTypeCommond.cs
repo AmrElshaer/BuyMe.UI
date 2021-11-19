@@ -8,7 +8,7 @@ namespace BuyMe.Application.ShipmentType.Commonds.CreateEdit
 {
     public class CreatEditShipmentTypeCommond : IRequest<int>
     {
-        public int? ShipmentTypeId { get; set; }
+        public int? Id { get; set; }
         public string ShipmentTypeName { get; set; }
         public string ShipmentTypeDescription { get; set; }
         public string CompanyId { get; set; }
@@ -27,10 +27,10 @@ namespace BuyMe.Application.ShipmentType.Commonds.CreateEdit
             public async Task<int> Handle(CreatEditShipmentTypeCommond request, CancellationToken cancellationToken)
             {
                 Domain.Entities.ShipmentType shipmentType;
-                if (request.ShipmentTypeId.HasValue)
+                if (request.Id.HasValue)
                 {
-                    var entity = await _context.ShipmentTypes.FindAsync(request.ShipmentTypeId);
-                    Guard.Against.Null(entity, request.ShipmentTypeId);
+                    var entity = await _context.ShipmentTypes.FindAsync(request.Id);
+                    Guard.Against.Null(entity, request.Id);
                     shipmentType = entity;
                 }
                 else

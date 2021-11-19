@@ -35,7 +35,7 @@ namespace BuyMe.UI.Areas.Sales.Controllers
         public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<CreatEditShipmentTypeCommond> value)
         {
             _ = value ?? throw new BadRequestException("Invalid Data");
-            value.Value.ShipmentTypeId = await Mediator.Send(value.Value);
+            value.Value.Id = await Mediator.Send(value.Value);
             return Json(value.Value);
         }
 

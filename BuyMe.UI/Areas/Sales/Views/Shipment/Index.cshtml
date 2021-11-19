@@ -1,0 +1,87 @@
+﻿@using Newtonsoft.Json;
+<link rel="stylesheet" href="~/css/grid.css" />
+<style>
+    .e-MT_List:before {
+        content: '\e605';
+        color: #3c8dbc;
+    }
+
+    .e-icons {
+        font-size: 20px;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Shipment
+        <small>Sales</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Shipment</a></li>
+        <li class="active">Sales</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="control-section">
+        <ejs-grid id="Grid" load="load" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search" })" allowPaging="true">
+            <e-data-manager url="/Sales/Shipment/UrlDataSource" insertUrl="/Sales/Shipment/CreateEdit" updateUrl="/Sales/Shipment/CreateEdit" removeUrl="/Sales/Shipment/Delete" adaptor="UrlAdaptor"></e-data-manager>
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="ShipmentName" headerText="Shipment Name" type="string"></e-grid-column>
+                <e-grid-column field="IsFullShipment" allowSearching="false" headerText="FullShipment" displayAsCheckBox="true"></e-grid-column>
+                <e-grid-column field="SalesOrderName" headerText="SO#" type="string"></e-grid-column>
+                <e-grid-column field="ShipmentDate" type="date" headerText="Shipment Date"></e-grid-column>
+                <e-grid-column field="WarehouseName"  headerText="Warehouse" type="string"></e-grid-column>
+                <e-grid-column field="CompanyId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+                <e-grid-column field="SalesOrderId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+                <e-grid-column field="ShipmentTypeId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+                <e-grid-column field="WarehouseId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+                <e-grid-column field="Remarks" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+                <e-grid-column field="ShipmentId" headerText="" allowSearching="false" allowFiltering="false" isPrimaryKey="true" template="#shipmentTemp"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</section><!-- /.content -->
+<script id="shipmentTemp" type="text/x-template">
+    <a rel='nofollow' href="/Sales/Shipment/Details?shipmentId=${ShipmentId}"><span class="e-icons e-MT_List"></span></a>
+</script>
+<script id='dialogtemplate' type="text/x-template">
+    <div id="dialogTemp"></div>
+</script>
+<script src="~/js/grid.js"></script>
+<script>
+        function load(args) {
+            this.columns[3].format = { type: 'date', format: 'dd/MM/yyyy' };
+        }
+        function actionFailure(args) {
+          displayErrors(args)
+        }
+    function actionComplete(args) {
+        if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+                let spinner = ej.popups.createSpinner({ target: args.dialog.element });
+                ej.popups.showSpinner(args.dialog.element);
+                if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+                    var ajax = new ej.base.Ajax({
+                        url: "@Url.Action($"EditAddPartial", "Shipment")", //render the partial view
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify({ value: args.rowData })
+                    });
+                    ajax.send().then(function (data) {
+                        appendElement(data, args.form); 
+                        ej.popups.hideSpinner(args.dialog.element);
+                    }).catch(function (xhr) {
+                        console.log(xhr);
+                        ej.popups.hideSpinner(args.dialog.element);
+                    });
+                }
+            }
+        }
+</script>
+<script type="text/javascript">
+    function salesOrderChange(e) {
+        $('#SalesOrderName').val(e.itemData.SalesOrderName);
+    }
+</script>

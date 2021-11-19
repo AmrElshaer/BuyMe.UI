@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace BuyMe.Domain.Entities
 {
     public class Shipment
-{
+    {
         public long ShipmentId { get; set; }
         public string ShipmentName { get; set; }
         public long? SalesOrderId { get; set; }
@@ -23,7 +17,5 @@ namespace BuyMe.Domain.Entities
         public int CompanyId { get; set; }
         public Company Company { get; set; }
         public string Remarks { get; set; }
-
-
     }
 }

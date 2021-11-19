@@ -1,0 +1,73 @@
+﻿@using BuyMe.Application.Shipment.Commonds
+@using Newtonsoft.Json
+@model CreateEditShipCommond
+@{
+    Layout = null;
+}
+<style>
+    .dropDownListTop {
+        margin-top: 15px;
+    }
+</style>
+<div>
+    <input name="SalesOrderName" id="SalesOrderName" type="hidden"/>
+    <input asp-for="ShipmentId" type="hidden" />
+    <input asp-for="CompanyId" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="ShipmentName" readonly />
+                <span class="e-float-line"></span>
+                <label asp-for="ShipmentName" class="e-float-text e-label-top">ShipmentName#</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <ejs-checkbox id="cbox2" name="IsFullShipment" value="@Model.IsFullShipment" checked="@Model.IsFullShipment" label="IsFullShipment"></ejs-checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="dropDownListTop">
+                <ejs-dropdownlist ejs-for="SalesOrderId" change="salesOrderChange" placeholder="SalesOrder" dataSource="@ViewBag.SalesOrders" popupHeight="200px">
+                    <e-dropdownlist-fields text="SalesOrderName" value="SalesOrderId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="ShipmentDate" type="date" />
+                <span class="e-float-line"></span>
+                <label asp-for="ShipmentDate" class="e-float-text e-label-top">ShipmentDate</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="dropDownListTop">
+                <ejs-dropdownlist ejs-for="ShipmentTypeId" dataSource="@ViewBag.ShipmentTypes" placeholder="Shipment Type" popupHeight="200px">
+                    <e-dropdownlist-fields text="ShipmentTypeName" value="Id"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="dropDownListTop">
+                <ejs-dropdownlist ejs-for="WarehouseId" dataSource="@ViewBag.Warhouses" placeholder="Warhouse" popupHeight="200px">
+                    <e-dropdownlist-fields text="WarehouseName" value="WarehouseId"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Remarks" />
+                <span class="e-float-line"></span>
+                <label asp-for="Remarks" class="e-float-text e-label-top">Remarks</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ejs-scripts></ejs-scripts>
