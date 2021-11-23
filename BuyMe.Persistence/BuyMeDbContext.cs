@@ -1,4 +1,5 @@
 ﻿using BuyMe.Application.Common.Interfaces;
+using BuyMe.Application.Common.Models;
 using BuyMe.Domain.Common;
 using BuyMe.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -60,7 +61,8 @@ namespace BuyMe.Persistence
         public DbSet<MarketingDefaultSetting> MarketingDefaultSettings { get; set ; }
         public DbSet<ShipmentType> ShipmentTypes { get; set; }
         public DbSet<Shipment> Shipments { get; set; }
-
+        public DbSet<CustomField> CustomFields { get; set; }
+        public DbSet<CustomFieldData> CustomFieldDatas { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())

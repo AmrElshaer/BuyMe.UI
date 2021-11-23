@@ -2,6 +2,7 @@
 using BuyMe.Application.Category.Queries;
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Models;
+using BuyMe.Application.CustomField.Queries.GetCustomFields;
 using BuyMe.Application.Product.Commonds;
 using BuyMe.Application.Product.Commonds.DeleteProduct;
 using BuyMe.Application.Product.Queries;
@@ -20,8 +21,9 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
     [Authorize(Roles = ApplicationRoles.Product)]
     public class ProductController : BaseController
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.AdditionalColums = await Mediator.Send(new GetCustomFieldQuery() {Category="Product" });
             return View();
         }
 

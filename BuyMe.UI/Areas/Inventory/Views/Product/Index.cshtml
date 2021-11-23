@@ -1,4 +1,5 @@
 ﻿@using Newtonsoft.Json;
+@using BuyMe.Application.CustomField.Queries.GetCustomFields
 <link rel="stylesheet" href="~/css/grid.css" />
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -11,7 +12,9 @@
         <li class="active">Inventory</li>
     </ol>
 </section>
-
+ <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal">
+                                        Add Column
+                                    </a>
 <!-- Main content -->
 <section class="content">
     <div class="control-section">
@@ -22,10 +25,9 @@
                 <e-grid-column field="ProductId" headerText="ProductId" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
                 <e-grid-column field="ProductName" headerText="Product Name" type="string"></e-grid-column>
                 <e-grid-column field="UOM" allowSearching="false" headerText="UOM" type="string"></e-grid-column>
-                <e-grid-column field="Barcode" headerText="Barcode" type="string"></e-grid-column>
+                <e-grid-column field="Barcode" headerText="Barcode" type="string" visible="false"></e-grid-column>
                 <e-grid-column field="DefaultBuyingPrice" headerText="Buying Price" format="C2" template="#DefaultBuyingPriceTemp"></e-grid-column>
                 <e-grid-column field="DefaultSellingPrice" headerText="Selling Price" template="#DefaultSellingPriceTemp" format="C2"></e-grid-column>
-
                 <e-grid-column field="BranchName" allowSearching="false" allowFiltering="false" visible="false" headerText="Branch" type="string"></e-grid-column>
                 <e-grid-column field="CompanyId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="CategoryId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
@@ -34,10 +36,41 @@
                 <e-grid-column field="UnitOfMeasureId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="AllowMarketing" headerText="Marketing" displayAsCheckBox="true"></e-grid-column>
                 <e-grid-column field="ProductImages" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
+                @foreach(var colum in ViewBag.AdditionalColums as IEnumerable<CustomFieldDto>){
+                    <e-grid-column field="@colum.FieldName" allowSearching="false" allowFiltering="false"></e-grid-column>
+                }
             </e-grid-columns>
         </ejs-grid>
     </div>
 </section><!-- /.content -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Tenant</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addColumn">
+                    <div class="form-group last mb-4">
+                        <input type="text" placeholder="Field Name" class="form-control" name="FieldName">
+                    </div>
+                     <div class="form-group last mb-4">
+                        <input type="text" placeholder="Field Type" class="form-control" name="FieldType">
+                    </div>
+                    <input type="hidden" placeholder="Field Type" class="form-control" value="Product" name="Category">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script id='DefaultBuyingPriceTemp' type="text/x-template">
     <span>${CurrencyCode} ${DefaultBuyingPrice}</span>
 </script>
@@ -51,6 +84,8 @@
     <div id="dialogTemp"></div>
 </script>
 <script src="~/js/grid.js"></script>
+
+
 <script>
 
     function actionBegin(args) {
@@ -152,3 +187,24 @@
         })
     }
 </script>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#addColumn').on('submit',function(e){
+                e.preventDefault();
+                const data=$(this).serialize();
+                 $.ajax({
+                    url: `/CustomField/UpSertCustomField`,
+                    data:data,
+                    type: 'POST',
+                    success: function (result) {
+                       console.log(result);
+                       location.reload();
+                    }
+                })
+            });
+
+        });
+    </script>
+}
+
