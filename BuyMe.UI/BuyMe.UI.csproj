@@ -22,12 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BuyMe.Application\BuyMe.Application.csproj" />
-    <ProjectReference Include="..\BuyMe.Infrastructure\BuyMe.Infrastructure.csproj" />
-    <ProjectReference Include="..\BuyMe.Persistence\BuyMe.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Areas\AdminPanel\Data\" />
     <Folder Include="Areas\AdminPanel\Models\" />
     <Folder Include="Areas\Config\Data\" />
@@ -39,6 +33,12 @@
     <Folder Include="Areas\UserRole\Data\" />
     <Folder Include="Areas\UserRole\Models\" />
     <Folder Include="Areas\UserRole\Views\Shared\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BuyMe.Application\BuyMe.Application.csproj" />
+    <ProjectReference Include="..\BuyMe.Infrastructure\BuyMe.Infrastructure.csproj" />
+    <ProjectReference Include="..\BuyMe.Persistence\BuyMe.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

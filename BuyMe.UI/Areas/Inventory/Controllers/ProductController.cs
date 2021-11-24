@@ -3,6 +3,7 @@ using BuyMe.Application.Category.Queries;
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Models;
 using BuyMe.Application.CustomField.Queries.GetCustomFields;
+using BuyMe.Application.CustomFieldData.Commonds.UpSertCustFieldData;
 using BuyMe.Application.Product.Commonds;
 using BuyMe.Application.Product.Commonds.DeleteProduct;
 using BuyMe.Application.Product.Queries;
@@ -37,6 +38,15 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
         {
             _ = value ?? throw new BadRequestException("Invalid Data");
             value.Value.ProductId = await Mediator.Send(value.Value);
+            if (value.Value.CustomColumns != null && value.Value.CustomColumns.Any())
+            {
+                await Mediator.Send(new UpSertCustFieldDataCommond()
+                {
+                    Category = "Product",
+                    CustomColumns = value.Value.CustomColumns,
+                    RefranceId = value.Value.ProductId.Value
+                });
+            }
             return Json(value.Value);
         }
 
@@ -56,6 +66,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
             {
                 value.Value.ProductDescriptions = await GetProductDesc(value.Value.ProductId, value.Value.CategoryId.Value);
             }
+
             return PartialView("_CreateEditPartial", value.Value);
         }
         public async Task<IActionResult> GetProductDescription(int? productId, int categoryId)

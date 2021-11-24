@@ -1,9 +1,17 @@
-﻿@using BuyMe.Application.Product.Commonds
+﻿@using BuyMe.Application.Common.Models
+@using BuyMe.Application.CustomField.Queries.GetCustomFields
+@using BuyMe.Application.CustomFieldData.Queries
+@using BuyMe.Application.CustomFieldData.Queries.GetCustFieldData
+@using BuyMe.Application.Product.Commonds
 @using BuyMe.Application.Product.Queries
 @using Newtonsoft.Json
+@using MediatR
+@inject IMediator Mediator
 @model CreateEditProductCommond
 @{
     Layout = null;
+    var additionalColums = await Mediator.Send(new GetCustomFieldQuery() {Category="Product" });
+    
 }
 <style>
     .dropDownListTop {
@@ -84,6 +92,27 @@
                 <label class="e-float-text e-label-top">Currency</label>
             </div>
         </div>
+    </div>
+     <div class="form-row">
+        @{
+            int count = 0;
+            CustomFieldDataDto dataOfCustomColumn=null;
+            if(Model.ProductId.HasValue)
+            {
+                dataOfCustomColumn =(await Mediator.Send(new GetCustFieldDataQuery("Product",Model.ProductId.Value)));
+            }
+            foreach (var field in additionalColums)
+            {
+                 <div class="form-group col-md-6 additionalColums">
+                    <div class="e-float-input e-control-wrapper">
+                        <input name="@(field.FieldName)" value="@(dataOfCustomColumn?.Value.FirstOrDefault(a=>a.FieldName==field.FieldName)?.FieldValue)" id="FieldName_@(count)"/>
+                        <span class="e-float-line"></span>
+                        <label class="e-float-text e-label-top">@field.FieldName</label>
+                    </div>
+                </div>
+                count++;
+            }
+      }
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">

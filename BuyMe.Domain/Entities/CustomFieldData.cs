@@ -10,8 +10,9 @@ namespace BuyMe.Domain.Entities
     {
         public int Id { get; set; }
         public int RefranceId { get; set; }
-        public int CustomFieldId { get; set; }
-        public CustomField CustomField { get; set; }
+        public string Category { get; set; }
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
         public string Value { get; set; }
     }
 }

@@ -90,6 +90,7 @@
 
     function actionBegin(args) {
         if (args.action === 'add' || args.action === 'edit') {
+            // product descriptions
             let productDesciptions = [];
             const allCategoryDesc = $('.allProductDescs').length;
             for (var i = 0; i < allCategoryDesc; i++) {
@@ -102,6 +103,18 @@
             }
             console.log(productDesciptions);
             args.data.ProductDescriptions = productDesciptions;
+            // additional columnField
+            let additionalColums=[];
+            const columsLength=$('.additionalColums').length;
+            for(var i=0;i<columsLength;i++)
+            {
+                additionalColums.push({
+                 FieldValue:$(`#FieldName_${i}`).val(),
+                 FieldName:$(`#FieldName_${i}`).attr('name')
+                });
+            }
+            console.log(additionalColums);
+            args.data.CustomColumns = additionalColums;
             let inputTypes = [];
             $('input[name="Images"]').each(function () {
                 inputTypes.push($(this).attr('value'));

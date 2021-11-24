@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Product.Queries;
+﻿using BuyMe.Application.Common.Models;
+using BuyMe.Application.Product.Queries;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -30,5 +31,6 @@ namespace BuyMe.Application.Product.Commonds
         public bool AllowMarketing { get; set; }
         public List<string> ProductImages { get; set; }
         public IList<ProductDescriptionDto> ProductDescriptions { get; set; }
+        public IList<CustomColumnModel> CustomColumns { get; set; }
     }
 }
