@@ -52,7 +52,8 @@
     <ul class="treeview-menu">
         <li class="@Html.IsSelected(controller:"Currency")"><a asp-area="Config" asp-controller="Currency" asp-action="Index"><i class="fa fa-circle-o"></i>Currency</a></li>
         <li class="@Html.IsSelected(controller:"Branch")"><a asp-area="Config" asp-controller="Branch" asp-action="Index"><i class="fa fa-circle-o"></i>Branch</a></li>
-        <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+        <li class="@Html.IsSelected(controller:"Tenant")"><a asp-area="Config" asp-controller="Tenant" asp-action="Index"><i class="fa fa-circle-o"></i>Manage Tenant</a></li>
+        
     </ul>
 </li>
 <li class="treeview @Html.IsSelected(area:"Marketing")">

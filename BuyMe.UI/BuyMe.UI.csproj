@@ -39,6 +39,7 @@
     <ProjectReference Include="..\BuyMe.Application\BuyMe.Application.csproj" />
     <ProjectReference Include="..\BuyMe.Infrastructure\BuyMe.Infrastructure.csproj" />
     <ProjectReference Include="..\BuyMe.Persistence\BuyMe.Persistence.csproj" />
+    <ProjectReference Include="..\BuyMe.Tenant\BuyMe.Tenant.csproj" />
   </ItemGroup>
 
 </Project>

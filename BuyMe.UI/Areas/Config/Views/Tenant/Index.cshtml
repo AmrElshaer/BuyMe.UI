@@ -1,0 +1,47 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Tenant
+        <small>Config</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Config</a></li>
+        <li class="active">Tenant</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <form id="newTenant">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Tenant Name</span>
+                    <input type="text" class="form-control" id="tenantName" placeholder="TenantName" aria-label="TenantName" aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div>
+        <button type="submit">New Database</button>
+    </form>
+</section>
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function () {
+
+            $('#newTenant').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/Config/Tenant/UpSertTenant',
+                    type: 'POST',
+                    data: { TenantName: $('#tenantName').val() },
+                    success: function (result) {
+                        console.log(result);
+                    }
+
+                });
+            });
+        });
+    </script>
+}

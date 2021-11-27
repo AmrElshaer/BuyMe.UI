@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Role\Queries\" />
+    <Folder Include="TenantSetting\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

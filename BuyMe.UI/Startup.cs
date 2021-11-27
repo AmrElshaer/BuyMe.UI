@@ -4,6 +4,7 @@ using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using BuyMe.Infrastructure;
 using BuyMe.Persistence;
+using BuyMe.Tenant;
 using BuyMe.UI.Common;
 using BuyMe.UI.Models;
 using BuyMe.UI.Services;
@@ -47,7 +48,7 @@ namespace BuyMe.UI
             services.AddInfrastructure(Configuration);
             services.AddPersistance(Configuration);
             services.AddApplication();
-           
+            services.AddTenant(Configuration);
             services.AddTransient<IGenerateManifestService, GenerateManifestService>();
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>

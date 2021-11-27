@@ -6,6 +6,7 @@ using BuyMe.Application.SalesType.Queries;
 using BuyMe.Application.ShipmentType.Commonds.CreateEdit;
 using BuyMe.Application.ShipmentType.Commonds.Delete;
 using BuyMe.Application.ShipmentType.Queries;
+using BuyMe.Application.TenantSetting.Commonds.UpSertTenant;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
