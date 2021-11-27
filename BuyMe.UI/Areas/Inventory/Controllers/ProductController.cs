@@ -24,7 +24,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            ViewBag.AdditionalColums = await Mediator.Send(new GetCustomFieldQuery() {Category="Product" });
+            ViewBag.AdditionalColums = await Mediator.Send(new GetCustomFieldQuery() {Category=CustomCategoryModel.Product });
             return View();
         }
 

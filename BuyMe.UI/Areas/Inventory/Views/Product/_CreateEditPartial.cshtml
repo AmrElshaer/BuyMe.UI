@@ -99,7 +99,7 @@
             CustomFieldDataDto dataOfCustomColumn=null;
             if(Model.ProductId.HasValue)
             {
-                dataOfCustomColumn =(await Mediator.Send(new GetCustFieldDataQuery("Product",Model.ProductId.Value)));
+                dataOfCustomColumn =(await Mediator.Send(new GetCustFieldDataQuery(CustomCategoryModel.Product,Model.ProductId.Value)));
             }
             foreach (var field in additionalColums)
             {

@@ -1,0 +1,76 @@
+﻿@using BuyMe.Application.CustomField.Queries.GetCustomFields
+@using MediatR
+@inject IMediator Mediator
+@model string
+@{
+    var additionalColums = await Mediator.Send(new GetCustomFieldQuery() { Category = Model });
+}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Product Config</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button type="button" id="addNewField" class="btn btn-light">New Field</button>
+
+
+                <table class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Field Type</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var colum in additionalColums)
+                        {
+                            <tr>
+                                <td style="display:none">@colum.Id</td>
+                                <td>@colum.FieldName</td>
+                                <td>@colum.FieldType</td>
+                                <td style="display:none">@colum.Category</td>
+                                <td>
+                                    <button onclick="additionColDisplay(this)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i></button>
+                                    <button onclick="deleteAddionCol(@(colum.Id))" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+                <form id="addColumn">
+                    <input name="Id" type="hidden" id="additionId" />
+                    <div class="form-group last mb-4">
+                        <input type="text" placeholder="Field Name" class="form-control" name="FieldName" id="additionFieldName">
+                    </div>
+                    <div class="form-group last mb-4">
+                        <select class="form-control" name="FieldType" id="additionFieldType">
+                            <option value="text">Text</option>
+                            <option value="number">Number</option>
+                            <option value="date">Date</option>
+                            <option value="time">Time</option>
+                            <option value="datetime-local">DateTime</option>
+                            <option value="url">Url</option>
+                            <option value="tel">Telephone</option>
+                            <option value="email">Email</option>
+                            <option value="color">Color</option>
+                        </select>
+                    </div>
+                    <input type="hidden" placeholder="Field Type" class="form-control" value="@(Model)" name="Category" id="additionCategory">
+
+                    <button class="btn btn-primary" type="submit" id="addEditBtn">Add</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
