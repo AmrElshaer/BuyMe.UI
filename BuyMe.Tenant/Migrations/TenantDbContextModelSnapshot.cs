@@ -34,6 +34,13 @@ namespace BuyMe.Tenant.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tenants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TenantName = "Default"
+                        });
                 });
 #pragma warning restore 612, 618
         }

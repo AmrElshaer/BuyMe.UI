@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuyMe.Tenant.Migrations
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20211127193218_initTenantDB")]
-    partial class initTenantDB
+    [Migration("20211128114615_initDataForTenant")]
+    partial class initDataForTenant
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,13 @@ namespace BuyMe.Tenant.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tenants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TenantName = "Default"
+                        });
                 });
 #pragma warning restore 612, 618
         }

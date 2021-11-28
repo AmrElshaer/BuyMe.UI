@@ -19,7 +19,7 @@ namespace BuyMe.Infrastructure.Identity
            : base(options)
         {
             this.tenantService = tenantService;
-            this.TenantId = this.tenantService.GetTenant()?.Name;
+            this.TenantId = this.tenantService.GetTenant()?.TenantName;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

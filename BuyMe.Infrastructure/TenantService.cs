@@ -1,5 +1,7 @@
-﻿using BuyMe.Application.Common.Interfaces;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
@@ -14,9 +16,11 @@ namespace BuyMe.Infrastructure
     {
         private readonly TenantSettings _tenantSettings;
         private HttpContext _httpContext;
-        private Tenant _currentTenant;
-        public TenantService(IOptions<TenantSettings> tenantSettings, IHttpContextAccessor contextAccessor)
+        private TenantDto _currentTenant;
+        private readonly IMediator medatorR;
+        public TenantService(IOptions<TenantSettings> tenantSettings,IMediator medatorR ,IHttpContextAccessor contextAccessor)
         {
+            this.medatorR = medatorR;
             _tenantSettings = tenantSettings.Value;
             _httpContext = contextAccessor.HttpContext;
             InitConnection();
@@ -46,8 +50,8 @@ namespace BuyMe.Infrastructure
 
         private void SetTenant(string tenantId)
         {
-            _currentTenant = _tenantSettings.Tenants.Where(a => a.Name == tenantId).FirstOrDefault();
-            if (_currentTenant == null) throw new Exception("Invalid Tenant!");
+            _currentTenant = medatorR.Send(new GetTenantByNameQuery(){TenantName=tenantId}).GetAwaiter().GetResult();
+            Guard.Against.Null(_currentTenant,tenantId);
             if (string.IsNullOrEmpty(_currentTenant.ConnectionString))
             {
                 SetDefaultConnectionStringToCurrentTenant();
@@ -63,7 +67,7 @@ namespace BuyMe.Infrastructure
             return _currentTenant?.ConnectionString;
         }
       
-        public Tenant GetTenant()
+        public TenantDto GetTenant()
         {
             return _currentTenant;
         }

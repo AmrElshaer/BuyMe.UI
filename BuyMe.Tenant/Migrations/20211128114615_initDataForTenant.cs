@@ -2,7 +2,7 @@
 
 namespace BuyMe.Tenant.Migrations
 {
-    public partial class initTenantDB : Migration
+    public partial class initDataForTenant : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,11 @@ namespace BuyMe.Tenant.Migrations
                 {
                     table.PrimaryKey("PK_Tenants", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Tenants",
+                columns: new[] { "Id", "ConnectionString", "TenantName" },
+                values: new object[] { 1, null, "Default" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

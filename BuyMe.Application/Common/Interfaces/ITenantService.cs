@@ -10,6 +10,6 @@ namespace BuyMe.Application.Common.Interfaces
     public interface ITenantService
     {
         public string GetConnectionString();
-        public Tenant GetTenant();
+        public TenantDto GetTenant();
     }
 }

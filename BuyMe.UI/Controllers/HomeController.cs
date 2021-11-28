@@ -19,16 +19,16 @@ namespace BuyMe.UI.Controllers
         private readonly TenantSettings option;
         private readonly IMediator mediator;
 
-        public HomeController(IOptions<TenantSettings> option, IMediator mediator)
+        public HomeController(IMediator mediator)
         {
-            this.option = option.Value;
             this.mediator = mediator;
         }
-        public IActionResult Index(string tenant)
+        public async Task<IActionResult> Index(string tenant)
         {
             if (!string.IsNullOrEmpty(tenant))
             {
-                if (!option.Tenants.Any(a => a.Name == tenant))
+                var tenantDto=await this.mediator.Send(new GetTenantByNameQuery(){TenantName=tenant});
+                if (tenantDto==null)
                 {
                     return NotFound();
                 }

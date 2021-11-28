@@ -1,4 +1,10 @@
-﻿<!-- Content Header (Page header) -->
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor _httpAccessor
+
+@{
+   var currentTenan= _httpAccessor.HttpContext.Request.Cookies.TryGetValue("tenant",out var value)?value:"Default";
+}
+<!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
         Tenant
@@ -12,17 +18,37 @@
 
 <!-- Main content -->
 <section class="content">
-    <form id="newTenant">
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Tenant Name</span>
-                    <input type="text" class="form-control" id="tenantName" placeholder="TenantName" aria-label="TenantName" aria-describedby="basic-addon1">
-                </div>
+    <div class="control-section">
+
+        <div class="row">
+            <!-- solid sales graph -->
+            <div class="col-lg-6">
+                 <div class="box box-primary">
+                <div class="box-header">
+                  <h3 class="box-title">Tenant Manage</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" id="newTenant">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Current Tenant</label>
+                      <input type="text" readonly class="form-control" id="exampleInputEmail1" value="@currentTenan">
+                    </div>
+                    <div class="form-group">
+                      <label for="tenantName">New Tenant</label>
+                      <input type="text" class="form-control" id="tenantName" placeholder="New Tenant">
+                    </div>
+                   
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div><!-- /.box -->
             </div>
         </div>
-        <button type="submit">New Database</button>
-    </form>
+    </div>
 </section>
 @section Scripts
 {

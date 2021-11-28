@@ -19,7 +19,7 @@ namespace BuyMe.Persistence
         {
             this.tenantService = tenantService;
             this.currentUserService = currentUserService;
-            this.TenantId = this.tenantService.GetTenant()?.Name;
+            this.TenantId = this.tenantService.GetTenant()?.TenantName;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

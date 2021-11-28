@@ -45,9 +45,10 @@ namespace BuyMe.UI
             services.AddTransient<ITenantService, TenantService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.Configure<TenantSettings>(Configuration.GetSection(nameof(TenantSettings)));
+            services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddPersistance(Configuration);
-            services.AddApplication();
+            
             services.AddTenant(Configuration);
             services.AddTransient<IGenerateManifestService, GenerateManifestService>();
             services.AddRazorPages();

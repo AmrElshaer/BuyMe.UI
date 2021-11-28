@@ -17,6 +17,12 @@ namespace BuyMe.Tenant
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TenantDbContext).Assembly);
+            modelBuilder.Entity<Domain.Entities.Tenant>().HasData(
+                new Domain.Entities.Tenant(){
+                    TenantName="Default",
+                    Id=1
+                }
+            );
             base.OnModelCreating(modelBuilder);
         }
         
