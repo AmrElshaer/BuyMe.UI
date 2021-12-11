@@ -29,9 +29,6 @@ namespace BuyMe.UI.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
-            await mediator.Send(new UpSertTenantCommond() { TenantName=CompanyCommond.Name});
-            HttpContext.Response.Cookies.Append("tenant", CompanyCommond.Name);
-            HttpContext.Session.SetString("tenant", CompanyCommond.Name);
             return (await TryAddCompany()) ? RedirectToPage("./Register") : Page();
 
         }
@@ -39,6 +36,9 @@ namespace BuyMe.UI.Areas.Identity.Pages.Account
         {
             try
             {
+                await mediator.Send(new UpSertTenantCommond() { TenantName = CompanyCommond.Name });
+                HttpContext.Response.Cookies.Append("tenant", CompanyCommond.Name);
+                HttpContext.Session.SetString("tenant", CompanyCommond.Name);
                 CompanyCommond.IsActive = true;
                 CompanyCommond.Id = await mediator.Send(CompanyCommond);
             }
