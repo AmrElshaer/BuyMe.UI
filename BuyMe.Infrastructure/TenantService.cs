@@ -33,6 +33,10 @@ namespace BuyMe.Infrastructure
             {
                 SetDefaultConnectionStringToCurrentTenant();
             }
+            else if (TryGetTenantFromSession(out var value))
+            {
+                SetTenant(value);
+            }
             else if (_httpContext.Request.Cookies.TryGetValue("tenant", out var tenantId))
             {
                 SetTenant(tenantId);
@@ -41,7 +45,6 @@ namespace BuyMe.Infrastructure
             {
                 SetTenant(tenId);
             }
-           
             else
             {
                 SetDefaultConnectionStringToCurrentTenant();
@@ -70,6 +73,16 @@ namespace BuyMe.Infrastructure
         public TenantDto GetTenant()
         {
             return _currentTenant;
+        }
+        private bool TryGetTenantFromSession(out string value)
+        {
+            value = null;
+            if(string.IsNullOrEmpty(_httpContext.Session.GetString("tenant")))
+            {
+                return false;
+            }
+            value = _httpContext.Session.GetString("tenant");
+            return true;
         }
     }
 }

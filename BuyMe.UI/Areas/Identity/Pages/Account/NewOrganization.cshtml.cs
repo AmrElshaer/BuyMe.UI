@@ -1,55 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using BuyMe.Application.Common.Exceptions;
-using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Company.Commonds;
-using BuyMe.Application.Company.Commonds.DeleteCompany;
-using BuyMe.Application.Employee.Commonds.CreateEdit;
+using BuyMe.Application.TenantSetting.Commonds.UpSertTenant;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Threading.Tasks;
 
 namespace BuyMe.UI.Areas.Identity.Pages.Account
 {
-    public class RegisterModel : PageModel
+    
+    public class NewOrganizationModel : PageModel
     {
         private readonly IMediator mediator;
-        private readonly ICompanyService companyService;
 
-        public RegisterModel(IMediator mediator, ICompanyService companyService)
+        public NewOrganizationModel(IMediator mediator)
         {
             this.mediator = mediator;
-            this.companyService = companyService;
         }
-
         [BindProperty]
-        public CreatEditEmployeeCommond employeeCommond { get; set; }
-
+        public CreateEditCompanyCommond CompanyCommond { get; set; }
         public void OnGet()
         {
         }
 
         public async Task<IActionResult> OnPost()
         {
-            return (await TryAddEmployee()) ? RedirectToPage("./Login") : Page();
+            await mediator.Send(new UpSertTenantCommond() { TenantName=CompanyCommond.Name});
+            HttpContext.Response.Cookies.Append("tenant", CompanyCommond.Name);
+            HttpContext.Session.SetString("tenant", CompanyCommond.Name);
+            return (await TryAddCompany()) ? RedirectToPage("./Register") : Page();
+
         }
-       
-        private async Task<bool> TryAddEmployee()
+        private async Task<bool> TryAddCompany()
         {
             try
             {
-                employeeCommond.CompanyId = (await companyService.GetCurrentCompany())?.Id;
-                await mediator.Send(employeeCommond);
+                CompanyCommond.IsActive = true;
+                CompanyCommond.Id = await mediator.Send(CompanyCommond);
             }
             catch (ValidationException validationException)
             {
+
                 AddValidation(validationException);
                 return false;
 
             }
             return true;
         }
-
         private void AddValidation(ValidationException validationException)
         {
             foreach (var item in validationException.Failures)
@@ -57,7 +58,5 @@ namespace BuyMe.UI.Areas.Identity.Pages.Account
                 ModelState.AddModelError(item.Key, item.Value[0]);
             }
         }
-
-       
     }
 }

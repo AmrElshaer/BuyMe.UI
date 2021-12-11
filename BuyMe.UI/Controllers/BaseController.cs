@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BuyMe.UI.Controllers
 {
-    public class BaseController: ControllerBase
+    public class BaseController: Controller
     {
         private IMediator _mediator;
 

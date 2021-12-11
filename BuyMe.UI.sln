@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyMe.Infrastructure", "Buy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyMe.Persistence", "BuyMe.Persistence\BuyMe.Persistence.csproj", "{1195A3FF-FAC8-4A36-93F3-2109B03E1135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyMe.Tenant", "BuyMe.Tenant\BuyMe.Tenant.csproj", "{F63EDCF7-980F-4D8E-B2F5-66ED2E30CABF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyMe.Tenant", "BuyMe.Tenant\BuyMe.Tenant.csproj", "{F63EDCF7-980F-4D8E-B2F5-66ED2E30CABF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,11 @@
 ﻿@page
-
+@inject BuyMe.Application.Common.Interfaces.ICompanyService companyService
 @model LoginModel
+
+@{ 
+    var logo =(await companyService.GetCurrentCompany())?.Logo;
+    logo ??= "/images/logo.png";
+}
 <div class="content">
     <div class="container">
         <div class="row">
@@ -11,12 +16,12 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="mb-4 text-center">
-                            <img src="~/images/logo.png" />
+                            <img src="@logo" />
                         </div>
                         <form method="post">
                             <div class="form-group last mb-4">
                                 <p class="alert alert-warning">
-                                    Current tenant  @(HttpContext.Request.Cookies.TryGetValue("tenant",out var value)?value:"Default" )
+                                    Current Organization  @(HttpContext.Request.Cookies.TryGetValue("tenant",out var value)?value:"Default" )
                                     <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal">
                                         Change
                                     </a>
@@ -46,7 +51,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Change Tenant</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Organization Account</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -54,10 +59,10 @@
             <div class="modal-body">
                 <form asp-area="" asp-action="Index" asp-controller="Home">
                     <div class="form-group last mb-4">
-                        
-                        <input type="text" placeholder="Tenant" class="form-control" name="tenant">
+
+                        <input type="text" placeholder="Organization Name" class="form-control" name="tenant">
                     </div>
-                    <button class="btn btn-primary" type="submit">Save</button>
+                    <button class="btn btn-primary" type="submit">Login</button>
                 </form>
             </div>
             <div class="modal-footer">

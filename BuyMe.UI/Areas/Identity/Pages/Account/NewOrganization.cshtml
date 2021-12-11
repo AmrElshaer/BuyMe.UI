@@ -1,10 +1,6 @@
 ﻿@page
-@inject BuyMe.Application.Common.Interfaces.ICompanyService companyService
-@model BuyMe.UI.Areas.Identity.Pages.Account.RegisterModel
-@{
-    var logo = (await companyService.GetCurrentCompany())?.Logo;
-    logo ??= "/images/logo.png";
-}
+@model BuyMe.UI.Areas.Identity.Pages.Account.NewOrganizationModel
+
 <style>
     .fileLogo {
         display: block;
@@ -26,70 +22,63 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="mb-4 text-center">
-                        <img src="@logo" />
+                        <img src="~/images/logo.png" />
                     </div>
                     <form id="myForm" method="post" style="margin-bottom:15px">
-                        <div class="form-group last mb-4 text-xl-center">
-                            <p class="alert alert-warning">
-                                Current Organization  @(HttpContext.Request.Cookies.TryGetValue("tenant",out var value)?value:"Default" )
-                                <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal">
-                                    Change
-                                </a>
-                            </p>
-                        </div>
                         <div asp-validation-summary="All" class="text-danger"></div>
-
-                        <input asp-for="employeeCommond.Id" type="hidden" />
-                        <input asp-for="employeeCommond.CompanyId" type="hidden" />
-                        <input asp-for="employeeCommond.UserId" type="hidden" />
+                        <input asp-for="CompanyCommond.Id" type="hidden" />
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="e-float-input e-control-wrapper">
+                                    <input asp-for="CompanyCommond.Name" />
+                                    <span class="e-float-line"></span>
+                                    <label asp-for="CompanyCommond.Name" class="e-float-text e-label-top">Company Name</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="e-float-input e-control-wrapper">
-                                    <input asp-for="employeeCommond.FirstName" />
+                                    <input asp-for="CompanyCommond.Country" />
                                     <span class="e-float-line"></span>
-                                    <label asp-for="employeeCommond.FirstName" class="e-float-text e-label-top">FirstName</label>
+                                    <label asp-for="CompanyCommond.Country" class="e-float-text e-label-top">Country</label>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="e-float-input e-control-wrapper">
-                                    <input asp-for="employeeCommond.LastName" />
+                                    <input asp-for="CompanyCommond.City" />
                                     <span class="e-float-line"></span>
-                                    <label asp-for="employeeCommond.LastName" class="e-float-text e-label-top">LastName</label>
+                                    <label asp-for="CompanyCommond.City" class="e-float-text e-label-top">City</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <div class="e-float-input e-control-wrapper">
-                                    <input asp-for="employeeCommond.Email" />
+                                    <input asp-for="CompanyCommond.Business" />
                                     <span class="e-float-line"></span>
-                                    <label asp-for="employeeCommond.Email" class="e-float-text e-label-top">Email</label>
+                                    <label asp-for="CompanyCommond.Business" class="e-float-text e-label-top">Business</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="e-float-input e-control-wrapper">
-                                    <input asp-for="employeeCommond.Password" />
+                                    <input asp-for="CompanyCommond.Telephone" />
                                     <span class="e-float-line"></span>
-                                    <label asp-for="employeeCommond.Password" class="e-float-text e-label-top">Password</label>
+                                    <label asp-for="CompanyCommond.Telephone" class="e-float-text e-label-top">Telephone</label>
                                 </div>
                             </div>
+
                             <div class="form-group col-md-6">
-                                <div class="e-float-input e-control-wrapper">
-                                    <input asp-for="employeeCommond.ConfirmPassword" />
-                                    <span class="e-float-line"></span>
-                                    <label asp-for="employeeCommond.ConfirmPassword" class="e-float-text e-label-top">ConfirmPassword</label>
-                                </div>
+                                <input type="hidden" asp-for="CompanyCommond.Logo" />
+                                <label for="formFile" class="form-label">Logo</label>
+                                <input type="file" class="fileLogo" id="formFile">
                             </div>
+
                         </div>
-                        <button type="submit" class="btn btn-success mb-2">Register</button>
-                        <br />
-                        <a asp-page="Login">Login</a>
-                        <br />
-                        <a asp-page="NewOrganization">New Organization</a>
-
-
+                        <a href="#" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">Have Organization Account</a>
+                        <button type="submit" class="btn btn-success mb-2 float-right">New Organization</button>
                     </form>
                 </div>
             </div>
@@ -135,7 +124,7 @@
                 var FR = new FileReader();
 
                 FR.addEventListener("load", function (e) {
-                    document.getElementById("companyCommond_Logo").value = e.target.result;
+                    document.getElementById("CompanyCommond_Logo").value = e.target.result;
                 });
 
                 FR.readAsDataURL(this.files[0]);
@@ -146,11 +135,7 @@
         document.getElementById("formFile").addEventListener("change", readFile);
 
 
-        $('#myForm a.next,a.previous').click(function (e) {
-            e.preventDefault();
-            $(this).removeClass('active');
-            $(this).tab('show');
-        })
+
 
     </script>
 

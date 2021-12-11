@@ -48,7 +48,7 @@ namespace BuyMe.UI
             services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddPersistance(Configuration);
-            
+            services.AddSession();
             services.AddTenant(Configuration);
             services.AddTransient<IGenerateManifestService, GenerateManifestService>();
             services.AddRazorPages();
@@ -107,6 +107,7 @@ namespace BuyMe.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
             app.UseCors("allowcors");
             app.UseCustomExceptionHandlerMiddleware();
             //Register Syncfusion license
