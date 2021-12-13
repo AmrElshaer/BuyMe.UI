@@ -33,8 +33,9 @@ namespace BuyMe.UI.Controllers
                     return NotFound();
                 }
                 HttpContext.Response.Cookies.Append("tenant", tenant);
+                return RedirectToAction(nameof(Dashboard));
             }
-            return RedirectToAction(nameof(Dashboard));
+            return LocalRedirect("/Identity/Account/ByMe");
         }
         [Authorize]
         public async Task<IActionResult> Dashboard()

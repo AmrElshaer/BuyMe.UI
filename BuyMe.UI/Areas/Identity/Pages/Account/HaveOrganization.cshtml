@@ -1,0 +1,24 @@
+﻿@page
+@model BuyMe.UI.Areas.Identity.Pages.Account.HaveOrganizationModel
+@{
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 contents">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="mb-4 text-center">
+                        <img src="~/images/logo.png" />
+                    </div>
+                    <form asp-area="" asp-action="Index" asp-controller="Home">
+                        <div class="form-group last mb-4  col-4">
+                            <input type="text" placeholder="Organization Name" class="form-control" name="tenant">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Go To Organization</button>
+                        <a asp-page="NewOrganization">Create New Organization</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
