@@ -15,6 +15,7 @@ namespace BuyMe.Application.TenantSetting.Commonds.UpSertTenant
     {
         public int? Id { get; set; }
         public string TenantName { get; set; }
+        public string TenantLogo { get; set; }
         public class UpSertTenantCommondHandler : IRequestHandler<UpSertTenantCommond, int>
         {
             private readonly ITenantDbContext tenantDbContext;
@@ -40,6 +41,7 @@ namespace BuyMe.Application.TenantSetting.Commonds.UpSertTenant
                     await  tenantDbContext.Tenants.AddAsync(entity);
                 }
                 entity.TenantName = request.TenantName;
+                entity.TenantLogo = request.TenantLogo;
                 entity.ConnectionString = $"Server=(localdb)\\mssqllocaldb;Database={entity.TenantName};Trusted_Connection=True;MultipleActiveResultSets=true";
                 await tenantDbContext.SaveChangesAsync();
                 tenantServiceProvider.GeneratTenant(entity.TenantName);

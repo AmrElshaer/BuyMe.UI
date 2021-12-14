@@ -25,6 +25,7 @@ namespace BuyMe.UI.Controllers
         }
         public async Task<IActionResult> Index(string tenant)
         {
+            
             if (!string.IsNullOrEmpty(tenant))
             {
                 var tenantDto=await this.mediator.Send(new GetTenantByNameQuery(){TenantName=tenant});

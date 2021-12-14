@@ -2,6 +2,7 @@
 @model BuyMe.UI.Areas.Identity.Pages.Account.HaveOrganizationModel
 @{
 }
+<div id="haveOrg"></div>
 <div class="container">
     <div class="row">
         <div class="col-md-12 contents">
@@ -22,3 +23,16 @@
         </div>
     </div>
 </div>
+@section Scripts{ 
+    <script>
+    $(document).ready(() => {
+
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('#haveOrg').offset().top
+            }, 'slow');
+        });
+    });
+    </script>
+}

@@ -1,11 +1,14 @@
 ﻿@page
-@inject BuyMe.Application.Common.Interfaces.ICompanyService companyService
+@using MediatR
+@inject IMediator _mediator
 @model LoginModel
 
-@{ 
-    var logo =(await companyService.GetCurrentCompany())?.Logo;
+@{
+    var tenant = HttpContext.Request.Cookies.TryGetValue("tenant", out var tenantName) ? tenantName : "Default";
+    var logo = (await _mediator.Send(new GetTenantByNameQuery() { TenantName = tenant }))?.TenantLogo;
     logo ??= "/images/logo.png";
 }
+<div id="login"></div>
 <div class="content">
     <div class="container">
         <div class="row">
@@ -21,7 +24,7 @@
                         <form method="post">
                             <div class="form-group last mb-4">
                                 <p class="alert alert-warning">
-                                    Current Organization  @(HttpContext.Request.Cookies.TryGetValue("tenant",out var value)?value:"Default" )
+                                    Current Organization  @(tenant)
                                     <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal">
                                         Change
                                     </a>
@@ -51,4 +54,15 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+<script>
+    $(document).ready(() => {
+
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('#login').offset().top
+            }, 'slow');
+        });
+    });
+</script>
 }

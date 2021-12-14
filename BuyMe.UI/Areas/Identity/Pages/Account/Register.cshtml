@@ -1,8 +1,10 @@
 ﻿@page
-@inject BuyMe.Application.Common.Interfaces.ICompanyService companyService
+@using MediatR
+@inject IMediator _mediator
 @model BuyMe.UI.Areas.Identity.Pages.Account.RegisterModel
 @{
-    var logo = (await companyService.GetCurrentCompany())?.Logo;
+    var tenant = HttpContext.Request.Cookies.TryGetValue("tenant", out var tenantName)? tenantName:"Default";
+    var logo = (await _mediator.Send(new GetTenantByNameQuery() { TenantName= tenant }))?.TenantLogo;
     logo ??= "/images/logo.png";
 }
 <style>
@@ -20,7 +22,8 @@
         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
 </style>
-<div class="container">
+<div id="register"></div>
+<div class="container" >
     <div class="row">
         <div class="col-md-12 contents">
             <div class="row justify-content-center">
@@ -31,7 +34,7 @@
                     <form id="myForm" method="post" style="margin-bottom:15px">
                         <div class="form-group last mb-4 text-xl-center">
                             <p class="alert alert-warning">
-                                Current Organization  @(HttpContext.Request.Cookies.TryGetValue("tenant",out var value)?value:"Default" )
+                                Current Organization  @(tenant)
                                 <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal">
                                     Change
                                 </a>
@@ -97,36 +100,20 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Organization Account</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form asp-area="" asp-action="Index" asp-controller="Home">
-                    <div class="form-group last mb-4">
 
-                        <input type="text" placeholder="Organization Name" class="form-control" name="tenant">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Login</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
     <script>
 
+        $(document).ready(() => {
 
+            $(document).ready(function () {
+                // Handler for .ready() called.
+                $('html, body').animate({
+                    scrollTop: $('#register').offset().top
+                }, 'slow');
+            });
+        });
 
         function readFile() {
 

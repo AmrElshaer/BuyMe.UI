@@ -36,7 +36,7 @@ namespace BuyMe.UI.Areas.Identity.Pages.Account
         {
             try
             {
-                await mediator.Send(new UpSertTenantCommond() { TenantName = CompanyCommond.Name });
+                await mediator.Send(new UpSertTenantCommond() { TenantName = CompanyCommond.Name,TenantLogo=CompanyCommond.Logo });
                 HttpContext.Response.Cookies.Append("tenant", CompanyCommond.Name);
                 HttpContext.Session.SetString("tenant", CompanyCommond.Name);
                 CompanyCommond.IsActive = true;

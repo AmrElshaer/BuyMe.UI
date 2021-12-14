@@ -123,10 +123,10 @@ namespace BuyMe.UI
             {
                 endpoints.MapControllerRoute(
                 name: "areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Dashboard}/{id?}");
                 endpoints.MapRazorPages();
             });
             // Enable middleware to serve generated Swagger as a JSON endpoint.

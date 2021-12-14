@@ -10,6 +10,7 @@ namespace BuyMe.Domain.Entities
     {
         public int Id { get; set; }
         public string TenantName { get; set; }
+        public string TenantLogo { get; set; }
         public string ConnectionString { get; set; }
     }
 }

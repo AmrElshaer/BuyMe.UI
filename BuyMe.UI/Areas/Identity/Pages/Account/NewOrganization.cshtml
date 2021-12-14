@@ -17,7 +17,7 @@
             transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         }
     </style>
-
+ <div id="neworg"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12 contents">
@@ -94,7 +94,17 @@
     @section Scripts{
         <partial name="_ValidationScriptsPartial" />
         <script>
+           
+            $(document).ready(() => {
 
+                    $(document).ready(function () {
+                        // Handler for .ready() called.
+                        $('html, body').animate({
+                            scrollTop: $('#neworg').offset().top
+                        }, 'slow');
+                    });
+            });
+       
 
 
             function readFile() {
