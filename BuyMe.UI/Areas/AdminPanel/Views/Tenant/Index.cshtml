@@ -1,46 +1,35 @@
 ﻿<link rel="stylesheet" href="~/css/grid.css" />
-<style>
-    .e-MT_List:before {
-        content: '\e605';
-        color: #3c8dbc;
-    }
-
-    .e-icons {
-        font-size: 20px;
-    }
-</style>
+<link rel="stylesheet" href="~/bootstrap-tagsinput/bootstrap-tagsinput.css" />
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Company
-        <small>Admin panel</small>
+        Manage Tenant
+        <small>Admin</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> AdminPanel</a></li>
-        <li class="active">Home</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tenants</a></li>
+        <li class="active">Admin Panel</li>
     </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
     <div class="control-section">
-        <ejs-grid id="Grid" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete" })" allowPaging="false">
-            <e-data-manager url="/AdminPanel/Company/UrlDataSource" insertUrl="/AdminPanel/Company/CreateEdit" updateUrl="/AdminPanel/Company/CreateEdit" removeUrl="/AdminPanel/Company/Delete" adaptor="UrlAdaptor"></e-data-manager>
-            <e-grid-editSettings  allowAdding="false" allowDeleting="false" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+        <ejs-grid id="Grid" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit","Search" })" allowPaging="true">
+            <e-data-manager url="/AdminPanel/Tenant/UrlDataSource" insertUrl="/AdminPanel/Tenant/CreateEdit" updateUrl="/AdminPanel/Tenant/CreateEdit"  adaptor="UrlAdaptor"></e-data-manager>
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
             <e-grid-columns>
-                <e-grid-column field="Id" headerText="Company Id" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
-                <e-grid-column field="Name" headerText="Company Name" type="string"></e-grid-column>
-                <e-grid-column field="Business" headerText="Business" type="string"></e-grid-column>
-                <e-grid-column field="Country" headerText="Country" type="string"></e-grid-column>
-                <e-grid-column field="City" headerText="City" type="string"></e-grid-column>
-                <e-grid-column field="Telephone" headerText="Telephone"></e-grid-column>
-                <e-grid-column field="IsActive" allowSearching="false" headerText="Active" displayAsCheckBox="true"></e-grid-column>
+                <e-grid-column field="Id" headerText="TenantId" allowSearching="false" allowFiltering="false" isPrimaryKey="true" visible="false"></e-grid-column>
+                <e-grid-column field="TenantName" headerText="Tenant Name" type="string"></e-grid-column>
+                <e-grid-column field="ConnectionString" allowSearching="false" allowFiltering="false"></e-grid-column>
+                <e-grid-column field="TenantName" headerText="" template="#companyTemp"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>
 </section><!-- /.content -->
-
-
+<script id="companyTemp" type="text/x-template">
+    <a rel='nofollow' href="/Home/Index?tenant=${TenantName}" class="btn btn-outline-primary">Sign In <i class="bi bi-box-arrow-in-right"></i></a>
+</script>
 <script id='dialogtemplate' type="text/x-template">
     <div id="dialogTemp"></div>
 </script>
@@ -52,7 +41,7 @@
     }
     function onFileSelect(imageInput) {
         const file = imageInput.filesData[0].rawFile;
-        getBase64(file,'Logo');
+        getBase64(file, 'Logo');
     }
     function actionFailure(args) {
         displayErrors(args)
@@ -63,14 +52,14 @@
                 ej.popups.showSpinner(args.dialog.element);
                 if (args.requestType === 'beginEdit' || args.requestType === 'add') {
                     var ajax = new ej.base.Ajax({
-                        url: "@Url.Action("EditAddPartial", "Company")", //render the partial view
+                        url: "@Url.Action($"EditAddPartial", "Tenant")", //render the partial view
                         type: "POST",
                         contentType: "application/json",
                         data: JSON.stringify({ value: args.rowData })
                     });
                     ajax.send().then(function (data) {
                         appendElement(data, args.form); //Render the edit form with selected record
-                        args.form.elements.namedItem('Name').focus();
+                        args.form.elements.namedItem('TenantName').focus();
                         ej.popups.hideSpinner(args.dialog.element);
                     }).catch(function (xhr) {
                         console.log(xhr);
@@ -80,3 +69,7 @@
             }
         }
 </script>
+@section Scripts{
+    <script src="~/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+
+}

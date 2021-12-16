@@ -3,6 +3,7 @@ using BuyMe.Domain.Common;
 using BuyMe.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,6 +25,31 @@ namespace BuyMe.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BuyMeDbContext).Assembly);
+            modelBuilder.Entity<Template>().HasData(
+                new Template()
+                {
+                    Id = 1,
+                    Name = "eshop"
+                },
+                new Template() { 
+                  Id=2,
+                  Name="coza"
+                }) ;
+            modelBuilder.Entity<TemplateImages>().HasData(
+                new TemplateImages() { 
+                     Id=1,
+                    ImageName = "eShop.jpg",
+                    TemplateId=1
+
+                },
+                new TemplateImages()
+                {
+                    Id=2,
+                    ImageName = "cozaStore.png",
+                    TemplateId=2
+
+                }
+            );
             base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -31,15 +31,25 @@
                     <div class="mb-4 text-center">
                         <img src="@logo" />
                     </div>
-                    <form id="myForm" method="post" style="margin-bottom:15px">
-                        <div class="form-group last mb-4 text-xl-center">
-                            <p class="alert alert-warning">
-                                Current Organization  @(tenant)
-                                <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal">
-                                    Change
-                                </a>
-                            </p>
+                    <div class="form-group last mb-4">
+                        <p class="alert alert-warning">
+                            Current Organization <a href="#">@(tenant)</a>
+
+                            @if (tenant == "Default")
+                            {
+                                <a asp-page="NewOrganization" class="text-warning">Subscripe in premium to create your own organization</a>
+                            }
+
+                        </p>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button type="button" class="input-group-text" onclick="copyOrgLink()" data-toggle="tooltip" data-placement="top" title="Copy Organization Link"><i class="bi bi-clipboard-check"></i></button>
+                            </div>
+                            <input type="url" readonly class="form-control" id="orglink">
                         </div>
+                    </div>
+                    <form id="myForm" method="post" style="margin-bottom:15px">
+                        
                         <div asp-validation-summary="All" class="text-danger"></div>
 
                         <input asp-for="employeeCommond.Id" type="hidden" />
@@ -73,14 +83,14 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="e-float-input e-control-wrapper">
-                                    <input asp-for="employeeCommond.Password" type="password"/>
+                                    <input asp-for="employeeCommond.Password" type="password" />
                                     <span class="e-float-line"></span>
                                     <label asp-for="employeeCommond.Password" class="e-float-text e-label-top">Password</label>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="e-float-input e-control-wrapper">
-                                    <input asp-for="employeeCommond.ConfirmPassword" type="password"/>
+                                    <input asp-for="employeeCommond.ConfirmPassword" type="password" />
                                     <span class="e-float-line"></span>
                                     <label asp-for="employeeCommond.ConfirmPassword" class="e-float-text e-label-top">ConfirmPassword</label>
                                 </div>
@@ -89,10 +99,6 @@
                         <button type="submit" class="btn btn-success mb-2">Register</button>
                         <br />
                         <a asp-page="Login">Login</a>
-                        <br />
-                        <a asp-page="NewOrganization">New Organization</a>
-
-
                     </form>
                 </div>
             </div>
@@ -104,16 +110,29 @@
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
     <script>
+        function copyOrgLink() {
+            /* Get the text field */
+            var copyText = document.getElementById("orglink");
 
-        $(document).ready(() => {
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
-            $(document).ready(function () {
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+        }
+
+
+
+        $(document).ready(function () {
+                const origin = window.location.origin;
+                $('#orglink').val(`${origin}/Home/Index?tenant=@(tenant)`);
                 // Handler for .ready() called.
                 $('html, body').animate({
                     scrollTop: $('#register').offset().top
                 }, 'slow');
             });
-        });
+
 
         function readFile() {
 

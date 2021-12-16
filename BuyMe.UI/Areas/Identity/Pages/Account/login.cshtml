@@ -21,15 +21,25 @@
                         <div class="mb-4 text-center">
                             <img src="@logo" />
                         </div>
-                        <form method="post">
-                            <div class="form-group last mb-4">
-                                <p class="alert alert-warning">
-                                    Current Organization  @(tenant)
-                                    <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal">
-                                        Change
-                                    </a>
-                                </p>
+                        <div class="form-group last mb-4">
+                            <p class="alert alert-warning">
+                                Current Organization <a href="#">@(tenant)</a>
+
+                                @if (tenant == "Default")
+                                {
+                                    <a asp-page="NewOrganization" class="text-warning">Subscripe in premium to create your own organization</a>
+                                }
+
+                            </p>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="input-group-text" onclick="copyOrgLink()" data-toggle="tooltip" data-placement="top" title="Copy Organization Link"><i class="bi bi-clipboard-check"></i></button>
+                                </div>
+                                <input type="url" readonly class="form-control" id="orglink">
                             </div>
+                        </div>
+                        <form method="post">
+
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group first">
                                 <label for="Email">Email</label>
@@ -42,8 +52,6 @@
                             <input type="submit" value="Log In" class="btn text-white btn-block btn-success" style="background-color: #29BB8A">
 
                             <a asp-page="Register">Register</a>
-                            <br />
-                            <a asp-page="NewOrganization">New Organization</a>
                         </form>
                     </div>
                 </div>
@@ -55,8 +63,20 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 <script>
-    $(document).ready(() => {
+    function copyOrgLink() {
+        /* Get the text field */
+        var copyText = document.getElementById("orglink");
 
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
+    }
+    $(document).ready(() => {
+        const origin = window.location.origin;
+        $('#orglink').val(`${origin}/Home/Index?tenant=@(tenant)`);
         $(document).ready(function () {
             // Handler for .ready() called.
             $('html, body').animate({

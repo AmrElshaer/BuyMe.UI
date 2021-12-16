@@ -52,7 +52,7 @@
                             <thead>
                                 <tr>
                                     <th>Role</th>
-                                    <th>Have Access</th>
+                                    <th><input type="checkbox" id="checkAllRoles"/> Have Access</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,7 +74,23 @@
     </section>
 </div>
 <script type="text/javascript">
+
+    $('#checkAllRoles').change(() => {
+            if ($('#checkAllRoles').prop('checked')) {
+                $('input[name="Roles"]').each(function () {
+                    $(this).prop('checked', true);
+                });
+            }
+            else {
+                $('input[name="Roles"]').each(function () {
+                    $(this).prop('checked', false);
+                });
+            }
+       
+        });
+
     $(document).ready(function () {
+      
         $('#roles').dataTable({
             "bPaginate": false,
             "bLengthChange": false,

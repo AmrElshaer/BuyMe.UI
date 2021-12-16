@@ -1,0 +1,51 @@
+﻿@using BuyMe.Application.TenantSetting.Commonds.UpSertTenant
+@model UpSertTenantCommond
+
+
+<div>
+    <input asp-for="Id" type="hidden" />
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="TenantName" />
+                <span class="e-float-line"></span>
+                <label asp-for="TenantName" class="e-float-text e-label-top">Organization Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="ConnectionString" readonly/>
+                <span class="e-float-line"></span>
+                <label asp-for="ConnectionString" class="e-float-text e-label-top">Connection</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+
+        <div class="form-group col-md-12">
+
+            <div class="e-float-input upload-area">
+                <input type="text" id="Logo" value="@Model.TenantLogo" name="TenantLogo" style="display:none">
+            </div>
+            <ejs-uploader id="fileupload" autoUpload="false" selected="onFileSelect" removing="removeImage" multiple="false"> </ejs-uploader>
+        </div>
+    </div>
+    @if (Model.TenantLogo != null)
+    {
+        <div class="form-row">
+            <div class="form-group col-md-12">
+
+                <div style="display: block;border-radius: 3px;">
+                    <span class="e-avatar e-avatar-xlarge" style="background-image:url(@Model.TenantLogo)"></span>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+<ejs-scripts></ejs-scripts>
+
+
