@@ -1,94 +1,149 @@
 ﻿@page
 @model BuyMe.UI.Areas.Identity.Pages.Account.NewOrganizationModel
 
+<style>
+    .new-org-form {
+        background-image: linear-gradient(to right,rgb(56, 126, 190), rgba(106, 131, 214, 0.67));
+    }
 
-    <style>
-        .fileLogo {
-            display: block;
-            width: 100%;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    .register-left {
+        text-align: center;
+        color: beige;
+        padding: 30px;
+    }
+
+        .register-left p {
+            padding: 20px 20px 0;
         }
-    </style>
- <div id="neworg"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 contents">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="mb-4 text-center">
-                            <img src="~/images/logo.png" />
-                        </div>
-                        <form id="myForm" method="post" style="margin-bottom:15px">
-                            <div asp-validation-summary="All" class="text-danger"></div>
-                            <input asp-for="CompanyCommond.Id" type="hidden" />
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <div class="e-float-input e-control-wrapper">
-                                        <input asp-for="CompanyCommond.Name" />
-                                        <span class="e-float-line"></span>
-                                        <label asp-for="CompanyCommond.Name" class="e-float-text e-label-top">Company Name</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <div class="e-float-input e-control-wrapper">
-                                        <input asp-for="CompanyCommond.Country" />
-                                        <span class="e-float-line"></span>
-                                        <label asp-for="CompanyCommond.Country" class="e-float-text e-label-top">Country</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <div class="e-float-input e-control-wrapper">
-                                        <input asp-for="CompanyCommond.City" />
-                                        <span class="e-float-line"></span>
-                                        <label asp-for="CompanyCommond.City" class="e-float-text e-label-top">City</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <div class="e-float-input e-control-wrapper">
-                                        <input asp-for="CompanyCommond.Business" />
-                                        <span class="e-float-line"></span>
-                                        <label asp-for="CompanyCommond.Business" class="e-float-text e-label-top">Business</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <div class="e-float-input e-control-wrapper">
-                                        <input asp-for="CompanyCommond.Telephone" />
-                                        <span class="e-float-line"></span>
-                                        <label asp-for="CompanyCommond.Telephone" class="e-float-text e-label-top">Telephone</label>
-                                    </div>
-                                </div>
 
-                                <div class="form-group col-md-6">
-                                    <input type="hidden" asp-for="CompanyCommond.Logo" />
-                                    <label for="formFile" class="form-label">Logo</label>
-                                    <input type="file" class="fileLogo" id="formFile">
-                                </div>
+        .register-left .btn-primary {
+            border-radius: 1.5rem;
+            width: 120px;
+            background: #f8f8f8;
+            border: none;
+            font-weight: 600;
+            color: #555;
+            margin-top: 20px;
+            padding: 10px;
+        }
 
-                            </div>
+            .register-left .btn-primary:hover {
+                background: rgb(4, 34, 100);
+            }
+
+    .register-right {
+        border: none;
+        background: #f8f8f8;
+        border-top-left-radius: 10% 50%;
+        border-bottom-left-radius: 10% 50%;
+        padding: 50px;
+    }
+
+        .register-right h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+    .Register-form {
+        padding: 30px;
+    }
+
+    .register-right .btn-primary {
+        float: right;
+        border-radius: 1.5rem;
+        width: 120px;
+        background: rgb(38, 109, 216);
+        border: none;
+        font-weight: 600;
+        color: #fff;
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+        .register-right .btn-primary:hover {
+            background: #132bb3;
+        }
+
+    .button-primary {
+        float: left;
+    }
+    .fileLogo {
+        display: block;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+</style>
+   
+ <div id="neworg" style="margin-bottom:15%"></div>
+ <div class="new-org-form" style="margin-bottom:15%">
+     <div class="container">
+         <div class="row">
+             <div class="col-md-10 offset=md-1">
+                 <div class="row">
+                     <div class="col-md-6 register-left" >
+                         <img src="/images/ByMe (2).png" style="margin-top:50%">
+                     </div>
+                     <div class="col-md-6 register-right">
+
+                         <h2>New Organization</h2>
+                         <form class="Register-form" method="post">
+                             <div asp-validation-summary="All" class="text-danger"></div>
+                             <input asp-for="CompanyCommond.Id" type="hidden" />
+                             <div class="form-group">
+                                 <input type="text" class="form-control" asp-for="CompanyCommond.Name" placeholder="Organization Name">
+                             </div>
+                             <div class="form-group mt-2">
+                                 <input type="text" class="form-control" asp-for="CompanyCommond.Country" placeholder="Country">
+                             </div>
+                             <div class="form-group mt-2">
+                                 <input type="text" class="form-control" asp-for="CompanyCommond.City" placeholder="City">
+                             </div>
+                             <div class="form-group mt-2">
+                                 <input type="text" class="form-control" asp-for="CompanyCommond.Business" placeholder="Business">
+                             </div>
+                             <div class="form-group mt-2">
+                                 <input type="text" class="form-control" asp-for="CompanyCommond.Telephone" placeholder="Telephone">
+                             </div>
+                           
+                            
+
+                                 <div class="form-group mt-2">
+                                     <input type="hidden" asp-for="CompanyCommond.Logo" />
+                                     
+                                     <input type="file" class="fileLogo form-control" id="formFile">
+                                 </div>
+                             
+                             <div class="btn2" style="text-align:left;
+                padding: 5px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 5px;
+            ">
+                                 
+                                 <a asp-page="HaveOrganization" style="margin-top: 2px;">Have Organization Account </a>
+                             </div>
 
 
-                            <button type="submit" class="btn btn-success mb-2 float-right">New Organization</button>
-                            <a asp-page="HaveOrganization">Have Organization Account</a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                             <button type="submit" class="btn btn-primary">Create <i class="bi bi-box-arrow-in-right"></i></button>
+                         </form>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+    
 
 
     @section Scripts{
