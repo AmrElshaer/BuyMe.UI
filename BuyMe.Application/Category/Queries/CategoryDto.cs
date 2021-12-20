@@ -13,6 +13,7 @@ namespace BuyMe.Application.Category.Queries
         public CategoryDto()
         {
             Products = new List<ProductDto>();
+            CategoryDescriptions = new List<CategoryDescriptionDto>();
         }
         public int? CategoryId { get; set; }
         public string CategoryName { get; set; }

@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyMe.Persistence", "BuyMe.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyMe.Tenant", "BuyMe.Tenant\BuyMe.Tenant.csproj", "{F63EDCF7-980F-4D8E-B2F5-66ED2E30CABF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyMe.UnitTests", "BuyMe.UnitTests\BuyMe.UnitTests.csproj", "{B09CB3DF-C551-405F-BAFD-AF2B0CFAE5AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{F63EDCF7-980F-4D8E-B2F5-66ED2E30CABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F63EDCF7-980F-4D8E-B2F5-66ED2E30CABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F63EDCF7-980F-4D8E-B2F5-66ED2E30CABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B09CB3DF-C551-405F-BAFD-AF2B0CFAE5AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B09CB3DF-C551-405F-BAFD-AF2B0CFAE5AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B09CB3DF-C551-405F-BAFD-AF2B0CFAE5AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B09CB3DF-C551-405F-BAFD-AF2B0CFAE5AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

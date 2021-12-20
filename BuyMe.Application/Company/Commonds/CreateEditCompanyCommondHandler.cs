@@ -10,12 +10,10 @@ namespace BuyMe.Application.Company.Commonds
     public class CreateEditCompanyCommondHandler : IRequestHandler<CreateEditCompanyCommond, int>
     {
         private readonly IBuyMeDbContext _context;
-        private readonly IImageService imageService;
 
-        public CreateEditCompanyCommondHandler(IBuyMeDbContext context, IImageService imageService)
+        public CreateEditCompanyCommondHandler(IBuyMeDbContext context)
         {
             _context = context;
-            this.imageService = imageService;
         }
 
         public async Task<int> Handle(CreateEditCompanyCommond request, CancellationToken cancellationToken)
@@ -35,10 +33,7 @@ namespace BuyMe.Application.Company.Commonds
             company.Country = request.Country;
             company.City = request.City;
             company.Business = request.Business;
-            if (!string.IsNullOrEmpty( request.Logo))
-            {
-                company.Logo= imageService.ResizeImage(request.Logo, 144, 144, ImageFormat.Png);
-            }
+           
             
             company.IsActive = request.IsActive;
             company.Name = request.Name;
