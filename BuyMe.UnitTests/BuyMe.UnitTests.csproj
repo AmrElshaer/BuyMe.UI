@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Companys\Commonds\DeleteCompanyCommondTest.cs~RF1735fa8b.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.16.1" />
@@ -25,10 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BuyMe.Application\BuyMe.Application.csproj" />
     <ProjectReference Include="..\BuyMe.Persistence\BuyMe.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Companys\Queries\" />
   </ItemGroup>
 
 </Project>

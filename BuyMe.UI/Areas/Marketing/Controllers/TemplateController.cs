@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Models;
+﻿using BuyMe.Application.Common.Interfaces;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.Company.Commonds.UpdateTemplate;
 using BuyMe.Application.Company.Queries;
 using BuyMe.Application.Template.Queries;
@@ -14,16 +15,18 @@ namespace BuyMe.UI.Areas.Marketing.Controllers
     public class TemplateController : BaseController
     {
         private readonly MarketingSettings _options;
+        private readonly ICurrentUserService currentUserService;
 
-        public TemplateController(IOptions<MarketingSettings> options)
+        public TemplateController(IOptions<MarketingSettings> options, ICurrentUserService currentUserService)
         {
             _options = options.Value;
+            this.currentUserService = currentUserService;
         }
 
         public async Task<IActionResult> Index()
         {
             var templates = await Mediator.Send(new GetTempWithImagesQuery());
-            var company = await Mediator.Send(new GetCompanyQuery());
+            var company = await Mediator.Send(new GetCompanyQuery(currentUserService.CompanyId));
             ViewBag.CompanyTemplate = company?.TemplateId;
             ViewBag.MarketingLink = $"{_options.Domain}/{company.Name}/{(HttpContext.Request.Cookies.TryGetValue("tenant",out var tenant)?tenant:"Default")}";
             return View(templates);

@@ -2,8 +2,8 @@
 {
     public interface ICurrentUserService
     {
-        int CompanyId { get; }
-        string UserId { get; }
+        int CompanyId { get;}
+        string UserId { get;  }
         bool IsAuthenticated { get; }
     }
 }

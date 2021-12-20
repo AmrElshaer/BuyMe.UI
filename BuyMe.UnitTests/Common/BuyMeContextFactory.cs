@@ -1,4 +1,5 @@
 ﻿using BuyMe.Application.Common.Interfaces;
+using BuyMe.Domain.Entities;
 using BuyMe.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -17,7 +18,7 @@ namespace BuyMe.UnitTests.Common
             var options = new DbContextOptionsBuilder<BuyMeDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
             var context = new BuyMeDbContext(options,new Mock<ITenantService>().Object,new Mock<ICurrentUserService>().Object);
             context.Database.EnsureCreated();
-            context.Companies.Add(new Domain.Entities.Company{ Name="BuyMe"});
+            context.Companies.AddRange(new Company{ Name="CompanyOne"}, new Company() { Name = "CompanyTwo" });
             context.SaveChanges();
             return context;
         }

@@ -2,6 +2,7 @@
 using BuyMe.Application.Common.Mapping;
 using BuyMe.Persistence;
 using System;
+using Xunit;
 
 namespace BuyMe.UnitTests.Common
 {
@@ -27,4 +28,6 @@ namespace BuyMe.UnitTests.Common
             BuyMeContextFactory.Destroy(Context);
         }
     }
+    [CollectionDefinition("QueryCollection")]
+    public class QueryCollection : ICollectionFixture<QueryTestFixture> { }
 }
