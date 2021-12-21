@@ -1,10 +1,12 @@
-﻿using BuyMe.Application.Common.Interfaces;
+﻿using BuyMe.Application.Common.Exceptions;
+using BuyMe.Application.Common.Interfaces;
 using BuyMe.Infrastructure.Identity;
 using BuyMe.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace BuyMe.Tenant
 {
@@ -17,8 +19,12 @@ namespace BuyMe.Tenant
         {
             this.services = services;
         }
-        public void GeneratTenant(string tenant)
+        public string GeneratTenant(string tenant, CancellationToken token = default)
         {
+            if (token.IsCancellationRequested)
+            {
+                throw new TaskCanceledException("Create Tenant");
+            }
             string connectionString = $"Server=(localdb)\\mssqllocaldb;Database={tenant};Trusted_Connection=True;MultipleActiveResultSets=true";
             // add BuyMeDbContext
             using var scope = services.CreateScope();
@@ -36,6 +42,7 @@ namespace BuyMe.Tenant
             {
                 dbContext2.Database.Migrate();
             }
+            return connectionString;
         }
 
     }

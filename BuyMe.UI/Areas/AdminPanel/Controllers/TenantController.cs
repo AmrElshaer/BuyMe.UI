@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BuyMe.Application.Common.Models;
 using BuyMe.Application.TenantSetting.Queries;
+using System.Threading;
 
 namespace BuyMe.UI.Areas.AdminPanel.Controllers
 {
@@ -26,10 +27,10 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
             return Json(result);
         }
 
-        public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<UpSertTenantCommond> value)
+        public async Task<ActionResult> CreateEdit([FromBody] CRUDModel<UpSertTenantCommond> value,CancellationToken token)
         {
             _ = value ?? throw new BadRequestException("Invalid Data");
-            value.Value.Id = await Mediator.Send(value.Value);
+            value.Value.Id = await Mediator.Send(value.Value, token);
             return Json(value.Value);
         }
 

@@ -32,7 +32,7 @@ namespace BuyMe.Application.TenantSetting.Commonds.UpSertTenant
                 Domain.Entities.Tenant entity;
                 if (request.Id.HasValue)
                 {
-                    var tenant =await tenantDbContext.Tenants.FindAsync(request.Id);
+                    var tenant =await tenantDbContext.Tenants.FindAsync(request.Id,cancellationToken);
                     Guard.Against.Null(tenant, request.Id);
                     entity = tenant;
                    
@@ -40,13 +40,12 @@ namespace BuyMe.Application.TenantSetting.Commonds.UpSertTenant
                 else
                 {
                     entity = new Domain.Entities.Tenant();
-                    entity.ConnectionString = $"Server=(localdb)\\mssqllocaldb;Database={request.TenantName};Trusted_Connection=True;MultipleActiveResultSets=true";
-                    tenantServiceProvider.GeneratTenant(request.TenantName);
-                    await  tenantDbContext.Tenants.AddAsync(entity);
+                    entity.ConnectionString =tenantServiceProvider.GeneratTenant(request.TenantName,cancellationToken);
+                    await  tenantDbContext.Tenants.AddAsync(entity,cancellationToken);
                 }
                 entity.TenantName = request.TenantName;
                 entity.TenantLogo = request.TenantLogo;
-                await tenantDbContext.SaveChangesAsync();
+                await tenantDbContext.SaveChangesAsync(cancellationToken);
                 
                 return entity.Id;
             }

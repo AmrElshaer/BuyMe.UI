@@ -1,7 +1,10 @@
-﻿namespace BuyMe.Application.Common.Interfaces
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace BuyMe.Application.Common.Interfaces
 {
     public interface ITenantServiceProvider
     {
-        void GeneratTenant(string tenant);
+       string GeneratTenant(string tenant, CancellationToken token = default);
     }
 }
