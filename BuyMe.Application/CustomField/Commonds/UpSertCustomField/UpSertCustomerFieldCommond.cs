@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using BuyMe.Application.CustomFieldData.Queries;
 
 namespace BuyMe.Application.CustomField.Commonds.UpSertCustomField
 {
@@ -21,7 +22,7 @@ namespace BuyMe.Application.CustomField.Commonds.UpSertCustomField
         public string Category { get; set; }
         public string FieldName { get; set; }
         public string FieldType { get; set; }
-        public class UpSertCustomerFieldCommondHandler : IRequestHandler<UpSertCustomerFieldCommond,int >
+        public class UpSertCustomerFieldCommondHandler : IRequestHandler<UpSertCustomerFieldCommond,int>
         {
             private readonly IBuyMeDbContext _context;
             private readonly ICurrentUserService _currentUserService;

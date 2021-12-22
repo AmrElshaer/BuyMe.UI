@@ -17,7 +17,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="control-section">
-        <ejs-grid id="Grid" actionBegin="actionBegin" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search","<a href='#' class='badge badge-warning' data-toggle='modal' data-target='#exampleModal'>New Field</a>" })" allowPaging="true">
+        <ejs-grid id="Grid" dataBound="databound" actionBegin="actionBegin" load="load" actionFailure="actionFailure" actionComplete="actionComplete" toolbar="@(new List<string>() { "Add", "Edit", "Delete","Print","Search","<a href='#' class='badge badge-warning' data-toggle='modal' data-target='#exampleModal'>New Field</a>" })" allowPaging="true">
             <e-data-manager url="/Inventory/Product/UrlDataSource" insertUrl="/Inventory/Product/CreateEdit" updateUrl="/Inventory/Product/CreateEdit" removeUrl="/Inventory/Product/Delete" adaptor="UrlAdaptor"></e-data-manager>
             <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
             <e-grid-columns>
@@ -35,9 +35,6 @@
                 <e-grid-column field="UnitOfMeasureId" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
                 <e-grid-column field="AllowMarketing" headerText="Marketing" displayAsCheckBox="true"></e-grid-column>
                 <e-grid-column field="ProductImages" allowSearching="false" allowFiltering="false" visible="false"></e-grid-column>
-                @*@foreach(var colum in ViewBag.AdditionalColums as IEnumerable<CustomFieldDto>){
-                        <e-grid-column field="@colum.FieldName" allowSearching="false" allowFiltering="false"></e-grid-column>
-                    }*@
             </e-grid-columns>
         </ejs-grid>
     </div>
@@ -56,10 +53,44 @@
     <div id="dialogTemp"></div>
 </script>
 <script src="~/js/grid.js"></script>
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 <script>
+    function databound() {
+        addCustomDataInGridCells();
+    }
+    function addCustomDataInGridCells() {
+        $.ajax({
+            url: `/CustomField/GetCustomData?category=Product`,
+            type: 'GET',
+            success: function (data) {
+                var grid = document.getElementById('Grid').ej2_instances[0];
+                $.each(data, (key, value) => {
+                    var row = grid.getRowInfo(grid.getRowByIndex(grid.getRowIndexByPrimaryKey(value.RefranceId)));
+                    $.each(value.Value, (i, v) => {
+                        var indexCell = grid.columns.map(a => a.field).indexOf(v.FieldName);
+                        row.row.cells[indexCell].innerText = v.FieldValue;
+                    });
+                });
+            }
+        });
+    }
+    function load() {
+        $.ajax({
+            url: `/CustomField/GetCustomFields?category=Product`,
+            type: 'GET',
+            async: false,
+            success: function (data) {
+                var grid = document.getElementById('Grid').ej2_instances[0];
+                $.each(data, (key, value) => {
+                    grid.columns.push({ field: value.FieldName, headerText: value.FieldName, allowSearching: false, allowFiltering: false });
+                });
 
+            }
+        });
+
+
+    }
     function actionBegin(args) {
         if (args.action === 'add' || args.action === 'edit') {
             // product descriptions
@@ -121,6 +152,7 @@
         displayErrors(args)
     }
     function actionComplete(args) {
+        console.log("compllelll");
         debugger;
         if (args.requestType === 'beginEdit' || args.requestType === 'add') {
             args.form.ej2_instances[0].addRules('BranchId', { required: true });
@@ -145,10 +177,8 @@
                         ej.popups.hideSpinner(args.dialog.element);
                     });
                 }
-            }
+        }
     }
-</script>
-<script type="text/javascript">
     function branchChange(e) {
         $.ajax({
             url: `/Config/Currency/GetBranchCurrency?branchId=${e.value}`,

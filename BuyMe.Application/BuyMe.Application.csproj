@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CustomFieldData\Commonds\DeleteCustFieldData\" />
     <Folder Include="Role\Queries\" />
   </ItemGroup>
 

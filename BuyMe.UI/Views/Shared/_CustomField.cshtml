@@ -3,7 +3,7 @@
 @inject IMediator Mediator
 @model string
 @{
-    var additionalColums = await Mediator.Send(new GetCustomFieldQuery() { Category = Model });
+    var additionalColums = await Mediator.Send(new GetCustomFieldQuery(Model));
 }
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -36,7 +36,6 @@
                                 <td>@colum.FieldType</td>
                                 <td style="display:none">@colum.Category</td>
                                 <td>
-                                    <button onclick="additionColDisplay(this)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i></button>
                                     <button onclick="deleteAddionCol(@(colum.Id))" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                                 </td>
                             </tr>

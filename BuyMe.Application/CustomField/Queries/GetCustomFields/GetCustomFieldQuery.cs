@@ -11,7 +11,11 @@ namespace BuyMe.Application.CustomField.Queries.GetCustomFields
 {
     public class GetCustomFieldQuery:IRequest<IList<CustomFieldDto>>
     {
-        public string Category { get; set; }
+        public string Category { get;  }
+        public GetCustomFieldQuery(string category )
+        {
+            this.Category = category;
+        }
         public class GetCustomFieldQueryHandler : IRequestHandler<GetCustomFieldQuery, IList<CustomFieldDto>>
         {
             private readonly IBuyMeDbContext _context;

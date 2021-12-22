@@ -10,7 +10,7 @@
 @model CreateEditProductCommond
 @{
     Layout = null;
-    var additionalColums = await Mediator.Send(new GetCustomFieldQuery() {Category="Product" });
+    var additionalColums = await Mediator.Send(new GetCustomFieldQuery("Product"));
     
 }
 <style>

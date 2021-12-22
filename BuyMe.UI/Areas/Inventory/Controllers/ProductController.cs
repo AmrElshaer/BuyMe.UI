@@ -3,6 +3,7 @@ using BuyMe.Application.Category.Queries;
 using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Common.Models;
 using BuyMe.Application.CustomField.Queries.GetCustomFields;
+using BuyMe.Application.CustomFieldData.Commonds.DeleteCustFieldData;
 using BuyMe.Application.CustomFieldData.Commonds.UpSertCustFieldData;
 using BuyMe.Application.Product.Commonds;
 using BuyMe.Application.Product.Commonds.DeleteProduct;
@@ -22,9 +23,9 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
     [Authorize(Roles = ApplicationRoles.Product)]
     public class ProductController : BaseController
     {
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
-            ViewBag.AdditionalColums = await Mediator.Send(new GetCustomFieldQuery() {Category=CustomCategoryModel.Product });
+          
             return View();
         }
 
@@ -53,6 +54,7 @@ namespace BuyMe.UI.Areas.Inventory.Controllers
         public async Task<ActionResult> Delete([FromBody] CRUDModel<ProductDto> value)
         {
             _ = await Mediator.Send(new DeleteProductCommond() { ProductId = Convert.ToInt32(value.Key) });
+            _ = await Mediator.Send(new DeleteCustFieldDataCommond(Convert.ToInt32(value.Key), CustomCategoryModel.Product));
             return Json(value);
         }
 
