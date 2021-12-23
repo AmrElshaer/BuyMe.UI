@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyMe.Persistence", "BuyMe.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyMe.Tenant", "BuyMe.Tenant\BuyMe.Tenant.csproj", "{F63EDCF7-980F-4D8E-B2F5-66ED2E30CABF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyMe.UnitTests", "BuyMe.UnitTests\BuyMe.UnitTests.csproj", "{B09CB3DF-C551-405F-BAFD-AF2B0CFAE5AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyMe.UnitTests", "BuyMe.UnitTests\BuyMe.UnitTests.csproj", "{B09CB3DF-C551-405F-BAFD-AF2B0CFAE5AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

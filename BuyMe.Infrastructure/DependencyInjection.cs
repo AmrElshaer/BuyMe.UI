@@ -1,6 +1,7 @@
 ﻿using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using BuyMe.Infrastructure.Authorization;
+using BuyMe.Infrastructure.HealthChecks;
 using BuyMe.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -18,7 +19,6 @@ namespace BuyMe.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            
             services.AddAndMigrateTenantDatabases(configuration);
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddRoles<IdentityRole>()
@@ -62,19 +62,29 @@ namespace BuyMe.Infrastructure
                 options.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAppSettingOptions[nameof(JwtIssuerOptions.SigningKey)])), SecurityAlgorithms.HmacSha256);
             });
 
+            // healthy check
+            services.AddHealthChecks()
+                .AddSqlServer(configuration.GetConnectionString("TenantConnection"), name: "Tenant DB Status",
+                tags: new[] { "Tenant DB" })
+                .AddCheck<SqlServerHealthCheck>(name: "Organizations Status", tags: new[] { "Organization DB" });
+            services.AddHealthChecksUI(setp =>
+            {
+                setp.MaximumHistoryEntriesPerEndpoint(50);
+                setp.SetEvaluationTimeInSeconds(5);
+                setp.AddHealthCheckEndpoint("ByMe Health Check", "http://localhost:5000/health");
+                setp.SetMinimumSecondsBetweenFailureNotifications(60);
+            }).AddInMemoryStorage();
             return services;
         }
-
-     
 
         public static IServiceCollection AddAndMigrateTenantDatabases(this IServiceCollection services, IConfiguration config)
         {
             var options = services.GetOptions<TenantSettings>(nameof(TenantSettings));
             var defaultConnectionString = options.DefaultConnection;
-           
-                services.AddDbContext<ApplicationDbContext>(m =>
-                m.UseSqlServer(e => e.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-            
+
+            services.AddDbContext<ApplicationDbContext>(m =>
+            m.UseSqlServer(e => e.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
             var tenants = options.Tenants;
             foreach (var tenant in tenants)
             {
@@ -97,6 +107,7 @@ namespace BuyMe.Infrastructure
             }
             return services;
         }
+
         public static T GetOptions<T>(this IServiceCollection services, string sectionName) where T : new()
         {
             using var serviceProvider = services.BuildServiceProvider();

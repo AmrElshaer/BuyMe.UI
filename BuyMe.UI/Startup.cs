@@ -1,4 +1,3 @@
-
 using BuyMe.Application;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
@@ -15,7 +14,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Rotativa.AspNetCore;
+using HealthChecks.UI.Client;
 
 namespace BuyMe.UI
 {
@@ -121,6 +123,12 @@ namespace BuyMe.UI
             RotativaConfiguration.Setup(env);
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecksUI();
                 endpoints.MapControllerRoute(
                 name: "areas",
                 pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
