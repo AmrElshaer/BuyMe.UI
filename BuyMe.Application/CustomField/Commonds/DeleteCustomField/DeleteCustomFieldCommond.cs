@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Interfaces;
+using BuyMe.Application.Common.Models;
 using BuyMe.Application.CustomerType.Commonds.Delete;
 using BuyMe.Application.CustomFieldData.Queries;
 using MediatR;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.Application.CustomField.Commonds.DeleteCustomField
 {
-    public class DeleteCustomFieldCommond:IRequest<Unit>
+    public class DeleteCustomFieldCommond : IRequest<Unit>
     {
         public int CustomFieldId { get; set; }
 
@@ -24,7 +25,7 @@ namespace BuyMe.Application.CustomField.Commonds.DeleteCustomField
             private readonly IBuyMeDbContext _context;
             private readonly IMapper mapper;
 
-            public DeleteCustomFieldCommondHandler(IBuyMeDbContext context,IMapper mapper)
+            public DeleteCustomFieldCommondHandler(IBuyMeDbContext context, IMapper mapper)
             {
                 this._context = context;
                 this.mapper = mapper;
@@ -42,26 +43,32 @@ namespace BuyMe.Application.CustomField.Commonds.DeleteCustomField
 
             private async Task RemoveCusDataAsync(Domain.Entities.CustomField customField)
             {
-                var customFieldDatas = mapper.Map<IList<CustomFieldDataDto>>(
-                    await _context.CustomFieldDatas.Where(a => a.Category == customField.Category
-                    ).ToListAsync());
-                if (customFieldDatas.Any())
-                {
-                    customFieldDatas.ToList()
-                        .ForEach(a => a.Value = a.Value.Where(c => c.FieldName != customField.FieldName).ToList());
-                    customFieldDatas.ToList().ForEach((a) =>
-                    {
-                        var cus = _context.CustomFieldDatas.Find(a.Id);
-                        if (a.Value.Any())
-                        {
-                            cus.Value = JsonConvert.SerializeObject(a.Value);
-                        }
-                        else
-                        {
-                            _context.CustomFieldDatas.Remove(cus);
-                        }
-                    });
-                }
+                var allCustomFieldData = await _context.CustomFieldDatas.Where(a => a.Category == customField.Category).ToListAsync();
+                var allcustomFieldDatasDto = mapper.Map<List<CustomFieldDataDto>>(allCustomFieldData);
+                allcustomFieldDatasDto.ForEach(a => a.Value = GetAllExpectThisFieldName(customField.FieldName, a.Value));
+                allcustomFieldDatasDto.ForEach((a) => UpDeleteCustomFieldData(a));
+            }
+
+            private List<CustomColumnModel> GetAllExpectThisFieldName(string fieldName, IList<CustomColumnModel> a)
+            {
+                return a.Where(c => c.FieldName != fieldName).ToList();
+            }
+
+            private void UpDeleteCustomFieldData(CustomFieldDataDto a)
+            {
+                if (a.Value.Any()) UpdateValue(a); else DeleteCusFieldData(a);
+            }
+
+            private void DeleteCusFieldData(CustomFieldDataDto a)
+            {
+                var cus = _context.CustomFieldDatas.Find(a.Id);
+                _context.CustomFieldDatas.Remove(cus);
+            }
+
+            private void UpdateValue(CustomFieldDataDto a)
+            {
+                var cus = _context.CustomFieldDatas.Find(a.Id);
+                cus.Value = JsonConvert.SerializeObject(a.Value);
             }
         }
     }
