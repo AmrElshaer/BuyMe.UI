@@ -1,28 +1,20 @@
-﻿using AutoMapper;
-using BuyMe.Application.Common.Behaviour;
+﻿using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Interfaces;
-using BuyMe.Application.Product.Commonds.CreatEditProductImages;
-using BuyMe.Application.Product.Commonds;
-using BuyMe.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using BuyMe.Application.CustomFieldData.Queries;
 
 namespace BuyMe.Application.CustomField.Commonds.UpSertCustomField
 {
-    public class UpSertCustomerFieldCommond:IRequest<int>
+    public class UpSertCustomerFieldCommond : IRequest<int>
     {
         public int? Id { get; set; }
         public string Category { get; set; }
         public string FieldName { get; set; }
         public string FieldType { get; set; }
-        public class UpSertCustomerFieldCommondHandler : IRequestHandler<UpSertCustomerFieldCommond,int>
+
+        public class UpSertCustomerFieldCommondHandler : IRequestHandler<UpSertCustomerFieldCommond, int>
         {
             private readonly IBuyMeDbContext _context;
             private readonly ICurrentUserService _currentUserService;
@@ -49,7 +41,7 @@ namespace BuyMe.Application.CustomField.Commonds.UpSertCustomField
                     customField.CompanyId = _currentUserService.CompanyId;
                 }
                 customField.Category = request.Category;
-                customField.FieldName=request.FieldName;
+                customField.FieldName = request.FieldName;
                 customField.FieldType = request.FieldType;
                 await _context.SaveChangesAsync(cancellationToken);
                 return customField.Id;

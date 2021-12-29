@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BuyMe.Application.Company.Queries;
+using BuyMe.Application.CustomField.Queries.GetCustomFields;
 using BuyMe.Domain.Entities;
 using Shouldly;
 using System;
@@ -19,7 +20,7 @@ namespace BuyMe.UnitTests.Mappings
         {
             _mapper = fixture.Mapper;
         }
-       
+
         [Fact]
         public void ShouldMapCompanyToCompanyDto()
         {
@@ -27,6 +28,15 @@ namespace BuyMe.UnitTests.Mappings
             var result = _mapper.Map<CompanyDto>(entity);
             result.ShouldNotBeNull();
             result.ShouldBeOfType<CompanyDto>();
+        }
+
+        [Fact]
+        public void ShouldMapCustomFieldToCustomFieldDto()
+        {
+            var entity = new CustomField();
+            var result = _mapper.Map<CustomFieldDto>(entity);
+            result.ShouldNotBeNull();
+            result.ShouldBeOfType<CustomFieldDto>();
         }
     }
 }
