@@ -41,6 +41,12 @@ namespace BuyMe.UnitTests.Common
                 FieldType = "Text",
                 Category = CustomCategoryModel.Product,
                 CompanyId = 1
+            }, new CustomField()
+            {
+                FieldName = "CustomNameThree",
+                FieldType = "Text",
+                Category = CustomCategoryModel.Product,
+                CompanyId = 1
             });
             context.CustomFieldDatas.AddRange(
                 new CustomFieldData()

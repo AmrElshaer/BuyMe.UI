@@ -1,20 +1,14 @@
 ﻿using BuyMe.Application.Common.Exceptions;
-using BuyMe.Application.Company.Commonds.DeleteCompany;
-using BuyMe.Persistence;
-using System;
-using System.Collections.Generic;
+using BuyMe.Application.Common.Models;
+using BuyMe.Application.CustomField.Commonds.DeleteCustomField;
+using BuyMe.Domain.Entities;
+using BuyMe.UnitTests.Common;
+using Shouldly;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static BuyMe.Application.Company.Commonds.DeleteCompany.DeleteCompanyCommond;
 using Xunit;
 using static BuyMe.Application.CustomField.Commonds.DeleteCustomField.DeleteCustomFieldCommond;
-using BuyMe.UnitTests.Common;
-using BuyMe.Application.CustomField.Commonds.DeleteCustomField;
-using BuyMe.Application.Common.Models;
-using Shouldly;
-using BuyMe.Domain.Entities;
 
 namespace BuyMe.UnitTests.CustomFields.Commonds
 {
@@ -29,27 +23,36 @@ namespace BuyMe.UnitTests.CustomFields.Commonds
         }
 
         [Fact]
-        public async Task Handle_DeleteCustomField_Return_ThrowNotFoundExpception()
+        public async Task DeleteCustomField_InValidId_ThrowNotFoundExpception()
         {
             var invalidId = 20;
-            var commond = new DeleteCustomFieldCommond() { CustomFieldId = invalidId };
-            await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(commond, CancellationToken.None));
+            await Assert.ThrowsAsync<NotFoundException>(() => DeleteCustomField(invalidId));
         }
 
         [Fact]
-        public async Task Handle_DeleteCustomField_Return_DeleteSuccess()
+        public async Task DeleteCustomField_ValidId_DeleteSuccess()
         {
-            // arrange
+            var validId = 3;
+            await DeleteCustomField(validId);
+            var field = await GetCustomField(validId);
+            field.ShouldBeNull();
+        }
+
+        [Fact]
+        public async Task DeleteCustomFieldWithFieldData_DeleteSuccess()
+        {
             var validId = 1;
             var fieldName = (await GetCustomField(validId))?.FieldName;
-            var commond = new DeleteCustomFieldCommond() { CustomFieldId = validId };
-            // act
-            await _sut.Handle(commond, CancellationToken.None);
-            var field = await GetCustomField(validId);
+            await DeleteCustomField(validId);
             var fieldData = buyMeDbContext.CustomFieldDatas.Where(a => a.Category == CustomCategoryModel.Product && a.Value.Contains(fieldName)).ToList();
-            // assert
             fieldData.ShouldBeEmpty();
-            field.ShouldBeNull();
+        }
+
+        private async Task DeleteCustomField(int id)
+        {
+            var commond = new DeleteCustomFieldCommond() { CustomFieldId = id };
+
+            await _sut.Handle(commond, CancellationToken.None);
         }
 
         private async Task<CustomField> GetCustomField(int fieldId)
