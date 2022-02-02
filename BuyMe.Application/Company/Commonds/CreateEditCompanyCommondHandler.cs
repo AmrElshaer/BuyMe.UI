@@ -33,7 +33,7 @@ namespace BuyMe.Application.Company.Commonds
             company.Country = request.Country;
             company.City = request.City;
             company.Business = request.Business;
-           
+            company.Logo = request.Logo;
             
             company.IsActive = request.IsActive;
             company.Name = request.Name;

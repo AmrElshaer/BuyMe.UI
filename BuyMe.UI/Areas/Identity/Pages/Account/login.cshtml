@@ -107,15 +107,18 @@
                                 </div>
                             </div>
                             <div asp-validation-summary="All" class="text-danger"></div>
-                           
+
                             <div class="form-group mt-2">
                                 <input type="email" class="form-control" asp-for="Input.Email" placeholder="Email">
                             </div>
                             <div class="form-group mt-2">
                                 <input type="password" class="form-control" asp-for="Input.Password" placeholder="Password">
                             </div>
-                           
 
+                            <div class="form-check mt-2">
+                                <input type="checkbox" onclick="togglePassword()" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1" >Show Password</label>
+                            </div>
 
 
                             <div class="btn2" style="text-align:left;
@@ -145,7 +148,11 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-<script>
+    <script>
+        function togglePassword() {
+            let x = document.getElementById("Input_Password");
+            x.type = x.type === "password" ? "text" : "password";
+        }
     function copyOrgLink() {
         /* Get the text field */
         var copyText = document.getElementById("orglink");
@@ -167,5 +174,5 @@
             }, 'slow');
         });
     });
-</script>
+    </script>
 }
