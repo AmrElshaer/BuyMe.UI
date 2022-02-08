@@ -8,6 +8,7 @@ namespace BuyMe.Application.Common.Models
 {
     public class TenantSettings
     {
+        public string ServerName { get; set; }
         public string DefaultConnection { get; set; }
         public List<Tenant> Tenants { get; set; }
     }

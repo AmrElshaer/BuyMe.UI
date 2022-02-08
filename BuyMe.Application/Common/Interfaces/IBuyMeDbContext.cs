@@ -33,6 +33,7 @@ namespace BuyMe.Application.Common.Interfaces
         DbSet<Entities.Shipment> Shipments { get; set; }
         DbSet<Entities.CustomField> CustomFields { get; set; }
         DbSet<Entities.CustomFieldData> CustomFieldDatas { get; set; }
+        DbSet<Entities.InvoiceType> InvoiceTypes { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

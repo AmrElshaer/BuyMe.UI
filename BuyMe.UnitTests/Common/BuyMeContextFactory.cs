@@ -22,6 +22,8 @@ namespace BuyMe.UnitTests.Common
             var context = new BuyMeDbContext(options, new Mock<ITenantService>().Object, new Mock<ICurrentUserService>().Object);
             context.Database.EnsureCreated();
             context.Companies.AddRange(new Company { Name = "CompanyOne" }, new Company() { Name = "CompanyTwo" });
+            context.InvoiceTypes.AddRange(new InvoiceType {InvoiceTypeName="Inv34",Description="InvDes" },
+                new InvoiceType{ InvoiceTypeName = "Inv35", Description = "InvDes3" });
             SeedCustomFieldAndData(context);
             context.SaveChanges();
             return context;

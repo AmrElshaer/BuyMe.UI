@@ -87,6 +87,7 @@ namespace BuyMe.Persistence
         public DbSet<Shipment> Shipments { get; set; }
         public DbSet<CustomField> CustomFields { get; set ; }
         public DbSet<CustomFieldData> CustomFieldDatas { get; set; }
+        public DbSet<InvoiceType> InvoiceTypes { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
