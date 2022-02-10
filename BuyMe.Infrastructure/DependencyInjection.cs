@@ -1,4 +1,5 @@
-﻿using BuyMe.Application.Common.Interfaces;
+﻿
+using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using BuyMe.Infrastructure.Authorization;
 using BuyMe.Infrastructure.HealthChecks;
@@ -67,13 +68,13 @@ namespace BuyMe.Infrastructure
                 .AddSqlServer(configuration.GetConnectionString("TenantConnection"), name: "Tenant DB Status",
                 tags: new[] { "Tenant DB" })
                 .AddCheck<SqlServerHealthCheck>(name: "Organizations Status", tags: new[] { "Organization DB" });
-            //services.AddHealthChecksUI(setp =>
-            //{
-            //    setp.MaximumHistoryEntriesPerEndpoint(50);
-            //    setp.SetEvaluationTimeInSeconds(5);
-            //    setp.AddHealthCheckEndpoint("ByMe Health Check", "http://localhost:5000/health");
-            //    setp.SetMinimumSecondsBetweenFailureNotifications(60);
-            //}).AddInMemoryStorage();
+            services.AddHealthChecksUI(setp =>
+            {
+                setp.MaximumHistoryEntriesPerEndpoint(50);
+                setp.SetEvaluationTimeInSeconds(5);
+                setp.AddHealthCheckEndpoint("ByMe Health Check", "http://localhost:5000/health");
+                setp.SetMinimumSecondsBetweenFailureNotifications(60);
+            }).AddInMemoryStorage();
             return services;
         }
 
