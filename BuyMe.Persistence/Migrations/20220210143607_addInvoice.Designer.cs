@@ -4,14 +4,16 @@ using BuyMe.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuyMe.Persistence.Migrations
 {
     [DbContext(typeof(BuyMeDbContext))]
-    partial class BuyMeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220210143607_addInvoice")]
+    partial class addInvoice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -428,14 +430,17 @@ namespace BuyMe.Persistence.Migrations
                     b.Property<int?>("InvoiceTypeId")
                         .HasColumnType("int");
 
-                    b.Property<long>("ShipmentId")
+                    b.Property<int>("ShipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("ShipmentId1")
                         .HasColumnType("bigint");
 
                     b.HasKey("InvoiceId");
 
                     b.HasIndex("InvoiceTypeId");
 
-                    b.HasIndex("ShipmentId");
+                    b.HasIndex("ShipmentId1");
 
                     b.ToTable("Invoices");
                 });
@@ -1098,9 +1103,7 @@ namespace BuyMe.Persistence.Migrations
 
                     b.HasOne("BuyMe.Domain.Entities.Shipment", "Shipment")
                         .WithMany()
-                        .HasForeignKey("ShipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ShipmentId1");
 
                     b.Navigation("InvoiceType");
 

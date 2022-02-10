@@ -5,12 +5,6 @@ using BuyMe.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.UnitTests.Common
 {
@@ -21,12 +15,60 @@ namespace BuyMe.UnitTests.Common
             var options = new DbContextOptionsBuilder<BuyMeDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
             var context = new BuyMeDbContext(options, new Mock<ITenantService>().Object, new Mock<ICurrentUserService>().Object);
             context.Database.EnsureCreated();
-            context.Companies.AddRange(new Company { Name = "CompanyOne" }, new Company() { Name = "CompanyTwo" });
-            context.InvoiceTypes.AddRange(new InvoiceType {InvoiceTypeName="Inv34",Description="InvDes" },
-                new InvoiceType{ InvoiceTypeName = "Inv35", Description = "InvDes3" });
+            SeedCompanyData(context);
+            SeedShipmentData(context);
+            SeedInvoiceTypeData(context);
+            SeedInvoiceData(context);
             SeedCustomFieldAndData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedInvoiceTypeData(BuyMeDbContext context)
+        {
+            context.InvoiceTypes.AddRange(new InvoiceType { InvoiceTypeName = "Inv34", Description = "InvDes" },
+                            new InvoiceType { InvoiceTypeName = "Inv35", Description = "InvDes3" });
+        }
+
+        private static void SeedCompanyData(BuyMeDbContext context)
+        {
+            context.Companies.AddRange(new Company { Name = "CompanyOne" }, new Company() { Name = "CompanyTwo" });
+        }
+
+        private static void SeedInvoiceData(BuyMeDbContext context)
+        {
+            
+            context.Invoices.AddRange(new Invoice
+            {
+                InvoiceName = "00001#INV",
+                ShipmentId = 1,
+                InvoiceTypeId = 1
+            },
+            new Invoice()
+            {
+                InvoiceName = "00002#INV",
+                ShipmentId = 2,
+                InvoiceTypeId = 2
+            }, new Invoice()
+            {
+                InvoiceName = "00003#INV",
+                ShipmentId = 1,
+                InvoiceTypeId = 1
+            }
+            );
+        }
+
+        private static void SeedShipmentData(BuyMeDbContext context)
+        {
+            context.Shipments.AddRange(new Shipment()
+            {
+                CompanyId = 1,
+                ShipmentName = "00001#ship"
+            }, new Shipment()
+            {
+                CompanyId = 1,
+                ShipmentName = "00002#ship"
+            });
         }
 
         private static void SeedCustomFieldAndData(BuyMeDbContext context)

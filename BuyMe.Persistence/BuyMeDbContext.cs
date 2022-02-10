@@ -88,7 +88,7 @@ namespace BuyMe.Persistence
         public DbSet<CustomField> CustomFields { get; set ; }
         public DbSet<CustomFieldData> CustomFieldDatas { get; set; }
         public DbSet<InvoiceType> InvoiceTypes { get; set; }
-
+        public DbSet<Invoice> Invoices { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())

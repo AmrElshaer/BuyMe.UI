@@ -34,6 +34,7 @@ namespace BuyMe.Application.Common.Interfaces
         DbSet<Entities.CustomField> CustomFields { get; set; }
         DbSet<Entities.CustomFieldData> CustomFieldDatas { get; set; }
         DbSet<Entities.InvoiceType> InvoiceTypes { get; set; }
+        DbSet<Entities.Invoice> Invoices { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

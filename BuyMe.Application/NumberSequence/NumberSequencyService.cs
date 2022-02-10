@@ -7,12 +7,10 @@ namespace BuyMe.Application.NumberSequence
 {
     public class NumberSequencyService : INumberSequencyService
     {
-        private readonly IBuyMeDbContext _context;
         private readonly IMediator _mediator;
 
-        public NumberSequencyService(IBuyMeDbContext context, IMediator mediator)
+        public NumberSequencyService(IMediator mediator)
         {
-            _context = context;
             _mediator = mediator;
         }
 
