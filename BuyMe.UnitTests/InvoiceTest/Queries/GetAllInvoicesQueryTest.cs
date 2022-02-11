@@ -27,6 +27,7 @@ namespace BuyMe.UnitTests.InvoiceTest.Queries
         [InlineData(1, "00001#INV")]
         [InlineData(3, "INV")]
         [InlineData(0, "00005#INV")]
+        [InlineData(2, "00001#ship")]
         public async Task GetAllInvoiceTypes(int expect, string value)
         {
             var res = await _sut.Handle(new GetAllInvoicesQuery() { DM = new DataManager() { SearchValue = value } }
