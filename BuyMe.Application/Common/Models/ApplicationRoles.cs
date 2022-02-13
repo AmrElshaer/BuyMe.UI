@@ -23,6 +23,8 @@ namespace BuyMe.Application.Common.Models
         public const string Shipment = "Shipment";
         public const string InvoiceType = "InvoiceType";
         public const string Invoice = "Invoice";
+        public const string PaymentType = "PaymentType";
+
         public static IEnumerable<string> GetRoles()
         {
             var roles = typeof(ApplicationRoles).GetFields().Select(a => a.Name);

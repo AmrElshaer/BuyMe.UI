@@ -1,0 +1,33 @@
+﻿@using BuyMe.Application.PaymentType.Commonds.CreatEditCommond
+@model CreatEditPaymentTypeCommond
+@{
+    Layout = null;
+}
+<style>
+    .dropDownListTop {
+        margin-top: 15px;
+    }
+</style>
+<div>
+    <input asp-for="PaymentTypeId" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="PaymentTypeName" />
+                <span class="e-float-line"></span>
+                <label asp-for="PaymentTypeName" class="e-float-text e-label-top">PaymentType Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input asp-for="Description" />
+                <span class="e-float-line"></span>
+                <label asp-for="Description" class="e-float-text e-label-top">Description</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ejs-scripts></ejs-scripts>

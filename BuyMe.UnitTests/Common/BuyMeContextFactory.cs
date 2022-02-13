@@ -20,8 +20,15 @@ namespace BuyMe.UnitTests.Common
             SeedInvoiceTypeData(context);
             SeedInvoiceData(context);
             SeedCustomFieldAndData(context);
+            SeedPaymentTypeData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedPaymentTypeData(BuyMeDbContext context)
+        {
+            context.PaymentTypes.AddRange(new PaymentType { PaymentTypeName = "Pay4", Description = "PayDes" },
+                           new PaymentType { PaymentTypeName = "Pay35", Description = "PayDes3" });
         }
 
         private static void SeedInvoiceTypeData(BuyMeDbContext context)
