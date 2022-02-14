@@ -36,6 +36,7 @@ namespace BuyMe.Application.Common.Interfaces
         DbSet<Entities.InvoiceType> InvoiceTypes { get; set; }
         DbSet<Entities.Invoice> Invoices { get; set; }
         DbSet<Entities.PaymentType> PaymentTypes { get; set; }
+        DbSet<Entities.PaymentReceive> PaymentReceives { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

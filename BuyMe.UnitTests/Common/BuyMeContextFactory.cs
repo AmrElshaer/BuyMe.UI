@@ -21,6 +21,7 @@ namespace BuyMe.UnitTests.Common
             SeedInvoiceData(context);
             SeedCustomFieldAndData(context);
             SeedPaymentTypeData(context);
+            SeedPaymentReceiveData(context);
             context.SaveChanges();
             return context;
         }
@@ -64,7 +65,28 @@ namespace BuyMe.UnitTests.Common
             }
             );
         }
+        private static void SeedPaymentReceiveData(BuyMeDbContext context)
+        {
 
+            context.PaymentReceives.AddRange(new PaymentReceive
+            {
+                PaymentReceiveName = "00001#PAYRCV",
+                PaymentTypeId = 1,
+                InvoiceId = 1
+            },
+            new PaymentReceive()
+            {
+                PaymentReceiveName = "00002#PAYRCV",
+                PaymentTypeId = 2,
+                InvoiceId = 2
+            }, new PaymentReceive()
+            {
+                PaymentReceiveName = "00003#PAYRCV",
+                PaymentTypeId = 1,
+                InvoiceId = 1
+            }
+            );
+        }
         private static void SeedShipmentData(BuyMeDbContext context)
         {
             context.Shipments.AddRange(new Shipment()

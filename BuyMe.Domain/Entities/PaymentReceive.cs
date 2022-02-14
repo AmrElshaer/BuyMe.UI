@@ -7,8 +7,10 @@ namespace BuyMe.Domain.Entities
         public int PaymentReceiveId { get; set; }
         public string PaymentReceiveName { get; set; }
         public int InvoiceId { get; set; }
+        public Invoice Invoice { get; set; }
         public DateTime PaymentDate { get; set; }
         public int PaymentTypeId { get; set; }
+        public PaymentType PaymentType { get; set; }
 
         public double PaymentAmount { get; set; }
         public bool IsFullPayment { get; set; } = true;

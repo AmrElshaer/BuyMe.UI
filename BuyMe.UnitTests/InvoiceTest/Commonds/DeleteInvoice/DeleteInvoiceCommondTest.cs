@@ -1,17 +1,11 @@
 ﻿using BuyMe.Application.Common.Exceptions;
 using BuyMe.Application.Invoice.Commonds.DeleteInvoice;
-using BuyMe.Application.InvoiceType.Commonds.DeletInvoiceType;
 using BuyMe.UnitTests.Common;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 using static BuyMe.Application.Invoice.Commonds.DeleteInvoice.DeleteInvoiceCommond;
-using static BuyMe.Application.InvoiceType.Commonds.DeletInvoiceType.DeleteInvoiceTypeCommond;
 
 namespace BuyMe.UnitTests.InvoiceTest.Commonds.DeleteInvoice
 {
