@@ -1,12 +1,17 @@
 ﻿using BuyMe.Application.Category.Queries;
 using BuyMe.Application.Common.Models;
 using BuyMe.Application.CustomerType.Queries;
+using BuyMe.Application.Invoice.Queries;
+using BuyMe.Application.PaymentReceive.Queries;
+using BuyMe.Application.SalesOrder.Queries;
+using BuyMe.Application.Shipment.Queries;
 using BuyMe.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,7 +48,28 @@ namespace BuyMe.UI.Controllers
         {
             ViewBag.ProductChart = await this.mediator.Send(new GetCategoryChartQuery());
             ViewBag.CustomerChart = await this.mediator.Send(new GetCustomerChartQuery());
+            ViewBag.SalesCycle =await SalesCycle();
             return View();
+        }
+
+        private async Task<IEnumerable<object>> SalesCycle()
+        {
+            var salesOrders = await mediator.Send(new GetSalesOrdersQuery());
+            var invoices = await mediator.Send(new GetAllInvoicesQuery());
+            var shipments = await mediator.Send(new GetShipmentsQuery());
+            var paymentsRec = await mediator.Send(new GetAllPaymentReceiveQuery());
+            var salesCycle = new List<object>();
+            salesCycle.AddRange(new List<object>{
+                new {xValue="Sales Order", yValue=SalesCyclePercetage(salesOrders.count) },
+                new {xValue= "Invoice",yValue=SalesCyclePercetage(invoices.count)},
+                new {xValue="Shipment",yValue=SalesCyclePercetage(shipments.count) },
+                new {xValue="Payment Receive",yValue=SalesCyclePercetage(paymentsRec.count)}
+            });
+            return salesCycle;
+        }
+        private double SalesCyclePercetage(double count)
+        {
+            return  (count / 4) * 100;
         }
         public IActionResult Privacy()
         {
