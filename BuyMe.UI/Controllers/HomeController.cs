@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace BuyMe.UI.Controllers
    
     public class HomeController : Controller
     {
-        private readonly TenantSettings option;
+       
         private readonly IMediator mediator;
 
         public HomeController(IMediator mediator)
@@ -43,13 +44,64 @@ namespace BuyMe.UI.Controllers
             }
             return LocalRedirect("/Identity/Account/ByMe");
         }
+       
         [Authorize]
         public async Task<IActionResult> Dashboard()
         {
-            ViewBag.ProductChart = await this.mediator.Send(new GetCategoryChartQuery());
-            ViewBag.CustomerChart = await this.mediator.Send(new GetCustomerChartQuery());
-            ViewBag.SalesCycle =await SalesCycle();
+            ViewBag.ProductChart = await mediator.Send(new GetCategoryChartQuery());
+            ViewBag.CustomerChart = await mediator.Send(new GetCustomerChartQuery());
+            ViewBag.SalesCycle = await SalesCycle();
+            ViewBag.SalesOrderMonthly= await SalesOrderMonthly();
+            ViewBag.InvoicesMonthly = await InvoiceMonthly();
+            ViewBag.PaymentsRecMonthly = await PaymentRecMonthly();
+            ViewBag.ShipmentsMonthly = await ShipmentMonthly();
+           
             return View();
+        }
+
+        private async Task<IEnumerable<CombinationSeriesData>> ShipmentMonthly()
+        {
+            var shipments = await mediator.Send(new GetShipmentsQuery());
+            var shipmentsMonthly = shipments.result.GroupBy(a => a.ShipmentDate.ToString("MMM")).Select(a => new CombinationSeriesData()
+            {
+                x = a.Key,
+                y = (a.Count())
+            });
+            return shipmentsMonthly;
+        }
+
+        private async Task<IEnumerable<CombinationSeriesData>> PaymentRecMonthly()
+        {
+            var paymentRecs = await mediator.Send(new GetAllPaymentReceiveQuery());
+            var paymentRecMonthly = paymentRecs.result.GroupBy(a => a.PaymentDate.ToString("MMM")).Select(a => new CombinationSeriesData()
+            {
+                x = a.Key,
+                y = (a.Count())
+            });
+            return paymentRecMonthly;
+        }
+
+        private async Task<IEnumerable<CombinationSeriesData>> SalesOrderMonthly()
+        {
+            var salesOrders = await mediator.Send(new GetSalesOrdersQuery());
+            var salesOrderMonthly = salesOrders.result.GroupBy(a => a.OrderDate.ToString("MMM")).Select(a => new CombinationSeriesData()
+            {
+                x = a.Key,
+                y = (a.Count())
+            });
+            return salesOrderMonthly;
+
+        }
+        private async Task<IEnumerable<CombinationSeriesData>> InvoiceMonthly()
+        {
+            var invoices = await mediator.Send(new GetAllInvoicesQuery());
+            var invoiceMonthly = invoices.result.GroupBy(a => a.InvoiceDate.ToString("MMM")).Select(a => new CombinationSeriesData()
+            {
+                x = a.Key,
+                y = (a.Count())
+            });
+            return invoiceMonthly;
+
         }
 
         private async Task<IEnumerable<object>> SalesCycle()
@@ -81,5 +133,10 @@ namespace BuyMe.UI.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+    }
+    public class CombinationSeriesData
+    {
+        public string x;
+        public double y;
     }
 }

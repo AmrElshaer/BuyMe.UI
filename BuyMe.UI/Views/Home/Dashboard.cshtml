@@ -21,53 +21,27 @@
                 <div class="box box-solid  box-primary">
                     <div class="box-header">
                         <i class="fa fa-th"></i>
-                        <h3 class="box-title">Products</h3>
+                        <h3 class="box-title">Sales Cycle Monthly</h3>
                         <div class="box-tools pull-right">
                             <button class="btn bg-primary btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
                             <button class="btn bg-primary btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
                         </div>
                     </div>
                     <div class="box-body border-radius-none">
-                        <div class="chart" id="line-chart">
-                            <ejs-accumulationchart enableAnimation="false" height="280" id="product" title="Products by Category">
-                                <e-accumulationchart-center x="50%" y="50%"></e-accumulationchart-center>
-                                <e-accumulationchart-tooltipsettings enable="true"></e-accumulationchart-tooltipsettings>
-                                <e-accumulationchart-legendsettings visible="true">
-                                </e-accumulationchart-legendsettings>
-                                <e-accumulation-series-collection>
-                                    <e-accumulation-series type="Pie" dataSource="ViewBag.ProductChart" radius="50%" startAngle="0" endAngle="360" explodeIndex="1" explode="true" explodeOffset="10%" xName="XValue" yName="YValue" name="Category">
-                                    </e-accumulation-series>
-                                </e-accumulation-series-collection>
-                            </ejs-accumulationchart>
+                        <div class="chart">
+                            <ejs-chart id="monthly" enableAnimation="true">
+                                <e-chart-primaryxaxis enableScrollbarOnZooming="true" valueType="Category" title="Month"></e-chart-primaryxaxis>
+                                <e-chart-primaryyaxis valueType="Double" title="Data count"></e-chart-primaryyaxis>
+                                <e-series-collection>
+                                    <e-series dataSource="ViewBag.SalesOrderMonthly" name="Sales Order" xName="x" yName="y" type="@Syncfusion.EJ2.Charts.ChartSeriesType.StackingColumn"></e-series>
+                                    <e-series dataSource="ViewBag.InvoicesMonthly" name="Invoice" xName="x" yName="y" type="@Syncfusion.EJ2.Charts.ChartSeriesType.StackingColumn"></e-series>
+                                    <e-series dataSource="ViewBag.PaymentsRecMonthly" name="Payment Receive" xName="x" yName="y" type="@Syncfusion.EJ2.Charts.ChartSeriesType.StackingColumn"></e-series>
+                                    <e-series dataSource="ViewBag.ShipmentsMonthly" name="Shipment" xName="x" yName="y" type="@Syncfusion.EJ2.Charts.ChartSeriesType.StackingColumn"></e-series>
+                                </e-series-collection>
+                            </ejs-chart>
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
-            </div>
-            <div class="col-lg-6">
-                <div class="box box-solid box-warning">
-                    <div class="box-header">
-                        <i class="fa fa-th"></i>
-                        <h3 class="box-title">Customers</h3>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-warning btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-warning btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                        </div>
-                    </div>
-                    <div class="box-body border-radius-none">
-                        <div class="chart" id="line-chart">
-                            <ejs-accumulationchart enableAnimation="false" height="280" id="customer" title="Customers by Customer Type">
-                                <e-accumulationchart-center x="50%" y="50%"></e-accumulationchart-center>
-                                <e-accumulationchart-tooltipsettings enable="true"></e-accumulationchart-tooltipsettings>
-                                <e-accumulationchart-legendsettings visible="true">
-                                </e-accumulationchart-legendsettings>
-                                <e-accumulation-series-collection>
-                                    <e-accumulation-series type="Pie" dataSource="ViewBag.CustomerChart" radius="50%" startAngle="0" endAngle="360" explodeIndex="5" explode="true" explodeOffset="10%" xName="XValue" yName="YValue" name="CustomerType">
-                                    </e-accumulation-series>
-                                </e-accumulation-series-collection>
-                            </ejs-accumulationchart>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col-lg-6">
                 <div class="box box-solid  box-primary">
@@ -98,6 +72,62 @@
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="box box-solid  box-primary">
+                    <div class="box-header">
+                        <i class="fa fa-th"></i>
+                        <h3 class="box-title">Products</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn bg-primary btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn bg-primary btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body border-radius-none">
+                        <div class="chart" id="line-chart">
+                            <ejs-accumulationchart enableAnimation="false" height="280" id="product" title="Products by Category">
+                                <e-accumulationchart-center x="50%" y="50%"></e-accumulationchart-center>
+                                <e-accumulationchart-tooltipsettings enable="true"></e-accumulationchart-tooltipsettings>
+                                <e-accumulationchart-legendsettings visible="true">
+                                </e-accumulationchart-legendsettings>
+                                <e-accumulation-series-collection>
+                                    <e-accumulation-series type="Pie" dataSource="ViewBag.ProductChart" radius="50%" startAngle="0" endAngle="360" explodeIndex="1" explode="true" explodeOffset="10%" xName="XValue" yName="YValue" name="Category">
+                                    </e-accumulation-series>
+                                </e-accumulation-series-collection>
+                            </ejs-accumulationchart>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="box box-solid box-warning">
+                    <div class="box-header">
+                        <i class="fa fa-th"></i>
+                        <h3 class="box-title">Customers</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-warning btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-warning btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body border-radius-none">
+                        <div class="chart" id="line-chart">
+                            <ejs-accumulationchart enableAnimation="false" height="280" id="customer" title="Customers by Customer Type">
+                                <e-accumulationchart-center x="50%" y="50%"></e-accumulationchart-center>
+                                <e-accumulationchart-tooltipsettings enable="true"></e-accumulationchart-tooltipsettings>
+                                <e-accumulationchart-legendsettings visible="true">
+                                </e-accumulationchart-legendsettings>
+                                <e-accumulation-series-collection>
+                                    <e-accumulation-series type="Pie" dataSource="ViewBag.CustomerChart" radius="50%" startAngle="0" endAngle="360" explodeIndex="5" explode="true" explodeOffset="10%" xName="XValue" yName="YValue" name="CustomerType">
+                                    </e-accumulation-series>
+                                </e-accumulation-series-collection>
+                            </ejs-accumulationchart>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
