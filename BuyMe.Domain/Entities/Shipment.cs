@@ -8,7 +8,7 @@ namespace BuyMe.Domain.Entities
         public string ShipmentName { get; set; }
         public long? SalesOrderId { get; set; }
         public SalesOrder SalesOrder { get; set; }
-        public DateTimeOffset ShipmentDate { get; set; }
+        public DateTime ShipmentDate { get; set; }
         public int? ShipmentTypeId { get; set; }
         public ShipmentType ShipmentType { get; set; }
         public int? WarehouseId { get; set; }

@@ -1,5 +1,4 @@
 ﻿using BuyMe.Application.Category.Queries;
-using BuyMe.Application.Common.Models;
 using BuyMe.Application.CustomerType.Queries;
 using BuyMe.Application.Invoice.Queries;
 using BuyMe.Application.PaymentReceive.Queries;
@@ -9,9 +8,6 @@ using BuyMe.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -19,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace BuyMe.UI.Controllers
 {
-   
+
     public class HomeController : Controller
     {
        

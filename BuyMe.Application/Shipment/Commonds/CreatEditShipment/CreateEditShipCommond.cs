@@ -9,7 +9,7 @@ namespace BuyMe.Application.Shipment.Commonds
         public long? ShipmentId { get; set; }
         public string ShipmentName { get; set; }
         public long SalesOrderId { get; set; }
-        public DateTimeOffset ShipmentDate { get; set; }
+        public DateTime ShipmentDate { get; set; }
         public int ShipmentTypeId { get; set; }
         public int WarehouseId { get; set; }
         public int CompanyId { get; set; }

@@ -20,7 +20,7 @@ namespace BuyMe.Application.Shipment.Queries
         public long? SalesOrderId { get; set; }
         public SalesOrderDto SalesOrder { get; set; }
         public string SalesOrderName { get; set; }
-        public DateTimeOffset ShipmentDate { get; set; }
+        public DateTime ShipmentDate { get; set; }
         public int? ShipmentTypeId { get; set; }
         public ShipmentTypeDto ShipmentType { get; set; }
         public int? WarehouseId { get; set; }
