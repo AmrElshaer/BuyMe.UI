@@ -26,19 +26,11 @@ namespace BuyMe.Persistence
             var tenants = options.Tenants;
             foreach (var tenant in tenants)
             {
-                string connectionString;
-                if (string.IsNullOrEmpty(tenant.ConnectionString))
-                {
-                    connectionString = defaultConnectionString;
-                }
-                else
-                {
-                    connectionString = tenant.ConnectionString;
-                }
+                string connectionString= string.IsNullOrEmpty(tenant.ConnectionString)? defaultConnectionString: tenant.ConnectionString;
                 using var scope = services.BuildServiceProvider().CreateScope();
                 var dbContext = scope.ServiceProvider.GetRequiredService<BuyMeDbContext>();
                 dbContext.Database.SetConnectionString(connectionString);
-                if (dbContext.Database.GetMigrations().Count() > 0)
+                if (dbContext.Database.GetMigrations().Any())
                 {
                     dbContext.Database.Migrate();
                 }
