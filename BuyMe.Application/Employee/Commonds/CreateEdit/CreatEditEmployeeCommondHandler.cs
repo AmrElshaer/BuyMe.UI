@@ -24,15 +24,13 @@ namespace BuyMe.Application.Employee.Commonds.CreateEdit
             {
                 var entity = await _context.Employees.FindAsync(request.Id);
                 Guard.Against.Null(entity, request.Id);
-                await _applicationUserServcie.EditApplicationUser(request.UserId, request.FirstName, request.LastName, request.Password
-                    , request.Email, request.CompanyId.Value, request.Photo);
+                await _applicationUserServcie.EditApplicationUser(request);
                 employee = entity;
             }
             else
             {
                 employee = new Domain.Entities.Employee();
-                employee.UserId = await _applicationUserServcie.AddApplicationUser(request.FirstName, request.LastName, request.Password
-                    , request.Email, request.CompanyId.Value, request.Photo);
+                employee.UserId = await _applicationUserServcie.AddApplicationUser(request);
                 await _context.Employees.AddAsync(employee);
             }
             employee.LastName = request.LastName;

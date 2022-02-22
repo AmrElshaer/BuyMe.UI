@@ -1,12 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using BuyMe.Application.Employee.Commonds.CreateEdit;
+using BuyMe.Application.Employee.Queries;
+using System.Threading.Tasks;
 
 namespace BuyMe.Application.Common.Interfaces
 {
     public interface IApplicationUserServcie
     {
-        Task<string> AddApplicationUser(string firstName, string lastName, string password, string email, int companyId, string photo = null);
+        Task<string> AddApplicationUser(CreatEditEmployeeCommond creatEditEmployee);
 
-        Task EditApplicationUser(string userId, string firstName, string lastName, string password, string email, int companyId, string photo = null);
+        Task EditApplicationUser(CreatEditEmployeeCommond creatEditEmployee);
 
         Task RemoveApplicationUser(string id);
 
