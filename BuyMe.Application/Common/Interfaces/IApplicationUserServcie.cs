@@ -1,19 +1,19 @@
-﻿using BuyMe.Application.Employee.Commonds.CreateEdit;
-using BuyMe.Application.Employee.Queries;
+﻿using BuyMe.Application.Common.Models;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Common.Interfaces
 {
     public interface IApplicationUserServcie
     {
-        Task<string> AddApplicationUser(CreatEditEmployeeCommond creatEditEmployee);
+        Task<string> AddApplicationUser(Common.Models.User user);
 
-        Task EditApplicationUser(CreatEditEmployeeCommond creatEditEmployee);
+        Task EditApplicationUser(Common.Models.User user);
 
         Task RemoveApplicationUser(string id);
 
         Task<(bool isRegister, string userId)> TryGetUserAsync(string email, int companyId, string password);
 
         Task<bool> EmailExistAsync(string email, int companyId);
+        Task ChangePassword(string userId, string oldPass, string newPass);
     }
 }

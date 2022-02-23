@@ -1,4 +1,7 @@
-﻿
+﻿@inject IUserManagerService UserManager
+@{
+    var user = await UserManager.GetCurrentUser();
+}
 <div id="displayProfile">
     <section class="content">
         <div class="control-section">
@@ -8,7 +11,33 @@
                     <h3 class="box-title">User Profile</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Email
+                            </dt>
+                            <dd>
+                                <input class="form-control" value="@(user.Email)" readonly />
+                            </dd>
+                            <dt>
+                                First Name
+                            </dt>
+                            <dd>
+                                <input class="form-control" value="@(user.FirstName)" readonly />
+                            </dd>
+                            <dt>
+                                Last Name
+                            </dt>
+                            <dd>
+                                <input class="form-control" value="@(user.LastName)" readonly />
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-4">
 
+                    </div>
+                </div>
             </div><!-- /.box -->
         </div>
     </section>
@@ -19,25 +48,65 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Edit Profile</h3>
+                    <h3 class="box-title">Change Password</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
+                <form role="form" id="changePassword">
+                    <div  id="changeMess">
+                       
+                    </div>
+                   
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="OldPassword">Old Password</label>
+                            <input type="password" name="OldPassword" class="form-control" id="OldPassword" placeholder="Old Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="NewPassword">New Password</label>
+                            <input type="password" name="NewPassword" class="form-control" id="NewPassword" placeholder="New Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="RePassword">Re-type Password</label>
+                            <input type="password" name="ReTypePassword" class="form-control" id="RePassword" placeholder="Re-type Password">
+                        </div>
+                    </div><!-- /.box-body -->
 
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                </form>
             </div><!-- /.box -->
         </div>
     </section>
 </div>
-<div id="changPassword">
-    <section class="content">
-        <div class="control-section">
-            <!-- general form elements -->
-            <div class="box box-primary">
-                <div class="box-header">
-                    <h3 class="box-title">Change Profile</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
+@section Scripts{
+    <script>
 
-            </div><!-- /.box -->
-        </div>
-    </section>
-</div>
+        $(document).ready(function () {
+            $("#changePassword").on("submit", function (event) {
+                event.preventDefault();
+                const formValues = $(this).serializeArray();
+                $.ajax({
+                    url: "@Url.Action("ChangePassword", "Profile")",
+                    type: "POST",
+                    data: formValues,
+                    success: function (data) {
+                        $("#changeMess").html("");
+                        $("#changeMess").append(`<p class="alert alert-success"> Password Change Succesfull </p>`);
+                        $("#changePassword").trigger("reset");
+                    },
+                    error: function (errors) {
+                        console.log(errors);
+                        $("#changeMess").html("");
+                        Object.values(errors.responseJSON).forEach(v => {
+                            $("#changeMess").append(`<p class="alert alert-danger" style="margin:2px;display:inline-block;max-width:fit-content">${v}</p>`);
+                        });
+                    }
+
+                });
+            });
+        });
+    </script>
+
+}

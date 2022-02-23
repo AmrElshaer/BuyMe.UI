@@ -278,7 +278,7 @@
                                     <img src="@(appUser.Photo)" class="user-image" alt="User Image" />
                                 }
 
-                                <span class="hidden-xs">@(appUser.UserName)</span>
+                                <span class="hidden-xs">@($"{appUser.FirstName} {appUser.LastName}")</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->

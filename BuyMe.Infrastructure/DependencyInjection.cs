@@ -64,10 +64,10 @@ namespace BuyMe.Infrastructure
             });
 
             // healthy check
-            services.AddHealthChecks()
-                .AddSqlServer(configuration.GetConnectionString("TenantConnection"), name: "Tenant DB Status",
-                tags: new[] { "Tenant DB" })
-                .AddCheck<SqlServerHealthCheck>(name: "Organizations Status", tags: new[] { "Organization DB" });
+            //services.AddHealthChecks()
+            //    .AddSqlServer(configuration.GetConnectionString("TenantConnection"), name: "Tenant DB Status",
+            //    tags: new[] { "Tenant DB" })
+            //    .AddCheck<SqlServerHealthCheck>(name: "Organizations Status", tags: new[] { "Organization DB" });
             services.AddHealthChecksUI(setp =>
             {
                 setp.MaximumHistoryEntriesPerEndpoint(50);

@@ -1,5 +1,4 @@
 ﻿using BuyMe.Application.Common.Interfaces;
-using BuyMe.Application.Employee.Commonds.CreateEdit;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,14 +18,15 @@ namespace BuyMe.Application.Marketing.User.Commonds.Register
 
         public async Task<Unit> Handle(RegisterCommond request, CancellationToken cancellationToken)
         {
-           
-            var userId = await _applicationUserServcie.AddApplicationUser(new CreatEditEmployeeCommond() { 
-             FirstName=request.FirstName,
-             LastName=request.LastName,
-             Email=request.Email,
-             Password=request.Password,
-             CompanyId=request.CompanyId
-            
+
+            var userId = await _applicationUserServcie.AddApplicationUser(new Common.Models.User()
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                Password = request.Password,
+                CompanyId = request.CompanyId
+
             });
             await _context.Customers.AddAsync(new Domain.Entities.Customer()
             {

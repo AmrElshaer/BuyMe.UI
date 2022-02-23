@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BuyMe.Application.Common.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Common.Interfaces
@@ -7,6 +8,6 @@ namespace BuyMe.Application.Common.Interfaces
     {
         Task<IEnumerable<string>> GetCurrentUserRoles();
 
-        Task<(string UserName, string Photo)> GetCurrentUser();
+        Task<Application.Common.Models.User> GetCurrentUser();
     }
 }

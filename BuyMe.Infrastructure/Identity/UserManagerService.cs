@@ -1,4 +1,6 @@
-﻿using BuyMe.Application.Common.Interfaces;
+﻿using BuyMe.Application.Common.Behaviour;
+using BuyMe.Application.Common.Interfaces;
+using BuyMe.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -22,10 +24,11 @@ namespace BuyMe.Infrastructure.Identity
             return await userManager.GetRolesAsync(user);
         }
 
-        public async Task<(string UserName, string Photo)> GetCurrentUser()
+        public async Task<Application.Common.Models.User> GetCurrentUser()
         {
             var appUser = await userManager.FindByIdAsync(currentUserService.UserId);
-            return ($"{appUser?.FirstName} {appUser?.LastName}", appUser.Photo);
+            Guard.Against.Null(appUser,currentUserService.UserId);
+            return new User() { FirstName = appUser.FirstName, LastName = appUser.LastName, Photo = appUser.Photo,Email=appUser.Email };
         }
     }
 }
