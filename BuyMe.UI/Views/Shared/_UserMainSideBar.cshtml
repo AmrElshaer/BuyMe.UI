@@ -1,31 +1,32 @@
-﻿<li class="header">MAIN NAVIGATION</li>
+﻿@inject IViewLocalizer _localizer
+<li class="header">MAIN NAVIGATION</li>
 <li class="@Html.IsSelected(controller:"Home")">
     <a href="/">
-        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+        <i class="fa fa-dashboard"></i> <span>@_localizer["Dashboard"]</span>
     </a>
 </li>
 <li class="treeview @Html.IsSelected(area:"Sales")">
     <a href="#">
         <i class="fa fa-laptop"></i>
-        <span>SALES</span>
+        <span> @_localizer["SALES"]</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li class="@Html.IsSelected(controller:"CustomerType")"><a asp-area="Sales" asp-controller="CustomerType" asp-action="Index"><i class="fa fa-circle-o"></i>Customer Type</a></li>
-        <li class="@Html.IsSelected( controller:"Customer")"><a asp-area="Sales" asp-controller="Customer" asp-action="Index"><i class="fa fa-circle-o"></i>Customer</a></li>
-        <li class="@Html.IsSelected( controller : "SalesType")"><a asp-area="Sales" asp-controller="SalesType" asp-action="Index"><i class="fa fa-circle-o"></i>SalesType</a></li>
-        <li class="@Html.IsSelected( controller : "SalesOrder")"><a asp-area="Sales" asp-controller="SalesOrder" asp-action="Index"><i class="fa fa-circle-o"></i>SalesOrder</a></li>
-        <li class="@Html.IsSelected( controller : "ShipmentType")"><a asp-area="Sales" asp-controller="ShipmentType" asp-action="Index"><i class="fa fa-circle-o"></i>ShipmentType</a></li>
-        <li class="@Html.IsSelected( controller : "Shipment")"><a asp-area="Sales" asp-controller="Shipment" asp-action="Index"><i class="fa fa-circle-o"></i>Shipment</a></li>
-        <li class="@Html.IsSelected( controller : "InvoiceType")"><a asp-area="Sales" asp-controller="InvoiceType" asp-action="Index"><i class="fa fa-circle-o"></i>InvoiceType</a></li>
-        <li class="@Html.IsSelected( controller : "Invoice")"><a asp-area="Sales" asp-controller="Invoice" asp-action="Index"><i class="fa fa-circle-o"></i>Invoice</a></li>
-        <li class="@Html.IsSelected( controller : "PaymentReceive")"><a asp-area="Sales" asp-controller="PaymentReceive" asp-action="Index"><i class="fa fa-circle-o"></i>PaymentReceive</a></li>
+        <li class="@Html.IsSelected(controller:"CustomerType")"><a asp-area="Sales" asp-controller="CustomerType" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["CustomerType"]</a></li>
+            <li class="@Html.IsSelected( controller:"Customer")"><a asp-area="Sales" asp-controller="Customer" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Customers"] </a></li>
+        <li class="@Html.IsSelected( controller : "SalesType")"><a asp-area="Sales" asp-controller="SalesType" asp-action="Index"><i class="fa fa-circle-o"></i> @_localizer["SalesType"]</a></li>
+        <li class="@Html.IsSelected( controller : "SalesOrder")"><a asp-area="Sales" asp-controller="SalesOrder" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["SalesOrder"]</a></li>
+        <li class="@Html.IsSelected( controller : "ShipmentType")"><a asp-area="Sales" asp-controller="ShipmentType" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["ShipmentType"]</a></li>
+        <li class="@Html.IsSelected( controller : "Shipment")"><a asp-area="Sales" asp-controller="Shipment" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Shipments"] </a></li>
+        <li class="@Html.IsSelected( controller : "InvoiceType")"><a asp-area="Sales" asp-controller="InvoiceType" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["InvoiceType"] </a></li>
+        <li class="@Html.IsSelected( controller : "Invoice")"><a asp-area="Sales" asp-controller="Invoice" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Invoices"] </a></li>
+        <li class="@Html.IsSelected( controller : "PaymentReceive")"><a asp-area="Sales" asp-controller="PaymentReceive" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["PaymentReceive"]</a></li>
     </ul>
 </li>
 <li class="treeview">
     <a href="#">
         <i class="fa fa-pie-chart"></i>
-        <span>PURCHASE</span>
+        <span>@_localizer["PURCHASE"]</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
@@ -37,48 +38,48 @@
 <li class="treeview  @Html.IsSelected( area:"Inventory")">
     <a href="#">
         <i class="fa fa-laptop"></i>
-        <span>INVENTORY</span>
+        <span>@_localizer["INVENTORY"]</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li class="@Html.IsSelected(controller:"Category")"><a asp-area="Inventory" asp-controller="Category" asp-action="Index"><i class="fa fa-circle-o"></i>Category</a></li>
-        <li class="@Html.IsSelected(controller:"UOM")"><a asp-area="Inventory" asp-controller="UOM" asp-action="Index"><i class="fa fa-circle-o"></i> Unit Of Measure</a></li>
-        <li class="@Html.IsSelected(controller:"Product")"><a asp-area="Inventory" asp-controller="Product" asp-action="Index"><i class="fa fa-circle-o"></i>Product</a></li>
-        <li class="@Html.IsSelected(controller:"Warehouse")"><a asp-area="Inventory" asp-controller="Warehouse" asp-action="Index"><i class="fa fa-circle-o"></i>Warehouse</a></li>
+        <li class="@Html.IsSelected(controller:"Category")"><a asp-area="Inventory" asp-controller="Category" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Category"]</a></li>
+        <li class="@Html.IsSelected(controller:"UOM")"><a asp-area="Inventory" asp-controller="UOM" asp-action="Index"><i class="fa fa-circle-o"></i> @_localizer["UnitOfMeasure"]</a></li>
+        <li class="@Html.IsSelected(controller:"Product")"><a asp-area="Inventory" asp-controller="Product" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Products"]</a></li>
+        <li class="@Html.IsSelected(controller:"Warehouse")"><a asp-area="Inventory" asp-controller="Warehouse" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Warehouse"]</a></li>
     </ul>
 </li>
 <li class="treeview @Html.IsSelected(area:"Config")">
     <a href="#">
-        <i class="fa fa-edit"></i> <span>CONFIG</span>
+        <i class="fa fa-edit"></i> <span>@_localizer["CONFIG"]</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li class="@Html.IsSelected(controller:"Currency")"><a asp-area="Config" asp-controller="Currency" asp-action="Index"><i class="fa fa-circle-o"></i>Currency</a></li>
-        <li class="@Html.IsSelected(controller:"Branch")"><a asp-area="Config" asp-controller="Branch" asp-action="Index"><i class="fa fa-circle-o"></i>Branch</a></li>
-        <li class="@Html.IsSelected(controller:"PaymentType")"><a asp-area="Config" asp-controller="PaymentType" asp-action="Index"><i class="fa fa-circle-o"></i>PaymentType</a></li>
+        <li class="@Html.IsSelected(controller:"Currency")"><a asp-area="Config" asp-controller="Currency" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Currency"]</a></li>
+        <li class="@Html.IsSelected(controller:"Branch")"><a asp-area="Config" asp-controller="Branch" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Branch"]</a></li>
+        <li class="@Html.IsSelected(controller:"PaymentType")"><a asp-area="Config" asp-controller="PaymentType" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["PaymentType"]</a></li>
         
         
     </ul>
 </li>
 <li class="treeview @Html.IsSelected(area:"Marketing")">
     <a href="#">
-        <i class="fa fa-table"></i> <span>Marketing</span>
+        <i class="fa fa-table"></i> <span>@_localizer["Marketing"]</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li class="@Html.IsSelected(controller:"Settings")"><a asp-area="Marketing" asp-controller="Settings" asp-action="Index"><i class="fa fa-circle-o"></i>Settings</a></li>
-        <li class="@Html.IsSelected(controller:"DefaultMarketingSetting")"><a asp-area="Marketing" asp-controller="DefaultMarketingSetting" asp-action="Index"><i class="fa fa-circle-o"></i>Default Settings</a></li>
-        <li class="@Html.IsSelected(controller:"Template")"><a asp-area="Marketing" asp-controller="Template" asp-action="Index"><i class="fa fa-circle-o"></i>Template</a></li>
+        <li class="@Html.IsSelected(controller:"Settings")"><a asp-area="Marketing" asp-controller="Settings" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Settings"]</a></li>
+        <li class="@Html.IsSelected(controller:"DefaultMarketingSetting")"><a asp-area="Marketing" asp-controller="DefaultMarketingSetting" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["DefaultSettings"]</a></li>
+        <li class="@Html.IsSelected(controller:"Template")"><a asp-area="Marketing" asp-controller="Template" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Templates"]</a></li>
 
     </ul>
 </li>
 <li class="treeview @Html.IsSelected(area:"UserRole")">
     <a href="#">
-        <i class="fa fa-table"></i> <span>User & Role</span>
+        <i class="fa fa-table"></i> <span>@_localizer["UserRole"]</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li class="@Html.IsSelected(controller:"User")"><a asp-area="UserRole" asp-controller="User" asp-action="Index"><i class="fa fa-circle-o"></i>User</a></li>
-        <li class="@Html.IsSelected(controller:"ChangeRole")"><a asp-area="UserRole" asp-controller="ChangeRole" asp-action="Index"><i class="fa fa-circle-o"></i>ChangeRole</a></li>
+        <li class="@Html.IsSelected(controller:"User")"><a asp-area="UserRole" asp-controller="User" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Users"]</a></li>
+        <li class="@Html.IsSelected(controller:"ChangeRole")"><a asp-area="UserRole" asp-controller="ChangeRole" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["ChangeRole"]</a></li>
     </ul>
 </li>

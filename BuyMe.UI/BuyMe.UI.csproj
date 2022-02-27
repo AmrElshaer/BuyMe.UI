@@ -35,6 +35,7 @@
     <Folder Include="Areas\UserRole\Data\" />
     <Folder Include="Areas\UserRole\Models\" />
     <Folder Include="Areas\UserRole\Views\Shared\" />
+    <Folder Include="Resources\Areas\Identity\Pages\Account" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +43,30 @@
     <ProjectReference Include="..\BuyMe.Infrastructure\BuyMe.Infrastructure.csproj" />
     <ProjectReference Include="..\BuyMe.Persistence\BuyMe.Persistence.csproj" />
     <ProjectReference Include="..\BuyMe.Tenant\BuyMe.Tenant.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Views\Shared\_UserMainSideBar.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_UserMainSideBar.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Shared\_UserMainSideBar.ar.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_UserMainSideBar.ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Views\Shared\_UserMainSideBar.en.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_UserMainSideBar.en.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Views\Shared\_UserMainSideBar.ar.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_UserMainSideBar.ar.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

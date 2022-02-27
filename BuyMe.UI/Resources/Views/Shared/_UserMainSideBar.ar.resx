@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Dashboard" xml:space="preserve">
+        <value>لوحه التحكم</value>
+    </data>
+    <data name="SALES" xml:space="preserve">
+        <value>المبيعات</value>
+    </data>
+    <data name="CustomerType" xml:space="preserve">
+        <value>نوع العملاء</value>
+    </data>
+    <data name="Customers" xml:space="preserve">
+        <value>العملاء</value>
+    </data>
+    <data name="SalesType" xml:space="preserve">
+        <value>نوع المبيعات</value>
+    </data>
+    <data name="SalesOrder" xml:space="preserve">
+        <value>الطلبيات</value>
+    </data>
+    <data name="ShipmentType" xml:space="preserve">
+        <value>انواع الشحن</value>
+    </data>
+    <data name="Shipments" xml:space="preserve">
+        <value>الشحنات</value>
+    </data>
+    <data name="InvoiceType" xml:space="preserve">
+        <value>نوع الفاتوره</value>
+    </data>
+    <data name="Invoices" xml:space="preserve">
+        <value>الفواتير</value>
+    </data>
+    <data name="PaymentReceive" xml:space="preserve">
+        <value>المدفوعات</value>
+    </data>
+    <data name="PURCHASE" xml:space="preserve">
+        <value>المشتريات</value>
+    </data>
+    <data name="INVENTORY" xml:space="preserve">
+        <value>المخازن</value>
+    </data>
+    <data name="CONFIG" xml:space="preserve">
+        <value>لاعدادات</value>
+    </data>
+    <data name="UnitOfMeasure" xml:space="preserve">
+        <value>وحدات القياس</value>
+    </data>
+    <data name="Category" xml:space="preserve">
+        <value>لاصناف</value>
+    </data>
+    <data name="Products" xml:space="preserve">
+        <value>المنتجات</value>
+    </data>
+    <data name="Warehouse" xml:space="preserve">
+        <value>المستودعات</value>
+    </data>
+    <data name="Currency" xml:space="preserve">
+        <value>العمله</value>
+    </data>
+    <data name="Branch" xml:space="preserve">
+        <value>الفروع</value>
+    </data>
+    <data name="PaymentType" xml:space="preserve">
+        <value>نوع المدفوعات</value>
+    </data>
+    <data name="Marketing" xml:space="preserve">
+        <value>التسويق</value>
+    </data>
+    <data name="Settings" xml:space="preserve">
+        <value>لاعدادات</value>
+    </data>
+    <data name="DefaultSettings" xml:space="preserve">
+        <value>لاعدادات لافتراضيه</value>
+    </data>
+    <data name="Templates" xml:space="preserve">
+        <value>القوالب</value>
+    </data>
+    <data name="UserRole" xml:space="preserve">
+        <value>المستخدمين والصلاحيات</value>
+    </data>
+    <data name="Users" xml:space="preserve">
+        <value>المستخدمين</value>
+    </data>
+    <data name="ChangeRole" xml:space="preserve">
+        <value>تغير الصلاحيات</value>
+    </data>
+</root>

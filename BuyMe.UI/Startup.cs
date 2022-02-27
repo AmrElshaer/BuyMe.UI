@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using BuyMe.Application;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
@@ -18,6 +20,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Rotativa.AspNetCore;
 using HealthChecks.UI.Client;
+using Microsoft.Extensions.Options;
 
 namespace BuyMe.UI
 {
@@ -33,6 +36,9 @@ namespace BuyMe.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc()
+                .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
             services.AddCors(options =>
             {
                 options.AddPolicy("allowcors",
@@ -43,6 +49,7 @@ namespace BuyMe.UI
                     .AllowAnyHeader().AllowCredentials();
                 });
             });
+            
             services.AddHttpContextAccessor();
             services.AddTransient<ITenantService, TenantService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
@@ -93,6 +100,17 @@ namespace BuyMe.UI
                     }
                 });
             });
+            services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
+            services.Configure<RequestLocalizationOptions>(options=>
+            {
+                var cultures = new List<CultureInfo> {
+                    new CultureInfo("en"),
+                    new CultureInfo("ar")
+                };
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
+                options.SupportedCultures = cultures;
+                options.SupportedUICultures = cultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,12 +132,12 @@ namespace BuyMe.UI
             app.UseCustomExceptionHandlerMiddleware();
             //Register Syncfusion license
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(this.Configuration["Syncfusion:Key"]);
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
             RotativaConfiguration.Setup(env);
             app.UseEndpoints(endpoints =>
             {
