@@ -25,6 +25,7 @@ namespace BuyMe.Application.Common.Models
         public const string Invoice = "Invoice";
         public const string PaymentType = "PaymentType";
         public const string PaymentReceive = "PaymentReceive";
+        public const string VendorType = "VendorType";
 
         public static IEnumerable<string> GetRoles()
         {

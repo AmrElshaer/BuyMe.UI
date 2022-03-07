@@ -22,8 +22,15 @@ namespace BuyMe.UnitTests.Common
             SeedCustomFieldAndData(context);
             SeedPaymentTypeData(context);
             SeedPaymentReceiveData(context);
+            SeedVendorTypesData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedVendorTypesData(BuyMeDbContext context)
+        {
+            context.VendorTypes.AddRange(new VendorType { Name = "VendType4", Description = "PayDes" },
+                           new VendorType { Name = "VendType35", Description = "PayDes3" });
         }
 
         private static void SeedPaymentTypeData(BuyMeDbContext context)

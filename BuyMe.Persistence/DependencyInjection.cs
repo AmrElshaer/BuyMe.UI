@@ -15,6 +15,7 @@ namespace BuyMe.Persistence
             services.AddScoped<IBuyMeDbContext>(provider => provider.GetService<BuyMeDbContext>());
             return services;
         }
+      
         public static IServiceCollection AddAndMigrateTenantDatabases(this IServiceCollection services, IConfiguration config)
         {
             var options = services.GetOptions<TenantSettings>(nameof(TenantSettings));

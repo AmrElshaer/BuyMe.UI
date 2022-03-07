@@ -8,6 +8,7 @@ namespace BuyMe.Application.Common.Interfaces
 {
     public interface IBuyMeDbContext
     {
+         DbSet<Entities.VendorType> VendorTypes { get; set; }
         DbSet<Entities.Company> Companies { get; set; }
         DbSet<Entities.Employee> Employees { get; set; }
         DbSet<Entities.Currency> Currencies { get; set; }

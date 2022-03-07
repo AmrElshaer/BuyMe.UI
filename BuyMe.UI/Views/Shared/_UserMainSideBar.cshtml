@@ -13,7 +13,7 @@
     </a>
     <ul class="treeview-menu">
         <li class="@Html.IsSelected(controller:"CustomerType")"><a asp-area="Sales" asp-controller="CustomerType" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["CustomerType"]</a></li>
-            <li class="@Html.IsSelected( controller:"Customer")"><a asp-area="Sales" asp-controller="Customer" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Customers"] </a></li>
+        <li class="@Html.IsSelected( controller:"Customer")"><a asp-area="Sales" asp-controller="Customer" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["Customers"] </a></li>
         <li class="@Html.IsSelected( controller : "SalesType")"><a asp-area="Sales" asp-controller="SalesType" asp-action="Index"><i class="fa fa-circle-o"></i> @_localizer["SalesType"]</a></li>
         <li class="@Html.IsSelected( controller : "SalesOrder")"><a asp-area="Sales" asp-controller="SalesOrder" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["SalesOrder"]</a></li>
         <li class="@Html.IsSelected( controller : "ShipmentType")"><a asp-area="Sales" asp-controller="ShipmentType" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["ShipmentType"]</a></li>
@@ -23,16 +23,14 @@
         <li class="@Html.IsSelected( controller : "PaymentReceive")"><a asp-area="Sales" asp-controller="PaymentReceive" asp-action="Index"><i class="fa fa-circle-o"></i>@_localizer["PaymentReceive"]</a></li>
     </ul>
 </li>
-<li class="treeview">
+<li class="treeview @Html.IsSelected(area:"Purchase")">
     <a href="#">
         <i class="fa fa-pie-chart"></i>
         <span>@_localizer["PURCHASE"]</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-        <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-        <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+        <li class="@Html.IsSelected( controller : "VendorType")"><a asp-area="Purchase" asp-controller="VendorType" asp-action="Index"><i class="fa fa-circle-o"></i>Vendor Type</a></li>
     </ul>
 </li>
 <li class="treeview  @Html.IsSelected( area:"Inventory")">

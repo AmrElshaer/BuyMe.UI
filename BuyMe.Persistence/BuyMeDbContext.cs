@@ -62,6 +62,7 @@ namespace BuyMe.Persistence
 
             }
         }
+        public DbSet<VendorType> VendorTypes { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Currency> Currencies { get; set; }

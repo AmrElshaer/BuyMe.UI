@@ -24,8 +24,15 @@ namespace BuyMe.Application.Company
 
         public async Task<CompanyDto> GetCurrentCompany()
         {
-            return mapper.Map<CompanyDto>(await _context.Companies.FirstOrDefaultAsync());
+            var defaultCompany = await _context.Companies.FirstOrDefaultAsync();
+            return mapper.Map<CompanyDto>(defaultCompany??(await CreatDefaultCompany()));
         }
-        
+        private async Task< Domain.Entities.Company> CreatDefaultCompany()
+        {
+            var defaultCompany = new Domain.Entities.Company() { Name = "ByMe", IsActive = true };
+            _context.Companies.Add(defaultCompany);
+            await _context.SaveChangesAsync();
+            return defaultCompany;
+        }
     }
 }

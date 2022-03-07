@@ -17,7 +17,17 @@ namespace BuyMe.Tenant
             services.AddAndMigrateTenantDatabases(configuration);
             services.AddScoped<ITenantDbContext>(provider => provider.GetService<TenantDbContext>());
             services.AddTransient<ITenantServiceProvider, TenantServiceProvider>();
+            services.RefreshAllTenants();
             return services;
+        }
+        public static IServiceCollection RefreshAllTenants(this IServiceCollection services)
+        {
+            using var scope = services.BuildServiceProvider().CreateScope();
+            var tenantService = scope.ServiceProvider.GetRequiredService<ITenantServiceProvider>();
+            tenantService.RefreshTenants();
+
+            return services;
+
         }
         public static IServiceCollection AddAndMigrateTenantDatabases(this IServiceCollection services,IConfiguration config)
         {

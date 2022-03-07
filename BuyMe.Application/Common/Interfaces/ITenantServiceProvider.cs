@@ -6,5 +6,6 @@ namespace BuyMe.Application.Common.Interfaces
     public interface ITenantServiceProvider
     {
        string GeneratTenant(string tenant, CancellationToken token = default);
+        void RefreshTenants();
     }
 }
