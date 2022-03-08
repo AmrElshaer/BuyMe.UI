@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,12 @@ namespace BuyMe.Application.Common.Models
         public static bool HasSearchValue(BaseRequestQuery request)
         {
             return !string.IsNullOrEmpty(request.DM.SearchValue);
+        }
+        public static IQueryable<T> ApplyFiliter<T>(this IQueryable<T> dataSource, BaseRequestQuery request
+            , Expression<Func<T, bool>> expression)
+        {
+            return DataManagerExtension.HasSearchValue(request) ?
+                dataSource.Where(expression) : dataSource;
         }
     }
 }

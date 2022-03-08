@@ -31,6 +31,7 @@
     </a>
     <ul class="treeview-menu">
         <li class="@Html.IsSelected( controller : "VendorType")"><a asp-area="Purchase" asp-controller="VendorType" asp-action="Index"><i class="fa fa-circle-o"></i>Vendor Type</a></li>
+        <li class="@Html.IsSelected( controller : "Vendor")"><a asp-area="Purchase" asp-controller="Vendor" asp-action="Index"><i class="fa fa-circle-o"></i>Vendor</a></li>
     </ul>
 </li>
 <li class="treeview  @Html.IsSelected( area:"Inventory")">
