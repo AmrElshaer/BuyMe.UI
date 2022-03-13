@@ -141,12 +141,12 @@ namespace BuyMe.UI
             RotativaConfiguration.Setup(env);
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapHealthChecks("/health", new HealthCheckOptions()
-                //{
-                //    Predicate = _ => true,
-                //    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                //});
-                //endpoints.MapHealthChecksUI();
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecksUI();
                 endpoints.MapControllerRoute(
                 name: "areas",
                 pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
