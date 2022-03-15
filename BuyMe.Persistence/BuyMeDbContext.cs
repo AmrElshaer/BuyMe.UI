@@ -93,6 +93,8 @@ namespace BuyMe.Persistence
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<PaymentReceive> PaymentReceives { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<PurchaseType> PurchaseTypes { get; set; }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())

@@ -9,7 +9,7 @@ using static BuyMe.Application.VendorType.Commonds.CreatEdit.CreatEditVendtorTyp
 
 namespace BuyMe.UnitTests.VendorTypeTest.Commonds
 {
-    public class CreatEditVendorTypeCommondTest: CommandTestBase
+    public class CreatEditVendorTypeCommondTest : CommandTestBase
     {
 
         private readonly CreatEditVendtorTypeCommondHandler _sut;

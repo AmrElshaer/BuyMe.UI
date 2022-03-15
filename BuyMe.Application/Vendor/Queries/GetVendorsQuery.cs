@@ -29,7 +29,8 @@ namespace BuyMe.Application.Vendor.Queries
 
             public async Task<QueryResult<VendorDto>> Handle(GetVendorsQuery request, CancellationToken cancellationToken)
             {
-                var dataSource = _context.Vendors.ApplyFiliter(request, a => a.Name.Contains(request.DM.SearchValue)).ApplySkip(request).ApplyTake(request);
+                var dataSource = _context.Vendors.ApplyFiliter(request, a => a.Name.Contains(request.DM.SearchValue))
+                    .ApplySkip(request).ApplyTake(request);
                 var count = dataSource.Count();
                 var vendorTypes = await dataSource.OrderByDescending(a => a.Id).ToListAsync();
                 return new QueryResult<VendorDto>() { count = count, result = _mapper.Map<IList<VendorDto>>(vendorTypes) };
