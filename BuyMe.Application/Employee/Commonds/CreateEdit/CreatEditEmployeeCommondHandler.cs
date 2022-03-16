@@ -1,10 +1,7 @@
 ﻿using BuyMe.Application.Common.Behaviour;
-using BuyMe.Application.Common.IntegrationEvents;
 using BuyMe.Application.Common.Interfaces;
-using BuyMe.Application.Common.Models;
 using BuyMe.Application.OutboxMessage.Commonds;
 using MediatR;
-using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,8 +37,8 @@ namespace BuyMe.Application.Employee.Commonds.CreateEdit
                 employee.UserId = await AddApplicationUser(request);
                 await this.mediator.Send(
                      new CreatOutboxMessageCommond(
-                         nameof(EmployeeCreatedEvent),
-                         new EmployeeCreatedEvent { Name = $"{request.FirstName} {request.LastName}", Email = request.Email }
+                         nameof(EmployeeCreated),
+                         new EmployeeCreated { Name = $"{request.FirstName} {request.LastName}", Email = request.Email }
                     ));
                 await _context.Employees.AddAsync(employee);
             }
