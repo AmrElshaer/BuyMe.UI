@@ -94,6 +94,7 @@ namespace BuyMe.Persistence
         public DbSet<PaymentReceive> PaymentReceives { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<PurchaseType> PurchaseTypes { get; set; }
+        public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
