@@ -11,6 +11,7 @@ namespace BuyMe.Application.Common.Interfaces
     public interface ITenantDbContext
     {
         DbSet<Domain.Entities.Tenant> Tenants { get; set; }
+        DbSet<Domain.Entities.OutboxMessage> OutboxMessages { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

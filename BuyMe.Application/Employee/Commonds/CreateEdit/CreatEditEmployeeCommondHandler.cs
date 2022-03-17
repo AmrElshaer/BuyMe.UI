@@ -1,6 +1,5 @@
 ﻿using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Interfaces;
-using BuyMe.Application.OutboxMessage.Commonds;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,13 +9,13 @@ namespace BuyMe.Application.Employee.Commonds.CreateEdit
     public class CreatEditEmployeeCommondHandler : IRequestHandler<CreatEditEmployeeCommond, int>
     {
         private readonly IBuyMeDbContext _context;
-        private readonly IMediator mediator;
+
         private readonly IApplicationUserServcie _applicationUserServcie;
 
-        public CreatEditEmployeeCommondHandler(IBuyMeDbContext context,IMediator mediator, IApplicationUserServcie applicationUserServcie)
+        public CreatEditEmployeeCommondHandler(IBuyMeDbContext context, IApplicationUserServcie applicationUserServcie)
         {
             _context = context;
-            this.mediator = mediator;
+
             _applicationUserServcie = applicationUserServcie;
         }
 
@@ -35,11 +34,7 @@ namespace BuyMe.Application.Employee.Commonds.CreateEdit
             {
                 employee = new Domain.Entities.Employee();
                 employee.UserId = await AddApplicationUser(request);
-                await this.mediator.Send(
-                     new CreatOutboxMessageCommond(
-                         nameof(EmployeeCreated),
-                         new EmployeeCreated { Name = $"{request.FirstName} {request.LastName}", Email = request.Email }
-                    ));
+
                 await _context.Employees.AddAsync(employee);
             }
             employee.LastName = request.LastName;

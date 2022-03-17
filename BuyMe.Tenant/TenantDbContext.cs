@@ -25,7 +25,7 @@ namespace BuyMe.Tenant
             );
             base.OnModelCreating(modelBuilder);
         }
-        
+        public  DbSet<Domain.Entities.OutboxMessage> OutboxMessages { get; set; }
         public DbSet<Domain.Entities.Tenant> Tenants { get; set; }
     }
 }

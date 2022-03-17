@@ -8,7 +8,7 @@ namespace BuyMe.Application.Common.Interfaces
 {
     public interface IBuyMeDbContext
     {
-        DbSet<Entities.OutboxMessage> OutboxMessages { get; set; }
+        
         DbSet<Entities.PurchaseType> PurchaseTypes { get; set; }
         DbSet<Entities.Vendor> Vendors { get; set; }
         DbSet<Entities.VendorType> VendorTypes { get; set; }
