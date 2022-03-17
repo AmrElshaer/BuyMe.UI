@@ -4,11 +4,8 @@ using BuyMe.Application.Common.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyMe.Infrastructure
 {
@@ -18,7 +15,7 @@ namespace BuyMe.Infrastructure
         private HttpContext _httpContext;
         private TenantDto _currentTenant;
         private readonly IMediator medatorR;
-        public TenantService(IOptions<TenantSettings> tenantSettings,IMediator medatorR ,IHttpContextAccessor contextAccessor)
+        public TenantService(IOptions<TenantSettings> tenantSettings, IMediator medatorR, IHttpContextAccessor contextAccessor)
         {
             this.medatorR = medatorR;
             _tenantSettings = tenantSettings.Value;
@@ -29,32 +26,39 @@ namespace BuyMe.Infrastructure
 
         private void InitConnection()
         {
-            if (_httpContext==null)
-            {
-                SetDefaultConnectionStringToCurrentTenant();
-            }
-            else if (TryGetTenantFromSession(out var value))
-            {
-                SetTenant(value);
-            }
-            else if (_httpContext.Request.Cookies.TryGetValue("tenant", out var tenantId))
-            {
-                SetTenant(tenantId);
-            }
-            else if (_httpContext.Request.Headers.TryGetValue("tenant", out var tenId))
-            {
-                SetTenant(tenId);
-            }
-            else
-            {
-                SetDefaultConnectionStringToCurrentTenant();
-            }
-        }
 
+            if (_httpContext != null && TryGetTenant(out string tenant))
+                SetTenant(tenant);
+            else
+                SetDefaultConnectionStringToCurrentTenant();
+
+        }
+        private bool TryGetTenant(out string tenant)
+        {
+
+            if (TryGetTenantFromSession(out tenant)
+                || TryGetTenantFromCookies(out tenant)
+                || TryGetTenantFromHeaders(out tenant))
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool TryGetTenantFromCookies(out string tenant)
+        {
+            return _httpContext.Request.Cookies.TryGetValue("tenant", out tenant);
+
+        }
+        private bool TryGetTenantFromHeaders(out string tenant)
+        {
+            tenant = _httpContext.Request.Headers["tenant"].FirstOrDefault();
+            return tenant != null;
+
+        }
         private void SetTenant(string tenantId)
         {
-            _currentTenant = medatorR.Send(new GetTenantByNameQuery(){TenantName=tenantId}).GetAwaiter().GetResult();
-            Guard.Against.Null(_currentTenant,tenantId);
+            _currentTenant = medatorR.Send(new GetTenantByNameQuery() { TenantName = tenantId }).GetAwaiter().GetResult();
+            Guard.Against.Null(_currentTenant, tenantId);
             if (string.IsNullOrEmpty(_currentTenant.ConnectionString))
             {
                 SetDefaultConnectionStringToCurrentTenant();
@@ -69,7 +73,7 @@ namespace BuyMe.Infrastructure
         {
             return _currentTenant?.ConnectionString;
         }
-      
+
         public TenantDto GetTenant()
         {
             return _currentTenant;
@@ -77,7 +81,7 @@ namespace BuyMe.Infrastructure
         private bool TryGetTenantFromSession(out string value)
         {
             value = null;
-            if(string.IsNullOrEmpty(_httpContext.Session.GetString("tenant")))
+            if (string.IsNullOrEmpty(_httpContext.Session.GetString("tenant")))
             {
                 return false;
             }
