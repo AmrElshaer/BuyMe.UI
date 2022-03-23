@@ -2,6 +2,17 @@
 @{
     var user = await UserManager.GetCurrentUser();
 }
+<style>
+    .e-upload-actions {
+        display: none;
+    }
+    #element {
+        display: block;
+        width: 300px;
+        margin: auto;
+        border-radius: 3px;
+    }
+</style>
 <div id="displayProfile">
     <section class="content">
         <div class="control-section">
@@ -35,6 +46,21 @@
                         </dl>
                     </div>
                     <div class="col-md-4">
+                        <div class="form-group text-center">
+                            <div id="uploadImgStatus"></div>
+                            <div class="e-float-input upload-area">
+                                <input type="text" id="photo"  name="photo" style="display:none">
+                            </div>
+                           
+                                <div id='element'>
+                                    <span class="e-avatar e-avatar-xlarge" id="profilPhoto" style="background-image:url(@user.Photo)"></span>
+                                </div>
+                            <ejs-uploader id="fileupload" autoUpload="false" selected="onFileSelect" removing="removeImage" multiple="false">
+
+                            </ejs-uploader>
+                            <button class="btn btn-primary" style="margin-top:15px" type="button" id="uploadImg">Upload</button>
+
+                        </div>
 
                     </div>
                 </div>
@@ -52,10 +78,10 @@
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form role="form" id="changePassword">
-                    <div  id="changeMess">
-                       
+                    <div id="changeMess">
+
                     </div>
-                   
+
                     <div class="box-body">
                         <div class="form-group">
                             <label for="OldPassword">Old Password</label>
@@ -80,10 +106,39 @@
         </div>
     </section>
 </div>
+<script src="~/js/grid.js"></script>
+<script>
+    function removeImage(e) {
+        var inputElement = document.getElementById('photo');
+        inputElement.value = "";
+    }
+    function onFileSelect(imageInput) {
+        const file = imageInput.filesData[0].rawFile;
+        getBase64(file, 'photo');
+    }
+</script>
 @section Scripts{
+
+
     <script>
 
         $(document).ready(function () {
+            $('#uploadImg').on('click', () => {
+                const photo = $('#photo').val();
+                if (!photo) return;
+                $.ajax({
+                    url: "@Url.Action("SaveProfileImage", "Profile")",
+                    type: "POST",
+                    data: { 'Photo': photo},
+                    success: function (data) {
+                        window.location.reload();
+                    },
+                    error: function (errors) {
+                        $("#uploadImgStatus").append(`<p class="alert alert-danger" style="margin:2px;display:inline-block;max-width:fit-content">Upload Failed</p>`);
+                    }
+
+                });
+            });
             $("#changePassword").on("submit", function (event) {
                 event.preventDefault();
                 const formValues = $(this).serializeArray();

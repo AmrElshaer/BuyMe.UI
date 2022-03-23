@@ -23,12 +23,18 @@ namespace BuyMe.Infrastructure.Identity
             var user = await userManager.FindByIdAsync(currentUserService.UserId);
             return await userManager.GetRolesAsync(user);
         }
-
+        public async Task UpdateUserPhoto(string photo)
+        {
+            var user = await userManager.FindByIdAsync(currentUserService.UserId);
+            user.Photo = photo;
+            await userManager.UpdateAsync(user);
+        }
         public async Task<Application.Common.Models.User> GetCurrentUser()
         {
             var appUser = await userManager.FindByIdAsync(currentUserService.UserId);
             Guard.Against.Null(appUser,currentUserService.UserId);
             return new User() { FirstName = appUser.FirstName, LastName = appUser.LastName, Photo = appUser.Photo,Email=appUser.Email };
         }
+       
     }
 }

@@ -9,5 +9,6 @@ namespace BuyMe.Application.Common.Interfaces
         Task<IEnumerable<string>> GetCurrentUserRoles();
 
         Task<Application.Common.Models.User> GetCurrentUser();
+        Task UpdateUserPhoto(string photo);
     }
 }

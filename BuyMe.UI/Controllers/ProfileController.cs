@@ -1,8 +1,6 @@
 ﻿using BuyMe.Application.User.Commonds.ChangePassword;
+using BuyMe.Application.User.Commonds.UpdateProfilePhoto;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BuyMe.UI.Controllers
@@ -15,6 +13,12 @@ namespace BuyMe.UI.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordCommond commond)
+        {
+            await Mediator.Send(commond);
+            return Ok();
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveProfileImage(UpdateProfilePhotoCommond commond)
         {
             await Mediator.Send(commond);
             return Ok();
