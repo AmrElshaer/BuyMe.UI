@@ -70,7 +70,7 @@ namespace BuyMe.UI
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                }).AddRazorRuntimeCompilation();
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BuyMe Api", Version = "v1", });
