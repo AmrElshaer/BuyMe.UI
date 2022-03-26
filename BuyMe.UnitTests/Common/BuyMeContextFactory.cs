@@ -26,8 +26,15 @@ namespace BuyMe.UnitTests.Common
             SeedVendorsData(context);
             SeedPurchasTypeData(context);
             SeedBrachesData(context);
+            SeedCategoriesData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedCategoriesData(BuyMeDbContext context)
+        {
+            context.Categories.AddRange(new Category { CategoryName = "Categ4"},
+                          new Category { CategoryName = "Categ35"});
         }
 
         private static void SeedBrachesData(BuyMeDbContext context)
