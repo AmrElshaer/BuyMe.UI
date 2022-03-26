@@ -8,7 +8,6 @@ using BuyMe.Application.SalesOrderLine.Queries;
 using BuyMe.Application.SalesType.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Rotativa.AspNetCore;
 using Syncfusion.EJ2.Base;
 using System;
 using System.Collections.Generic;

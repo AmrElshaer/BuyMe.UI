@@ -9,7 +9,6 @@ using BuyMe.Application.SalesOrderLine.Queries;
 using BuyMe.Application.SalesType.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Rotativa.AspNetCore;
 using Syncfusion.EJ2.Base;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,12 +36,12 @@ namespace BuyMe.UI.Areas.Sales.Controllers
             return Json(value.Value);
         }
 
-        public async Task<IActionResult> Print(long salesOrderId)
-        {
-            var so = await Mediator.Send(new GetSalesOrderQuery(salesOrderId));
-            var salesOrdersLine = (await Mediator.Send(new GetSOLinesQuery(salesOrderId)))?.result;
-            return new ViewAsPdf((so, salesOrdersLine));
-        }
+        //public async Task<IActionResult> Print(long salesOrderId)
+        //{
+        //    var so = await Mediator.Send(new GetSalesOrderQuery(salesOrderId));
+        //    var salesOrdersLine = (await Mediator.Send(new GetSOLinesQuery(salesOrderId)))?.result;
+        //    return new ViewAsPdf((so, salesOrdersLine));
+        //}
 
         public async Task<ActionResult> Details(long salesOrderId)
         {

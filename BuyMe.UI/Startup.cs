@@ -18,7 +18,6 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Rotativa.AspNetCore;
 using HealthChecks.UI.Client;
 using Microsoft.Extensions.Options;
 
@@ -138,7 +137,6 @@ namespace BuyMe.UI
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
-            RotativaConfiguration.Setup(env);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHealthChecks("/health", new HealthCheckOptions()
