@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BuyMe.Application.Branch.Queries;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -34,8 +36,14 @@ namespace BuyMe.Application.Common.Models
         public static IQueryable<T> ApplyFiliter<T>(this IQueryable<T> dataSource, BaseRequestQuery request
             , Expression<Func<T, bool>> expression)
         {
-            return DataManagerExtension.HasSearchValue(request) ?
+            return HasSearchValue(request) ?
                 dataSource.Where(expression) : dataSource;
+        }
+        public static async Task<(int Count,IList<T> Data)> Build<T>(this IQueryable<T> dataSource, Expression<Func<T, int>> expression)
+        {
+            int count = dataSource.Count();
+            var res = await dataSource.OrderByDescending(expression).ToListAsync();
+            return (count,res);
         }
     }
 }

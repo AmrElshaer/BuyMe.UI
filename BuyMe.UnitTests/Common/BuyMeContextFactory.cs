@@ -25,8 +25,15 @@ namespace BuyMe.UnitTests.Common
             SeedVendorTypesData(context);
             SeedVendorsData(context);
             SeedPurchasTypeData(context);
+            SeedBrachesData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedBrachesData(BuyMeDbContext context)
+        {
+            context.Branches.AddRange(new  Branch{ BranchName = "Branch4", Address = "Address" },
+                          new Branch { BranchName = "Branch35", Address = "Address" });
         }
 
         private static void SeedPurchasTypeData(BuyMeDbContext context)
