@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace BuyMe.Application.Common.Behaviour
 {
     public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+      where   TRequest : MediatR.IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
