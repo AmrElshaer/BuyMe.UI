@@ -30,7 +30,6 @@ namespace BuyMe.Infrastructure
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IJwtFactoryService, JwtFactoryService>();
             services.AddTransient<IRoleService, RoleService>();
-            services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IEmailService, EmailService>();
             services.Configure<IdentityOptions>(opts =>
             {
