@@ -32,8 +32,14 @@ namespace BuyMe.UnitTests.Common
             SeedWarehouseData(context);
             SeedCurrencyData(context);
             SeedCustomerTypeData(context);
+            SeedUOMData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedUOMData(BuyMeDbContext context)
+        {
+            context.UnitOfMeasures.AddRange(new () { UOM = "UOM4"}, new () { UOM = "UOM35"});
         }
 
         private static void SeedCustomerTypeData(BuyMeDbContext context)
