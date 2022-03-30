@@ -34,8 +34,15 @@ namespace BuyMe.UnitTests.Common
             SeedCustomerTypeData(context);
             SeedEmployeeData(context);
             SeedUOMData(context);
+            SeedSalesOrderData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedSalesOrderData(BuyMeDbContext context)
+        {
+            context.SalesOrders.AddRange(new () { SalesOrderName = "00000#1"},
+                new () { SalesOrderName = "00000#2"});
         }
 
         private static void SeedEmployeeData(BuyMeDbContext context)

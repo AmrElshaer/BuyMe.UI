@@ -39,7 +39,8 @@ namespace BuyMe.Application.Common.Models
             return HasSearchValue(request) ?
                 dataSource.Where(expression) : dataSource;
         }
-        public static async Task<(int Count,IList<T> Data)> Build<T>(this IQueryable<T> dataSource, Expression<Func<T, int>> expression)
+      
+        public static async Task<(int Count,IList<T> Data)> Build<T>(this IQueryable<T> dataSource, Expression<Func<T, long>> expression)
         {
             int count = dataSource.Count();
             var res = await dataSource.OrderByDescending(expression).ToListAsync();

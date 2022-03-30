@@ -1,52 +1,45 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Product.Queries
 {
-    public class GetProductQuery : IRequest<QueryResult<ProductDto>>
+    public class GetProductQuery : BaseRequestQuery,IRequest<QueryResult<ProductDto>>
     {
-        public DataManager DM { get; set; }
-
-        public GetProductQuery()
-        {
-            DM ??= new DataManager();
-        }
-
         public class GetProductQueryHandler : IRequestHandler<GetProductQuery, QueryResult<ProductDto>>
         {
             private readonly IBuyMeDbContext _context;
             private readonly IMapper _mapper;
-            private readonly ICurrentUserService currentUserService;
 
-            public GetProductQueryHandler(IBuyMeDbContext context, IMapper mapper, ICurrentUserService currentUserService)
+            public GetProductQueryHandler(IBuyMeDbContext context, IMapper mapper)
             {
                 _context = context;
                 _mapper = mapper;
-                this.currentUserService = currentUserService;
             }
 
             public async Task<QueryResult<ProductDto>> Handle(GetProductQuery request, CancellationToken cancellationToken)
             {
-                var dataSource = _context.Products.Include(a => a.Branch)
-                    .Include(a => a.UnitOfMeasure).Include(a => a.Currency).Where(a => a.CompanyId == currentUserService.CompanyId).AsQueryable();
-                if (!string.IsNullOrEmpty(request.DM.SearchValue))
-                {
-                    dataSource = dataSource.Where(a =>
+                var res =await _context.Products.Include(a => a.Branch)
+                    .Include(a => a.UnitOfMeasure).Include(a => a.Currency)
+                    .ApplyFiliter(request, SearchQuery(request)
+                    ).ApplySkip(request).ApplyTake(request).Build(a => a.ProductId);
+                
+                return new QueryResult<ProductDto>() { count = res.Count, result =_mapper.Map<IList<ProductDto>>(res.Data)  };
+            }
+
+            private static Expression<Func<Domain.Entities.Product, bool>> SearchQuery(GetProductQuery request)
+            {
+                return a =>
                     a.ProductName.Contains(request.DM.SearchValue) ||
-                    a.Barcode.Contains(request.DM.SearchValue)
-                    );
-                }
-                if (request.DM.Skip != null && request.DM.Skip != 0) dataSource = dataSource.Skip(request.DM.Skip.Value);
-                if (request.DM.Take != null && request.DM.Take != 0) dataSource = dataSource.Take(request.DM.Take.Value);
-                int count = dataSource.Count();
-                var products = dataSource.OrderByDescending(a => a.ProductId).Select(_mapper.Map<ProductDto>).ToList();
-                return new QueryResult<ProductDto>() { count = count, result = products };
+                    a.Barcode.Contains(request.DM.SearchValue);
             }
         }
     }
