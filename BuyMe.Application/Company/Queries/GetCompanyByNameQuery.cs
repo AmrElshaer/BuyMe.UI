@@ -29,7 +29,7 @@ namespace BuyMe.Application.Company.Queries
 
             public async Task<CompanyDto> Handle(GetCompanyByNameQuery request, CancellationToken cancellationToken)
             {
-                return _mapper.Map<CompanyDto>(await _context.Companies.Include(a => a.Template).FirstOrDefaultAsync(a => a.Name == request.Name));
+                return _mapper.Map<CompanyDto>(await _context.Companies.Include(a => a.Template).FirstOrDefaultAsync(a => a.Name == request.Name,cancellationToken));
             }
         }
     }
