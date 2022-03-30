@@ -1,21 +1,19 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BuyMe.Application.Company.Queries
 {
-    public class GetCompaniesQuery : IRequest<QueryResult<CompanyDto>>
+    public class GetCompaniesQuery : BaseRequestQuery,IRequest<QueryResult<CompanyDto>>
     {
-        public DataManager DM { get; set; }
-
-        public GetCompaniesQuery()
-        {
-            DM ??= new DataManager();
-        }
+       
 
         public class GetCompaniesQueryHandler : IRequestHandler<GetCompaniesQuery, QueryResult<CompanyDto>>
         {
@@ -30,19 +28,19 @@ namespace BuyMe.Application.Company.Queries
 
             public async Task<QueryResult<CompanyDto>> Handle(GetCompaniesQuery request, CancellationToken cancellationToken)
             {
-                var dataSource = _context.Companies.AsQueryable();
-                if (!string.IsNullOrEmpty(request.DM.SearchValue))
-                {
-                    dataSource = dataSource.Where(a => a.Name.Contains(request.DM.SearchValue) ||
+                var res =await _context.Companies.ApplyFiliter(request, SearchQuery(request))
+                    .ApplySkip(request).ApplyTake(request).Build(a => a.Id);
+                return new QueryResult<CompanyDto>() { count = res.Count, 
+                    result =_mapper.Map<IList<CompanyDto>>(res.Data)  };
+            }
+
+            private Expression<Func<Domain.Entities.Company, bool>> SearchQuery(GetCompaniesQuery request)
+            {
+                Expression<Func<Domain.Entities.Company, bool>> expression = a => a.Name.Contains(request.DM.SearchValue) ||
                     a.Country.Contains(request.DM.SearchValue) ||
                     a.City.Contains(request.DM.SearchValue) ||
-                    a.Business.Contains(request.DM.SearchValue));
-                }
-                if (request.DM.Skip != null && request.DM.Skip != 0) dataSource = dataSource.Skip(request.DM.Skip.Value);
-                if (request.DM.Take != null && request.DM.Take != 0) dataSource = dataSource.Take(request.DM.Take.Value);
-                int count = dataSource.Count();
-                var companies = dataSource.OrderByDescending(a => a.Id).Select(_mapper.Map<CompanyDto>).ToList();
-                return new QueryResult<CompanyDto>() { count = count, result = companies };
+                    a.Business.Contains(request.DM.SearchValue);
+                return expression;
             }
         }
     }

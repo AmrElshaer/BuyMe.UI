@@ -13,26 +13,30 @@ using System.Threading.Tasks;
 using Xunit;
 using static BuyMe.Application.Company.Queries.GetCompaniesQuery;
 
-namespace BuyMe.UnitTests.Companys.Queries
-{
-    [Collection("QueryCollection")]
-    public class GetCompaniesQueryTest
-    {
-        private readonly BuyMeDbContext _context;
-        private readonly IMapper _mapper;
+namespace BuyMe.UnitTests.Companys.Queries;
 
-        public GetCompaniesQueryTest(QueryTestFixture fixture)
-        {
-            _context = fixture.Context;
-            _mapper = fixture.Mapper;
-        }
-        [Fact]
-        public async Task GetAllCompanies()
-        {
-            var sut = new GetCompaniesQueryHandler(_context,_mapper);
-            var result= await sut.Handle(new GetCompaniesQuery(), CancellationToken.None);
-            result.ShouldBeOfType<QueryResult<CompanyDto>>();
-            result.result.Count.ShouldBeGreaterThanOrEqualTo(1);
-        }
+[Collection("QueryCollection")]
+public class GetCompaniesQueryTest
+{
+    private readonly BuyMeDbContext _context;
+    private readonly IMapper _mapper;
+
+    public GetCompaniesQueryTest(QueryTestFixture fixture)
+    {
+        _context = fixture.Context;
+        _mapper = fixture.Mapper;
+    }
+    [Theory]
+    [InlineData(2, "Company")]
+    [InlineData(1, "CompanyOne")]
+    [InlineData(1, "CompanyTwo")]
+    [InlineData(0, "CompanyOne58")]
+    public async Task GetAllCompanies(int expect, string value)
+    {
+        var sut = new GetCompaniesQueryHandler(_context,_mapper);
+        var res= await sut.Handle(new GetCompaniesQuery(){ DM = new DataManager() { SearchValue = value }}
+            , CancellationToken.None);
+        res.count.ShouldBeEquivalentTo(expect);
     }
 }
+
