@@ -24,8 +24,6 @@ namespace BuyMe.UI.Areas.AdminPanel.Controllers
             var result = await Mediator.Send(new GetEmployeesQuery()
             {
                 DM = new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key)
-                ,
-                CompanyId = companyId
             });
             return Json(result);
         }

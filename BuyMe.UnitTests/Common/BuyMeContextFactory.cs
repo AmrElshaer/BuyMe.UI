@@ -32,9 +32,16 @@ namespace BuyMe.UnitTests.Common
             SeedWarehouseData(context);
             SeedCurrencyData(context);
             SeedCustomerTypeData(context);
+            SeedEmployeeData(context);
             SeedUOMData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedEmployeeData(BuyMeDbContext context)
+        {
+            context.Employees.AddRange(new () { FirstName = "firstName",LastName = "lastName"},
+                new () { FirstName = "firstName2",LastName = "lastName2"});
         }
 
         private static void SeedUOMData(BuyMeDbContext context)
