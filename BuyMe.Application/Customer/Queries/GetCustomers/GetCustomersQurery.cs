@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BuyMe.Application.Common.Models;
 namespace BuyMe.Application.Customer.Queries.GetCustomers
 {
     public class GetCustomersQurery :BaseRequestQuery, IRequest<QueryResult<CustomerDto>>

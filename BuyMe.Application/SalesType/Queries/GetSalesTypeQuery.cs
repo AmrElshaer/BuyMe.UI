@@ -3,10 +3,8 @@ using AutoMapper;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BuyMe.Application.Common.Models;
 namespace BuyMe.Application.SalesType.Queries
 {
     public class GetSalesTypeQuery : BaseRequestQuery,IRequest<QueryResult<SalesTypeDto>>
