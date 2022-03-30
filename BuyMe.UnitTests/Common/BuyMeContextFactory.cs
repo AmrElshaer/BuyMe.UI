@@ -30,8 +30,15 @@ namespace BuyMe.UnitTests.Common
             SeedCustmerData(context);
             SeedSalesTypeData(context);
             SeedWarehouseData(context);
+            SeedCurrencyData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedCurrencyData(BuyMeDbContext context)
+        {
+            context.Currencies.AddRange(new Currency() { CurrencyName = "Curriency4"},
+                new Currency { CurrencyName = "Curriency35"});
         }
 
         private static void SeedWarehouseData(BuyMeDbContext context)
