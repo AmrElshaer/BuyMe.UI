@@ -28,8 +28,15 @@ namespace BuyMe.UnitTests.Common
             SeedBrachesData(context);
             SeedCategoriesData(context);
             SeedCustmerData(context);
+            SeedSalesTypeData(context);
             context.SaveChanges();
             return context;
+        }
+
+        private static void SeedSalesTypeData(BuyMeDbContext context)
+        {
+            context.SalesTypes.AddRange(new SalesType() { SalesTypeName = "SalesType4"},
+                new SalesType { SalesTypeName = "SalesType35"});
         }
 
         private static void SeedCustmerData(BuyMeDbContext context)
