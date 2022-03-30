@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
@@ -9,14 +10,13 @@ using System.Threading.Tasks;
 
 namespace BuyMe.Application.SalesOrderLine.Queries
 {
-    public class GetSOLinesQuery : IRequest<QueryResult<SalesOrderLineDto>>
+    public class GetSOLinesQuery : BaseRequestQuery,IRequest<QueryResult<SalesOrderLineDto>>
     {
-        public DataManager DM { get; set; }
-        public long SalesOrderId { get; private set; }
+     
+        public long SalesOrderId { get;  }
 
         public GetSOLinesQuery(long salesOrderId)
         {
-            DM ??= new DataManager();
             SalesOrderId = salesOrderId;
         }
 
@@ -33,19 +33,16 @@ namespace BuyMe.Application.SalesOrderLine.Queries
 
             public async Task<QueryResult<SalesOrderLineDto>> Handle(GetSOLinesQuery request, CancellationToken cancellationToken)
             {
-                var dataSource = _context.SalesOrderLines.Include(a => a.Product)
-                    .Where(a => a.SalesOrderId == request.SalesOrderId).AsQueryable();
-                if (!string.IsNullOrEmpty(request.DM.SearchValue))
-                {
-                    dataSource = dataSource.Where(a =>
+                var res =await _context.SalesOrderLines
+                    .Include(a => a.Product)
+                    .Where(a => a.SalesOrderId == request.SalesOrderId)
+                    .ApplyFiliter(request,a =>
                     a.Product.ProductName.Contains(request.DM.SearchValue)
-                    );
-                }
-                if (request.DM.Skip != null && request.DM.Skip != 0) dataSource = dataSource.Skip(request.DM.Skip.Value);
-                if (request.DM.Take != null && request.DM.Take != 0) dataSource = dataSource.Take(request.DM.Take.Value);
-                int count = dataSource.Count();
-                var products = dataSource.OrderByDescending(a => a.SalesOrderLineId).Select(_mapper.Map<SalesOrderLineDto>).ToList();
-                return new QueryResult<SalesOrderLineDto>() { count = count, result = products };
+                    ).ApplySkip(request).ApplyTake(request).Build(a => a.SalesOrderLineId);
+                    
+                return new QueryResult<SalesOrderLineDto>() { count = res.Count, 
+                    result =_mapper.Map<IList<SalesOrderLineDto>>(
+                    res.Data) };
             }
         }
     }
