@@ -5,10 +5,11 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.SalesOrder.Queries;
 using BuyMe.Persistence;
 using BuyMe.UnitTests.Common;
-using Shouldly;
+using FluentAssertions;
 using Xunit;
 
 namespace BuyMe.UnitTests.SalesOrderTest.Queries;
+
 [Collection("QueryCollection")]
 public class GetSalesOrdersQueryTest
 {
@@ -28,8 +29,8 @@ public class GetSalesOrdersQueryTest
     public async Task GetAllSalesOrders(int expect, string value)
     {
         var sut = new GetSalesOrdersQuery.GetSalesOrderQueryHandler(_context, _mapper);
-        var res = await sut.Handle(new GetSalesOrdersQuery() { DM = new DataManager() { SearchValue = value } }
+        var res = await sut.Handle(new GetSalesOrdersQuery {DM = new DataManager {SearchValue = value}}
             , CancellationToken.None);
-        res.count.ShouldBeEquivalentTo(expect);
+        res.count.Should().Be(expect);
     }
 }

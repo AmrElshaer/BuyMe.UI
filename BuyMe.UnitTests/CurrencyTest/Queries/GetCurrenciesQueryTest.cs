@@ -5,7 +5,7 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.Currency.Queries;
 using BuyMe.Persistence;
 using BuyMe.UnitTests.Common;
-using Shouldly;
+using FluentAssertions;
 using Xunit;
 
 namespace BuyMe.UnitTests.CurrencyTest.Queries;
@@ -31,6 +31,6 @@ public class GetCurrenciesQueryTest
         var sut = new GetCurrenciesQuery.GetCurrenciesQueryHandler(_context, _mapper);
         var res = await sut.Handle(new GetCurrenciesQuery() { DM = new DataManager() { SearchValue = value } }
             , CancellationToken.None);
-        res.count.ShouldBeEquivalentTo(expect);
+        res.count.Should().Be(expect);
     }
 }

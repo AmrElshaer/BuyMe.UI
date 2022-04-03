@@ -5,10 +5,11 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.UnitOfMeasure.Queries;
 using BuyMe.Persistence;
 using BuyMe.UnitTests.Common;
-using Shouldly;
+using FluentAssertions;
 using Xunit;
 
 namespace BuyMe.UnitTests.UnitOfMeasureTest.Queries;
+
 [Collection("QueryCollection")]
 public class GetUOMQueryTest
 {
@@ -29,8 +30,8 @@ public class GetUOMQueryTest
     public async Task GetAllUOM(int expect, string value)
     {
         var sut = new GetUOMQuery.GetUOMsQueryHandler(_context, _mapper);
-        var res = await sut.Handle(new GetUOMQuery() { DM = new DataManager() { SearchValue = value } }
+        var res = await sut.Handle(new GetUOMQuery {DM = new DataManager {SearchValue = value}}
             , CancellationToken.None);
-        res.count.ShouldBeEquivalentTo(expect);
+        res.count.Should().Be(expect);
     }
 }

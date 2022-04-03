@@ -5,7 +5,7 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.Customer.Queries.GetCustomers;
 using BuyMe.Persistence;
 using BuyMe.UnitTests.Common;
-using Shouldly;
+using FluentAssertions;
 using Xunit;
 
 namespace BuyMe.UnitTests.CustomerTest.Queries;
@@ -31,6 +31,6 @@ public class GetCustomersQueryTest
         var sut = new GetCustomersQurery.GetCustomersQureryHandler(_context, _mapper);
         var res = await sut.Handle(new GetCustomersQurery() { DM = new DataManager() { SearchValue = value } }
             , CancellationToken.None);
-        res.count.ShouldBeEquivalentTo(expect);
+        res.count.Should().Be(expect);
     }
 }

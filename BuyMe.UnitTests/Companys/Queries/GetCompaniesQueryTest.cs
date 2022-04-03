@@ -1,15 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using BuyMe.Application.Common.Models;
 using BuyMe.Application.Company.Queries;
 using BuyMe.Persistence;
 using BuyMe.UnitTests.Common;
-using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 using static BuyMe.Application.Company.Queries.GetCompaniesQuery;
 
@@ -26,6 +22,7 @@ public class GetCompaniesQueryTest
         _context = fixture.Context;
         _mapper = fixture.Mapper;
     }
+
     [Theory]
     [InlineData(2, "Company")]
     [InlineData(1, "CompanyOne")]
@@ -33,10 +30,10 @@ public class GetCompaniesQueryTest
     [InlineData(0, "CompanyOne58")]
     public async Task GetAllCompanies(int expect, string value)
     {
-        var sut = new GetCompaniesQueryHandler(_context,_mapper);
-        var res= await sut.Handle(new GetCompaniesQuery(){ DM = new DataManager() { SearchValue = value }}
+        var sut = new GetCompaniesQueryHandler(_context, _mapper);
+        var res = await sut.Handle(new GetCompaniesQuery {DM = new DataManager {SearchValue = value}}
             , CancellationToken.None);
-        res.count.ShouldBeEquivalentTo(expect);
+
+        res.count.Should().Be(expect);
     }
 }
-

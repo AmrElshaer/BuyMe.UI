@@ -3,10 +3,10 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.CustomField.Commonds.DeleteCustomField;
 using BuyMe.Domain.Entities;
 using BuyMe.UnitTests.Common;
-using Shouldly;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 using static BuyMe.Application.CustomField.Commonds.DeleteCustomField.DeleteCustomFieldCommond;
 
@@ -35,7 +35,7 @@ namespace BuyMe.UnitTests.CustomFields.Commonds
             var validId = 3;
             await DeleteCustomField(validId);
             var field = await GetCustomField(validId);
-            field.ShouldBeNull();
+            field.Should().BeNull();
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace BuyMe.UnitTests.CustomFields.Commonds
             var fieldName = (await GetCustomField(validId))?.FieldName;
             await DeleteCustomField(validId);
             var fieldData = buyMeDbContext.CustomFieldDatas.Where(a => a.Category == CustomCategoryModel.Product && a.Value.Contains(fieldName)).ToList();
-            fieldData.ShouldBeEmpty();
+            fieldData.Should().BeEmpty();
         }
 
         private async Task DeleteCustomField(int id)

@@ -5,10 +5,11 @@ using BuyMe.Application.Common.Models;
 using BuyMe.Application.Employee.Queries;
 using BuyMe.Persistence;
 using BuyMe.UnitTests.Common;
-using Shouldly;
+using FluentAssertions;
 using Xunit;
 
 namespace BuyMe.UnitTests.EmployeeTest.Queries;
+
 [Collection("QueryCollection")]
 public class GetEmployeesQueriesTest
 {
@@ -29,8 +30,8 @@ public class GetEmployeesQueriesTest
     public async Task GetAllEmployeeies(int expect, string value)
     {
         var sut = new GetEmployeesQuery.GetEmployeesQueryHandler(_context, _mapper);
-        var res = await sut.Handle(new GetEmployeesQuery() { DM = new DataManager() { SearchValue = value } }
+        var res = await sut.Handle(new GetEmployeesQuery {DM = new DataManager {SearchValue = value}}
             , CancellationToken.None);
-        res.count.ShouldBeEquivalentTo(expect);
+        res.count.Should().Be(expect);
     }
 }
