@@ -138,12 +138,12 @@ namespace BuyMe.UI
             app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-                endpoints.MapHealthChecksUI();
+                // endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                // {
+                //     Predicate = _ => true,
+                //     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                // });
+                // endpoints.MapHealthChecksUI();
                 endpoints.MapControllerRoute(
                 name: "areas",
                 pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
