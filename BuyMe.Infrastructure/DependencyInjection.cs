@@ -64,17 +64,17 @@ namespace BuyMe.Infrastructure
             });
 
             // healthy check
-            // services.AddHealthChecks()
-            //     .AddSqlServer(configuration.GetConnectionString("TenantConnection"), name: "Tenant DB Status",
-            //     tags: new[] { "Tenant DB" })
-            //     .AddCheck<SqlServerHealthCheck>(name: "Organizations Status", tags: new[] { "Organization DB" });
-            // services.AddHealthChecksUI(setp =>
-            // {
-            //     setp.MaximumHistoryEntriesPerEndpoint(50);
-            //     setp.SetEvaluationTimeInSeconds(2000);
-            //     setp.AddHealthCheckEndpoint("ByMe Health Check", "http://localhost:5000/health");
-            //     setp.SetMinimumSecondsBetweenFailureNotifications(60);
-            // }).AddInMemoryStorage();
+            services.AddHealthChecks()
+                .AddSqlServer(configuration.GetConnectionString("TenantConnection"), name: "Tenant DB Status",
+                tags: new[] { "Tenant DB" })
+                .AddCheck<SqlServerHealthCheck>(name: "Organizations Status", tags: new[] { "Organization DB" });
+            services.AddHealthChecksUI(setp =>
+            {
+                setp.MaximumHistoryEntriesPerEndpoint(50);
+                setp.SetEvaluationTimeInSeconds(2000);
+                setp.AddHealthCheckEndpoint("ByMe Health Check", "http://localhost:5000/health");
+                setp.SetMinimumSecondsBetweenFailureNotifications(60);
+            }).AddInMemoryStorage();
             return services;
         }
 
