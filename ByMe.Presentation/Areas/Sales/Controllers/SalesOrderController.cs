@@ -5,19 +5,24 @@ using BuyMe.Application.Customer.Queries.GetCustomers;
 using BuyMe.Application.SalesOrder.Commonds;
 using BuyMe.Application.SalesOrder.Commonds.DeleteSalesOrder;
 using BuyMe.Application.SalesOrder.Queries;
-using BuyMe.Application.SalesOrderLine.Queries;
 using BuyMe.Application.SalesType.Queries;
+using ByMe.Presentation.Helper.PdfDocuments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace ByMe.Presentation.Areas.Sales.Controllers
 {
     [Authorize(Roles = ApplicationRoles.SalesOrder)]
     public class SalesOrderController : BaseController
     {
+        private readonly ISalesOrderDocument salesOrderDocument;
+
+        public SalesOrderController(ISalesOrderDocument salesOrderDocument)
+        {
+            this.salesOrderDocument = salesOrderDocument;
+        }
         public IActionResult Index()
         {
             return View();
@@ -36,12 +41,13 @@ namespace ByMe.Presentation.Areas.Sales.Controllers
             return Json(value.Value);
         }
 
-        //public async Task<IActionResult> Print(long salesOrderId)
-        //{
-        //    var so = await Mediator.Send(new GetSalesOrderQuery(salesOrderId));
-        //    var salesOrdersLine = (await Mediator.Send(new GetSOLinesQuery(salesOrderId)))?.result;
-        //    return new ViewAsPdf((so, salesOrdersLine));
-        //}
+        public async Task<IActionResult> Print(long salesOrderId)
+        {
+
+            return File(await salesOrderDocument.GetSalesOrderPDfAsync(salesOrderId), "application/pdf");
+
+
+        }
 
         public async Task<ActionResult> Details(long salesOrderId)
         {

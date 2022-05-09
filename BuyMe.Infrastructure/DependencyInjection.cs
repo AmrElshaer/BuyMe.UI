@@ -5,7 +5,6 @@ using BuyMe.Infrastructure.Authorization;
 using BuyMe.Infrastructure.HealthChecks;
 using BuyMe.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -68,11 +67,12 @@ namespace BuyMe.Infrastructure
                 .AddSqlServer(configuration.GetConnectionString("TenantConnection"), name: "Tenant DB Status",
                 tags: new[] { "Tenant DB" })
                 .AddCheck<SqlServerHealthCheck>(name: "Organizations Status", tags: new[] { "Organization DB" });
+            // healthchecks-ui path
             services.AddHealthChecksUI(setp =>
             {
                 setp.MaximumHistoryEntriesPerEndpoint(50);
                 setp.SetEvaluationTimeInSeconds(2000);
-                setp.AddHealthCheckEndpoint("ByMe Health Check", "http://localhost:5000/health");
+                setp.AddHealthCheckEndpoint("ByMe Health Check", "https://localhost:7269/health");
                 setp.SetMinimumSecondsBetweenFailureNotifications(60);
             }).AddInMemoryStorage();
             return services;

@@ -1,18 +1,19 @@
-﻿using BuyMe.Application.Common.Interfaces;
+﻿using BuyMe.Application;
+using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
-using BuyMe.Application;
 using BuyMe.Infrastructure;
 using BuyMe.Persistence;
 using BuyMe.Tenant;
+using ByMe.Presentation.Helper.PdfDocuments;
+using ByMe.Presentation.Middlewares;
+using ByMe.Presentation.Models;
+using ByMe.Presentation.Services;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System.Globalization;
-using ByMe.Presentation.Services;
-using ByMe.Presentation.Models;
-using ByMe.Presentation.Middlewares;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using HealthChecks.UI.Client;
 
 namespace ByMe.Presentation
 {
@@ -36,15 +37,16 @@ namespace ByMe.Presentation
                 options.AddPolicy("allowcors",
                 builder =>
                 {
-builder.WithOrigins(this.Configuration["MarketingSettings:Domain"])
-                    .AllowAnyMethod()
-                    .AllowAnyHeader().AllowCredentials();
+                    builder.WithOrigins(this.Configuration["MarketingSettings:Domain"])
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader().AllowCredentials();
                 });
             });
 
             services.AddHttpContextAccessor();
             services.AddTransient<ITenantService, TenantService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddTransient<ISalesOrderDocument, SalesOrderDocument>();
             services.Configure<TenantSettings>(Configuration.GetSection(nameof(TenantSettings)));
             services.AddApplication();
             services.AddInfrastructure(Configuration);
