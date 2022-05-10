@@ -8,6 +8,8 @@ services:
       - SA_PASSWORD=1Secure*Password1
     ports:
       - "1433:1433"
+    volumes:
+       - sql_data_volume:/var/opt/mssql
   byme.presentation:
     image: ${DOCKER_REGISTRY-}bymepresentation
     build:
@@ -15,3 +17,5 @@ services:
       dockerfile: ByMe.Presentation/Dockerfile
     depends_on:
      - db
+volumes: 
+    sql_data_volume:
