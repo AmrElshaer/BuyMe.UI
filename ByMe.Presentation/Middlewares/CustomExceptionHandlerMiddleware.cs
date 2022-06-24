@@ -8,10 +8,12 @@ namespace ByMe.Presentation.Middlewares
     public class CustomExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
 
-        public CustomExceptionHandlerMiddleware(RequestDelegate next)
+        public CustomExceptionHandlerMiddleware(RequestDelegate next, ILogger<CustomExceptionHandlerMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext httpContext)
@@ -22,6 +24,7 @@ namespace ByMe.Presentation.Middlewares
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message, ex);
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
@@ -53,7 +56,7 @@ namespace ByMe.Presentation.Middlewares
             {
                 result = JsonConvert.SerializeObject(new { error = exception.Message });
             }
-
+            _logger.LogError($"{code}:{result}");
             return context.Response.WriteAsync(result);
         }
     }

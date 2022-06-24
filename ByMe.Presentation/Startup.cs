@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Serilog;
+using Serilog.Events;
 using System.Globalization;
 
 namespace ByMe.Presentation
@@ -22,6 +24,11 @@ namespace ByMe.Presentation
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Log.Logger = new LoggerConfiguration()
+              .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+              .Enrich.FromLogContext()
+              .WriteTo.Console()
+              .CreateBootstrapLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -29,6 +36,7 @@ namespace ByMe.Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddMvc()
                 .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
@@ -120,6 +128,10 @@ namespace ByMe.Presentation
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSerilogRequestLogging(configure =>
+            {
+                configure.MessageTemplate = "HTTP {RequestMethod} {RequestPath} ({UserId}) responded {StatusCode} in {Elapsed:0.0000}ms";
+            });
             app.UseSession();
             app.UseCors("allowcors");
             app.UseCustomExceptionHandlerMiddleware();
