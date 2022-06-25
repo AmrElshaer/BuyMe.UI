@@ -166,3 +166,706 @@ SELECT [MigrationId], [ProductVersion]
 FROM [__EFMigrationsHistory]
 ORDER BY [MigrationId];
 2022-06-24 22:08:38.797 +02:00 [INF] No migrations were applied. The database is already up to date.
+2022-06-25 23:05:27.311 +02:00 [INF] Tenant
+2022-06-25 23:05:29.498 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: MigrationsAssembly=BuyMe.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2022-06-25 23:05:31.685 +02:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:05:31.831 +02:00 [INF] Executed DbCommand (128ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:05:31.839 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:05:31.842 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:05:31.879 +02:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2022-06-25 23:05:31.892 +02:00 [INF] No migrations were applied. The database is already up to date.
+2022-06-25 23:05:35.538 +02:00 [INF] User profile is available. Using 'C:\Users\Lenovo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-06-25 23:05:35.673 +02:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2022-06-25 23:05:35.675 +02:00 [INF] Quartz Scheduler created
+2022-06-25 23:05:35.676 +02:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2022-06-25 23:05:35.677 +02:00 [INF] RAMJobStore initialized.
+2022-06-25 23:05:35.680 +02:00 [INF] Scheduler meta-data: Quartz Scheduler (v3.3.3.0) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'Quartz.Core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'Quartz.Simpl.DefaultThreadPool' - with 10 threads.
+  Using job-store 'Quartz.Simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2022-06-25 23:05:35.682 +02:00 [INF] Quartz scheduler 'QuartzScheduler' initialized
+2022-06-25 23:05:35.683 +02:00 [INF] Quartz scheduler version: 3.3.3.0
+2022-06-25 23:05:35.701 +02:00 [INF] Adding 1 jobs, 1 triggers.
+2022-06-25 23:05:35.706 +02:00 [INF] Adding job: DEFAULT.MonitorTenantJob
+2022-06-25 23:05:35.742 +02:00 [INF] Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+2022-06-25 23:05:35.794 +02:00 [INF] Initializing UI Database
+2022-06-25 23:05:35.904 +02:00 [INF] Check messages!
+2022-06-25 23:05:35.909 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:05:36.072 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'HealthChecksDb' using provider 'Microsoft.EntityFrameworkCore.InMemory:6.0.2' with options: StoreName=HealthChecksUI 
+2022-06-25 23:05:36.108 +02:00 [INF] Saving healthchecks configuration to database
+2022-06-25 23:05:36.109 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:05:36.173 +02:00 [INF] Saved 1 entities to in-memory store.
+2022-06-25 23:05:37.574 +02:00 [INF] Now listening on: https://localhost:7269
+2022-06-25 23:05:37.576 +02:00 [INF] Now listening on: http://localhost:5269
+2022-06-25 23:05:38.244 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'HealthChecksDb' using provider 'Microsoft.EntityFrameworkCore.InMemory:6.0.2' with options: StoreName=HealthChecksUI 
+2022-06-25 23:05:38.285 +02:00 [INF] Start processing HTTP request GET "https://localhost:7269/health"
+2022-06-25 23:05:38.289 +02:00 [INF] Sending HTTP request GET "https://localhost:7269/health"
+2022-06-25 23:05:38.296 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-25 23:05:38.298 +02:00 [INF] Hosting environment: Development
+2022-06-25 23:05:38.302 +02:00 [INF] Content root path: E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation
+2022-06-25 23:05:38.330 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/ - -
+2022-06-25 23:05:38.330 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:7269/health - -
+2022-06-25 23:05:38.414 +02:00 [INF] Executing endpoint 'Health checks'
+2022-06-25 23:05:38.417 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2022-06-25 23:05:38.453 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2022-06-25 23:05:38.456 +02:00 [INF] HTTP GET / ({UserId}) responded 302 in 95.2303ms
+2022-06-25 23:05:38.465 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/ - - - 302 0 - 139.5323ms
+2022-06-25 23:05:38.470 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/Identity/Account/Login?ReturnUrl=%2F - -
+2022-06-25 23:05:38.485 +02:00 [INF] Executing endpoint '/Account/login'
+2022-06-25 23:05:38.533 +02:00 [INF] Route matched with {page = "/Account/login", area = "Identity", action = "", controller = ""}. Executing page /Account/login
+2022-06-25 23:05:38.541 +02:00 [INF] Tenant
+2022-06-25 23:05:38.568 +02:00 [INF] Tenant
+2022-06-25 23:05:38.615 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:05:38.631 +02:00 [INF] Executing handler method ByMe.Presentation.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2022-06-25 23:05:38.649 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tenants] AS [t]
+2022-06-25 23:05:38.677 +02:00 [INF] Executed handler method OnGetAsync, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2022-06-25 23:05:38.681 +02:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+ORDER BY CAST([t].[Id] AS bigint) DESC
+2022-06-25 23:05:38.726 +02:00 [INF] Executing RedirectToPageResult, redirecting to NewOrganization.
+2022-06-25 23:05:38.735 +02:00 [INF] Executed page /Account/login in 194.5473ms
+2022-06-25 23:05:38.737 +02:00 [INF] Executed endpoint '/Account/login'
+2022-06-25 23:05:38.738 +02:00 [INF] HTTP GET /Identity/Account/Login ({UserId}) responded 302 in 266.3097ms
+2022-06-25 23:05:38.743 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/Identity/Account/Login?ReturnUrl=%2F - - - 302 0 - 273.4592ms
+2022-06-25 23:05:38.749 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/Identity/Account/NewOrganization - -
+2022-06-25 23:05:38.752 +02:00 [INF] Executing endpoint '/Account/NewOrganization'
+2022-06-25 23:05:38.763 +02:00 [INF] Route matched with {page = "/Account/NewOrganization", area = "Identity", action = "", controller = ""}. Executing page /Account/NewOrganization
+2022-06-25 23:05:38.770 +02:00 [INF] Executing handler method ByMe.Presentation.Areas.Identity.Pages.Account.NewOrganizationModel.OnGet - ModelState is "Valid"
+2022-06-25 23:05:38.772 +02:00 [INF] Executed handler method OnGet, returned result .
+2022-06-25 23:05:38.778 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2022-06-25 23:05:38.779 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2022-06-25 23:05:38.848 +02:00 [INF] Tenant
+2022-06-25 23:05:38.964 +02:00 [INF] Executed page /Account/NewOrganization in 195.7561ms
+2022-06-25 23:05:38.968 +02:00 [INF] Executed endpoint '/Account/NewOrganization'
+2022-06-25 23:05:38.972 +02:00 [INF] HTTP GET /Identity/Account/NewOrganization ({UserId}) responded 200 in 222.2740ms
+2022-06-25 23:05:39.019 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/Identity/Account/NewOrganization - - - 200 - text/html;+charset=utf-8 270.5644ms
+2022-06-25 23:05:39.077 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/aos/aos.css - -
+2022-06-25 23:05:39.077 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/bootstrap/css/bootstrap.min.css - -
+2022-06-25 23:05:39.077 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/boxicons/css/boxicons.min.css - -
+2022-06-25 23:05:39.077 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/bootstrap-icons/bootstrap-icons.css - -
+2022-06-25 23:05:39.078 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/remixicon/remixicon.css - -
+2022-06-25 23:05:39.078 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/glightbox/css/glightbox.min.css - -
+2022-06-25 23:05:39.078 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/swiper/swiper-bundle.min.css - -
+2022-06-25 23:05:39.171 +02:00 [INF] Sending file. Request path: '/arsha/vendor/glightbox/css/glightbox.min.css'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\glightbox\css\glightbox.min.css'
+2022-06-25 23:05:39.179 +02:00 [INF] Sending file. Request path: '/arsha/vendor/swiper/swiper-bundle.min.css'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\swiper\swiper-bundle.min.css'
+2022-06-25 23:05:39.185 +02:00 [INF] HTTP GET /arsha/vendor/glightbox/css/glightbox.min.css ({UserId}) responded 200 in 81.1630ms
+2022-06-25 23:05:39.186 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/css/style.css - -
+2022-06-25 23:05:39.195 +02:00 [INF] HTTP GET /arsha/vendor/swiper/swiper-bundle.min.css ({UserId}) responded 200 in 87.2071ms
+2022-06-25 23:05:39.215 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/swiper/swiper-bundle.min.css - - - 200 13883 text/css 136.6835ms
+2022-06-25 23:05:39.220 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/glightbox/css/glightbox.min.css - - - 200 13746 text/css 141.7949ms
+2022-06-25 23:05:39.231 +02:00 [INF] Sending file. Request path: '/arsha/vendor/bootstrap-icons/bootstrap-icons.css'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\bootstrap-icons\bootstrap-icons.css'
+2022-06-25 23:05:39.229 +02:00 [INF] Sending file. Request path: '/arsha/vendor/boxicons/css/boxicons.min.css'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\boxicons\css\boxicons.min.css'
+2022-06-25 23:05:39.229 +02:00 [INF] Sending file. Request path: '/arsha/vendor/remixicon/remixicon.css'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\remixicon\remixicon.css'
+2022-06-25 23:05:39.229 +02:00 [INF] Sending file. Request path: '/arsha/vendor/aos/aos.css'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\aos\aos.css'
+2022-06-25 23:05:39.233 +02:00 [INF] Sending file. Request path: '/arsha/vendor/bootstrap/css/bootstrap.min.css'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\bootstrap\css\bootstrap.min.css'
+2022-06-25 23:05:39.236 +02:00 [INF] HTTP GET /arsha/vendor/bootstrap-icons/bootstrap-icons.css ({UserId}) responded 200 in 139.2109ms
+2022-06-25 23:05:39.242 +02:00 [INF] HTTP GET /arsha/vendor/boxicons/css/boxicons.min.css ({UserId}) responded 200 in 154.4496ms
+2022-06-25 23:05:39.246 +02:00 [INF] Sending file. Request path: '/arsha/css/style.css'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\css\style.css'
+2022-06-25 23:05:39.247 +02:00 [INF] HTTP GET /arsha/vendor/remixicon/remixicon.css ({UserId}) responded 200 in 147.3711ms
+2022-06-25 23:05:39.249 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/lib/jquery/dist/jquery.min.js - -
+2022-06-25 23:05:39.252 +02:00 [INF] HTTP GET /arsha/vendor/aos/aos.css ({UserId}) responded 200 in 171.3913ms
+2022-06-25 23:05:39.257 +02:00 [INF] HTTP GET /arsha/vendor/bootstrap/css/bootstrap.min.css ({UserId}) responded 200 in 173.7360ms
+2022-06-25 23:05:39.263 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/bootstrap-icons/bootstrap-icons.css - - - 200 67086 text/css 185.8573ms
+2022-06-25 23:05:39.269 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/boxicons/css/boxicons.min.css - - - 200 63235 text/css 191.8437ms
+2022-06-25 23:05:39.277 +02:00 [INF] HTTP GET /arsha/css/style.css ({UserId}) responded 200 in 72.4558ms
+2022-06-25 23:05:39.283 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/remixicon/remixicon.css - - - 200 112755 text/css 205.4058ms
+2022-06-25 23:05:39.295 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/aos/aos.css - - - 200 26053 text/css 217.6582ms
+2022-06-25 23:05:39.303 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/bootstrap/css/bootstrap.min.css - - - 200 155637 text/css 226.4889ms
+2022-06-25 23:05:39.339 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/css/style.css - - - 200 33302 text/css 152.8669ms
+2022-06-25 23:05:39.345 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/aos/aos.js - -
+2022-06-25 23:05:39.345 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/bootstrap/js/bootstrap.bundle.min.js - -
+2022-06-25 23:05:39.429 +02:00 [INF] Sending file. Request path: '/arsha/vendor/aos/aos.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\aos\aos.js'
+2022-06-25 23:05:39.434 +02:00 [INF] HTTP GET /arsha/vendor/aos/aos.js ({UserId}) responded 200 in 68.0975ms
+2022-06-25 23:05:39.439 +02:00 [INF] Sending file. Request path: '/arsha/vendor/bootstrap/js/bootstrap.bundle.min.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\bootstrap\js\bootstrap.bundle.min.js'
+2022-06-25 23:05:39.440 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/aos/aos.js - - - 200 14690 application/javascript 95.3442ms
+2022-06-25 23:05:39.445 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/glightbox/js/glightbox.min.js - -
+2022-06-25 23:05:39.446 +02:00 [INF] HTTP GET /arsha/vendor/bootstrap/js/bootstrap.bundle.min.js ({UserId}) responded 200 in 76.4486ms
+2022-06-25 23:05:39.457 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/bootstrap/js/bootstrap.bundle.min.js - - - 200 78754 application/javascript 112.2772ms
+2022-06-25 23:05:39.463 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/isotope-layout/isotope.pkgd.min.js - -
+2022-06-25 23:05:39.512 +02:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\lib\jquery\dist\jquery.min.js'
+2022-06-25 23:05:39.518 +02:00 [INF] HTTP GET /lib/jquery/dist/jquery.min.js ({UserId}) responded 200 in 231.4862ms
+2022-06-25 23:05:39.527 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/lib/jquery/dist/jquery.min.js - - - 200 89478 application/javascript 277.8858ms
+2022-06-25 23:05:39.531 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/php-email-form/validate.js - -
+2022-06-25 23:05:39.532 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/swiper/swiper-bundle.min.js - -
+2022-06-25 23:05:39.532 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/waypoints/noframework.waypoints.js - -
+2022-06-25 23:05:39.556 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/js/main.js - -
+2022-06-25 23:05:39.575 +02:00 [INF] Sending file. Request path: '/arsha/vendor/isotope-layout/isotope.pkgd.min.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\isotope-layout\isotope.pkgd.min.js'
+2022-06-25 23:05:39.583 +02:00 [INF] Sending file. Request path: '/arsha/vendor/glightbox/js/glightbox.min.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\glightbox\js\glightbox.min.js'
+2022-06-25 23:05:39.584 +02:00 [INF] Sending file. Request path: '/arsha/vendor/php-email-form/validate.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\php-email-form\validate.js'
+2022-06-25 23:05:39.594 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/_framework/aspnetcore-browser-refresh.js - -
+2022-06-25 23:05:39.599 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/images/ByMe (2).png - -
+2022-06-25 23:05:39.611 +02:00 [INF] Sending file. Request path: '/arsha/vendor/waypoints/noframework.waypoints.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\waypoints\noframework.waypoints.js'
+2022-06-25 23:05:39.619 +02:00 [INF] HTTP GET /arsha/vendor/isotope-layout/isotope.pkgd.min.js ({UserId}) responded 200 in 154.0125ms
+2022-06-25 23:05:39.625 +02:00 [INF] HTTP GET /arsha/vendor/glightbox/js/glightbox.min.js ({UserId}) responded 200 in 174.0029ms
+2022-06-25 23:05:39.628 +02:00 [INF] Sending file. Request path: '/arsha/js/main.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\js\main.js'
+2022-06-25 23:05:39.631 +02:00 [INF] HTTP GET /arsha/vendor/php-email-form/validate.js ({UserId}) responded 200 in 95.7505ms
+2022-06-25 23:05:39.681 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/php-email-form/validate.js - - - 200 2731 application/javascript 149.8329ms
+2022-06-25 23:05:39.645 +02:00 [INF] HTTP GET /arsha/vendor/waypoints/noframework.waypoints.js ({UserId}) responded 200 in 102.8495ms
+2022-06-25 23:05:39.653 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/isotope-layout/isotope.pkgd.min.js - - - 200 35456 application/javascript 190.1101ms
+2022-06-25 23:05:39.702 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/img/hero-img.png - -
+2022-06-25 23:05:39.666 +02:00 [INF] Sending file. Request path: '/images/ByMe (2).png'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\images\ByMe (2).png'
+2022-06-25 23:05:39.667 +02:00 [INF] HTTP GET /arsha/js/main.js ({UserId}) responded 200 in 104.1914ms
+2022-06-25 23:05:39.641 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/_framework/aspnetcore-browser-refresh.js - - - 200 12004 application/javascript;+charset=utf-8 46.1962ms
+2022-06-25 23:05:39.695 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/waypoints/noframework.waypoints.js - - - 200 21869 application/javascript 162.9649ms
+2022-06-25 23:05:39.662 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/glightbox/js/glightbox.min.js - - - 200 55976 application/javascript 217.5343ms
+2022-06-25 23:05:39.715 +02:00 [INF] HTTP GET /images/ByMe (2).png ({UserId}) responded 200 in 73.7018ms
+2022-06-25 23:05:39.722 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/js/main.js - - - 200 6333 application/javascript 165.6628ms
+2022-06-25 23:05:39.725 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/_vs/browserLink - -
+2022-06-25 23:05:39.775 +02:00 [INF] Sending file. Request path: '/arsha/vendor/swiper/swiper-bundle.min.js'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\swiper\swiper-bundle.min.js'
+2022-06-25 23:05:39.762 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/images/ByMe (2).png - - - 200 4647 image/png 163.0030ms
+2022-06-25 23:05:39.745 +02:00 [INF] Sending file. Request path: '/arsha/img/hero-img.png'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\img\hero-img.png'
+2022-06-25 23:05:39.788 +02:00 [INF] HTTP GET /arsha/vendor/swiper/swiper-bundle.min.js ({UserId}) responded 200 in 247.4785ms
+2022-06-25 23:05:39.813 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/swiper/swiper-bundle.min.js - - - 200 145459 application/javascript 280.7560ms
+2022-06-25 23:05:39.799 +02:00 [INF] HTTP GET /arsha/img/hero-img.png ({UserId}) responded 200 in 90.5021ms
+2022-06-25 23:05:39.843 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/img/hero-img.png - - - 200 68245 image/png 140.9772ms
+2022-06-25 23:05:39.947 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 221.1911ms
+2022-06-25 23:05:39.955 +02:00 [INF] Executed endpoint 'Health checks'
+2022-06-25 23:05:39.959 +02:00 [INF] HTTP GET /health ({UserId}) responded 200 in 1612.5465ms
+2022-06-25 23:05:39.965 +02:00 [INF] Request finished HTTP/1.1 GET https://localhost:7269/health - - - 200 - application/json 1640.2317ms
+2022-06-25 23:05:39.967 +02:00 [INF] Received HTTP response headers after 1666.7521ms - 200
+2022-06-25 23:05:39.974 +02:00 [INF] End processing HTTP request after 1697.8352ms - 200
+2022-06-25 23:05:40.006 +02:00 [INF] Check messages!
+2022-06-25 23:05:40.011 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:05:40.027 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:05:40.118 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2?856008caa5eb66df68595e734e59580d - -
+2022-06-25 23:05:40.118 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/arsha/vendor/boxicons/fonts/boxicons.woff2 - -
+2022-06-25 23:05:40.152 +02:00 [INF] CORS policy execution failed.
+2022-06-25 23:05:40.152 +02:00 [INF] CORS policy execution failed.
+2022-06-25 23:05:40.157 +02:00 [INF] Request origin https://localhost:7269 does not have permission to access the resource.
+2022-06-25 23:05:40.161 +02:00 [INF] Request origin https://localhost:7269 does not have permission to access the resource.
+2022-06-25 23:05:40.220 +02:00 [INF] Sending file. Request path: '/arsha/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\bootstrap-icons\fonts\bootstrap-icons.woff2'
+2022-06-25 23:05:40.226 +02:00 [INF] HTTP GET /arsha/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2 ({UserId}) responded 200 in 78.2582ms
+2022-06-25 23:05:40.226 +02:00 [INF] Sending file. Request path: '/arsha/vendor/boxicons/fonts/boxicons.woff2'. Physical path: 'E:\Projects\GraduateProject\Project\ByMe\ByMe.Presentation\wwwroot\arsha\vendor\boxicons\fonts\boxicons.woff2'
+2022-06-25 23:05:40.234 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2?856008caa5eb66df68595e734e59580d - - - 200 90528 font/woff2 116.1369ms
+2022-06-25 23:05:40.239 +02:00 [INF] HTTP GET /arsha/vendor/boxicons/fonts/boxicons.woff2 ({UserId}) responded 200 in 88.1536ms
+2022-06-25 23:05:40.256 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/arsha/vendor/boxicons/fonts/boxicons.woff2 - - - 200 93260 font/woff2 137.6724ms
+2022-06-25 23:05:40.850 +02:00 [INF] Saved 3 entities to in-memory store.
+2022-06-25 23:05:46.014 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/Identity/Account/HaveOrganization - -
+2022-06-25 23:05:46.018 +02:00 [INF] Executing endpoint '/Account/HaveOrganization'
+2022-06-25 23:05:46.022 +02:00 [INF] Route matched with {page = "/Account/HaveOrganization", area = "Identity", action = "", controller = ""}. Executing page /Account/HaveOrganization
+2022-06-25 23:05:46.024 +02:00 [INF] Executing handler method ByMe.Presentation.Areas.Identity.Pages.Account.HaveOrganizationModel.OnGet - ModelState is "Valid"
+2022-06-25 23:05:46.026 +02:00 [INF] Executed handler method OnGet, returned result .
+2022-06-25 23:05:46.027 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2022-06-25 23:05:46.029 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2022-06-25 23:05:46.045 +02:00 [INF] Tenant
+2022-06-25 23:05:46.058 +02:00 [INF] Executed page /Account/HaveOrganization in 34.4605ms
+2022-06-25 23:05:46.061 +02:00 [INF] Executed endpoint '/Account/HaveOrganization'
+2022-06-25 23:05:46.062 +02:00 [INF] HTTP GET /Identity/Account/HaveOrganization ({UserId}) responded 200 in 45.1692ms
+2022-06-25 23:05:46.067 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/Identity/Account/HaveOrganization - - - 200 - text/html;+charset=utf-8 53.6320ms
+2022-06-25 23:05:46.095 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/_vs/browserLink - -
+2022-06-25 23:05:46.098 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/_framework/aspnetcore-browser-refresh.js - -
+2022-06-25 23:05:46.101 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/_framework/aspnetcore-browser-refresh.js - - - 200 12004 application/javascript;+charset=utf-8 2.6778ms
+2022-06-25 23:05:46.115 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 19.7843ms
+2022-06-25 23:05:50.014 +02:00 [INF] Check messages!
+2022-06-25 23:05:50.019 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:05:50.035 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:05:50.723 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7269/Home/Index application/x-www-form-urlencoded 194
+2022-06-25 23:05:50.726 +02:00 [INF] CORS policy execution failed.
+2022-06-25 23:05:50.728 +02:00 [INF] Request origin https://localhost:7269 does not have permission to access the resource.
+2022-06-25 23:05:50.730 +02:00 [INF] Executing endpoint 'ByMe.Presentation.Controllers.HomeController.Index (ByMe.Presentation)'
+2022-06-25 23:05:50.782 +02:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String) on controller ByMe.Presentation.Controllers.HomeController (ByMe.Presentation).
+2022-06-25 23:05:51.015 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:05:51.106 +02:00 [INF] Executed DbCommand (71ms) [Parameters=[@__request_TenantName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenantName] = @__request_TenantName_0
+2022-06-25 23:05:51.169 +02:00 [INF] Executing RedirectResult, redirecting to /.
+2022-06-25 23:05:51.171 +02:00 [INF] Executed action ByMe.Presentation.Controllers.HomeController.Index (ByMe.Presentation) in 384.0703ms
+2022-06-25 23:05:51.173 +02:00 [INF] Executed endpoint 'ByMe.Presentation.Controllers.HomeController.Index (ByMe.Presentation)'
+2022-06-25 23:05:51.175 +02:00 [INF] HTTP POST /Home/Index ({UserId}) responded 302 in 449.0748ms
+2022-06-25 23:05:51.180 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7269/Home/Index application/x-www-form-urlencoded 194 - 302 0 - 456.7861ms
+2022-06-25 23:05:51.182 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/ - -
+2022-06-25 23:05:51.185 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2022-06-25 23:05:51.196 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2022-06-25 23:05:51.198 +02:00 [INF] HTTP GET / ({UserId}) responded 302 in 14.0920ms
+2022-06-25 23:05:51.202 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/ - - - 302 0 - 20.0356ms
+2022-06-25 23:05:51.207 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/Identity/Account/Login?ReturnUrl=%2F - -
+2022-06-25 23:05:51.209 +02:00 [INF] Executing endpoint '/Account/login'
+2022-06-25 23:05:51.211 +02:00 [INF] Route matched with {page = "/Account/login", area = "Identity", action = "", controller = ""}. Executing page /Account/login
+2022-06-25 23:05:51.214 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:05:51.219 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_TenantName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenantName] = @__request_TenantName_0
+2022-06-25 23:05:51.288 +02:00 [INF] Tenant
+2022-06-25 23:05:51.293 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_TenantName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenantName] = @__request_TenantName_0
+2022-06-25 23:05:51.404 +02:00 [INF] Tenant
+2022-06-25 23:05:51.407 +02:00 [INF] Executing handler method ByMe.Presentation.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2022-06-25 23:05:51.412 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2022-06-25 23:05:51.414 +02:00 [INF] Executed handler method OnGetAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2022-06-25 23:05:51.424 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__request_TenantName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenantName] = @__request_TenantName_0
+2022-06-25 23:05:51.762 +02:00 [INF] Executed page /Account/login in 550.0136ms
+2022-06-25 23:05:51.765 +02:00 [INF] Executed endpoint '/Account/login'
+2022-06-25 23:05:51.767 +02:00 [INF] HTTP GET /Identity/Account/Login ({UserId}) responded 200 in 558.3069ms
+2022-06-25 23:05:51.795 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/Identity/Account/Login?ReturnUrl=%2F - - - 200 - text/html;+charset=utf-8 588.1732ms
+2022-06-25 23:05:51.922 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/_framework/aspnetcore-browser-refresh.js - -
+2022-06-25 23:05:51.922 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/_vs/browserLink - -
+2022-06-25 23:05:51.926 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/_framework/aspnetcore-browser-refresh.js - - - 200 12004 application/javascript;+charset=utf-8 4.4227ms
+2022-06-25 23:05:52.405 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 483.5412ms
+2022-06-25 23:05:55.102 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7269/Identity/Account/Login?ReturnUrl=%2F application/x-www-form-urlencoded 251
+2022-06-25 23:05:55.108 +02:00 [INF] CORS policy execution failed.
+2022-06-25 23:05:55.112 +02:00 [INF] Request origin https://localhost:7269 does not have permission to access the resource.
+2022-06-25 23:05:55.116 +02:00 [INF] Executing endpoint '/Account/login'
+2022-06-25 23:05:55.129 +02:00 [INF] Route matched with {page = "/Account/login", area = "Identity", action = "", controller = ""}. Executing page /Account/login
+2022-06-25 23:05:55.141 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:05:55.155 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__request_TenantName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenantName] = @__request_TenantName_0
+2022-06-25 23:05:55.276 +02:00 [INF] Tenant
+2022-06-25 23:05:55.285 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__request_TenantName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenantName] = @__request_TenantName_0
+2022-06-25 23:05:55.410 +02:00 [INF] Tenant
+2022-06-25 23:05:55.457 +02:00 [INF] Executing handler method ByMe.Presentation.Areas.Identity.Pages.Account.LoginModel.OnPostAsync - ModelState is "Valid"
+2022-06-25 23:05:55.497 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: MigrationsAssembly=BuyMe.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2022-06-25 23:05:55.687 +02:00 [INF] Executed DbCommand (173ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[CompanyId], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Photo], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2022-06-25 23:05:57.529 +02:00 [INF] Executed DbCommand (37ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2022-06-25 23:05:57.807 +02:00 [INF] Executed DbCommand (107ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2022-06-25 23:05:57.818 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2022-06-25 23:05:57.842 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[CompanyId], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Photo], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2022-06-25 23:05:58.193 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'BuyMeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: MigrationsAssembly=BuyMe.Persistence, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2022-06-25 23:05:58.256 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[Business], [c].[City], [c].[Country], [c].[CreatedBy], [c].[CreatedOn], [c].[IsActive], [c].[LastModifiedBy], [c].[LastModifiedOn], [c].[Logo], [c].[Name], [c].[Telephone], [c].[TemplateId]
+FROM [Companies] AS [c]
+WHERE [c].[Id] = @__p_0
+2022-06-25 23:05:58.423 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2022-06-25 23:05:58.427 +02:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2022-06-25 23:05:58.429 +02:00 [INF] Executed page /Account/login in 3293.004ms
+2022-06-25 23:05:58.430 +02:00 [INF] Executed endpoint '/Account/login'
+2022-06-25 23:05:58.432 +02:00 [INF] HTTP POST /Identity/Account/Login ({UserId}) responded 302 in 3324.1620ms
+2022-06-25 23:05:58.435 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7269/Identity/Account/Login?ReturnUrl=%2F application/x-www-form-urlencoded 251 - 302 0 - 3333.7327ms
+2022-06-25 23:05:58.440 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/ - -
+2022-06-25 23:05:58.446 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:05:58.453 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_TenantName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenantName] = @__request_TenantName_0
+2022-06-25 23:05:58.571 +02:00 [INF] Tenant
+2022-06-25 23:05:58.575 +02:00 [INF] Executing endpoint 'ByMe.Presentation.Controllers.HomeController.Dashboard (ByMe.Presentation)'
+2022-06-25 23:05:58.578 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Home", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard() on controller ByMe.Presentation.Controllers.HomeController (ByMe.Presentation).
+2022-06-25 23:05:58.670 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_TenantName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[TenantLogo], [t].[TenantName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenantName] = @__request_TenantName_0
+2022-06-25 23:05:58.738 +02:00 [INF] Tenant
+2022-06-25 23:05:58.742 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'BuyMeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: MigrationsAssembly=BuyMe.Persistence, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2022-06-25 23:05:58.903 +02:00 [INF] Executed DbCommand (136ms) [Parameters=[@__currentUserService_CompanyId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[CategoryName] AS [XValue], CAST((
+    SELECT COUNT(*)
+    FROM [Products] AS [p]
+    WHERE [c].[CategoryId] = [p].[CategoryId]) AS float) AS [YValue]
+FROM [Categories] AS [c]
+WHERE [c].[CompanyId] = @__currentUserService_CompanyId_0
+2022-06-25 23:05:58.979 +02:00 [INF] Executed DbCommand (38ms) [Parameters=[@__currentUserService_CompanyId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[CustomerTypeName] AS [XValue], CAST((
+    SELECT COUNT(*)
+    FROM [Customers] AS [c0]
+    WHERE [c].[Id] = [c0].[CustomerTypeId]) AS float) AS [YValue]
+FROM [CustomerTypes] AS [c]
+WHERE [c].[CompanyId] = @__currentUserService_CompanyId_0
+2022-06-25 23:05:59.020 +02:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [SalesOrders] AS [s]
+2022-06-25 23:05:59.104 +02:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[SalesOrderId], [s].[Amount], [s].[BranchId], [s].[CompanyId], [s].[CurrencyCode], [s].[CurrencyId], [s].[CustomerId], [s].[DeliveryDate], [s].[Discount], [s].[Freight], [s].[OrderDate], [s].[Remarks], [s].[SalesOrderName], [s].[SalesTypeId], [s].[SubTotal], [s].[Tax], [s].[Total], [b].[BranchId], [b].[Address], [b].[BranchName], [b].[City], [b].[CompanyId], [b].[ContactPerson], [b].[CurrencyId], [b].[Description], [b].[Email], [b].[Phone], [b].[State], [b].[ZipCode], [c].[Id], [c].[Address], [c].[City], [c].[CompanyId], [c].[Country], [c].[CustomerName], [c].[CustomerTypeId], [c].[Email], [c].[Phone], [c].[UserId], [c0].[CurrencyId], [c0].[CompanyId], [c0].[CurrencyCode], [c0].[CurrencyName], [c0].[Description], [s0].[Id], [s0].[CompanyId], [s0].[SalesTypeDescription], [s0].[SalesTypeName]
+FROM [SalesOrders] AS [s]
+LEFT JOIN [Branches] AS [b] ON [s].[BranchId] = [b].[BranchId]
+LEFT JOIN [Customers] AS [c] ON [s].[CustomerId] = [c].[Id]
+LEFT JOIN [Currencies] AS [c0] ON [s].[CurrencyId] = [c0].[CurrencyId]
+LEFT JOIN [SalesTypes] AS [s0] ON [s].[SalesTypeId] = [s0].[Id]
+ORDER BY [s].[SalesOrderId] DESC
+2022-06-25 23:05:59.278 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Invoices] AS [i]
+2022-06-25 23:05:59.316 +02:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[InvoiceId], [i].[InvoiceDate], [i].[InvoiceDueDate], [i].[InvoiceName], [i].[InvoiceTypeId], [i].[ShipmentId], [s].[ShipmentId], [s].[CompanyId], [s].[IsFullShipment], [s].[Remarks], [s].[SalesOrderId], [s].[ShipmentDate], [s].[ShipmentName], [s].[ShipmentTypeId], [s].[WarehouseId], [i0].[InvoiceTypeId], [i0].[Description], [i0].[InvoiceTypeName]
+FROM [Invoices] AS [i]
+INNER JOIN [Shipments] AS [s] ON [i].[ShipmentId] = [s].[ShipmentId]
+LEFT JOIN [InvoiceTypes] AS [i0] ON [i].[InvoiceTypeId] = [i0].[InvoiceTypeId]
+ORDER BY [i].[InvoiceId] DESC
+2022-06-25 23:05:59.379 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Shipments] AS [s]
+2022-06-25 23:05:59.402 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[ShipmentId], [s].[CompanyId], [s].[IsFullShipment], [s].[Remarks], [s].[SalesOrderId], [s].[ShipmentDate], [s].[ShipmentName], [s].[ShipmentTypeId], [s].[WarehouseId], [w].[WarehouseId], [w].[BranchId], [w].[CompanyId], [w].[Description], [w].[WarehouseName], [s0].[SalesOrderId], [s0].[Amount], [s0].[BranchId], [s0].[CompanyId], [s0].[CurrencyCode], [s0].[CurrencyId], [s0].[CustomerId], [s0].[DeliveryDate], [s0].[Discount], [s0].[Freight], [s0].[OrderDate], [s0].[Remarks], [s0].[SalesOrderName], [s0].[SalesTypeId], [s0].[SubTotal], [s0].[Tax], [s0].[Total]
+FROM [Shipments] AS [s]
+LEFT JOIN [Warehouses] AS [w] ON [s].[WarehouseId] = [w].[WarehouseId]
+LEFT JOIN [SalesOrders] AS [s0] ON [s].[SalesOrderId] = [s0].[SalesOrderId]
+ORDER BY [s].[ShipmentId] DESC
+2022-06-25 23:05:59.501 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [PaymentReceives] AS [p]
+2022-06-25 23:05:59.557 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PaymentReceiveId], [p].[InvoiceId], [p].[IsFullPayment], [p].[PaymentAmount], [p].[PaymentDate], [p].[PaymentReceiveName], [p].[PaymentTypeId], [p0].[PaymentTypeId], [p0].[Description], [p0].[PaymentTypeName], [i].[InvoiceId], [i].[InvoiceDate], [i].[InvoiceDueDate], [i].[InvoiceName], [i].[InvoiceTypeId], [i].[ShipmentId]
+FROM [PaymentReceives] AS [p]
+INNER JOIN [PaymentTypes] AS [p0] ON [p].[PaymentTypeId] = [p0].[PaymentTypeId]
+INNER JOIN [Invoices] AS [i] ON [p].[InvoiceId] = [i].[InvoiceId]
+ORDER BY [p].[PaymentReceiveId] DESC
+2022-06-25 23:05:59.632 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [SalesOrders] AS [s]
+2022-06-25 23:05:59.654 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[SalesOrderId], [s].[Amount], [s].[BranchId], [s].[CompanyId], [s].[CurrencyCode], [s].[CurrencyId], [s].[CustomerId], [s].[DeliveryDate], [s].[Discount], [s].[Freight], [s].[OrderDate], [s].[Remarks], [s].[SalesOrderName], [s].[SalesTypeId], [s].[SubTotal], [s].[Tax], [s].[Total], [b].[BranchId], [b].[Address], [b].[BranchName], [b].[City], [b].[CompanyId], [b].[ContactPerson], [b].[CurrencyId], [b].[Description], [b].[Email], [b].[Phone], [b].[State], [b].[ZipCode], [c].[Id], [c].[Address], [c].[City], [c].[CompanyId], [c].[Country], [c].[CustomerName], [c].[CustomerTypeId], [c].[Email], [c].[Phone], [c].[UserId], [c0].[CurrencyId], [c0].[CompanyId], [c0].[CurrencyCode], [c0].[CurrencyName], [c0].[Description], [s0].[Id], [s0].[CompanyId], [s0].[SalesTypeDescription], [s0].[SalesTypeName]
+FROM [SalesOrders] AS [s]
+LEFT JOIN [Branches] AS [b] ON [s].[BranchId] = [b].[BranchId]
+LEFT JOIN [Customers] AS [c] ON [s].[CustomerId] = [c].[Id]
+LEFT JOIN [Currencies] AS [c0] ON [s].[CurrencyId] = [c0].[CurrencyId]
+LEFT JOIN [SalesTypes] AS [s0] ON [s].[SalesTypeId] = [s0].[Id]
+ORDER BY [s].[SalesOrderId] DESC
+2022-06-25 23:05:59.674 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Invoices] AS [i]
+2022-06-25 23:05:59.688 +02:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[InvoiceId], [i].[InvoiceDate], [i].[InvoiceDueDate], [i].[InvoiceName], [i].[InvoiceTypeId], [i].[ShipmentId], [s].[ShipmentId], [s].[CompanyId], [s].[IsFullShipment], [s].[Remarks], [s].[SalesOrderId], [s].[ShipmentDate], [s].[ShipmentName], [s].[ShipmentTypeId], [s].[WarehouseId], [i0].[InvoiceTypeId], [i0].[Description], [i0].[InvoiceTypeName]
+FROM [Invoices] AS [i]
+INNER JOIN [Shipments] AS [s] ON [i].[ShipmentId] = [s].[ShipmentId]
+LEFT JOIN [InvoiceTypes] AS [i0] ON [i].[InvoiceTypeId] = [i0].[InvoiceTypeId]
+ORDER BY [i].[InvoiceId] DESC
+2022-06-25 23:05:59.705 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [PaymentReceives] AS [p]
+2022-06-25 23:05:59.725 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PaymentReceiveId], [p].[InvoiceId], [p].[IsFullPayment], [p].[PaymentAmount], [p].[PaymentDate], [p].[PaymentReceiveName], [p].[PaymentTypeId], [p0].[PaymentTypeId], [p0].[Description], [p0].[PaymentTypeName], [i].[InvoiceId], [i].[InvoiceDate], [i].[InvoiceDueDate], [i].[InvoiceName], [i].[InvoiceTypeId], [i].[ShipmentId]
+FROM [PaymentReceives] AS [p]
+INNER JOIN [PaymentTypes] AS [p0] ON [p].[PaymentTypeId] = [p0].[PaymentTypeId]
+INNER JOIN [Invoices] AS [i] ON [p].[InvoiceId] = [i].[InvoiceId]
+ORDER BY [p].[PaymentReceiveId] DESC
+2022-06-25 23:05:59.750 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Shipments] AS [s]
+2022-06-25 23:05:59.769 +02:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[ShipmentId], [s].[CompanyId], [s].[IsFullShipment], [s].[Remarks], [s].[SalesOrderId], [s].[ShipmentDate], [s].[ShipmentName], [s].[ShipmentTypeId], [s].[WarehouseId], [w].[WarehouseId], [w].[BranchId], [w].[CompanyId], [w].[Description], [w].[WarehouseName], [s0].[SalesOrderId], [s0].[Amount], [s0].[BranchId], [s0].[CompanyId], [s0].[CurrencyCode], [s0].[CurrencyId], [s0].[CustomerId], [s0].[DeliveryDate], [s0].[Discount], [s0].[Freight], [s0].[OrderDate], [s0].[Remarks], [s0].[SalesOrderName], [s0].[SalesTypeId], [s0].[SubTotal], [s0].[Tax], [s0].[Total]
+FROM [Shipments] AS [s]
+LEFT JOIN [Warehouses] AS [w] ON [s].[WarehouseId] = [w].[WarehouseId]
+LEFT JOIN [SalesOrders] AS [s0] ON [s].[SalesOrderId] = [s0].[SalesOrderId]
+ORDER BY [s].[ShipmentId] DESC
+2022-06-25 23:05:59.795 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2022-06-25 23:06:00.007 +02:00 [INF] Check messages!
+2022-06-25 23:06:00.121 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:06:00.137 +02:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:06:00.935 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: MigrationsAssembly=BuyMe.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2022-06-25 23:06:00.973 +02:00 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[CompanyId], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Photo], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2022-06-25 23:06:02.067 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2022-06-25 23:06:02.501 +02:00 [INF] Executed ViewResult - view Dashboard executed in 2713.9681ms.
+2022-06-25 23:06:02.507 +02:00 [INF] Executed action ByMe.Presentation.Controllers.HomeController.Dashboard (ByMe.Presentation) in 3925.6963ms
+2022-06-25 23:06:02.511 +02:00 [INF] Executed endpoint 'ByMe.Presentation.Controllers.HomeController.Dashboard (ByMe.Presentation)'
+2022-06-25 23:06:02.516 +02:00 [INF] HTTP GET / ({UserId}) responded 200 in 4074.1468ms
+2022-06-25 23:06:02.853 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/ - - - 200 - text/html;+charset=utf-8 4413.3952ms
+2022-06-25 23:06:03.242 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/_framework/aspnetcore-browser-refresh.js - -
+2022-06-25 23:06:03.244 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/_framework/aspnetcore-browser-refresh.js - - - 200 12004 application/javascript;+charset=utf-8 1.9589ms
+2022-06-25 23:06:03.271 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7269/_vs/browserLink - -
+2022-06-25 23:06:03.294 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7269/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 23.2181ms
+2022-06-25 23:06:10.003 +02:00 [INF] Check messages!
+2022-06-25 23:06:10.010 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:06:10.017 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:06:20.006 +02:00 [INF] Check messages!
+2022-06-25 23:06:20.021 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:06:20.054 +02:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:06:30.000 +02:00 [INF] Check messages!
+2022-06-25 23:06:30.007 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:06:30.012 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:06:40.002 +02:00 [INF] Check messages!
+2022-06-25 23:06:40.023 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:06:40.043 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:06:50.012 +02:00 [INF] Check messages!
+2022-06-25 23:06:50.018 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:06:50.025 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:07:00.000 +02:00 [INF] Check messages!
+2022-06-25 23:07:00.003 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:07:00.008 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:07:10.006 +02:00 [INF] Check messages!
+2022-06-25 23:07:10.011 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:07:10.023 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:07:20.014 +02:00 [INF] Check messages!
+2022-06-25 23:07:20.017 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:07:20.023 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:07:30.012 +02:00 [INF] Check messages!
+2022-06-25 23:07:30.015 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:07:30.020 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:07:40.005 +02:00 [INF] Check messages!
+2022-06-25 23:07:40.008 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:07:40.015 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:07:50.009 +02:00 [INF] Check messages!
+2022-06-25 23:07:50.020 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:07:50.030 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:08:00.012 +02:00 [INF] Check messages!
+2022-06-25 23:08:00.016 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:08:00.022 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:08:10.012 +02:00 [INF] Check messages!
+2022-06-25 23:08:10.015 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:08:10.020 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:08:20.013 +02:00 [INF] Check messages!
+2022-06-25 23:08:20.015 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:08:20.026 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:08:30.012 +02:00 [INF] Check messages!
+2022-06-25 23:08:30.018 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:08:30.023 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:08:40.000 +02:00 [INF] Check messages!
+2022-06-25 23:08:40.003 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:08:40.006 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:08:50.011 +02:00 [INF] Check messages!
+2022-06-25 23:08:50.014 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:08:50.020 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:09:00.000 +02:00 [INF] Check messages!
+2022-06-25 23:09:00.004 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:09:00.010 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:09:10.000 +02:00 [INF] Check messages!
+2022-06-25 23:09:10.003 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:09:10.007 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:09:20.013 +02:00 [INF] Check messages!
+2022-06-25 23:09:20.016 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:09:20.020 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:09:30.008 +02:00 [INF] Check messages!
+2022-06-25 23:09:30.012 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:09:30.017 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:09:40.006 +02:00 [INF] Check messages!
+2022-06-25 23:09:40.009 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:09:40.012 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:09:50.008 +02:00 [INF] Check messages!
+2022-06-25 23:09:50.011 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:09:50.016 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:10:00.007 +02:00 [INF] Check messages!
+2022-06-25 23:10:00.010 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:10:00.017 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:10:10.007 +02:00 [INF] Check messages!
+2022-06-25 23:10:10.008 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:10:10.015 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:10:20.011 +02:00 [INF] Check messages!
+2022-06-25 23:10:20.021 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:10:20.028 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:10:30.027 +02:00 [INF] Check messages!
+2022-06-25 23:10:30.032 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:10:30.085 +02:00 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:10:40.015 +02:00 [INF] Check messages!
+2022-06-25 23:10:40.044 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:10:40.053 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[Id], [o].[Data], [o].[IsProcessed], [o].[ProcessingTime], [o].[Time], [o].[Type]
+FROM [OutboxMessages] AS [o]
+WHERE [o].[Type] IN (N'Tenant Created', N'Tenant Updated') AND ([o].[IsProcessed] = CAST(0 AS bit))
+ORDER BY [o].[Data]
+2022-06-25 23:10:57.554 +02:00 [INF] Tenant
+2022-06-25 23:10:58.463 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: MigrationsAssembly=BuyMe.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2022-06-25 23:10:59.212 +02:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:10:59.274 +02:00 [INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:10:59.287 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:10:59.294 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:10:59.342 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2022-06-25 23:10:59.373 +02:00 [INF] No migrations were applied. The database is already up to date.
+2022-06-25 23:11:00.423 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:11:01.319 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:11:01.363 +02:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:11:01.372 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:11:01.379 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:11:01.410 +02:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2022-06-25 23:11:01.418 +02:00 [INF] No migrations were applied. The database is already up to date.
+2022-06-25 23:12:45.437 +02:00 [INF] Tenant Name  Tenant connection Server=DESKTOP-90NU8GR\SQLEXPRESS;Database=BuyMe;Trusted_Connection=True;MultipleActiveResultSets=true
+2022-06-25 23:12:47.302 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: MigrationsAssembly=BuyMe.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2022-06-25 23:12:48.048 +02:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:12:48.131 +02:00 [INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:12:48.147 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:12:48.157 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:12:48.190 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2022-06-25 23:12:48.220 +02:00 [INF] No migrations were applied. The database is already up to date.
+2022-06-25 23:12:48.736 +02:00 [INF] Entity Framework Core 6.0.4 initialized 'TenantDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.4' with options: None
+2022-06-25 23:12:49.442 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:12:49.475 +02:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:12:49.481 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-06-25 23:12:49.487 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-06-25 23:12:49.527 +02:00 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2022-06-25 23:12:49.530 +02:00 [INF] No migrations were applied. The database is already up to date.

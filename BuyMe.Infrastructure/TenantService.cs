@@ -3,6 +3,7 @@ using BuyMe.Application.Common.Interfaces;
 using BuyMe.Application.Common.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,16 @@ namespace BuyMe.Infrastructure
         private readonly TenantSettings _tenantSettings;
         private HttpContext _httpContext;
         private TenantDto _currentTenant;
+        private ILogger<TenantService> _logger;
         private readonly IMediator medatorR;
-        public TenantService(IOptions<TenantSettings> tenantSettings, IMediator medatorR, IHttpContextAccessor contextAccessor)
+        public TenantService(IOptions<TenantSettings> tenantSettings, ILogger<TenantService> logger, IMediator medatorR, IHttpContextAccessor contextAccessor)
         {
             this.medatorR = medatorR;
             _tenantSettings = tenantSettings.Value;
             _httpContext = contextAccessor.HttpContext;
             InitConnection();
+            _logger = logger;
+            _logger.LogInformation($"Tenant Name {_currentTenant.TenantName} Tenant connection {_currentTenant.ConnectionString}");
 
         }
 
