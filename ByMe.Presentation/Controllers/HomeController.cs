@@ -8,17 +8,14 @@ using ByMe.Presentation.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ByMe.Presentation.Controllers
 {
 
     public class HomeController : Controller
     {
-       
+
         private readonly IMediator mediator;
 
         public HomeController(IMediator mediator)
@@ -27,31 +24,26 @@ namespace ByMe.Presentation.Controllers
         }
         public async Task<IActionResult> Index(string tenant)
         {
-            
-            if (!string.IsNullOrEmpty(tenant))
-            {
-                var tenantDto=await this.mediator.Send(new GetTenantByNameQuery(){TenantName=tenant});
-                if (tenantDto==null)
-                {
-                    return NotFound();
-                }
-                HttpContext.Response.Cookies.Append("tenant", tenant);
-                return RedirectToAction(nameof(Dashboard));
-            }
-            return LocalRedirect("/Identity/Account/ByMe");
+            if (string.IsNullOrEmpty(tenant)) return LocalRedirect("/Identity/Account/ByMe");
+            var tenantDto = await this.mediator.Send(new GetTenantByNameQuery() { TenantName = tenant });
+            if (tenantDto == null) return NotFound();
+            HttpContext.Response.Cookies.Append("tenant", tenant);
+            return RedirectToAction(nameof(Dashboard));
+
+
         }
-       
+
         [Authorize]
         public async Task<IActionResult> Dashboard()
         {
             ViewBag.ProductChart = await mediator.Send(new GetCategoryChartQuery());
             ViewBag.CustomerChart = await mediator.Send(new GetCustomerChartQuery());
             ViewBag.SalesCycle = await SalesCycle();
-            ViewBag.SalesOrderMonthly= await SalesOrderMonthly();
+            ViewBag.SalesOrderMonthly = await SalesOrderMonthly();
             ViewBag.InvoicesMonthly = await InvoiceMonthly();
             ViewBag.PaymentsRecMonthly = await PaymentRecMonthly();
             ViewBag.ShipmentsMonthly = await ShipmentMonthly();
-           
+
             return View();
         }
 
@@ -117,7 +109,7 @@ namespace ByMe.Presentation.Controllers
         }
         private double SalesCyclePercetage(double count)
         {
-            return  (count / 4) * 100;
+            return (count / 4) * 100;
         }
         public IActionResult Privacy()
         {
