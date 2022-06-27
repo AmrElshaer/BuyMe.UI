@@ -1,4 +1,4 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -19,10 +19,7 @@ namespace BuyMe.Application.Branch.Commonds.DeleteBranch
             public async Task<Unit> Handle(DeleteBranchCommond request, CancellationToken cancellationToken)
             {
                 var branch = await context.Branches.FindAsync(request.BranchId);
-                if (branch == null)
-                {
-                    throw new NotFoundException("Branch", request.BranchId);
-                }
+                Guard.Against.Null(branch, request.BranchId);
                 context.Branches.Remove(branch);
                 await context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

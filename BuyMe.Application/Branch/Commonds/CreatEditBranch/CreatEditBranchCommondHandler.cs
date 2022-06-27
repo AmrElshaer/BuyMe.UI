@@ -1,4 +1,4 @@
-﻿using BuyMe.Application.Common.Exceptions;
+﻿using BuyMe.Application.Common.Behaviour;
 using BuyMe.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
@@ -23,8 +23,7 @@ namespace BuyMe.Application.Branch.Commonds.CreatEditBranch
             if (request.BranchId.HasValue)
             {
                 var entity = await _context.Branches.FindAsync(request.BranchId);
-                if (entity == null)
-                    throw new NotFoundException("Branch", request.CurrencyId);
+                Guard.Against.Null(entity, request.CurrencyId);
                 branch = entity;
             }
             else
