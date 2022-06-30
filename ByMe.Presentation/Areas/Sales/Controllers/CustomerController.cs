@@ -7,9 +7,6 @@ using BuyMe.Application.CustomerType.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.Base;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ByMe.Presentation.Areas.Sales.Controllers
 {
